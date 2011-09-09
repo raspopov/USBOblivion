@@ -1,0 +1,230 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#ifndef APSTUDIO_INVOKED
+#include "targetver.h"
+#endif
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1251)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON                    "res\\USBOblivion.ico"
+IDI_INF                 ICON                    "res\\info.ico"
+IDI_WARN                ICON                    "res\\warning.ico"
+IDI_ERR                 ICON                    "res\\error.ico"
+IDI_SEARCH              ICON                    "res\\search.ico"
+IDI_DONE                ICON                    "res\\done.ico"
+IDI_REGEDIT             ICON                    "res\\regedit.ico"
+IDI_LOCK                ICON                    "res\\lock.ico"
+IDI_EJECT               ICON                    "res\\eject.ico"
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Russian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+#ifdef _WIN32
+LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_CONTEXT MENU 
+BEGIN
+    POPUP "Context"
+    BEGIN
+        MENUITEM "Копировать",                  ID_COPY
+        MENUITEM "Копировать Всё",              ID_COPY_ALL
+    END
+END
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#ifndef APSTUDIO_INVOKED\r\n"
+    "#include ""targetver.h""\r\n"
+    "#endif\r\n"
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)\r\n"
+    "LANGUAGE 25, 1\r\n"
+    "#pragma code_page(1251)\r\n"
+    "#include ""res\\USBOblivion.rc2""  // ?ano?nu, ia ?aaaeoe?oaiua a Microsoft Visual C++\r\n"
+    "#include ""l.RUS\\afxres.rc""      // Noaiaa?oiua eiiiiiaiou\r\n"
+    "#endif\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_USBOBLIVION_DIALOG DIALOGEX 0, 0, 331, 201
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_APPWINDOW
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Очистка",IDOK,195,178,60,16
+    PUSHBUTTON      "Выход",IDCANCEL,264,178,60,16
+    CONTROL         "",IDC_REPORT,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,7,7,317,160
+    CONTROL         "Произвести реальную очиску (иначе симуляция)",IDC_ENABLE,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,171,181,10
+    CONTROL         "Сохранить .reg-файл отмены",IDC_SAVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,184,115,10
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO 
+BEGIN
+    IDD_USBOBLIVION_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 324
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 194
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE 
+BEGIN
+    IDS_ABOUT               "Использование:\n\nUSBOblivion[32|64].exe [параметры]\n\nПараметры:\n\n-enable - Рабочий режим очистки, иначе симуляция;\n-auto - Автоматический запуск;\n-nosave - Отмена сохранения .reg-файла;\n-? - Выдача этой справки.\n"
+    IDS_WARNING             "ВНИМАНИЕ! Удалите все флешки из системы перед очисткой."
+    IDS_START               "Нажмите кнопку ""Очистка"" для начала очистки системы."
+    IDS_MODE_WORK           "Режим работы: рабочий (реальное удаление)."
+    IDS_MODE_SIM            "Режим работы: симуляция (удаление не производится)."
+    IDS_ERROR_FILE_CREATE   "Ошибка создания файла: "
+    IDS_ERROR_FILE_WRITE    "Ошибка записи в файл: "
+    IDS_FILE_REG            "Файл отмены: "
+    IDS_RUN_DONE            "Завершено."
+    IDS_RUN_REGISTRY        "Идёт сбор данных в системном реестре..."
+    IDS_RUN_DISK_FOUND      "Найдено дисков в системе (игнорируются): "
+    IDS_RUN_CLEAN           "Идёт очистка..."
+    IDS_DELETE_KEY          "Удаление ключа: "
+    IDS_DELETE_VALUE        "Удаление значения: "
+    IDS_RUN_USERS           "Идёт сбор данных о пользователях..."
+END
+
+STRINGTABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "USBOblivion"
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_RUN_USER            "Идёт сбор данных пользователя: "
+    IDS_RUN_USERS_FOUND     "Найдено пользователей: "
+    IDS_RUN_MOUNT_FOUND     "Найдено точек монтирования: "
+    IDS_RUN_EXPLORER_FOUND  "Найдено дисков в Проводнике: "
+    IDS_DELETE_ERROR        "Ошибка удаления: "
+    IDS_RUN_MOUNTS          "Идёт сбор данных о точках монтирования..."
+    IDS_RUN_CONTROLSETS_FOUND "Найдено ControlSet'ов: "
+    IDS_RUN_KEYS_FOUND      "Найдено ключей: "
+    IDS_RUN_VALUES_FOUND    "Найдено значений: "
+    IDS_ERROR_ACCESS        "Ошибка доступа к ключу: "
+    IDS_DISK_MOUNT          "Диск %c: вставлен."
+    IDS_RUN_IMPERSONATE     "Вход под системный аккаунт произведён успешно."
+    IDS_ERROR_PROCESS_ACCESS "Ошибка входа под системным аккаунтом."
+    IDS_AS_ADMIN            "Перезапуск под администратором..."
+    IDS_DISK_UNMOUNT        "Диск %c: извлечён."
+    IDS_ERROR_EJECT         "Ошибка извлечения диска %c:."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_RUN_EJECT           "Попытка извлечения диска %c:..."
+    IDS_DELETE_FILE         "Удаление файла: "
+    IDS_RUN_FILES           "Идёт сбор данных о файлах..."
+    IDS_RUN_LOG             "Очистка журнала: "
+    IDS_RUN_LOGS            "Идёт сбор данных о журналах..."
+END
+
+#endif    // Russian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
+LANGUAGE 25, 1
+#pragma code_page(1251)
+#include "res\USBOblivion.rc2"  // ресурсы, не редактируемые в Microsoft Visual C++
+#include "l.RUS\afxres.rc"      // Стандартные компоненты
+#endif
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
