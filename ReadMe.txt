@@ -36,13 +36,17 @@ Versions:
 
 1.6.0.0
 
-  * Added "CurrentControlSet\Services\USBSTOR\Enum" key cleanup
-  * Added "CurrentControlSet\Control\usbflags" key cleanup
-  * Added "SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" key cleanup
-  * Added "SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\SyncMgr\HandlerInstances" key cleanup
+  * Added "CurrentControlSet\Services\USBSTOR\Enum" key clean-up
+  * Added "CurrentControlSet\Control\usbflags" key clean-up
+  * Added "SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\Shell\MuiCache" key clean-up
+  * Added "SOFTWARE\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\SyncMgr\HandlerInstances" key clean-up
   * Project moved to Google Code: http://code.google.com/p/usboblivion/
 
 1.5.0.0
+
+  * Added "INFCACHE.1" file removing
+  * Added "{10497b1b-ba51-44e5-8318-a65c837b6661}" key clean-up (Windows 7)
+  * Added SafelyRemove key clean-up
 
 ========================================================================
 
