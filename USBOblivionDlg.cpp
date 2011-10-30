@@ -2,21 +2,21 @@
 // USBOblivionDlg.cpp
 //
 // Copyright (c) Nikolay Raspopov, 2009-2011.
-// This file is part of USB Oblivion (www.cherubicsoft.com)
+// This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
 //
-// Shareaza is free software; you can redistribute it
-// and/or modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2 of
-// the License, or (at your option) any later version.
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 //
-// Shareaza is distributed in the hope that it will be useful,
+// This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License
-// along with Shareaza; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 
 #include "stdafx.h"
@@ -201,6 +201,8 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 			MAKEINTRESOURCE( nIcons[ i ] ), IMAGE_ICON, 16, 16, LR_SHARED ) );
 	}
 	m_pReport.SetImageList( &m_oImages, LVSIL_SMALL );
+
+	theApp.m_Loc.Translate( GetSafeHwnd(), CUSBOblivionDlg::IDD );
 
 	Log( IDS_WARNING, Warning );
 
@@ -758,7 +760,7 @@ bool CUSBOblivionDlg::EjectDrive(TCHAR DriveLetter)
 	if ( CM_Get_Parent( &DevParent, DevInst, 0 ) != CR_SUCCESS )
 		return false;
 
-	msg.Format( IDS_RUN_EJECT, DriveLetter );
+	msg.Format( LoadString( IDS_RUN_EJECT ), DriveLetter );
 	Log( msg, Eject );
 
 	for ( int tries = 1; tries <= 3; ++tries )
@@ -776,7 +778,7 @@ bool CUSBOblivionDlg::EjectDrive(TCHAR DriveLetter)
 			szVetoName, MAX_PATH, 0 ) == CR_SUCCESS &&
 			VetoType == PNP_VetoTypeUnknown )
 		{
-			msg.Format( IDS_DISK_UNMOUNT, DriveLetter );
+			msg.Format( LoadString( IDS_DISK_UNMOUNT ), DriveLetter );
 			Log( msg );
 			return true;
 		}
@@ -784,7 +786,7 @@ bool CUSBOblivionDlg::EjectDrive(TCHAR DriveLetter)
 		Sleep( 500 ); // required to give the next tries a chance!
 	}
 
-	msg.Format( IDS_ERROR_EJECT, DriveLetter );
+	msg.Format( LoadString( IDS_ERROR_EJECT ), DriveLetter );
 	Log( msg, Error );
 
 	return false;
@@ -1542,6 +1544,7 @@ void CUSBOblivionDlg::OnNMRClickReport(NMHDR *pNMHDR, LRESULT *pResult)
 
 		CMenu oMenu;
 		oMenu.LoadMenu( IDR_CONTEXT );
+		theApp.m_Loc.Translate( oMenu.GetSafeHmenu(), IDR_CONTEXT );
 		oMenu.GetSubMenu( 0 )->TrackPopupMenu( TPM_LEFTALIGN |TPM_RIGHTBUTTON,
 			pNMItemActivate->ptAction.x, 
 			pNMItemActivate->ptAction.y, this );
@@ -1590,9 +1593,9 @@ BOOL CUSBOblivionDlg::OnDeviceChange(UINT /*nEventType*/, DWORD_PTR /*dwData*/)
 			{
 				CString msg;
 				if ( ( m_nDrives & nMask ) == 0 )
-					msg.Format( IDS_DISK_MOUNT, i );
+					msg.Format( LoadString( IDS_DISK_MOUNT ), i );
 				else
-					msg.Format( IDS_DISK_UNMOUNT, i );
+					msg.Format( LoadString( IDS_DISK_UNMOUNT ), i );
 				Log( msg );
 			}
 		}

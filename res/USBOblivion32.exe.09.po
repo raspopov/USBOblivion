@@ -1,0 +1,251 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: USBOblivion32.exe\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: ryo-oh-ki <ryo-oh-ki@narod.ru>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Menu popup
+#: MENUPOPUP.130.0
+msgid "Context"
+msgstr "Context"
+
+#. Menu item
+#: MENUITEM.130.32771
+msgid "Копировать"
+msgstr "Copy"
+
+#. Menu item
+#: MENUITEM.130.32772
+msgid "Копировать Всё"
+msgstr "Copy all"
+
+#. Dialog caption
+#: DIALOGCAPTION.102
+msgid "USBOblivion"
+msgstr "USBOblivion"
+
+#. Dialog control
+#: DIALOGCONTROL.102.Button.1
+msgid "Очистка"
+msgstr "Clean"
+
+#. Dialog control
+#: DIALOGCONTROL.102.Button.2
+msgid "Выход"
+msgstr "Exit"
+
+#. Dialog control
+#: DIALOGCONTROL.102.Button.1002
+msgid "Произвести реальную очистку (иначе симуляция)"
+msgstr "Do real clean (simulation otherwise)"
+
+#. Dialog control
+#: DIALOGCONTROL.102.Button.1003
+msgid "Сохранить .reg-файл отмены"
+msgstr "Save backup .reg-file"
+
+#. String resource
+#: STRING.129
+msgid ""
+"Использование:\n"
+"\n"
+"USBOblivion[32|64].exe [параметры]\n"
+"\n"
+"Параметры:\n"
+"\n"
+"-enable - Рабочий режим очистки, иначе симуляция;\n"
+"-auto - Автоматический запуск;\n"
+"-nosave - Отмена сохранения .reg-файла;\n"
+"-? - Выдача этой справки.\n"
+msgstr ""
+"Usage:\n"
+"\n"
+"USBOblivion[32|64].exe [params]\n"
+"\n"
+"Params:\n"
+"\n"
+"-enable - Do real clean (simulation otherwise);\n"
+"-auto - Automatic run;\n"
+"-nosave - Don't save backup .reg-file;\n"
+"-? - Show this help.\n"
+
+#. String resource
+#: STRING.130
+msgid "ВНИМАНИЕ! Удалите все флешки из системы перед очисткой."
+msgstr "WARNING! Eject all flash drives before cleaning please."
+
+#. String resource
+#: STRING.131
+msgid "Нажмите кнопку \"Очистка\" для начала очистки системы."
+msgstr "Press \"Clean\" button to begin cleaning."
+
+#. String resource
+#: STRING.132
+msgid "Режим работы: рабочий (реальное удаление)."
+msgstr "Process mode: real (data will be cleaned)."
+
+#. String resource
+#: STRING.133
+msgid "Режим работы: симуляция (удаление не производится)."
+msgstr "Process mode: simulation (no data will be cleaned)."
+
+#. String resource
+#: STRING.134
+msgid "Ошибка создания файла: "
+msgstr "File creation error: "
+
+#. String resource
+#: STRING.135
+msgid "Ошибка записи в файл: "
+msgstr "File write error: "
+
+#. String resource
+#: STRING.136
+msgid "Файл отмены: "
+msgstr "Backup file: "
+
+#. String resource
+#: STRING.137
+msgid "Завершено."
+msgstr "Done."
+
+#. String resource
+#: STRING.138
+msgid "Идёт сбор данных в системном реестре..."
+msgstr "Gathering data from system registry..."
+
+#. String resource
+#: STRING.139
+msgid "Найдено дисков в системе (игнорируются): "
+msgstr "Found drives (will be ignored): "
+
+#. String resource
+#: STRING.140
+msgid "Идёт очистка..."
+msgstr "Cleaning..."
+
+#. String resource
+#: STRING.141
+msgid "Удаление ключа: "
+msgstr "Removing key: "
+
+#. String resource
+#: STRING.142
+msgid "Удаление значения: "
+msgstr "Removing value: "
+
+#. String resource
+#: STRING.143
+msgid "Идёт сбор данных о пользователях..."
+msgstr "Gathering user data..."
+
+#. String resource
+#: STRING.144
+msgid "Идёт сбор данных пользователя: "
+msgstr "Gathering data about user: "
+
+#. String resource
+#: STRING.145
+msgid "Найдено пользователей: "
+msgstr "Found users: "
+
+#. String resource
+#: STRING.146
+msgid "Найдено точек монтирования: "
+msgstr "Found mount points: "
+
+#. String resource
+#: STRING.147
+msgid "Найдено дисков в Проводнике: "
+msgstr "Found Explorer drives: "
+
+#. String resource
+#: STRING.148
+msgid "Ошибка удаления: "
+msgstr "Remove error: "
+
+#. String resource
+#: STRING.149
+msgid "Идёт сбор данных о точках монтирования..."
+msgstr "Gathering mount point's data..."
+
+#. String resource
+#: STRING.150
+msgid "Найдено ControlSet'ов: "
+msgstr "Found ControlSets: "
+
+#. String resource
+#: STRING.151
+msgid "Найдено ключей: "
+msgstr "Found keys: "
+
+#. String resource
+#: STRING.152
+msgid "Найдено значений: "
+msgstr "Found values: "
+
+#. String resource
+#: STRING.153
+msgid "Ошибка доступа к ключу: "
+msgstr "Key access denied: "
+
+#. String resource
+#: STRING.154
+msgid "Диск %c: вставлен."
+msgstr "Disk %c: has been inserted."
+
+#. String resource
+#: STRING.155
+msgid "Вход под системный аккаунт произведён успешно."
+msgstr "Logged-in under system account successfully."
+
+#. String resource
+#: STRING.156
+msgid "Ошибка входа под системным аккаунтом."
+msgstr "Failed to login under system account."
+
+#. String resource
+#: STRING.157
+msgid "Перезапуск под администратором..."
+msgstr "Re-starting under administrator..."
+
+#. String resource
+#: STRING.158
+msgid "Диск %c: извлечён."
+msgstr "Disk %c: has been ejected."
+
+#. String resource
+#: STRING.159
+msgid "Ошибка извлечения диска %c:."
+msgstr "Failed to eject disk %c:."
+
+#. String resource
+#: STRING.160
+msgid "Попытка извлечения диска %c:..."
+msgstr "Ejecting disk %c:..."
+
+#. String resource
+#: STRING.161
+msgid "Удаление файла: "
+msgstr "Removing file: "
+
+#. String resource
+#: STRING.162
+msgid "Идёт сбор данных о файлах..."
+msgstr "Gathering file data..."
+
+#. String resource
+#: STRING.163
+msgid "Очистка журнала: "
+msgstr "Cleaning journal: "
+
+#. String resource
+#: STRING.164
+msgid "Идёт сбор данных о журналах..."
+msgstr "Gathering journal data..."
+

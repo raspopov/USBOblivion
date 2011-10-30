@@ -1,22 +1,22 @@
 //
 // USBOblivion.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2010.
-// This file is part of USB Oblivion (www.cherubicsoft.com)
+// Copyright (c) Nikolay Raspopov, 2009-2011.
+// This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
 //
-// Shareaza is free software; you can redistribute it
-// and/or modify it under the terms of the GNU General Public License
-// as published by the Free Software Foundation; either version 2 of
-// the License, or (at your option) any later version.
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 //
-// Shareaza is distributed in the hope that it will be useful,
+// This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
 //
-// You should have received a copy of the GNU General Public License
-// along with Shareaza; if not, write to the Free Software
-// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 
 #include "stdafx.h"
@@ -27,10 +27,20 @@
 #define new DEBUG_NEW
 #endif
 
+CString LoadString(UINT nID)
+{
+	return theApp.m_Loc.LoadString( nID );
+}
+
 BEGIN_MESSAGE_MAP(CUSBOblivionApp, CWinApp)
 END_MESSAGE_MAP()
 
 CUSBOblivionApp theApp;
+
+CUSBOblivionApp::CUSBOblivionApp()
+	: m_Loc( LANG_RUSSIAN )
+{
+}
 
 BOOL CUSBOblivionApp::InitInstance()
 {
@@ -43,6 +53,9 @@ BOOL CUSBOblivionApp::InitInstance()
 	CWinApp::InitInstance();
 
 	SetRegistryKey( _T("USBOblivion") );
+
+	m_Loc.Load();
+	m_Loc.Select();
 
 	CUSBOblivionDlg dlg;
 
