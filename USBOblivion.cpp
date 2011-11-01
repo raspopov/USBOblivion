@@ -38,7 +38,6 @@ END_MESSAGE_MAP()
 CUSBOblivionApp theApp;
 
 CUSBOblivionApp::CUSBOblivionApp()
-	: m_Loc( LANG_RUSSIAN )
 {
 }
 
