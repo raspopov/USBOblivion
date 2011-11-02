@@ -46,7 +46,7 @@ IDI_EJECT               ICON                    "res\\eject.ico"
 // PO
 //
 
-25                       PO                      "res\\USBOblivion32.exe.19.po"
+25                      PO                      "res\\USBOblivion32.exe.19.p_"
 #endif    // Neutral resources
 /////////////////////////////////////////////////////////////////////////////
 
@@ -69,8 +69,8 @@ IDR_CONTEXT MENU
 BEGIN
     POPUP "Context"
     BEGIN
-        MENUITEM "Copy",                  ID_COPY
-        MENUITEM "Copy all",              ID_COPY_ALL
+        MENUITEM "Copy",                        ID_COPY
+        MENUITEM "Copy all",                    ID_COPY_ALL
     END
 END
 
@@ -127,8 +127,7 @@ BEGIN
     DEFPUSHBUTTON   "Clean",IDOK,195,178,60,16
     PUSHBUTTON      "Exit",IDCANCEL,264,178,60,16
     CONTROL         "",IDC_REPORT,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,7,7,317,160
-    CONTROL         "Do real clean (simulation otherwise)",IDC_ENABLE,
-                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,171,181,10
+    CONTROL         "Do real clean (simulation otherwise)",IDC_ENABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,171,181,10
     CONTROL         "Save backup .reg-file",IDC_SAVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,184,115,10
 END
 

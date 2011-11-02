@@ -397,6 +397,50 @@
 				>
 			</File>
 			<File
+				RelativePath="..\res\USBOblivion32.exe.19.po"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Compress..."
+						CommandLine="compress.exe &quot;$(InputPath)&quot; &quot;$(InputDir)$(InputName).p_&quot;&#x0D;&#x0A;"
+						Outputs="$(InputDir)$(InputName).p_"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Debug|x64"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Compress..."
+						CommandLine="compress.exe &quot;$(InputPath)&quot; &quot;$(InputDir)$(InputName).p_&quot;&#x0D;&#x0A;"
+						Outputs="$(InputDir)$(InputName).p_"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Compress..."
+						CommandLine="compress.exe &quot;$(InputPath)&quot; &quot;$(InputDir)$(InputName).p_&quot;&#x0D;&#x0A;"
+						Outputs="$(InputDir)$(InputName).p_"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|x64"
+					>
+					<Tool
+						Name="VCCustomBuildTool"
+						Description="Compress..."
+						CommandLine="compress.exe &quot;$(InputPath)&quot; &quot;$(InputDir)$(InputName).p_&quot;&#x0D;&#x0A;"
+						Outputs="$(InputDir)$(InputName).p_"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\USBOblivionDlg.cpp"
 				>
 			</File>
@@ -477,7 +521,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\res\USBOblivion32.exe.09.po"
+				RelativePath="..\res\usboblivion32.exe.19.p_"
 				>
 			</File>
 			<File

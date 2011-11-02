@@ -3,8 +3,8 @@
 //
 // This file is part of Localization library.
 // Copyright (c) Nikolay Raspopov, 2011.
-// E-mail: raspopov@cherubicsoft.com
-// Web: http://www.cherubicsoft.com/
+// E-mail: ryo.rabbit@gmail.com
+// Web: http://code.google.com/p/po-localization/
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -23,10 +23,13 @@
 
 #pragma once
 
-#include <windowsx.h>	// for ComboBox_*
-#include <atlstr.h>		// for CString
-#include <atlcoll.h>	// for CAtlMap
-#include <atlfile.h>	// for CAtlFile
+#include <windowsx.h>		// for ComboBox_*
+#include <lzexpand.h>		// for LZOpenFile,LZRead,LZClose
+#include <atlstr.h>			// for CString
+#include <atlcoll.h>		// for CAtlMap
+#include <atlfile.h>		// for CAtlFile, CAtlTemporaryFile
+
+#pragma comment(lib,"lz32")	// for LZOpenFile,LZRead,LZClose
 
 using namespace ATL;
 
@@ -74,11 +77,15 @@ public:
 	// Empty any loaded translation and select default language
 	void Empty();
 
-	// Load .po-translation from language file
+	// Load .po-translation from language file (including compressed one)
 	BOOL LoadPoFromFile(LANGID nLangID, LPCTSTR szFilename);
 
-	// Load .po-translation from resource
+	// Load .po-translation from resource (including compressed one)
 	BOOL LoadPoFromResource(LANGID nLangID, LPCTSTR szFilename);
+
+	// Load .po-translation from compressed language file
+	// (Compressed by old Microsoft (R) File Compression Utility Version 2.50)
+	BOOL LoadPoFromArchive(LANGID nLangID, LPCTSTR szFilename);
 
 	// Load .po-translation from string
 	BOOL LoadPoFromString(LANGID nLangID, const CStringA& sContent);
@@ -119,7 +126,7 @@ protected:
 };
 
 #define RT_PO	_T("PO")	// Resource type used to store .po-translations inside modules
-#define RT_MO	_T("MO")	// Resource type used to store .mo-translations inside modules
+//#define RT_MO	_T("MO")	// Resource type used to store .mo-translations inside modules
 
 /*
 #pragma pack( push, 1 )

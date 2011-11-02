@@ -3,8 +3,8 @@
 //
 // This file is part of Localization library.
 // Copyright (c) Nikolay Raspopov, 2011.
-// E-mail: raspopov@cherubicsoft.com
-// Web: http://www.cherubicsoft.com/
+// E-mail: ryo.rabbit@gmail.com
+// Web: http://code.google.com/p/po-localization/
 //
 // This library is free software; you can redistribute it and/or
 // modify it under the terms of the GNU Lesser General Public
@@ -23,7 +23,8 @@
 
 #include "Localization.h"
 
-#define ORDINAL	0x80000000
+#define LZ_MAGIC	('DDZS')		// Lempel-Ziv algorithm magic number: 'SZDD' (in reverse order)
+#define ORDINAL		0x80000000
 
 inline int hs2b(TCHAR s)
 {
@@ -324,7 +325,7 @@ BOOL CLocalization::Load(LPCTSTR szModule)
 
 	// Enumerate external files next
 	WIN32_FIND_DATA wfd = {};
-	HANDLE ff = FindFirstFile( m_strModule + _T("*.po"), &wfd );
+	HANDLE ff = FindFirstFile( m_strModule + _T("*.p?"), &wfd );
 	if ( ff != INVALID_HANDLE_VALUE )
 	{
 		do
@@ -332,21 +333,26 @@ BOOL CLocalization::Load(LPCTSTR szModule)
 			size_t nLen = _tcslen( wfd.cFileName );
 			if ( ! ( wfd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY ) && nLen >= 7 )
 			{
-				int a = hs2b( wfd.cFileName [ nLen - 7 ] );
-				int b = hs2b( wfd.cFileName [ nLen - 6 ] );
-				int c = hs2b( wfd.cFileName [ nLen - 5 ] );
-				int d = hs2b( wfd.cFileName [ nLen - 4 ] );
-				if ( d >= 0 )
+				LPCTSTR szExt = PathFindExtension( wfd.cFileName );
+				if ( _tcsicmp( szExt, _T(".po") ) == 0 ||
+					 _tcsicmp( szExt, _T(".p_") ) == 0 )
 				{
-					LANGID nLangID =
-						( a >= 0 && b >= 0 && c >= 0 ? ( (LANGID)a << 12 ) : 0 ) |
-						( b >= 0 && c >= 0 ? ( (LANGID)b << 8 ) : 0 ) |
-						( c >= 0 ? ( (LANGID)c << 4 ) : 0 ) |
-						( (LANGID)d );
-					if ( nLangID != LANG_NEUTRAL && nLangID != m_nDefaultLangID )
+					int a = hs2b( wfd.cFileName [ nLen - 7 ] );
+					int b = hs2b( wfd.cFileName [ nLen - 6 ] );
+					int c = hs2b( wfd.cFileName [ nLen - 5 ] );
+					int d = hs2b( wfd.cFileName [ nLen - 4 ] );
+					if ( d >= 0 )
 					{
-						CString sFile = m_strModule.Left( nPos + 1 ) + wfd.cFileName;
-						m_pLanguages.SetAt( nLangID, sFile );
+						LANGID nLangID =
+							( a >= 0 && b >= 0 && c >= 0 ? ( (LANGID)a << 12 ) : 0 ) |
+							( b >= 0 && c >= 0 ? ( (LANGID)b << 8 ) : 0 ) |
+							( c >= 0 ? ( (LANGID)c << 4 ) : 0 ) |
+							( (LANGID)d );
+						if ( nLangID != LANG_NEUTRAL && nLangID != m_nDefaultLangID )
+						{
+							CString sFile = m_strModule.Left( nPos + 1 ) + wfd.cFileName;
+							m_pLanguages.SetAt( nLangID, sFile );
+						}
 					}
 				}
 			}
@@ -484,22 +490,34 @@ BOOL CLocalization::LoadPoFromFile(LANGID nLangID, LPCTSTR szFilename)
 	BOOL bRet = FALSE;
 
 	CAtlFile oFile;
-	HRESULT hr = oFile.Create( szFilename, GENERIC_READ, 0, OPEN_EXISTING );
+	HRESULT hr = oFile.Create( szFilename, GENERIC_READ, FILE_SHARE_READ, OPEN_EXISTING );
 	if ( SUCCEEDED( hr ) )
 	{
 		ULONGLONG nLength = 0;
 		hr = oFile.GetSize( nLength );
 		if ( SUCCEEDED( hr ) )
 		{
-			CStringA sContent;
-			hr = oFile.Read( sContent.GetBuffer( (DWORD)nLength ), (DWORD)nLength );
-			sContent.ReleaseBuffer( (DWORD)nLength );
-			if ( SUCCEEDED( hr ) )
+			DWORD magic = 0;
+			hr = oFile.Read( &magic, sizeof( magic ) );
+			if ( magic == LZ_MAGIC )
 			{
-				bRet = LoadPoFromString( nLangID, sContent );
+				oFile.Close();
+
+				bRet = LoadPoFromArchive( nLangID, szFilename );
 			}
 			else
-				TRACE( "CLocalization Error : Can't read .po-file %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
+			{
+				oFile.Seek( 0, FILE_BEGIN );
+				CStringA sContent;
+				hr = oFile.Read( sContent.GetBuffer( (DWORD)nLength ), (DWORD)nLength );
+				sContent.ReleaseBuffer( (DWORD)nLength );
+				if ( SUCCEEDED( hr ) )
+				{
+					bRet = LoadPoFromString( nLangID, sContent );
+				}
+				else
+					TRACE( "CLocalization Error : Can't read .po-file %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
+			}
 		}
 		else
 			TRACE( "CLocalization Error : Can't get size of .po-file %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
@@ -525,7 +543,32 @@ BOOL CLocalization::LoadPoFromResource(LANGID nLangID, LPCTSTR szFilename)
 			{
 				if ( const char* hData = (const char*)LockResource( hResData ) )
 				{
-					bRet = LoadPoFromString( nLangID, CStringA( hData, nSize ) );
+					DWORD magic = *(DWORD*)hData;
+					if ( magic == LZ_MAGIC )
+					{
+						CAtlTemporaryFile oFile;
+						HRESULT hr = oFile.Create( NULL, GENERIC_WRITE );
+						if ( SUCCEEDED( hr ) )
+						{
+							CString sTempFilename = oFile.TempFileName();
+
+							hr = oFile.Write( hData, nSize );
+							if ( SUCCEEDED( hr ) )
+							{
+								oFile.HandsOff();
+
+								bRet = LoadPoFromArchive( nLangID, sTempFilename );
+								
+								oFile.HandsOn();
+							}
+							else
+								TRACE( "CLocalization Error : Can't write temporary file: %s\n", (LPCSTR)CT2A( sTempFilename ) );
+						}
+						else
+							TRACE( "CLocalization Error : Can't create temporary file: %s\n", (LPCSTR)CT2A( szFilename ) );
+					}
+					else
+						bRet = LoadPoFromString( nLangID, CStringA( hData, nSize ) );
 				}
 				else
 					TRACE( "CLocalization Error : Can't lock .po-resource %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
@@ -540,6 +583,47 @@ BOOL CLocalization::LoadPoFromResource(LANGID nLangID, LPCTSTR szFilename)
 	}
 	else
 		TRACE( "CLocalization Error : Can't open .po-resource %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
+
+	return bRet;
+}
+
+BOOL CLocalization::LoadPoFromArchive(LANGID nLangID, LPCTSTR szFilename)
+{
+	Empty();
+
+	BOOL bRet = FALSE;
+
+	OFSTRUCT of = { sizeof ( OFSTRUCT ) };
+	INT hCompressed = LZOpenFile( (LPTSTR)szFilename, &of, OF_READ | OF_SHARE_DENY_WRITE );
+	if ( hCompressed > 0 ) // Status: < 0 - error, == 0 - uncompressed, > 0 - compressed
+	{
+		CStringA sUncompressed;
+		const INT nChunk = 1024;  
+		for (;;)
+		{
+			INT nLength = sUncompressed.GetLength();
+			LPSTR pBuf = sUncompressed.GetBuffer( nLength + nChunk );
+			INT nRead = LZRead( hCompressed, pBuf + nLength, nChunk );
+			if ( nRead == 0 )
+			{
+				// EOF
+				sUncompressed.ReleaseBuffer( nLength );
+				bRet = LoadPoFromString( nLangID, sUncompressed );
+				break;
+			}
+			else if ( nRead < 0 )
+			{
+				// Decompression error
+				TRACE( "CLocalization Error : Can't decompress file: %s\n", (LPCSTR)CT2A( szFilename ) );
+				sUncompressed.ReleaseBuffer( nLength );
+				break;
+			}
+			sUncompressed.ReleaseBuffer( nLength + nRead );
+		}
+		LZClose( hCompressed );
+	}
+	else
+		TRACE( "CLocalization Error : Can't open file: %s\n", (LPCSTR)CT2A( szFilename ) );
 
 	return bRet;
 }
