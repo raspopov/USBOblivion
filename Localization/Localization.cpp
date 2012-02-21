@@ -2,7 +2,7 @@
 // Localization.cpp
 //
 // This file is part of Localization library.
-// Copyright (c) Nikolay Raspopov, 2011.
+// Copyright (c) Nikolay Raspopov, 2011-2012.
 // E-mail: ryo.rabbit@gmail.com
 // Web: http://code.google.com/p/po-localization/
 //
@@ -23,17 +23,29 @@
 
 #include "Localization.h"
 
+#ifdef _DEBUG
+#define LOG		ATLTRACE
+#else
+#define LOG		__noop
+#endif
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#undef THIS_FILE
+static char THIS_FILE[] = __FILE__;
+#endif
+
 #define LZ_MAGIC	('DDZS')		// Lempel-Ziv algorithm magic number: 'SZDD' (in reverse order)
 #define ORDINAL		0x80000000
 
-inline int hs2b(TCHAR s)
+static inline int hs2b(TCHAR s)
 {
 	return ( ( s >= '0' && s <= _T('9') ) ? ( s - _T('0') ) :
 		( s >= 'a' && s <= _T('f') ) ? ( s - _T('a') + 10 ) :
 		( s >= 'A' && s <= _T('F') ) ? ( s - _T('A') + 10 ) : -1 );
 }
 
-inline CString& UnMakeSafe(CString& str)
+static inline CString& UnMakeSafe(CString& str)
 {
 	CString tmp;
 	LPTSTR dst = tmp.GetBuffer( str.GetLength() + 1 );
@@ -81,7 +93,7 @@ inline CString& UnMakeSafe(CString& str)
 	return str;
 }
 
-inline CStringW Decode(LPCSTR szInput, int nInput = -1)
+static inline CStringW Decode(LPCSTR szInput, int nInput = -1)
 {
 	int nWide = MultiByteToWideChar( CP_UTF8, 0, szInput, nInput, NULL, 0 );
 	CStringW sWide;
@@ -93,7 +105,6 @@ inline CStringW Decode(LPCSTR szInput, int nInput = -1)
 	}
 	return sWide;
 }
-
 
 CLocalization::CLocalization(LANGID nDefault)
 	: m_nDefaultLangID	( nDefault )
@@ -113,6 +124,14 @@ void CLocalization::Empty()
 	m_pStrings.RemoveAll();
 	m_pMenus.RemoveAll();
 	m_pDialogs.RemoveAll();
+}
+
+void CLocalization::Reload()
+{
+	LANGID nCurrent = m_nLangID;
+	Empty();
+	Load( m_strModule );
+	Select( nCurrent );
 }
 
 CString CLocalization::LoadString(UINT nID) const
@@ -215,7 +234,7 @@ BOOL CLocalization::Add(const CString& sRef, const CString& sTranslated)
 			return TRUE;
 		}
 		else
-			TRACE( "CLocalization Error : Bad string ID: %s\n", (LPCSTR)CT2A( sRef ) );
+			LOG( "CLocalization Error : Bad string ID: %s\n", (LPCSTR)CT2A( sRef ) );
 	}
 	else if ( sType.CompareNoCase( _T("MENUITEM") ) == 0 )
 	{
@@ -230,10 +249,10 @@ BOOL CLocalization::Add(const CString& sRef, const CString& sTranslated)
 				return TRUE;
 			}
 			else
-				TRACE( "CLocalization Error : Bad menu item ID: %s\n", (LPCSTR)CT2A( sRef ) );
+				LOG( "CLocalization Error : Bad menu item ID: %s\n", (LPCSTR)CT2A( sRef ) );
 		}
 		else
-			TRACE( "CLocalization Error : Bad menu ID: %s\n", (LPCSTR)CT2A( sRef ) );
+			LOG( "CLocalization Error : Bad menu ID: %s\n", (LPCSTR)CT2A( sRef ) );
 	}
 	else if ( sType.CompareNoCase( _T("MENUPOPUP") ) == 0 )
 	{
@@ -248,10 +267,10 @@ BOOL CLocalization::Add(const CString& sRef, const CString& sTranslated)
 				return TRUE;
 			}
 			else
-				TRACE( "CLocalization Error : Bad menu popup ordinal: %s\n", (LPCSTR)CT2A( sRef ) );
+				LOG( "CLocalization Error : Bad menu popup ordinal: %s\n", (LPCSTR)CT2A( sRef ) );
 		}
 		else
-			TRACE( "CLocalization Error : Bad menu ID: %s\n", (LPCSTR)CT2A( sRef ) );
+			LOG( "CLocalization Error : Bad menu ID: %s\n", (LPCSTR)CT2A( sRef ) );
 	}
 	else if ( sType.CompareNoCase( _T("DIALOGCAPTION") ) == 0 )
 	{
@@ -263,7 +282,7 @@ BOOL CLocalization::Add(const CString& sRef, const CString& sTranslated)
 			return TRUE;
 		}
 		else
-			TRACE( "CLocalization Error : Bad dialog ID: %s\n", (LPCSTR)CT2A( sRef ) );
+			LOG( "CLocalization Error : Bad dialog ID: %s\n", (LPCSTR)CT2A( sRef ) );
 	}
 	else if ( sType.CompareNoCase( _T("DIALOGCONTROL") ) == 0 )
 	{
@@ -281,16 +300,16 @@ BOOL CLocalization::Add(const CString& sRef, const CString& sTranslated)
 					return TRUE;
 				}
 				else
-					TRACE( "CLocalization Error : Bad dialog control ID: %s\n", (LPCSTR)CT2A( sRef ) );
+					LOG( "CLocalization Error : Bad dialog control ID: %s\n", (LPCSTR)CT2A( sRef ) );
 			}
 			else
-				TRACE( "CLocalization Error : Bad dialog control class: %s\n", (LPCSTR)CT2A( sRef ) );
+				LOG( "CLocalization Error : Bad dialog control class: %s\n", (LPCSTR)CT2A( sRef ) );
 		}
 		else
-			TRACE( "CLocalization Error : Bad dialog ID: %s\n", (LPCSTR)CT2A( sRef ) );
+			LOG( "CLocalization Error : Bad dialog ID: %s\n", (LPCSTR)CT2A( sRef ) );
 	}
 	else
-		TRACE( "CLocalization Error : Unknown reference token: %s\n", (LPCSTR)CT2A( sRef ) );
+		LOG( "CLocalization Error : Unknown reference token: %s\n", (LPCSTR)CT2A( sRef ) );
 
 	return FALSE;
 }
@@ -299,16 +318,13 @@ BOOL CLocalization::Load(LPCTSTR szModule)
 {
 	m_pLanguages.RemoveAll();
 
-	if ( szModule )
-	{
-		GetFullPathName( szModule, 1024, m_strModule.GetBuffer( 1024 ), NULL );
-		m_strModule.ReleaseBuffer();
-	}
+	CString sPath;
+	if ( szModule && *szModule )
+		GetFullPathName( szModule, 1024, sPath.GetBuffer( 1024 ), NULL );
 	else
-	{
-		GetModuleFileName( NULL, m_strModule.GetBuffer( 1024 ), 1024 );
-		m_strModule.ReleaseBuffer();
-	}
+		GetModuleFileName( NULL, sPath.GetBuffer( 1024 ), 1024 );
+	sPath.ReleaseBuffer();
+	m_strModule = sPath;
 	int nPos = m_strModule.ReverseFind( _T('\\') );
 	BOOL bFolder = ( ( m_strModule.GetLength() - 1 ) == nPos );
 
@@ -380,6 +396,8 @@ BOOL CALLBACK CLocalization::EnumResNameProc(HMODULE /*hModule*/, LPCTSTR /*lpsz
 
 void CLocalization::FillComboBox(HWND hwndCombo) const
 {
+	ComboBox_ResetContent( hwndCombo );
+
 	int index = ComboBox_AddString( hwndCombo, GetLangName( m_nDefaultLangID ) );
 	ComboBox_SetItemData( hwndCombo, index, m_nDefaultLangID );
 	if ( m_nDefaultLangID == m_nLangID )
@@ -407,7 +425,11 @@ CString CLocalization::GetLangName(LANGID nLangID)
 	GetLocaleInfo( lcID, LOCALE_SNATIVELANGNAME, strNativeLangName.GetBuffer( 80 ), 80 );
 	strNativeLangName.ReleaseBuffer();
 
-	return strLangName + _T(" - ") + strNativeLangName;
+	CString strNativeCountry;
+	GetLocaleInfo( lcID, LOCALE_SNATIVECTRYNAME, strNativeCountry.GetBuffer( 80 ), 80 );
+	strNativeCountry.ReleaseBuffer();
+
+	return strLangName + _T(" - ") + strNativeLangName + _T(" (") + strNativeCountry + _T(")");
 }
 
 BOOL CLocalization::Select(HWND hwndCombo)
@@ -469,7 +491,7 @@ BOOL CLocalization::Select(LANGID nLangID)
 						nLangID = nSecondLangID;
 					else
 					{
-						TRACE( "CLocalization Error : Unknown language ID %02x\n", nLangID );
+						LOG( "CLocalization Error : Unknown language ID %02x\n", nLangID );
 						return FALSE;
 					}
 				}
@@ -516,15 +538,15 @@ BOOL CLocalization::LoadPoFromFile(LANGID nLangID, LPCTSTR szFilename)
 					bRet = LoadPoFromString( nLangID, sContent );
 				}
 				else
-					TRACE( "CLocalization Error : Can't read .po-file %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
+					LOG( "CLocalization Error : Can't read .po-file %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
 			}
 		}
 		else
-			TRACE( "CLocalization Error : Can't get size of .po-file %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
+			LOG( "CLocalization Error : Can't get size of .po-file %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
 	}
 	else
-		TRACE( "CLocalization Error : Can't open .po-file %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
-	
+		LOG( "CLocalization Error : Can't open .po-file %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
+
 	return bRet;
 }
 
@@ -558,31 +580,31 @@ BOOL CLocalization::LoadPoFromResource(LANGID nLangID, LPCTSTR szFilename)
 								oFile.HandsOff();
 
 								bRet = LoadPoFromArchive( nLangID, sTempFilename );
-								
+
 								oFile.HandsOn();
 							}
 							else
-								TRACE( "CLocalization Error : Can't write temporary file: %s\n", (LPCSTR)CT2A( sTempFilename ) );
+								LOG( "CLocalization Error : Can't write temporary file: %s\n", (LPCSTR)CT2A( sTempFilename ) );
 						}
 						else
-							TRACE( "CLocalization Error : Can't create temporary file: %s\n", (LPCSTR)CT2A( szFilename ) );
+							LOG( "CLocalization Error : Can't create temporary file: %s\n", (LPCSTR)CT2A( szFilename ) );
 					}
 					else
 						bRet = LoadPoFromString( nLangID, CStringA( hData, nSize ) );
 				}
 				else
-					TRACE( "CLocalization Error : Can't lock .po-resource %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
+					LOG( "CLocalization Error : Can't lock .po-resource %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
 			}
 			else
-				TRACE( "CLocalization Error : Can't load .po-resource %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
+				LOG( "CLocalization Error : Can't load .po-resource %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
 		}
 		else
-			TRACE( "CLocalization Error : Can't find .po-resource %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
+			LOG( "CLocalization Error : Can't find .po-resource %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
 
 		FreeLibrary( hModule );
 	}
 	else
-		TRACE( "CLocalization Error : Can't open .po-resource %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
+		LOG( "CLocalization Error : Can't open .po-resource %02x: %s\n", nLangID, (LPCSTR)CT2A( szFilename ) );
 
 	return bRet;
 }
@@ -598,7 +620,7 @@ BOOL CLocalization::LoadPoFromArchive(LANGID nLangID, LPCTSTR szFilename)
 	if ( hCompressed > 0 ) // Status: < 0 - error, == 0 - uncompressed, > 0 - compressed
 	{
 		CStringA sUncompressed;
-		const INT nChunk = 1024;  
+		const INT nChunk = 1024;
 		for (;;)
 		{
 			INT nLength = sUncompressed.GetLength();
@@ -614,7 +636,7 @@ BOOL CLocalization::LoadPoFromArchive(LANGID nLangID, LPCTSTR szFilename)
 			else if ( nRead < 0 )
 			{
 				// Decompression error
-				TRACE( "CLocalization Error : Can't decompress file: %s\n", (LPCSTR)CT2A( szFilename ) );
+				LOG( "CLocalization Error : Can't decompress file: %s\n", (LPCSTR)CT2A( szFilename ) );
 				sUncompressed.ReleaseBuffer( nLength );
 				break;
 			}
@@ -623,7 +645,7 @@ BOOL CLocalization::LoadPoFromArchive(LANGID nLangID, LPCTSTR szFilename)
 		LZClose( hCompressed );
 	}
 	else
-		TRACE( "CLocalization Error : Can't open file: %s\n", (LPCSTR)CT2A( szFilename ) );
+		LOG( "CLocalization Error : Can't open file: %s\n", (LPCSTR)CT2A( szFilename ) );
 
 	return bRet;
 }
@@ -659,7 +681,7 @@ BOOL CLocalization::LoadPoFromString(LANGID nLangID, const CStringA& sContent)
 		case '#':
 			if ( mode != mode_ref && mode != mode_start && mode != mode_msgstr )
 			{
-				TRACE( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
+				LOG( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
 				bRet = FALSE;
 				break;
 			}
@@ -669,7 +691,7 @@ BOOL CLocalization::LoadPoFromString(LANGID nLangID, const CStringA& sContent)
 				if ( mode == mode_msgstr )
 				{
 					// Save previous string
-					if ( ! sRef.IsEmpty() )
+					if ( ! sRef.IsEmpty() && ! sString.IsEmpty() )
 						Add( sRef, Decode( sString ) );
 
 					sString.Empty();
@@ -692,7 +714,7 @@ BOOL CLocalization::LoadPoFromString(LANGID nLangID, const CStringA& sContent)
 				// ID
 				if ( mode != mode_start && mode != mode_ref )
 				{
-					TRACE( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
+					LOG( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
 					bRet = FALSE;
 					break;
 				}
@@ -708,7 +730,7 @@ BOOL CLocalization::LoadPoFromString(LANGID nLangID, const CStringA& sContent)
 			{
 				// Translation
 				if ( mode != mode_msgid )
-					sRef = sString.Trim();					
+					sRef = sString.Trim();
 				else
 					sID = Decode( sString );
 
@@ -720,7 +742,7 @@ BOOL CLocalization::LoadPoFromString(LANGID nLangID, const CStringA& sContent)
 			else
 			{
 				// Unknown string
-				TRACE( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
+				LOG( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
 				bRet = FALSE;
 				break;
 			}
@@ -728,7 +750,7 @@ BOOL CLocalization::LoadPoFromString(LANGID nLangID, const CStringA& sContent)
 		case '\"':
 			if ( mode != mode_msgid && mode != mode_msgstr )
 			{
-				TRACE( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
+				LOG( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
 				bRet = FALSE;
 				break;
 			}
@@ -740,7 +762,7 @@ BOOL CLocalization::LoadPoFromString(LANGID nLangID, const CStringA& sContent)
 			else
 			{
 				// Unknown string
-				TRACE( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
+				LOG( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
 				bRet = FALSE;
 				break;
 			}
@@ -759,14 +781,14 @@ BOOL CLocalization::LoadPoFromString(LANGID nLangID, const CStringA& sContent)
 	if ( bRet && mode != mode_msgstr )
 	{
 		// Unknown string
-		TRACE( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
+		LOG( "CLocalization Error : Invalid .po-line #%d: %s\n", nLine, sOriginalLine );
 		bRet = FALSE;
 	}
 
 	if ( bRet )
 	{
 		// Save last string
-		if ( ! sRef.IsEmpty() )
+		if ( ! sRef.IsEmpty() && ! sString.IsEmpty() )
 			Add( sRef, Decode( sString ) );
 	}
 	else

@@ -1,7 +1,7 @@
 //
 // USBOblivion.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2011.
+// Copyright (c) Nikolay Raspopov, 2009-2012.
 // This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -90,6 +90,15 @@ BOOL CUSBOblivionApp::InitInstance()
 				CmpStrI( szArglist[ i ], _T("/elevation") ) )
 			{
 				dlg.m_bElevation = TRUE;
+			}
+			else if ( CmpStrI( szArglist[ i ], _T("-lang:"), 6 ) ||
+				CmpStrI( szArglist[ i ], _T("/lang:"), 6 ) )
+			{
+				int lang;
+				if ( _stscanf_s( szArglist[ i ] + 6, _T("%x"), &lang ) == 1 )
+				{
+					m_Loc.Select( (LANGID)lang );
+				}
 			}
 		}
 	}

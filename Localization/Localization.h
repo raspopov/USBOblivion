@@ -2,7 +2,7 @@
 // Localization.h
 //
 // This file is part of Localization library.
-// Copyright (c) Nikolay Raspopov, 2011.
+// Copyright (c) Nikolay Raspopov, 2011-2012.
 // E-mail: ryo.rabbit@gmail.com
 // Web: http://code.google.com/p/po-localization/
 //
@@ -40,7 +40,7 @@ class CLocalization
 {
 public:
 	CLocalization(LANGID nDefault = LANG_ENGLISH); // Set default/native language
-	virtual ~CLocalization();
+	~CLocalization();
 
 	// Load all available translations for specified module using two methods:
 	//
@@ -48,7 +48,7 @@ public:
 	// where XXXX is a 2 or 4 hexadecimal digits of language ID for example
 	// 0409 or 09 for English and 0419 or 19 for Russian.
 	//
-	// 2) Loading from resources. Resource ID treated as language ID, resource type "PO".
+	// 2) Loading from resources. Resource ID treated as language ID, resource type: "PO".
 	//
 	// szModule can be module path or folder path (i.e. ends by "\"), or NULL then
 	// current module name will be used.
@@ -56,6 +56,9 @@ public:
 
 	// Select language. Use LANG_NEUTRAL for language auto-detection.
 	BOOL Select(LANGID nLangID = LANG_NEUTRAL);
+
+	// Reload translation
+	void Reload();
 
 	// Load translated string
 	CString LoadString(UINT nID) const;

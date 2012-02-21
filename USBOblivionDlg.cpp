@@ -304,6 +304,7 @@ void CUSBOblivionDlg::OnOK()
 			sParams += _T(" -enable");
 		if ( ! m_bSave )
 			sParams += _T(" -nosave");
+		sParams.AppendFormat( _T(" -lang:%x"), (int)theApp.m_Loc.GetLang() );
 
 		CString sPath;
 		GetModuleFileName( NULL, sPath.GetBuffer( MAX_PATH + 1 ), MAX_PATH );
