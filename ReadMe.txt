@@ -35,6 +35,10 @@ System Requirements:
 
 Versions:
 
+1.8.0.0
+
+  * Added Italian translation
+
 1.7.0.0
 
   * Added English interface

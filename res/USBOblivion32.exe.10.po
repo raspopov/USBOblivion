@@ -1,0 +1,254 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: USBOblivion32.exe\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Russian\n"
+
+#. Menu popup
+#: MENUPOPUP.130.0
+msgid "Context"
+msgstr "Contesto"
+
+#. Menu item
+#: MENUITEM.130.32771
+msgid "Copy"
+msgstr "Copia"
+
+#. Menu item
+#: MENUITEM.130.32772
+msgid "Copy all"
+msgstr "Copia tutto"
+
+#. Dialog caption
+#: DIALOGCAPTION.102
+msgid "USBOblivion"
+msgstr "USBOblivion"
+
+#. Dialog control
+#: DIALOGCONTROL.102.Button.1
+msgid "Clean"
+msgstr "Pulisci"
+
+#. Dialog control
+#: DIALOGCONTROL.102.Button.2
+msgid "Exit"
+msgstr "Esci"
+
+#. Dialog control
+#: DIALOGCONTROL.102.Button.1002
+msgid "Do real clean (simulation otherwise)"
+msgstr "Esegui pulizia reale (altrimenti simulazione)"
+
+#. Dialog control
+#: DIALOGCONTROL.102.Button.1003
+msgid "Save backup .reg-file"
+msgstr "Crea copia del file .reg"
+
+#. String resource
+#: STRING.129
+msgid ""
+"Usage:\n"
+"\n"
+"USBOblivion[32|64].exe [params]\n"
+"\n"
+"Params:\n"
+"\n"
+"-enable - Do real clean (simulation otherwise);\n"
+"-auto - Automatic run;\n"
+"-nosave - Don't save backup .reg-file;\n"
+"-lang:XX - Use language XX (hex-code);\n"
+"-? - Show this help.\n"
+msgstr ""
+"Sintassi:\n"
+"\n"
+"USBOblivion[32|64].exe [parametro]\n"
+"\n"
+"Lista parametri:\n"
+"\n"
+"-enable - Esegue pulizia reale (altrimenti simula);\n"
+"-auto - Esecuzione automatica;\n"
+"-nosave - Nessun salvataggio del file .reg;\n"
+"-lang:XX - Utilizza la lingua XX (in formato hex);\n"
+"-? - Visualizza questa guida.\n"
+
+#. String resource
+#: STRING.130
+msgid "WARNING! Eject all flash drives before cleaning please."
+msgstr "ATTENZIONE! Disconnettere tutte le periferiche USB prima di pulire."
+
+#. String resource
+#: STRING.131
+msgid "Press \"Clean\" button to begin cleaning."
+msgstr "Cliccare \"Pulisci \" per iniziare la pulizia."
+
+#. String resource
+#: STRING.132
+msgid "Process mode: real (data will be cleaned)."
+msgstr "Tipo di pulizia: reale (i dati verranno puliti)."
+
+#. String resource
+#: STRING.133
+msgid "Process mode: simulation (no data will be cleaned)."
+msgstr "Tipo di pulizia: simulazione (nessun dato verrà pulito)."
+
+#. String resource
+#: STRING.134
+msgid "File creation error: "
+msgstr "Errore di creazione del file: "
+
+#. String resource
+#: STRING.135
+msgid "File write error: "
+msgstr "Errore di scrittura del file: "
+
+#. String resource
+#: STRING.136
+msgid "Backup file: "
+msgstr "Copia di sicurezza: "
+
+#. String resource
+#: STRING.137
+msgid "Done."
+msgstr "Finito."
+
+#. String resource
+#: STRING.138
+msgid "Gathering data from system registry..."
+msgstr "Raccolta di dati dal registro di sistema..."
+
+#. String resource
+#: STRING.139
+msgid "Found drives (will be ignored): "
+msgstr "Dispositivi di memorizzazione trovati (verranno ignorati): "
+
+#. String resource
+#: STRING.140
+msgid "Cleaning..."
+msgstr "Pulizia in corso..."
+
+#. String resource
+#: STRING.141
+msgid "Removing key: "
+msgstr "Rimozione chiave: "
+
+#. String resource
+#: STRING.142
+msgid "Removing value: "
+msgstr "Rimozione valore: "
+
+#. String resource
+#: STRING.143
+msgid "Gathering user data..."
+msgstr "Raccolta dati utente..."
+
+#. String resource
+#: STRING.144
+msgid "Gathering data about user: "
+msgstr "Raccolta di dati relativi all'utente: "
+
+#. String resource
+#: STRING.145
+msgid "Found users: "
+msgstr "Utenti trovati: "
+
+#. String resource
+#: STRING.146
+msgid "Found mount points: "
+msgstr "Punti di montaggio trovati: "
+
+#. String resource
+#: STRING.147
+msgid "Found Explorer drives: "
+msgstr "Unità trovate in Explorer: "
+
+#. String resource
+#: STRING.148
+msgid "Remove error: "
+msgstr "Rimozione errore: "
+
+#. String resource
+#: STRING.149
+msgid "Gathering mount point's data..."
+msgstr "Raccolta di dati dei punti di montaggio..."
+
+#. String resource
+#: STRING.150
+msgid "Found ControlSets: "
+msgstr "ControlSets trovati: "
+
+#. String resource
+#: STRING.151
+msgid "Found keys: "
+msgstr "Chiavi trovate: "
+
+#. String resource
+#: STRING.152
+msgid "Found values: "
+msgstr "Valori trovati: "
+
+#. String resource
+#: STRING.153
+msgid "Key access denied: "
+msgstr "Tasto di accesso negato: "
+
+#. String resource
+#: STRING.154
+msgid "Disk %c: has been inserted."
+msgstr "Il disco %c: è stato inserito."
+
+#. String resource
+#: STRING.155
+msgid "Logged-in under system account successfully."
+msgstr "Accesso nell'account di sistema avvenuto con successo."
+
+#. String resource
+#: STRING.156
+msgid "Failed to login under system account."
+msgstr "Errore durante l'accesso nell'account di sistema."
+
+#. String resource
+#: STRING.157
+msgid "Re-starting under administrator..."
+msgstr "Riavvio come amministratore..."
+
+#. String resource
+#: STRING.158
+msgid "Disk %c: has been ejected."
+msgstr "Il disco %c: è stato disconnesso."
+
+#. String resource
+#: STRING.159
+msgid "Failed to eject disk %c:."
+msgstr "Errore durante la disconnessione del disco %c:."
+
+#. String resource
+#: STRING.160
+msgid "Ejecting disk %c:..."
+msgstr "Disconnessione del disco %c:..."
+
+#. String resource
+#: STRING.161
+msgid "Removing file: "
+msgstr "Eliminazione del file: "
+
+#. String resource
+#: STRING.162
+msgid "Gathering file data..."
+msgstr "Raccolta dati del file..."
+
+#. String resource
+#: STRING.163
+msgid "Cleaning journal: "
+msgstr "Pulizia diario: "
+
+#. String resource
+#: STRING.164
+msgid "Gathering journal data..."
+msgstr "Raccolta dati del diario..."
+

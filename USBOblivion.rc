@@ -48,6 +48,7 @@ IDI_EJECT               ICON                    "res\\eject.ico"
 
 25                      PO                      "res\\USBOblivion32.exe.19.p_"
 10                      PO                      "res\\USBOblivion32.exe.0a.p_"
+16                      PO                      "res\\USBOblivion32.exe.10.p_"
 #endif    // Neutral resources
 /////////////////////////////////////////////////////////////////////////////
 
