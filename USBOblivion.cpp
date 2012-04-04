@@ -53,12 +53,10 @@ BOOL CUSBOblivionApp::InitInstance()
 
 	SetRegistryKey( _T("USBOblivion") );
 
-	m_Loc.Load();
-	m_Loc.Select();
-
 	CUSBOblivionDlg dlg;
 
-	BOOL bExit = FALSE;
+	LANGID nLang = 0;
+	BOOL bHelp = FALSE;
 	int nArgs = 0;
 	LPWSTR* szArglist = CommandLineToArgvW( GetCommandLineW(), &nArgs );
 	if ( szArglist )
@@ -68,8 +66,7 @@ BOOL CUSBOblivionApp::InitInstance()
 			if ( CmpStrI( szArglist[ i ], _T("-?") ) ||
 				 CmpStrI( szArglist[ i ], _T("/?") ) )
 			{
-				AfxMessageBox( IDS_ABOUT );
-				bExit = TRUE;
+				bHelp = TRUE;
 			}
 			else if ( CmpStrI( szArglist[ i ], _T("-enable") )||
 				CmpStrI( szArglist[ i ], _T("/enable") ) )
@@ -97,14 +94,21 @@ BOOL CUSBOblivionApp::InitInstance()
 				int lang;
 				if ( _stscanf_s( szArglist[ i ] + 6, _T("%x"), &lang ) == 1 )
 				{
-					m_Loc.Select( (LANGID)lang );
+					nLang = (LANGID)lang;
 				}
 			}
 		}
 	}
 	LocalFree( szArglist );
 
-	if ( ! bExit )
+	m_Loc.Load();
+	m_Loc.Select( nLang );
+
+	if ( bHelp )
+	{
+		AfxMessageBox( LoadString( IDS_ABOUT ) );
+	}
+	else
 	{
 		m_pMainWnd = &dlg;
 		dlg.DoModal();

@@ -12,6 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Global
+	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
+		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
 		Debug|x64 = Debug|x64
@@ -32,13 +35,11 @@ Global
 		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Debug|x64.ActiveCfg = Debug|x64
 		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Debug|x64.Build.0 = Debug|x64
 		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Release|Win32.ActiveCfg = Release|x64
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Release|Win32.Build.0 = Release|x64
 		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Release|x64.ActiveCfg = Release|x64
 		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
-		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
 	EndGlobalSection
 EndGlobal
