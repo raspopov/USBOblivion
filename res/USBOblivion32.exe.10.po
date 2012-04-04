@@ -85,7 +85,7 @@ msgstr "ATTENZIONE! Disconnettere tutte le periferiche USB prima di pulire."
 #. String resource
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Cliccare \"Pulisci \" per iniziare la pulizia."
+msgstr "Cliccare \"Pulisci\" per iniziare la pulizia."
 
 #. String resource
 #: STRING.132
