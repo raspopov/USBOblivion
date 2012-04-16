@@ -37,6 +37,7 @@ Versions:
 
 1.8.0.0
 
+  * Fixed GUI freezes
   * Added Italian translation
 
 1.7.0.0

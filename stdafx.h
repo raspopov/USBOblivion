@@ -51,6 +51,7 @@
 #include <winioctl.h>
 #include <cfgmgr32.h>
 
+#include "thread.h"
 #include "Localization\Localization.h"
 
 #ifdef _UNICODE
@@ -86,3 +87,5 @@ HANDLE OpenProcessToken(HANDLE hProcess, DWORD dwAccess);
 
 // Возвращает хэндлер дискового устройства по его номеру (Uwe Sieber - www.uwe-sieber.de)
 DEVINST GetDrivesDevInstByDeviceNumber(DWORD DeviceNumber, UINT DriveType, LPCTSTR szDosDeviceName);
+
+using namespace c4u;

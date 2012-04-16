@@ -1,7 +1,7 @@
 //
 // USBOblivionDlg.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2011.
+// Copyright (c) Nikolay Raspopov, 2009-2012.
 // This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -64,6 +64,7 @@ class CUSBOblivionDlg : public CDialog
 {
 public:
 	CUSBOblivionDlg(CWnd* pParent = NULL);
+	virtual ~CUSBOblivionDlg();
 
 	enum { IDD = IDD_USBOBLIVION_DIALOG };
 
@@ -81,12 +82,21 @@ protected:
 	CCtrlResize	m_CtrlsResize;	// Изменение размеров интерфейса
 	CRect		m_InitialRect;	// Начальные разсеры окна - минимальные размеры
 	DWORD		m_nDrives;		// Текущие диски
+	
+	CString		m_sDeleteKeyString;		// Кеш строки
+	CString		m_sDeleteValueString;	// Кеш строки
+
+	typedef C2< CString, UINT > CLogItem;
+	typedef CList< CLogItem* > CLogList;
+	cs						m_pSection;		// Синхронизация доступа к отчёту
+	CAutoPtr< CLogList >	m_pReportList;	// Список строк для отчта
+	bool					m_bRunning;		// Флаг обработки
 
 	LSTATUS (WINAPI *m_pRegDeleteKeyExW) (HKEY, LPCWSTR, REGSAM, DWORD);
 
 	enum { Information = 0, Warning, Error, Search, Done, Clean, Regedit, Lock, Eject };
 
-	void Log(LPCTSTR szText, UINT nType = Information);
+	void Log(const CString& sText, UINT nType = Information);
 	void Log(UINT nID, UINT nType = Information);
 	void Write(LPCTSTR szText);
 
@@ -124,6 +134,8 @@ protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// поддержка DDX/DDV
 	virtual BOOL OnInitDialog();
 	virtual void OnOK();
+	virtual void OnCancel();
+
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
 	afx_msg void OnDestroy();
@@ -134,6 +146,9 @@ protected:
 	afx_msg void OnCopyAll();
 	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 	afx_msg BOOL OnDeviceChange(UINT nEventType, DWORD_PTR dwData);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
 	DECLARE_MESSAGE_MAP()
+
+	THREAD(CUSBOblivionDlg,RunThread)
 };

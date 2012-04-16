@@ -19,10 +19,8 @@
 // Neutral resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
-#ifdef _WIN32
 LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 #pragma code_page(1251)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -46,28 +44,26 @@ IDI_EJECT               ICON                    "res\\eject.ico"
 // PO
 //
 
-25                      PO                      "res\\USBOblivion32.exe.19.p_"
-10                      PO                      "res\\USBOblivion32.exe.0a.p_"
-16                      PO                      "res\\USBOblivion32.exe.10.p_"
+25                      PO                      "res\\USBOblivion32.exe.19.po_"
+10                      PO                      "res\\USBOblivion32.exe.0a.po_"
+16                      PO                      "res\\USBOblivion32.exe.10.po_"
 #endif    // Neutral resources
 /////////////////////////////////////////////////////////////////////////////
 
 
 /////////////////////////////////////////////////////////////////////////////
-// Russian resources
+// Russian (Russia) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_RUS)
-#ifdef _WIN32
 LANGUAGE LANG_RUSSIAN, SUBLANG_DEFAULT
 #pragma code_page(1251)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu
 //
 
-IDR_CONTEXT MENU 
+IDR_CONTEXT MENU
 BEGIN
     POPUP "Context"
     BEGIN
@@ -120,17 +116,17 @@ END
 // Dialog
 //
 
-IDD_USBOBLIVION_DIALOG DIALOGEX 0, 0, 331, 201
+IDD_USBOBLIVION_DIALOG DIALOGEX 0, 0, 401, 202
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_VISIBLE | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "USBOblivion"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "Clean",IDOK,195,178,60,16
-    PUSHBUTTON      "Exit",IDCANCEL,264,178,60,16
-    CONTROL         "",IDC_REPORT,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,7,7,317,160
-    CONTROL         "Do real clean (simulation otherwise)",IDC_ENABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,171,181,10
-    CONTROL         "Save backup .reg-file",IDC_SAVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,184,115,10
+    DEFPUSHBUTTON   "Clean",IDOK,267,179,60,16
+    PUSHBUTTON      "Exit",IDCANCEL,334,179,60,16
+    CONTROL         "",IDC_REPORT,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,7,7,387,160
+    CONTROL         "Do real clean (simulation otherwise)",IDC_ENABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,171,250,10
+    CONTROL         "Save backup .reg-file",IDC_SAVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,185,250,10
 END
 
 
@@ -140,14 +136,15 @@ END
 //
 
 #ifdef APSTUDIO_INVOKED
-GUIDELINES DESIGNINFO 
+GUIDELINES DESIGNINFO
 BEGIN
     IDD_USBOBLIVION_DIALOG, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 324
+        RIGHTMARGIN, 394
+        VERTGUIDE, 257
         TOPMARGIN, 7
-        BOTTOMMARGIN, 194
+        BOTTOMMARGIN, 195
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -158,7 +155,7 @@ END
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_ABOUT               "Usage:\n\nUSBOblivion[32|64].exe [params]\n\nParams:\n\n-enable - Do real clean (simulation otherwise);\n-auto - Automatic run;\n-nosave - Don't save backup .reg-file;\n-lang:XX - Use language XX (hex-code);\n-? - Show this help.\n"
     IDS_WARNING             "WARNING! Eject all flash drives before cleaning please."
@@ -177,12 +174,12 @@ BEGIN
     IDS_RUN_USERS           "Gathering user data..."
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "USBOblivion"
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_RUN_USER            "Gathering data about user: "
     IDS_RUN_USERS_FOUND     "Found users: "
@@ -202,7 +199,7 @@ BEGIN
     IDS_ERROR_EJECT         "Failed to eject disk %c:."
 END
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_RUN_EJECT           "Ejecting disk %c:..."
     IDS_DELETE_FILE         "Removing file: "
@@ -211,7 +208,7 @@ BEGIN
     IDS_RUN_LOGS            "Gathering journal data..."
 END
 
-#endif    // Russian resources
+#endif    // Russian (Russia) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

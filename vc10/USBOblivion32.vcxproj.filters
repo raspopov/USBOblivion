@@ -79,10 +79,24 @@
     <None Include="..\res\warning.ico">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\res\USBOblivion32.exe.0a.po_">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\res\USBOblivion32.exe.19.po_">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\res\USBOblivion32.exe.10.po_">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\USBOblivion.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\pointer.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

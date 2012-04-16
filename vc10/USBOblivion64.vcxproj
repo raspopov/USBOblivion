@@ -49,6 +49,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -111,10 +112,20 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
+      <DelayLoadDLLs>gdiplus.dll;setupapi.dll;msimg32.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll;imm32.dll;winmm.dll</DelayLoadDLLs>
+      <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Localization</Message>
+    </PreBuildEvent>
+    <PostBuildEvent />
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -139,10 +150,19 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
+      <DelayLoadDLLs>gdiplus.dll;setupapi.dll;msimg32.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll;imm32.dll;winmm.dll</DelayLoadDLLs>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Localization</Message>
+    </PreBuildEvent>
+    <PostBuildEvent />
+    <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Midl>
@@ -174,12 +194,17 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX86</TargetMachine>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
+      <DelayLoadDLLs>gdiplus.dll;setupapi.dll;msimg32.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll;imm32.dll;winmm.dll</DelayLoadDLLs>
+      <Profile>true</Profile>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
+    <PreBuildEvent>
+      <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Localization</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -197,8 +222,6 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
       <StringPooling>true</StringPooling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
     </ClCompile>
@@ -213,11 +236,16 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX64</TargetMachine>
+      <DelayLoadDLLs>gdiplus.dll;setupapi.dll;msimg32.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll;imm32.dll;winmm.dll</DelayLoadDLLs>
+      <Profile>true</Profile>
     </Link>
-    <PostBuildEvent>
-      <Command>
-      </Command>
-    </PostBuildEvent>
+    <PostBuildEvent />
+    <PreBuildEvent>
+      <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Message>Localization</Message>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\CtrlsResize.cpp" />
@@ -239,6 +267,11 @@
     <ClInclude Include="..\USBOblivionDlg.h" />
   </ItemGroup>
   <ItemGroup>
+    <MASM Include="..\pointer.asm">
+      <FileType>Document</FileType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </MASM>
     <None Include="..\res\done.ico" />
     <None Include="..\res\eject.ico" />
     <None Include="..\res\error.ico" />
@@ -248,6 +281,9 @@
     <None Include="..\res\search.ico" />
     <None Include="..\res\USBOblivion.ico" />
     <None Include="..\res\USBOblivion.rc2" />
+    <None Include="..\res\USBOblivion32.exe.0a.po_" />
+    <None Include="..\res\USBOblivion32.exe.10.po_" />
+    <None Include="..\res\USBOblivion32.exe.19.po_" />
     <None Include="..\res\warning.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -255,6 +291,7 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>

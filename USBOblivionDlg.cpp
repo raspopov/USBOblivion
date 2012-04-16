@@ -1,7 +1,7 @@
 //
 // USBOblivionDlg.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2011.
+// Copyright (c) Nikolay Raspopov, 2009-2012.
 // This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -107,9 +107,21 @@ CUSBOblivionDlg::CUSBOblivionDlg(CWnd* pParent /*=NULL*/)
 	, m_nSelected	( -1 )
 	, m_InitialRect	( 0, 0, 0, 0 )
 	, m_nDrives		( GetLogicalDrives() )
+	, m_bRunning	( false )
+	, m_pReportList	( new CLogList )
 {
 	(FARPROC&)m_pRegDeleteKeyExW = GetProcAddress(
 		GetModuleHandle( _T("advapi32.dll") ), "RegDeleteKeyExW" );
+}
+
+CUSBOblivionDlg::~CUSBOblivionDlg()
+{
+	locker_holder oLock( &m_pSection );
+
+	while ( ! m_pReportList->IsEmpty() )
+	{
+		delete m_pReportList->RemoveHead();
+	}
 }
 
 void CUSBOblivionDlg::DoDataExchange(CDataExchange* pDX)
@@ -153,11 +165,15 @@ BEGIN_MESSAGE_MAP(CUSBOblivionDlg, CDialog)
 	ON_COMMAND(ID_COPY_ALL, &CUSBOblivionDlg::OnCopyAll)
 	ON_WM_HELPINFO()
 	ON_WM_DEVICECHANGE()
+	ON_WM_TIMER()
 END_MESSAGE_MAP()
 
 BOOL CUSBOblivionDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
+
+	m_sDeleteKeyString = LoadString( IDS_DELETE_KEY );
+	m_sDeleteValueString = LoadString( IDS_DELETE_VALUE );
 
 	GetWindowRect( m_InitialRect );
 
@@ -215,11 +231,15 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 	else
 		Log( IDS_START );
 
+	SetTimer( 1, 250, NULL );
+
 	return TRUE;
 }
 
 void CUSBOblivionDlg::OnDestroy()
 {
+	KillTimer( 1 );
+
 	CDialog::OnDestroy();
 }
 
@@ -275,23 +295,18 @@ void CUSBOblivionDlg::OnOK()
 	UpdateData();
 
 	m_pReport.DeleteAllItems();
+
+	GetDlgItem( IDC_ENABLE )->EnableWindow( FALSE );
+	GetDlgItem( IDC_SAVE )->EnableWindow( FALSE );
 	GetDlgItem( IDOK )->EnableWindow( FALSE );
 	GetDlgItem( IDCANCEL )->EnableWindow( FALSE );
 
 	// Нужнен ли запуск под админом?
 	if ( IsRunAsAdmin() || m_bElevation )
 	{
-		// Подготовка к запуску
-		if ( PrepareBackup() )
-		{
-			// Запуск #1: с привелегиями
-			if ( ! RunAsSystem() )
-				// Запуск #2: без привелегий
-				Run();
-		}
-
-		// Подчистка
-		FinishBackup();
+		m_bRunning = true;
+		startRunThread();
+		return;
 	}
 	else if ( ! m_bElevation ) // исключение бесконечного перезапуска
 	{
@@ -326,6 +341,8 @@ void CUSBOblivionDlg::OnOK()
 		}
 	}
 
+	GetDlgItem( IDC_ENABLE )->EnableWindow( TRUE );
+	GetDlgItem( IDC_SAVE )->EnableWindow( TRUE );
 	GetDlgItem( IDOK )->EnableWindow( TRUE );
 	GetDlgItem( IDCANCEL )->EnableWindow( TRUE );
 
@@ -333,6 +350,35 @@ void CUSBOblivionDlg::OnOK()
 	
 	if ( m_bAuto )
 		CDialog::OnOK();
+}
+
+void CUSBOblivionDlg::OnCancel()
+{
+	if ( m_bRunning )
+		MessageBeep( MB_ICONHAND );
+	else
+		CDialog::OnCancel();
+}
+
+void CUSBOblivionDlg::RunThread()
+{
+	CoInitialize( NULL );
+
+	// Подготовка к запуску
+	if ( PrepareBackup() )
+	{
+		// Запуск #1: с привелегиями
+		if ( ! RunAsSystem() )
+			// Запуск #2: без привелегий
+			Run();
+	}
+
+	// Подчистка
+	FinishBackup();
+
+	Log( IDS_RUN_DONE, Done );
+
+	CoUninitialize();
 }
 
 bool CUSBOblivionDlg::PrepareBackup()
@@ -498,16 +544,13 @@ void CUSBOblivionDlg::Log(UINT nID, UINT nType)
 	Log( LoadString( nID ), nType );
 }
 
-void CUSBOblivionDlg::Log(LPCTSTR szText, UINT nType)
+void CUSBOblivionDlg::Log(const CString& sText, UINT nType)
 {
-	TRACE( _T("[LOG] %hs\r\n"), (LPCSTR)CT2A( szText ) );
+	TRACE( "[LOG] %s\r\n", (LPCSTR)CT2A( (LPCTSTR)sText ) );
 
-	m_pReport.EnsureVisible( m_pReport.InsertItem(
-		m_pReport.GetItemCount(), szText, nType ), FALSE );
+	locker_holder oLock( &m_pSection );
 
-	UpdateWindow();
-
-	Sleep( 0 );
+	m_pReportList->AddTail( new CLogItem( sText, nType ) );
 }
 
 void CUSBOblivionDlg::Write(LPCTSTR szText)
@@ -1400,8 +1443,7 @@ void CUSBOblivionDlg::DeleteLog(LPCTSTR szName)
 
 void CUSBOblivionDlg::DeleteKey(HKEY hRoot, const CString& sSubKey)
 {
-	Log( LoadString( IDS_DELETE_KEY ) + GetKeyName( hRoot ) +
-		_T("\\") + sSubKey, Clean );
+	Log( m_sDeleteKeyString + GetKeyName( hRoot ) + _T("\\") + sSubKey, Clean );
 
 	SaveKey( hRoot, sSubKey );
 
@@ -1410,27 +1452,24 @@ void CUSBOblivionDlg::DeleteKey(HKEY hRoot, const CString& sSubKey)
 
 void CUSBOblivionDlg::DeleteValue(HKEY hRoot, LPCTSTR szSubKey, LPCTSTR szValue)
 {
-	Log( LoadString( IDS_DELETE_VALUE ) + GetKeyName( hRoot ) +
-		_T("\\") + szSubKey + _T(" -> ") + szValue, Clean );
+	Log( m_sDeleteValueString + GetKeyName( hRoot ) + _T("\\") + szSubKey + _T(" -> ") + szValue, Clean );
 
 	SaveKey( hRoot, szSubKey, szValue );
 
 	if ( m_bEnable )
-	{
 		RegDeleteValueFull( hRoot, szSubKey, szValue );
-	}
 }
 
 void CUSBOblivionDlg::SaveKey(HKEY hRoot, LPCTSTR szKeyName, LPCTSTR szValueName)
 {
+	if ( m_oFile == INVALID_HANDLE_VALUE )
+		return;
+
 	TCHAR pszName[ 1024 ] = {};
 	DWORD cchName;
 	DWORD dwType;
 	BYTE pszValue[ 4096 ] = {};
 	DWORD cchValue;
-
-	if ( m_oFile == INVALID_HANDLE_VALUE )
-		return;
 
 	HKEY hKey = NULL;
 	LSTATUS ret = RegOpenKeyFull( hRoot, szKeyName, KEY_READ, &hKey );
@@ -1604,4 +1643,52 @@ BOOL CUSBOblivionDlg::OnDeviceChange(UINT /*nEventType*/, DWORD_PTR /*dwData*/)
 		m_nDrives = nDrives;
 	}
 	return TRUE;
+}
+
+void CUSBOblivionDlg::OnTimer(UINT_PTR nIDEvent)
+{
+	CDialog::OnTimer( nIDEvent );
+
+	// Get completed log for output and create new one
+	CAutoPtr< CLogList > pCopy;
+	{
+		locker_holder oLock( &m_pSection );
+		if ( ! m_pReportList->IsEmpty() )
+		{
+			pCopy.Attach( m_pReportList.Detach() );
+			m_pReportList.Attach( new CLogList );
+		}
+	}
+
+	// Output log on screen
+	if ( pCopy && ! pCopy->IsEmpty() )
+	{
+		DWORD nInsert = m_pReport.GetItemCount();
+		do
+		{
+			CLogItem* pItem = pCopy->RemoveHead();
+			m_pReport.InsertItem( nInsert++, pItem->first, pItem->second );
+			delete pItem;
+		}
+		while ( ! pCopy->IsEmpty() );
+
+		m_pReport.EnsureVisible( nInsert - 1, FALSE );
+		UpdateWindow();
+	}
+
+	if ( m_bRunning && ! m_threadRunThread.is_running() )
+	{
+		// Complete
+		m_bRunning = false;
+
+		m_threadRunThread.close();
+		
+		GetDlgItem( IDC_ENABLE )->EnableWindow( TRUE );
+		GetDlgItem( IDC_SAVE )->EnableWindow( TRUE );
+		GetDlgItem( IDOK )->EnableWindow( TRUE );
+		GetDlgItem( IDCANCEL )->EnableWindow( TRUE );
+	
+		if ( m_bAuto )
+			CDialog::OnOK();
+	}
 }
