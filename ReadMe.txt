@@ -83,6 +83,6 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 Copyrights:
 
 USB Oblivion
-Copyright (C) Nikolay Raspopov, 2009-2011.
-E-Mail: ryo.rabbit@gmail.com
+Copyright (C) Nikolay Raspopov, 2009-2012.
+E-Mail: raspopov@cherubicsoft.com
 Web site: http://code.google.com/p/usboblivion/

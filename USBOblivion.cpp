@@ -63,33 +63,31 @@ BOOL CUSBOblivionApp::InitInstance()
 	{
 		for( int i = 0; i < nArgs; ++i )
 		{
-			if ( CmpStrI( szArglist[ i ], _T("-?") ) ||
-				 CmpStrI( szArglist[ i ], _T("/?") ) )
+			if ( CmpStrI( szArglist[ i ], _T("-?") ) || CmpStrI( szArglist[ i ], _T("/?") ) )
 			{
 				bHelp = TRUE;
 			}
-			else if ( CmpStrI( szArglist[ i ], _T("-enable") )||
-				CmpStrI( szArglist[ i ], _T("/enable") ) )
+			else if ( CmpStrI( szArglist[ i ], _T("-enable") ) || CmpStrI( szArglist[ i ], _T("/enable") ) )
 			{
 				dlg.m_bEnable = TRUE;
 			}
-			else if ( CmpStrI( szArglist[ i ], _T("-auto") ) ||
-				CmpStrI( szArglist[ i ], _T("/auto") ) )
+			else if ( CmpStrI( szArglist[ i ], _T("-auto") ) || CmpStrI( szArglist[ i ], _T("/auto") ) )
 			{
 				dlg.m_bAuto = TRUE;
 			}
-			else if ( CmpStrI( szArglist[ i ], _T("-nosave") ) ||
-				CmpStrI( szArglist[ i ], _T("/nosave") ) )
+			else if ( CmpStrI( szArglist[ i ], _T("-nosave") ) || CmpStrI( szArglist[ i ], _T("/nosave") ) )
 			{
 				dlg.m_bSave = FALSE;
 			}
-			else if ( CmpStrI( szArglist[ i ], _T("-elevation") ) ||
-				CmpStrI( szArglist[ i ], _T("/elevation") ) )
+			else if ( CmpStrI( szArglist[ i ], _T("-elevation") ) || CmpStrI( szArglist[ i ], _T("/elevation") ) )
 			{
 				dlg.m_bElevation = TRUE;
 			}
-			else if ( CmpStrI( szArglist[ i ], _T("-lang:"), 6 ) ||
-				CmpStrI( szArglist[ i ], _T("/lang:"), 6 ) )
+			else if ( CmpStrI( szArglist[ i ], _T("-silent") ) || CmpStrI( szArglist[ i ], _T("/silent") ) )
+			{
+				dlg.m_bSilent = TRUE;
+			}
+			else if ( CmpStrI( szArglist[ i ], _T("-lang:"), 6 ) || CmpStrI( szArglist[ i ], _T("/lang:"), 6 ) )
 			{
 				int lang;
 				if ( _stscanf_s( szArglist[ i ] + 6, _T("%x"), &lang ) == 1 )

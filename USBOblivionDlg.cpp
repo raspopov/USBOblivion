@@ -104,6 +104,7 @@ CUSBOblivionDlg::CUSBOblivionDlg(CWnd* pParent /*=NULL*/)
 	, m_bAuto		( FALSE )
 	, m_bSave		( TRUE )
 	, m_bElevation	( FALSE )
+	, m_bSilent		( FALSE )
 	, m_nSelected	( -1 )
 	, m_InitialRect	( 0, 0, 0, 0 )
 	, m_nDrives		( GetLogicalDrives() )
@@ -172,6 +173,8 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
+	ShowWindow( ( m_bAuto && m_bSilent ) ? SW_HIDE : SW_SHOWNORMAL );
+
 	m_sDeleteKeyString = LoadString( IDS_DELETE_KEY );
 	m_sDeleteValueString = LoadString( IDS_DELETE_VALUE );
 
@@ -198,10 +201,8 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 
 	CRect rc;
 	m_pReport.GetClientRect( &rc );
-	m_pReport.InsertColumn( 0, _T(""), LVCFMT_LEFT, rc.Width() -
-		GetSystemMetrics( SM_CXVSCROLL ) - 4 );
-	m_pReport.SetExtendedStyle( m_pReport.GetExtendedStyle() |
-		LVS_EX_DOUBLEBUFFER | LVS_EX_LABELTIP );
+	m_pReport.InsertColumn( 0, _T(""), LVCFMT_LEFT, rc.Width() - GetSystemMetrics( SM_CXVSCROLL ) - 4 );
+	m_pReport.SetExtendedStyle( m_pReport.GetExtendedStyle() | LVS_EX_DOUBLEBUFFER | LVS_EX_LABELTIP );
 
 	static const WORD nIcons[] =
 	{
@@ -270,11 +271,11 @@ void CUSBOblivionDlg::OnPaint()
 	if ( IsIconic() )
 	{
 		CPaintDC dc( this );
-		SendMessage( WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0 );
+		SendMessage( WM_ICONERASEBKGND, reinterpret_cast<WPARAM>( dc.GetSafeHdc() ), 0 );
 		int cxIcon = GetSystemMetrics( SM_CXICON );
 		int cyIcon = GetSystemMetrics( SM_CYICON );
 		CRect rect;
-		GetClientRect(&rect);
+		GetClientRect( &rect );
 		int x = ( rect.Width() - cxIcon + 1 ) / 2;
 		int y = ( rect.Height() - cyIcon + 1 ) / 2;
 		dc.DrawIcon( x, y, m_hIcon );
@@ -319,6 +320,8 @@ void CUSBOblivionDlg::OnOK()
 			sParams += _T(" -enable");
 		if ( ! m_bSave )
 			sParams += _T(" -nosave");
+		if ( m_bSilent )
+			sParams += _T(" -silent");
 		sParams.AppendFormat( _T(" -lang:%x"), (int)theApp.m_Loc.GetLang() );
 
 		CString sPath;
@@ -331,7 +334,7 @@ void CUSBOblivionDlg::OnOK()
 		sei.lpFile = sPath;
 		sei.lpParameters = sParams;
 		sei.hwnd = GetSafeHwnd();
-		sei.nShow = SW_NORMAL;
+		sei.nShow = ( m_bAuto && m_bSilent ) ? SW_HIDE : SW_SHOWNORMAL;
 
 		if ( ShellExecuteEx( &sei ) )
 		{

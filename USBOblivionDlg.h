@@ -72,6 +72,7 @@ public:
 	BOOL		m_bAuto;		// -auto		- Автоматический запуск
 	BOOL		m_bSave;		// -nosave		- Отмена сохранения .reg-файла (инверсия)
 	BOOL		m_bElevation;	// -elevation	- Режим с повышенными правами
+	BOOL		m_bSilent;		// -silent		- Тихий режим (работает только в автоматическом режиме)
 
 protected:
 	CImageList	m_oImages;		// Иконки списка
