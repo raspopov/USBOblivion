@@ -8,9 +8,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Français\n"
-"X-Poedit-Country: France\n"
 "X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. Menu popup
 #: MENUPOPUP.130.0
@@ -65,6 +64,7 @@ msgid ""
 "-auto - Automatic run;\n"
 "-nosave - Don't save backup .reg-file;\n"
 "-lang:XX - Use language XX (hex-code);\n"
+"-silent - Hidden mode (if possible);\n"
 "-? - Show this help.\n"
 msgstr ""
 "Utilisation:\n"
@@ -77,6 +77,7 @@ msgstr ""
 "-auto - Exécution automatique;\n"
 "-nosave - Ne pas créer de fichier .reg de sauvegarde;\n"
 "-lang:XX - utiliser la langue XX (code hexadécimal);\n"
+"-silent - Hidden mode (if possible);\n"
 "-? - Afficher cet écran d'aide.\n"
 
 #. String resource

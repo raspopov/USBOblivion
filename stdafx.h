@@ -1,7 +1,7 @@
 //
 // stdafx.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2011.
+// Copyright (c) Nikolay Raspopov, 2009-2012.
 // This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -31,9 +31,12 @@
 #define VC_EXTRALEAN
 #endif
 
+#define WIN32_LEAN_AND_MEAN
+
 #include "targetver.h"
 
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS
+#define _ATL_CSTRING_NO_CRT
 #define _ATL_NO_COM_SUPPORT
 #define _AFX_ALL_WARNINGS
 #define NO_PRINT

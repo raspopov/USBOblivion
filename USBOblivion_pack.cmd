@@ -1,4 +1,4 @@
-set version=1.8.0.0
+set version=1.9.0.0
 md "..\redist"
 del "..\redist\usboblivion32-%version%.zip"
 del "..\redist\usboblivion64-%version%.zip"

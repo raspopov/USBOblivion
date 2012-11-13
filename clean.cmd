@@ -1,4 +1,5 @@
 @echo off
+rd /s /q ".\vc10\ipch\" 2>nul:
 rd /s /q ".\ipch\" 2>nul:
 rd /s /q ".\Win32\" 2>nul:
 rd /s /q ".\x64\" 2>nul:

@@ -27,6 +27,12 @@
 #define new DEBUG_NEW
 #endif
 
+#define DELETE_EXCEPTION(e) do { if(e) { e->Delete(); } } while (0)
+
+// window creation hooking
+void AFXAPI AfxHookWindowCreate(CWnd* pWnd);
+BOOL AFXAPI AfxUnhookWindowCreate();
+
 const LPCTSTR szSYS		= _T("SYSTEM");
 const LPCTSTR szMD		= _T("SYSTEM\\MountedDevices");
 const LPCTSTR szMP2		= _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2");
@@ -35,47 +41,51 @@ const LPCTSTR szCPC		= _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explore
 static const CKeyDef defs[] =
 {
 	// "Universal Serial Bus controllers" XP, Vista
-	{ mControlSet, _T("Control\\Class\\{36FC9E60-C465-11CF-8056-444553540000}"), NULL, _T("InfSection"), _T("USBSTOR_BULK"), FALSE },
+	{ mControlSet_Key, _T("Control\\Class\\{36FC9E60-C465-11CF-8056-444553540000}"), NULL, _T("InfSection"), _T("USBSTOR_BULK"), FALSE },
 	// "DVD/CD-ROM drives" XP, Vista
-	//{ mControlSet, _T("Control\\Class\\{4D36E965-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("cdrom_install"), FALSE },
+	//{ mControlSet_Key, _T("Control\\Class\\{4D36E965-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("cdrom_install"), FALSE },
 	// "Disk drives" XP, Vista
-	//{ mControlSet, _T("Control\\Class\\{4D36E967-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("disk_install"), FALSE },
+	//{ mControlSet_Key, _T("Control\\Class\\{4D36E967-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("disk_install"), FALSE },
 	// "Portable Devices" Vista
-	{ mControlSet, _T("Control\\Class\\{EEC5AD98-8080-425F-922A-DABF3DE3F69A}"), NULL, _T("InfSection"), _T("Basic_Install"), FALSE },
+	{ mControlSet_Key, _T("Control\\Class\\{EEC5AD98-8080-425F-922A-DABF3DE3F69A}"), NULL, _T("InfSection"), _T("Basic_Install"), FALSE },
 	// XP, Vista
-	{ mControlSet, _T("Control\\DeviceClasses\\{53f56307-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet, _T("Control\\DeviceClasses\\{53f56308-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f56307-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f56308-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
 	// XP
-	{ mControlSet, _T("Control\\DeviceClasses\\{53f5630a-b6bf-11d0-94f2-00a0c91efb8b}"), _T("STORAGE#RemovableMedia"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f5630a-b6bf-11d0-94f2-00a0c91efb8b}"), _T("STORAGE#RemovableMedia"), NULL, NULL, FALSE },
 	// XP, Vista
-	{ mControlSet, _T("Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}"), _T("STORAGE#RemovableMedia"), NULL, NULL, FALSE },
-	{ mControlSet, _T("Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet, _T("Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}"), _T("STORAGE#RemovableMedia"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
 	// Vista
-	{ mControlSet, _T("Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet, _T("Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
 	// Vista
-	{ mControlSet, _T("Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet, _T("Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
 	// Windows 7
-	{ mControlSet, _T("Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet, _T("Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
+	// windows 8
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
+	{ mControlSet_Val, _T("Control\\DeviceContainers\\{beb6f4cc-ba87-5134-a5c9-a2b619ef4e3a}\\BaseContainers\\{beb6f4cc-ba87-5134-a5c9-a2b619ef4e3a}"), NULL, NULL, NULL, FALSE },
 	// XP
-	{ mControlSet, _T("Enum\\STORAGE\\RemovableMedia"), NULL, NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Enum\\STORAGE\\RemovableMedia"), NULL, NULL, NULL, FALSE },
 	// Vista
-	{ mControlSet, _T("Enum\\STORAGE\\Volume"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet, _T("Enum\\STORAGE\\Volume"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Enum\\STORAGE\\Volume"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Enum\\STORAGE\\Volume"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
 	// XP, Vista
-	{ mControlSet, _T("Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
-	{ mControlSet, _T("Services\\USBSTOR\\Enum"), NULL, NULL, NULL, TRUE },
-	{ mControlSet, _T("Control\\usbflags"), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key, _T("Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key, _T("Services\\USBSTOR\\Enum"), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key, _T("Control\\usbflags"), NULL, NULL, NULL, TRUE },
 	// Vista
-	{ mControlSet, _T("Enum\\WpdBusEnumRoot\\UMB"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet, _T("Enum\\WpdBusEnumRoot\\UMB"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Enum\\WpdBusEnumRoot\\UMB"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Enum\\WpdBusEnumRoot\\UMB"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
 	// Vista
-	{ mControlSet, _T("Hardware Profiles\\0000\\System\\CurrentControlSet\\Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
-	{ mControlSet, _T("Hardware Profiles\\0001\\System\\CurrentControlSet\\Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
-	{ mControlSet, _T("Hardware Profiles\\0002\\System\\CurrentControlSet\\Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key, _T("Hardware Profiles\\0000\\System\\CurrentControlSet\\Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key, _T("Hardware Profiles\\0001\\System\\CurrentControlSet\\Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key, _T("Hardware Profiles\\0002\\System\\CurrentControlSet\\Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
 	// Vista
 	{ mHKLM_Val, _T("SOFTWARE\\Microsoft\\WBEM\\WDM"), _T("USBSTOR"), NULL, NULL, FALSE },
 	// Vista
@@ -93,7 +103,7 @@ static const CKeyDef defs[] =
 	// HandlerInstances
 	{ mHKCU_Key, _T("SOFTWARE\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\SyncMgr\\HandlerInstances"), NULL, NULL, NULL, TRUE },
 	// end
-	{ mControlSet, NULL, NULL, NULL, NULL, FALSE }
+	{ mControlSet_Key, NULL, NULL, NULL, NULL, FALSE }
 };
 
 
@@ -174,6 +184,7 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 	CDialog::OnInitDialog();
 
 	ShowWindow( ( m_bAuto && m_bSilent ) ? SW_HIDE : SW_SHOWNORMAL );
+	CenterWindow();
 
 	m_sDeleteKeyString = LoadString( IDS_DELETE_KEY );
 	m_sDeleteValueString = LoadString( IDS_DELETE_VALUE );
@@ -1117,8 +1128,10 @@ void CUSBOblivionDlg::Run()
 		// Подчистка всего остального
 		for (int i = 0; defs[ i ].szKeyName; ++i )
 		{
-			if ( defs[ i ].nMode == mControlSet )
+			if ( defs[ i ].nMode == mControlSet_Key )
 				ProcessKey( HKEY_LOCAL_MACHINE, sKey, defs[ i ], oKeys );
+			else if ( defs[ i ].nMode == mControlSet_Val )
+				ProcessValue( HKEY_LOCAL_MACHINE, sKey, defs[ i ], oValues );
 		}
 	}
 
@@ -1650,8 +1663,6 @@ BOOL CUSBOblivionDlg::OnDeviceChange(UINT /*nEventType*/, DWORD_PTR /*dwData*/)
 
 void CUSBOblivionDlg::OnTimer(UINT_PTR nIDEvent)
 {
-	CDialog::OnTimer( nIDEvent );
-
 	// Get completed log for output and create new one
 	CAutoPtr< CLogList > pCopy;
 	{
@@ -1676,7 +1687,6 @@ void CUSBOblivionDlg::OnTimer(UINT_PTR nIDEvent)
 		while ( ! pCopy->IsEmpty() );
 
 		m_pReport.EnsureVisible( nInsert - 1, FALSE );
-		UpdateWindow();
 	}
 
 	if ( m_bRunning && ! m_threadRunThread.is_running() )
@@ -1694,4 +1704,105 @@ void CUSBOblivionDlg::OnTimer(UINT_PTR nIDEvent)
 		if ( m_bAuto )
 			CDialog::OnOK();
 	}
+
+	CDialog::OnTimer( nIDEvent );
+}
+
+INT_PTR CUSBOblivionDlg::DoModal()
+{
+	// can be constructed with a resource template or InitModalIndirect
+	ASSERT(m_lpszTemplateName != NULL || m_hDialogTemplate != NULL ||
+		m_lpDialogTemplate != NULL);
+
+	// load resource as necessary
+	LPCDLGTEMPLATE lpDialogTemplate = m_lpDialogTemplate;
+	HGLOBAL hDialogTemplate = m_hDialogTemplate;
+	HINSTANCE hInst = AfxGetResourceHandle();
+	if (m_lpszTemplateName != NULL)
+	{
+		hInst = AfxFindResourceHandle(m_lpszTemplateName, RT_DIALOG);
+		HRSRC hResource = ::FindResource(hInst, m_lpszTemplateName, RT_DIALOG);
+		hDialogTemplate = LoadResource(hInst, hResource);
+	}
+	if (hDialogTemplate != NULL)
+		lpDialogTemplate = (LPCDLGTEMPLATE)LockResource(hDialogTemplate);
+
+	// return -1 in case of failure to load the dialog template resource
+	if (lpDialogTemplate == NULL)
+		return -1;
+
+	// disable parent (before creating dialog)
+	HWND hWndParent = PreModal();
+	AfxUnhookWindowCreate();
+	BOOL bEnableParent = FALSE;
+#ifndef _AFX_NO_OLE_SUPPORT
+	CWnd* pMainWnd = NULL;
+	BOOL bEnableMainWnd = FALSE;
+#endif
+	if (hWndParent && hWndParent != ::GetDesktopWindow() && ::IsWindowEnabled(hWndParent))
+	{
+		::EnableWindow(hWndParent, FALSE);
+		bEnableParent = TRUE;
+#ifndef _AFX_NO_OLE_SUPPORT
+		pMainWnd = AfxGetMainWnd();
+		if (pMainWnd && pMainWnd->IsFrameWnd() && pMainWnd->IsWindowEnabled())
+		{
+			//
+			// We are hosted by non-MFC container
+			// 
+			pMainWnd->EnableWindow(FALSE);
+			bEnableMainWnd = TRUE;
+		}
+#endif
+	}
+
+	TRY
+	{
+		// create modeless dialog
+		AfxHookWindowCreate(this);
+		if (CreateDlgIndirect(lpDialogTemplate,
+						CWnd::FromHandle(hWndParent), hInst))
+		{
+			if (m_nFlags & WF_CONTINUEMODAL)
+			{
+				// enter modal loop
+				DWORD dwFlags = 0;
+				if (GetStyle() & DS_NOIDLEMSG)
+					dwFlags |= MLF_NOIDLEMSG;
+				VERIFY(RunModalLoop(dwFlags) == m_nModalResult);
+			}
+
+			// hide the window before enabling the parent, etc.
+			if (m_hWnd != NULL)
+				SetWindowPos(NULL, 0, 0, 0, 0, SWP_HIDEWINDOW|
+					SWP_NOSIZE|SWP_NOMOVE|SWP_NOACTIVATE|SWP_NOZORDER);
+		}
+	}
+	CATCH_ALL(e)
+	{
+		DELETE_EXCEPTION(e);
+		m_nModalResult = -1;
+	}
+	END_CATCH_ALL
+
+#ifndef _AFX_NO_OLE_SUPPORT
+	if (bEnableMainWnd)
+		pMainWnd->EnableWindow(TRUE);
+#endif
+	if (bEnableParent)
+		::EnableWindow(hWndParent, TRUE);
+	if (hWndParent != NULL && ::GetActiveWindow() == m_hWnd)
+		::SetActiveWindow(hWndParent);
+
+	// destroy modal window
+	DestroyWindow();
+	PostModal();
+
+	// unlock/free resources as necessary
+	if (m_lpszTemplateName != NULL || m_hDialogTemplate != NULL)
+		UnlockResource(hDialogTemplate);
+	if (m_lpszTemplateName != NULL)
+		FreeResource(hDialogTemplate);
+
+	return m_nModalResult;
 }

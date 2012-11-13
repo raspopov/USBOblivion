@@ -111,10 +111,10 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>windowscodecs.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <DelayLoadDLLs>gdiplus.dll;setupapi.dll;msimg32.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll;imm32.dll;winmm.dll</DelayLoadDLLs>
+      <DelayLoadDLLs>setupapi.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll</DelayLoadDLLs>
       <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
@@ -149,10 +149,10 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>windowscodecs.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
-      <DelayLoadDLLs>gdiplus.dll;setupapi.dll;msimg32.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll;imm32.dll;winmm.dll</DelayLoadDLLs>
+      <DelayLoadDLLs>setupapi.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll</DelayLoadDLLs>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PreBuildEvent>
@@ -188,14 +188,14 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>windowscodecs.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX86</TargetMachine>
       <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
-      <DelayLoadDLLs>gdiplus.dll;setupapi.dll;msimg32.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll;imm32.dll;winmm.dll</DelayLoadDLLs>
+      <DelayLoadDLLs>setupapi.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll</DelayLoadDLLs>
       <Profile>true</Profile>
     </Link>
     <PostBuildEvent />
@@ -230,13 +230,13 @@
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>windowscodecs.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX64</TargetMachine>
-      <DelayLoadDLLs>gdiplus.dll;setupapi.dll;msimg32.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll;imm32.dll;winmm.dll</DelayLoadDLLs>
+      <DelayLoadDLLs>setupapi.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll</DelayLoadDLLs>
       <Profile>true</Profile>
     </Link>
     <PostBuildEvent />

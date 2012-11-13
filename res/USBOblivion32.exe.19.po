@@ -5,10 +5,11 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: Nikolay Raspopov <raspopov@cherubicsoft.com>\n"
 "Language-Team: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Russian\n"
+"X-Generator: Poedit 1.5.4\n"
 
 #. Menu popup
 #: MENUPOPUP.130.0
@@ -63,6 +64,7 @@ msgid ""
 "-auto - Automatic run;\n"
 "-nosave - Don't save backup .reg-file;\n"
 "-lang:XX - Use language XX (hex-code);\n"
+"-silent - Hidden mode (if possible);\n"
 "-? - Show this help.\n"
 msgstr ""
 "Использование:\n"
@@ -75,6 +77,7 @@ msgstr ""
 "-auto - Автоматический запуск;\n"
 "-nosave - Отмена сохранения .reg-файла;\n"
 "-lang:XX - Использовать язык XX (шестнадцатиричный код);\n"
+"-silent - Режим скрытности (если возможно);\n"
 "-? - Выдача этой справки.\n"
 
 #. String resource
@@ -251,4 +254,3 @@ msgstr "Очистка журнала: "
 #: STRING.164
 msgid "Gathering journal data..."
 msgstr "Идёт сбор данных о журналах..."
-

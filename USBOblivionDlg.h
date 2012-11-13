@@ -26,7 +26,8 @@
 
 typedef enum CKeyType
 {
-	mControlSet,	// Поиск ключей   в HKEY_LOCAL_MACHINE\SYSTEM\ControlSet\*
+	mControlSet_Key,// Поиск ключей   в HKEY_LOCAL_MACHINE\SYSTEM\ControlSet\*
+	mControlSet_Val,// Поиск значений в HKEY_LOCAL_MACHINE\SYSTEM\ControlSet\*
 	mHKLM_Key,		// Поиск ключей   в HKEY_LOCAL_MACHINE
 	mHKLM_Val,		// Поиск значений в HKEY_LOCAL_MACHINE
 	mHKCU_Key,		// Поиск ключей   в HKEY_USERS\*
@@ -73,6 +74,8 @@ public:
 	BOOL		m_bSave;		// -nosave		- Отмена сохранения .reg-файла (инверсия)
 	BOOL		m_bElevation;	// -elevation	- Режим с повышенными правами
 	BOOL		m_bSilent;		// -silent		- Тихий режим (работает только в автоматическом режиме)
+
+	virtual INT_PTR DoModal();
 
 protected:
 	CImageList	m_oImages;		// Иконки списка
