@@ -41,6 +41,8 @@
 #define _AFX_ALL_WARNINGS
 #define NO_PRINT
 
+#include "miniVS2010.h"
+
 #include <afxwin.h>
 #include <afxcmn.h>
 #include <afxtempl.h>
