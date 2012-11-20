@@ -77,7 +77,7 @@ msgstr ""
 "-auto - Esecuzione automatica;\n"
 "-nosave - Nessun salvataggio del file .reg;\n"
 "-lang:XX - Utilizza la lingua XX (in formato hex);\n"
-"-silenzioso - modo nascosto (se possibile);\n"
+"-silent - modo nascosto (se possibile);\n"
 "-? - Visualizza questa guida.\n"
 
 #. String resource
