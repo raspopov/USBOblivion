@@ -73,12 +73,12 @@ msgstr ""
 "\n"
 "Lista parametri:\n"
 "\n"
-"-enable - Esegue pulizia reale (altrimenti simula);\n"
-"-auto - Esecuzione automatica;\n"
-"-nosave - Nessun salvataggio del file .reg;\n"
-"-lang:XX - Utilizza la lingua XX (in formato hex);\n"
+"-enable - esegue pulizia reale (altrimenti simula);\n"
+"-auto - esecuzione automatica;\n"
+"-nosave - nessun salvataggio del file .reg;\n"
+"-lang:XX - utilizza la lingua XX (in formato hex);\n"
 "-silent - modo nascosto (se possibile);\n"
-"-? - Visualizza questa guida.\n"
+"-? - visualizza questa guida.\n"
 
 #. String resource
 #: STRING.130
