@@ -16,14 +16,32 @@ Windows 7, Windows 8 как 32, так и 64-битных версиях. Ути
 3. По-умолчанию утилита НЕ будет ничего стирать, чтобы это сделать нужно отметить соответствующую галочку.
 4. По-умолчанию утилита ведёт подробный отчёт и создаст .reg-файл в папке "Документы" для отката изменений.
 
-Утилита поддерживает автоматический режим работы, параметры командной строки:
+========================================================================
 
-	-enable  - Рабочий режим очистки, иначе симуляция;
-	-auto    - Автоматический запуск (не влияет на режим очистки);
-	-nosave  - Отмена сохранения .reg-файла;
-	-lang:XX - Использовать язык XX (шестнадцатиричный код);
-	-silent  - Режим скрытности (если возможно);
-	-?       - Выдача справки.
+Usage:
+
+	USBOblivion[32|64].exe [params]
+
+Params:
+
+	-enable - Do real clean (simulation otherwise);
+	-auto - Automatic run;
+	-nosave - Don't save backup .reg-file;
+	-lang:XX - Use language XX (hex-code);
+	-silent - Hidden mode (if possible);
+	-? - Show this help.
+	
+========================================================================
+
+Languages:
+
+	-lang:09 - English
+	-lang:0a - Spanish (by CesarRG)
+	-lang:0c - French (by Mathieu Bergounioux)
+	-lang:10 - Italian (by Marcello)
+	-lang:12 - Korean (by 4Li)
+	-lang:19 - Russian (by Nikolay Raspopov)
+	-lang:1d - Swedish (by Ake Engelbrektson)
 
 ========================================================================
 
