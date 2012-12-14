@@ -1,4 +1,4 @@
-﻿msgid ""
+msgid ""
 msgstr ""
 "Project-Id-Version: USBOblivion32.exe\n"
 "POT-Creation-Date: \n"
@@ -118,42 +118,42 @@ msgstr "Copia di sicurezza: "
 #. String resource
 #: STRING.137
 msgid "Done."
-msgstr "Finito."
+msgstr "Ho finito."
 
 #. String resource
 #: STRING.138
 msgid "Gathering data from system registry..."
-msgstr "Raccolta di dati dal registro di sistema..."
+msgstr "Raccolgo i dati dal registro di sistema..."
 
 #. String resource
 #: STRING.139
 msgid "Found drives (will be ignored): "
-msgstr "Dispositivi di memorizzazione trovati (verranno ignorati): "
+msgstr "Ho trovato questi dispositivi di memorizzazione (li ignoro): "
 
 #. String resource
 #: STRING.140
 msgid "Cleaning..."
-msgstr "Pulizia in corso..."
+msgstr "Inizio la pulizia..."
 
 #. String resource
 #: STRING.141
 msgid "Removing key: "
-msgstr "Rimozione chiave: "
+msgstr "Rimuovo chiave: "
 
 #. String resource
 #: STRING.142
 msgid "Removing value: "
-msgstr "Rimozione valore: "
+msgstr "Rimuovo valore: "
 
 #. String resource
 #: STRING.143
 msgid "Gathering user data..."
-msgstr "Raccolta dati utente..."
+msgstr "Raccolgo i dati dell'utente..."
 
 #. String resource
 #: STRING.144
 msgid "Gathering data about user: "
-msgstr "Raccolta di dati relativi all'utente: "
+msgstr "Raccolgo i dati relativi all'utente: "
 
 #. String resource
 #: STRING.145
@@ -173,12 +173,12 @@ msgstr "Unità trovate in Explorer: "
 #. String resource
 #: STRING.148
 msgid "Remove error: "
-msgstr "Rimozione errore: "
+msgstr "Rimuovo errore: "
 
 #. String resource
 #: STRING.149
 msgid "Gathering mount point's data..."
-msgstr "Raccolta di dati dei punti di montaggio..."
+msgstr "Raccolgo i dati dei punti di montaggio..."
 
 #. String resource
 #: STRING.150
@@ -203,7 +203,7 @@ msgstr "Tasto di accesso negato: "
 #. String resource
 #: STRING.154
 msgid "Disk %c: has been inserted."
-msgstr "Il disco %c: è stato inserito."
+msgstr "Il disco %c: è stato connesso."
 
 #. String resource
 #: STRING.155
@@ -233,24 +233,24 @@ msgstr "Errore durante la disconnessione del disco %c:."
 #. String resource
 #: STRING.160
 msgid "Ejecting disk %c:..."
-msgstr "Disconnessione del disco %c:..."
+msgstr "Disconnetto il disco %c:..."
 
 #. String resource
 #: STRING.161
 msgid "Removing file: "
-msgstr "Eliminazione del file: "
+msgstr "Elimino il file: "
 
 #. String resource
 #: STRING.162
 msgid "Gathering file data..."
-msgstr "Raccolta dati del file..."
+msgstr "Raccolgo i dati del file..."
 
 #. String resource
 #: STRING.163
 msgid "Cleaning journal: "
-msgstr "Pulizia diario: "
+msgstr "Pulisco diario: "
 
 #. String resource
 #: STRING.164
 msgid "Gathering journal data..."
-msgstr "Raccolta dati del diario..."
+msgstr "Raccolgo i dati del diario..."
