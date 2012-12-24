@@ -1,14 +1,14 @@
-msgid ""
+﻿msgid ""
 msgstr ""
 "Project-Id-Version: USBOblivion32.exe\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: Nikolay Raspopov <raspopov@cherubicsoft.com>\n"
+"Last-Translator: Miel <triple_miel@live.fr>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SourceCharset: UTF-8\n"
 "X-Generator: Poedit 1.5.4\n"
 
 #. Menu popup
@@ -44,7 +44,7 @@ msgstr "Quitter"
 #. Dialog control
 #: DIALOGCONTROL.102.Button.1002
 msgid "Do real clean (simulation otherwise)"
-msgstr "Nettoyer réellement (sinon ce ne sera qu'une simulation)"
+msgstr "Nettoyer réellement (sinon ça sera qu'une simulation)"
 
 #. Dialog control
 #: DIALOGCONTROL.102.Button.1003
@@ -73,184 +73,184 @@ msgstr ""
 "\n"
 "Paramètres:\n"
 "\n"
-"-enable - nettoyer réellement (sinon ce ne sera qu'une simulation);\n"
+"-enable - Nettoyer réellement (sinon ça sera qu'une simulation);\n"
 "-auto - Exécution automatique;\n"
 "-nosave - Ne pas créer de fichier .reg de sauvegarde;\n"
-"-lang:XX - utiliser la langue XX (code hexadécimal);\n"
-"-silent - Hidden mode (if possible);\n"
+"-lang:XX - Utiliser la langue XX (code hexadécimal);\n"
+"-silent - Mode silencieux (si possible);\n"
 "-? - Afficher cet écran d'aide.\n"
 
 #. String resource
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
-msgstr "ВНИМАНИЕ! Удалите все флешки из системы перед очисткой."
+msgstr "ATTENTION! Veuillez éjecter tous les disques flash avant le nettoyage."
 
 #. String resource
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Нажмите кнопку \"Очистка\" для начала очистки системы."
+msgstr "Veuillez appuyer sur \"Nettoyer\" pour commencer le nettoyage."
 
 #. String resource
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
-msgstr "Режим работы: рабочий (реальное удаление)."
+msgstr "Mode du processus: réel (les données seront nettoyées)."
 
 #. String resource
 #: STRING.133
 msgid "Process mode: simulation (no data will be cleaned)."
-msgstr "Режим работы: симуляция (удаление не производится)."
+msgstr "Mode du processus: simulation (les données ne seront pas nettoyées)."
 
 #. String resource
 #: STRING.134
 msgid "File creation error: "
-msgstr "Ошибка создания файла: "
+msgstr "Erreur lors de la création du fichier: "
 
 #. String resource
 #: STRING.135
 msgid "File write error: "
-msgstr "Ошибка записи в файл: "
+msgstr "Erreur lors de l'écriture du fichier: "
 
 #. String resource
 #: STRING.136
 msgid "Backup file: "
-msgstr "Файл отмены: "
+msgstr "Fichier de sauvegarde: "
 
 #. String resource
 #: STRING.137
 msgid "Done."
-msgstr "Завершено."
+msgstr "Fini."
 
 #. String resource
 #: STRING.138
 msgid "Gathering data from system registry..."
-msgstr "Идёт сбор данных в системном реестре..."
+msgstr "Récupération des données dans la base de registre..."
 
 #. String resource
 #: STRING.139
 msgid "Found drives (will be ignored): "
-msgstr "Найдено дисков в системе (игнорируются): "
+msgstr "Disques trouvés (ignoré): "
 
 #. String resource
 #: STRING.140
 msgid "Cleaning..."
-msgstr "Идёт очистка..."
+msgstr "Nettoyage..."
 
 #. String resource
 #: STRING.141
 msgid "Removing key: "
-msgstr "Удаление ключа: "
+msgstr "Suppression de la clé: "
 
 #. String resource
 #: STRING.142
 msgid "Removing value: "
-msgstr "Удаление значения: "
+msgstr "Suppression de la valeur: "
 
 #. String resource
 #: STRING.143
 msgid "Gathering user data..."
-msgstr "Идёт сбор данных о пользователях..."
+msgstr "Récupération des données des utilisateurs..."
 
 #. String resource
 #: STRING.144
 msgid "Gathering data about user: "
-msgstr "Идёт сбор данных пользователя: "
+msgstr "Récupération des données de l'utilisateur: "
 
 #. String resource
 #: STRING.145
 msgid "Found users: "
-msgstr "Найдено пользователей: "
+msgstr "Utilisateurs trouvés: "
 
 #. String resource
 #: STRING.146
 msgid "Found mount points: "
-msgstr "Найдено точек монтирования: "
+msgstr "Points de montage trouvés: "
 
 #. String resource
 #: STRING.147
 msgid "Found Explorer drives: "
-msgstr "Найдено дисков в Проводнике: "
+msgstr "Disques trouvés dans l'explorateur: "
 
 #. String resource
 #: STRING.148
 msgid "Remove error: "
-msgstr "Ошибка удаления: "
+msgstr "Erreur de suppression: "
 
 #. String resource
 #: STRING.149
 msgid "Gathering mount point's data..."
-msgstr "Идёт сбор данных о точках монтирования..."
+msgstr "Récupération des données sur les points de montage..."
 
 #. String resource
 #: STRING.150
 msgid "Found ControlSets: "
-msgstr "Найдено ControlSet'ов: "
+msgstr "ControlSets trouvés: "
 
 #. String resource
 #: STRING.151
 msgid "Found keys: "
-msgstr "Найдено ключей: "
+msgstr "Clés trouvés: "
 
 #. String resource
 #: STRING.152
 msgid "Found values: "
-msgstr "Найдено значений: "
+msgstr "Valeurs trouvées: "
 
 #. String resource
 #: STRING.153
 msgid "Key access denied: "
-msgstr "Ошибка доступа к ключу: "
+msgstr "Accès refusé pour la clé: "
 
 #. String resource
 #: STRING.154
 msgid "Disk %c: has been inserted."
-msgstr "Диск %c: вставлен."
+msgstr "Disque %c: a été inséré."
 
 #. String resource
 #: STRING.155
 msgid "Logged-in under system account successfully."
-msgstr "Вход под системный аккаунт произведён успешно."
+msgstr "L'accès sous le compte système a réussi."
 
 #. String resource
 #: STRING.156
 msgid "Failed to login under system account."
-msgstr "Ошибка входа под системным аккаунтом."
+msgstr "L'accès sous le compte système a échoué."
 
 #. String resource
 #: STRING.157
 msgid "Re-starting under administrator..."
-msgstr "Перезапуск под администратором..."
+msgstr "Veuillez redémarrer en tant qu'administrateur..."
 
 #. String resource
 #: STRING.158
 msgid "Disk %c: has been ejected."
-msgstr "Диск %c: извлечён."
+msgstr "Disque %c: a été éjecté."
 
 #. String resource
 #: STRING.159
 msgid "Failed to eject disk %c:."
-msgstr "Ошибка извлечения диска %c:."
+msgstr "Echec lors de l'éjection du disque %c:."
 
 #. String resource
 #: STRING.160
 msgid "Ejecting disk %c:..."
-msgstr "Попытка извлечения диска %c:..."
+msgstr "Ejection du disque %c:..."
 
 #. String resource
 #: STRING.161
 msgid "Removing file: "
-msgstr "Удаление файла: "
+msgstr "Suppression du fichier: "
 
 #. String resource
 #: STRING.162
 msgid "Gathering file data..."
-msgstr "Идёт сбор данных о файлах..."
+msgstr "Récupération des données des fichiers..."
 
 #. String resource
 #: STRING.163
 msgid "Cleaning journal: "
-msgstr "Очистка журнала: "
+msgstr "Nettoyage du journal: "
 
 #. String resource
 #: STRING.164
 msgid "Gathering journal data..."
-msgstr "Идёт сбор данных о журналах..."
+msgstr "Récupération des données des journaux..."
