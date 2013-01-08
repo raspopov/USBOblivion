@@ -40,6 +40,7 @@ Languages:
 	-lang:0c - French (by Mathieu Bergounioux)
 	-lang:10 - Italian (by Marcello)
 	-lang:12 - Korean (by 4Li)
+	-lang:16 - Brazilian Portuguese (by Paulo Guzmán)
 	-lang:19 - Russian (by Nikolay Raspopov)
 	-lang:1d - Swedish (by Ake Engelbrektson)
 

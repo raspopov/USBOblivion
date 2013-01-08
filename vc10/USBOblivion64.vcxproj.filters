@@ -97,6 +97,9 @@
     <None Include="..\res\USBOblivion32.exe.12.po_">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\res\USBOblivion32.exe.16.po_">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="..\res\USBOblivion32.exe.19.po_">
       <Filter>Resource Files</Filter>
     </None>
