@@ -88,7 +88,7 @@ msgstr "ATENÇÃO! Por favor, remova todos os drivers flash antes de limpar."
 #. String resource
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Pressione \"Limpar\" botão para iniciar a limpeza."
+msgstr "Pressione o botão \"Limpar\" para iniciar a limpeza."
 
 #. String resource
 #: STRING.132
@@ -168,7 +168,7 @@ msgstr "Pontos de montagem encontrados:"
 #. String resource
 #: STRING.147
 msgid "Found Explorer drives: "
-msgstr "Unidades do Explorer encontradas:"
+msgstr "Unidades encontradas no Explorer:"
 
 #. String resource
 #: STRING.148
@@ -208,7 +208,7 @@ msgstr "O dispositivo %c: foi inserido."
 #. String resource
 #: STRING.155
 msgid "Logged-in under system account successfully."
-msgstr "Logado em uma conta do sistema com êxito."
+msgstr "Autenticado na conta do sistema com êxito."
 
 #. String resource
 #: STRING.156
@@ -253,4 +253,4 @@ msgstr "Limpeza:"
 #. String resource
 #: STRING.164
 msgid "Gathering journal data..."
-msgstr "Coletando dados da limpeza..."
+msgstr "Coletando os dados para limpeza..."
