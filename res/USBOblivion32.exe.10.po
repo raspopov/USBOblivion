@@ -49,7 +49,7 @@ msgstr "Esegui pulizia reale (altrimenti simulazione)"
 #. Dialog control
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
-msgstr "Crea copia del file .reg"
+msgstr "Salva una copia di sicurezza in un file .reg"
 
 #. String resource
 #: STRING.129
