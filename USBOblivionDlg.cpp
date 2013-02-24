@@ -1,7 +1,7 @@
 //
 // USBOblivionDlg.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2012.
+// Copyright (c) Nikolay Raspopov, 2009-2013.
 // This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -69,7 +69,10 @@ static const CKeyDef defs[] =
 	// windows 8
 	{ mControlSet_Key, _T("Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
 	{ mControlSet_Key, _T("Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
+	{ mControlSet_Key, _T("Control\\DeviceClasses\\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
 	{ mControlSet_Val, _T("Control\\DeviceContainers\\{beb6f4cc-ba87-5134-a5c9-a2b619ef4e3a}\\BaseContainers\\{beb6f4cc-ba87-5134-a5c9-a2b619ef4e3a}"), NULL, NULL, NULL, FALSE },
+	{ mControlSet_Val, _T("Control\\DeviceContainers\\{40258d5b-c399-5c39-b26f-a3250b527c3c}\\BaseContainers\\{40258d5b-c399-5c39-b26f-a3250b527c3c}"), NULL, NULL, NULL, FALSE },
 	// XP
 	{ mControlSet_Key, _T("Enum\\STORAGE\\RemovableMedia"), NULL, NULL, NULL, FALSE },
 	// Vista

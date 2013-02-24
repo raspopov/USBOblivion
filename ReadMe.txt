@@ -2,12 +2,11 @@
 
 ========================================================================
 
-Утилита USBOblivion предназначена для стирания следов подключения USB-дисков и
-CD-ROM'ов из реестра в Windows 2000, Windows XP, Windows 2003, Windows Vista,
-Windows 7, Windows 8 как 32, так и 64-битных версиях. Утилита имеет тестовый режим работы,
-т.е. без фактического удаления данных из реестра, и, на всякий случай,
-создаёт .reg-файл для отмены всех изменений. Также имеется полностью
-автоматический режим работы. 
+USBOblivion utility designed to erase all traces of USB-connected drives and CD-ROMs from the registry in Windows 2000, Windows XP, Windows 2003, Windows Vista, Windows 7, Windows 8 32/64-bit versions. The utility has a test mode of operation, i.e. without actually removing data from the registry, and, just in case, creates a .reg-file to undo any changes. There is also a fully automatic mode. 
+
+Утилита USBOblivion предназначена для стирания следов подключения USB-дисков и CD-ROM'ов из реестра в Windows 2000, Windows XP, Windows 2003, Windows Vista, Windows 7, Windows 8 как 32, так и 64-битных версиях. Утилита имеет тестовый режим работы, т.е. без фактического удаления данных из реестра, и, на всякий случай, создаёт .reg-файл для отмены всех изменений. Также имеется полностью автоматический режим работы. 
+
+========================================================================
 
 Инструкция:
 
@@ -50,10 +49,17 @@ System Requirements:
 
   * Windows 2000/XP/2003/Vista/2008/7/8 32/64-bit
   * About 500 Kb of disk space. No installation needed.
+  * Administrative privileges.
 
 ========================================================================
 
 Versions:
+
+1.10.0.0
+
+  * Added key "CurrentControlSet\Control\DeviceContainers\{40258d5b-c399-5c39-b26f-a3250b527c3c}" (Windows 8)
+  * Added key "CurrentControlSet\Control\DeviceClasses\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}" (Windows 8)
+  * Updated translations
 
 1.9.0.0
 
@@ -88,27 +94,32 @@ Versions:
 
 ========================================================================
 
+Translation:
+
+To help in USBOblivion translation you'll need to perform next steps:
+
+  1. Download and install poEdit utility ( http://sourceforge.net/projects/poedit/ );
+  2. Download POT-file ( http://usboblivion.googlecode.com/svn/trunk/USBOblivion.pot );
+  3. Translate it by poEdit to your language;
+  4. Save to file "USBOblivion32.exe.XX.po" or to "USBOblivion64.exe.XX.po" near USBOblivion32.exe or USBOblivion64.exe correspondingly. Where "XX" is a 2- or 4-digit hexadecimal primary language identifier for example "09" - English, "19" - Russian, "07" - German, etc.
+  5. Test it. Application loads translation according to current user language. To select other language than current specify command-line option "-lang:XX" (XX - hexadecimal language code).
+  6. Send PO-file to me: raspopov@cherubicsoft.com 
+
+========================================================================
+
 License:
 
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along
-with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 
 ========================================================================
 
 Copyrights:
 
 USB Oblivion
-Copyright (C) Nikolay Raspopov, 2009-2012.
+Copyright (C) Nikolay Raspopov, 2009-2013.
 E-Mail: raspopov@cherubicsoft.com
 Web site: http://code.google.com/p/usboblivion/
