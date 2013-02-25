@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.5\n"
 
 #. Menu popup
 #: MENUPOPUP.130.0
@@ -75,7 +75,7 @@ msgstr ""
 "\n"
 "-enable - esegue pulizia reale (altrimenti simula);\n"
 "-auto - esecuzione automatica;\n"
-"-nosave - nessun salvataggio del file .reg;\n"
+"-nosave - nessun salvataggio della copia di sicurezza;\n"
 "-lang:XX - utilizza la lingua XX (in formato hex);\n"
 "-silent - modo nascosto (se possibile);\n"
 "-? - visualizza questa guida.\n"
