@@ -283,6 +283,7 @@
     <None Include="..\res\search.ico" />
     <None Include="..\res\USBOblivion.ico" />
     <None Include="..\res\USBOblivion.rc2" />
+    <None Include="..\res\USBOblivion32.exe.08.po_" />
     <None Include="..\res\USBOblivion32.exe.0a.po_" />
     <None Include="..\res\USBOblivion32.exe.0c.po_" />
     <None Include="..\res\USBOblivion32.exe.10.po_" />

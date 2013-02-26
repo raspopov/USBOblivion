@@ -34,7 +34,8 @@ Params:
 
 Languages:
 
-	-lang:09 - English
+	-lang:08 - Greek (by Geogeo)
+	-lang:09 - English (by Nikolay Raspopov)
 	-lang:0a - Spanish (by CesarRG)
 	-lang:0c - French (by Mathieu Bergounioux)
 	-lang:10 - Italian (by Marcello)
@@ -54,6 +55,10 @@ System Requirements:
 ========================================================================
 
 Versions:
+
+1.10.1.0
+
+  * Added Greek translation (by Geogeo)
 
 1.10.0.0
 
