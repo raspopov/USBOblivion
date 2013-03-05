@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: USBOblivion32.exe\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: Nikolay Raspopov <raspopov@cherubicsoft.com>\n"
+"Last-Translator: Zames Dean <zdci4li@gmail.com>\n"
 "Language-Team: \n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.5\n"
 
 #. Menu popup
 #: MENUPOPUP.130.0
@@ -29,7 +29,7 @@ msgstr "모두 복사"
 #. Dialog caption
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
-msgstr "USBOblivion"
+msgstr "USBOblivion (한글 번역 제공: 4Li)"
 
 #. Dialog control
 #: DIALOGCONTROL.102.Button.1
@@ -44,7 +44,7 @@ msgstr "끝내기"
 #. Dialog control
 #: DIALOGCONTROL.102.Button.1002
 msgid "Do real clean (simulation otherwise)"
-msgstr "실제 지우기 (그렇지 않으면 시뮬레이션)"
+msgstr "실제로 지우기 (그렇지 않으면 시뮬레이션)"
 
 #. Dialog control
 #: DIALOGCONTROL.102.Button.1003
@@ -66,19 +66,7 @@ msgid ""
 "-lang:XX - Use language XX (hex-code);\n"
 "-silent - Hidden mode (if possible);\n"
 "-? - Show this help.\n"
-msgstr ""
-"사용 방법:\n"
-"\n"
-"USBOblivion[32|64].exe [매개 변수]\n"
-"\n"
-"매개 변수:\n"
-"\n"
-"-enable - 실제 지우기 (그렇지 않으면 시뮬레이션);\n"
-"-auto - 자동으로 실행;\n"
-"-nosave - .reg 파일로 백업 저장 안함;\n"
-"-lang:XX - XX (16진수) 언어 사용;\n"
-"-silent - 숨김 방식 (가능한 경우);\n"
-"-? - 이 도움말 보이기\n"
+msgstr "사용 방법:\n\nUSBOblivion[32|64].exe [매개 변수]\n\n매개 변수:\n\n-enable - 실제로 지우기 (그렇지 않으면 시뮬레이션);\n-auto - 자동으로 실행;\n-nosave - .reg 파일로 백업 저장 안함;\n-lang:XX - XX (16진수) 언어 사용;\n-silent - 숨김 방식 (가능한 경우);\n-? - 이 도움말 보이기\n"
 
 #. String resource
 #: STRING.130
@@ -98,7 +86,7 @@ msgstr "처리 방식: 실제 (데이터가 지워집니다.)"
 #. String resource
 #: STRING.133
 msgid "Process mode: simulation (no data will be cleaned)."
-msgstr "처리 방식: 시뮬레이션 (데이터가 지워지지 않습니다.)"
+msgstr "처리 방식: 시뮬레이션 (데이터는 지워지지 않습니다.)"
 
 #. String resource
 #: STRING.134
@@ -108,7 +96,7 @@ msgstr "파일 만들기 오류: "
 #. String resource
 #: STRING.135
 msgid "File write error: "
-msgstr "파일 기록 오류: "
+msgstr "파일 쓰기 오류: "
 
 #. String resource
 #: STRING.136
@@ -128,7 +116,7 @@ msgstr "시스템 레지스트리에서 데이터 수집하는 중..."
 #. String resource
 #: STRING.139
 msgid "Found drives (will be ignored): "
-msgstr "드라이브 발견 (무시됩니다.): "
+msgstr "(무시되는) 드라이브 찾음: "
 
 #. String resource
 #: STRING.140
@@ -138,12 +126,12 @@ msgstr "지우는 중..."
 #. String resource
 #: STRING.141
 msgid "Removing key: "
-msgstr "키 지우는 중: "
+msgstr "키 제거하는 중: "
 
 #. String resource
 #: STRING.142
 msgid "Removing value: "
-msgstr "값 지우는 중: "
+msgstr "값 제거하는 중: "
 
 #. String resource
 #: STRING.143
@@ -158,17 +146,17 @@ msgstr "사용자에 대한 데이터를 수집하는 중: "
 #. String resource
 #: STRING.145
 msgid "Found users: "
-msgstr "사용자 발견: "
+msgstr "사용자 찾음: "
 
 #. String resource
 #: STRING.146
 msgid "Found mount points: "
-msgstr "탑재 지점 발견: "
+msgstr "탑재 지점 찾음: "
 
 #. String resource
 #: STRING.147
 msgid "Found Explorer drives: "
-msgstr "탐색기 드라이브 발견: "
+msgstr "탐색기 드라이브 찾음: "
 
 #. String resource
 #: STRING.148
@@ -183,17 +171,17 @@ msgstr "탑재 지점의 데이터를 수집하는 중..."
 #. String resource
 #: STRING.150
 msgid "Found ControlSets: "
-msgstr "ControlSets 발견: "
+msgstr "ControlSets 찾음: "
 
 #. String resource
 #: STRING.151
 msgid "Found keys: "
-msgstr "키 발견: "
+msgstr "키 찾음: "
 
 #. String resource
 #: STRING.152
 msgid "Found values: "
-msgstr "값 발견: "
+msgstr "값 찾음: "
 
 #. String resource
 #: STRING.153
