@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 1.5.5\n"
 
 #. Menu popup
 #: MENUPOPUP.130.0
@@ -49,7 +49,7 @@ msgstr "Limpieza real (sin marcar es una simulación)"
 #. Dialog control
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
-msgstr "Guardar copia de seguridad .reg-archivo"
+msgstr "Guardar copia de seguridad (archivo .reg)"
 
 #. String resource
 #: STRING.129
@@ -67,39 +67,38 @@ msgid ""
 "-silent - Hidden mode (if possible);\n"
 "-? - Show this help.\n"
 msgstr ""
-"Uso:\n"
+"Modo de uso:\n"
 "\n"
 "USBOblivion[32|64].exe [parámetros]\n"
 "\n"
 "Parámetros:\n"
 "\n"
-"-enable - Limpieza real (sin marcar es una simulación);\n"
-"-auto - Ejecución automática;\n"
-"-nosave - No guardar copia de seguridad .reg-archivo;\n"
-"-lang:XX - Use language XX (hex-code);\n"
-"-silent - Hidden mode (if possible);\n"
-"-? - Mostrar esta ayuda.\n"
+"-enable - Limpieza real (de otro modo será una simulación);\n"
+"-auto - funcionamiento automático.;\n"
+"-nosave - No guarda copia de seguridad (archivo .reg).;\n"
+"-lang:XX - Usar idioma XX (código exadecimal).;\n"
+"-silent - Modo oculto (Si es posible).;\n"
+"-? - Visializar esta ayuda.\n"
 
 #. String resource
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
-msgstr ""
-"ATENCIÓN! Extraiga todos los discos USB antes de proceder a la limpieza."
+msgstr "¡¡ATENCIÓN!! Extraiga todos los discos USB antes de proceder a la limpieza."
 
 #. String resource
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Pulse el botón \"Limpiar\" para iniciar la limpieza."
+msgstr "Pulse el botón \"Limpiar\" para iniciar el proceso de limpieza."
 
 #. String resource
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
-msgstr "Proceso en modo: real (los datos seran borrados)."
+msgstr "Ejecutar en modo: real (los datos serán limpiados)."
 
 #. String resource
 #: STRING.133
 msgid "Process mode: simulation (no data will be cleaned)."
-msgstr "Proceso en modo: simulación (los datos no seran borrados)."
+msgstr "Ejecutar en modo: simulación (los datos no se limpian)."
 
 #. String resource
 #: STRING.134
@@ -109,7 +108,7 @@ msgstr "Error al crear el archivo: "
 #. String resource
 #: STRING.135
 msgid "File write error: "
-msgstr "Error al escribir en el archivo: "
+msgstr "Error al escribir el archivo: "
 
 #. String resource
 #: STRING.136
@@ -119,17 +118,17 @@ msgstr "Archivo de copia de seguridad: "
 #. String resource
 #: STRING.137
 msgid "Done."
-msgstr "Finalizado."
+msgstr "Hecho."
 
 #. String resource
 #: STRING.138
 msgid "Gathering data from system registry..."
-msgstr "Recopilando datos del registro del sistema ..."
+msgstr "Recopilando datos desde el registro del sistema..."
 
 #. String resource
 #: STRING.139
 msgid "Found drives (will be ignored): "
-msgstr "Encontradas unidades (seran ignoradas): "
+msgstr "Discos encontrados (se ignoran): "
 
 #. String resource
 #: STRING.140
@@ -149,12 +148,12 @@ msgstr "Eliminando valor: "
 #. String resource
 #: STRING.143
 msgid "Gathering user data..."
-msgstr "Recopilando datos de usuario..."
+msgstr "Recopilando datos del usuario..."
 
 #. String resource
 #: STRING.144
 msgid "Gathering data about user: "
-msgstr "Recopilando datos sobre el usuario:"
+msgstr "Recopilando datos acerca del usuario: "
 
 #. String resource
 #: STRING.145
@@ -164,27 +163,27 @@ msgstr "Usuarios encontrados: "
 #. String resource
 #: STRING.146
 msgid "Found mount points: "
-msgstr "Encontrados puntos de montaje: "
+msgstr "Puntos de montaje encontrados: "
 
 #. String resource
 #: STRING.147
 msgid "Found Explorer drives: "
-msgstr "Exploración de unidades encontradas: "
+msgstr "Unidades encontradas: "
 
 #. String resource
 #: STRING.148
 msgid "Remove error: "
-msgstr "Errores eliminados: "
+msgstr "Error al eliminar: "
 
 #. String resource
 #: STRING.149
 msgid "Gathering mount point's data..."
-msgstr "Recopilando información de puntos de montaje..."
+msgstr "Recopilando datos de puntos de montaje..."
 
 #. String resource
 #: STRING.150
 msgid "Found ControlSets: "
-msgstr "Puntos de control encontrados: "
+msgstr "Conjuntos de control encontrados: "
 
 #. String resource
 #: STRING.151
@@ -199,32 +198,32 @@ msgstr "Valores encontrados: "
 #. String resource
 #: STRING.153
 msgid "Key access denied: "
-msgstr "Claves de acceso denegadas: "
+msgstr "Acceso denegado a la clave: "
 
 #. String resource
 #: STRING.154
 msgid "Disk %c: has been inserted."
-msgstr "Disco %c: ha sido insertado."
+msgstr "Se ha conectado el disco %c:."
 
 #. String resource
 #: STRING.155
 msgid "Logged-in under system account successfully."
-msgstr "Registrado en la cuenta del sistema con éxito."
+msgstr "Se ha iniciado sesión con la cuenta del sistema."
 
 #. String resource
 #: STRING.156
 msgid "Failed to login under system account."
-msgstr "Error al registrarse en la cuenta del sistema."
+msgstr "No se pudo iniciar sesión con la cuenta del sistema."
 
 #. String resource
 #: STRING.157
 msgid "Re-starting under administrator..."
-msgstr "Reiniciar como administrador..."
+msgstr "Re-iniciando como administrador..."
 
 #. String resource
 #: STRING.158
 msgid "Disk %c: has been ejected."
-msgstr "Disco %c: ha sido expulsado."
+msgstr "Se ha explulsado el disco %c:."
 
 #. String resource
 #: STRING.159
@@ -234,17 +233,17 @@ msgstr "Fallo al expulsar el disco %c:."
 #. String resource
 #: STRING.160
 msgid "Ejecting disk %c:..."
-msgstr "Expulsando el disco %c:..."
+msgstr "Expulsando disco %c:..."
 
 #. String resource
 #: STRING.161
 msgid "Removing file: "
-msgstr "Eliminando el archivo: "
+msgstr "Eliminando archivo: "
 
 #. String resource
 #: STRING.162
 msgid "Gathering file data..."
-msgstr "Recopilando datos del archivo..."
+msgstr "Recopilando archivos de datos..."
 
 #. String resource
 #: STRING.163
@@ -254,4 +253,4 @@ msgstr "Limpiando diario: "
 #. String resource
 #: STRING.164
 msgid "Gathering journal data..."
-msgstr "Recopilando información del diario..."
+msgstr "Recopilando datos del diario..."
