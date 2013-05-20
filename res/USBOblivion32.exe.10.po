@@ -103,12 +103,12 @@ msgstr "Tipo di pulizia: simulazione (nessun dato verrà pulito)."
 #. String resource
 #: STRING.134
 msgid "File creation error: "
-msgstr "Errore di creazione del file: "
+msgstr "Non posso creare questo file: "
 
 #. String resource
 #: STRING.135
 msgid "File write error: "
-msgstr "Errore di scrittura del file: "
+msgstr "Non posso scrivere in questo file: "
 
 #. String resource
 #: STRING.136
@@ -213,7 +213,7 @@ msgstr "Accesso nell'account di sistema avvenuto con successo."
 #. String resource
 #: STRING.156
 msgid "Failed to login under system account."
-msgstr "Errore durante l'accesso nell'account di sistema."
+msgstr "Non posso accedere nell'account di sistema."
 
 #. String resource
 #: STRING.157
@@ -228,7 +228,7 @@ msgstr "Il disco %c: è stato disconnesso."
 #. String resource
 #: STRING.159
 msgid "Failed to eject disk %c:."
-msgstr "Errore durante la disconnessione del disco %c:."
+msgstr "Non posso disconnettere il disco %c:."
 
 #. String resource
 #: STRING.160
