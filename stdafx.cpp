@@ -1,7 +1,7 @@
 //
 // stdafx.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2012.
+// Copyright (c) Nikolay Raspopov, 2009-2014.
 // This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -20,7 +20,6 @@
 //
 
 #include "stdafx.h"
-#include "vs2010.cpp"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

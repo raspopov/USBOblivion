@@ -1,7 +1,7 @@
 //
 // stdafx.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2012.
+// Copyright (c) Nikolay Raspopov, 2009-2014.
 // This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -41,8 +41,6 @@
 #define _AFX_ALL_WARNINGS
 #define NO_PRINT
 
-#include "miniVS2010.h"
-
 #include <afxwin.h>
 #include <afxcmn.h>
 #include <afxtempl.h>
@@ -55,6 +53,18 @@
 #include <setupapi.h>
 #include <winioctl.h>
 #include <cfgmgr32.h>
+
+#ifndef BCM_FIRST
+#define BCM_FIRST 0x1600
+#endif
+
+#ifndef BCM_SETSHIELD
+#define BCM_SETSHIELD (BCM_FIRST + 0x000C)
+#endif
+
+#ifndef LVS_EX_DOUBLEBUFFER
+#define LVS_EX_DOUBLEBUFFER 0x00010000
+#endif
 
 #include "thread.h"
 #include "Localization\Localization.h"

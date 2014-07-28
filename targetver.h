@@ -1,7 +1,7 @@
 //
 // targetver.h 
 //
-// Copyright (c) Nikolay Raspopov, 2009-2012.
+// Copyright (c) Nikolay Raspopov, 2009-2014.
 // This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -21,4 +21,5 @@
 
 #pragma once
 
+#define _WIN32_WINNT 0x0600
 #include <SDKDDKVer.h>

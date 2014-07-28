@@ -2,9 +2,9 @@
 
 ========================================================================
 
-USBOblivion utility designed to erase all traces of USB-connected drives and CD-ROMs from the registry in Windows 2000, Windows XP, Windows 2003, Windows Vista, Windows 7, Windows 8 32/64-bit versions. The utility has a test mode of operation, i.e. without actually removing data from the registry, and, just in case, creates a .reg-file to undo any changes. There is also a fully automatic mode. 
+USBOblivion utility designed to erase all traces of USB-connected drives and CD-ROMs from the registry in Windows XP, Windows 2003, Windows Vista, Windows 7, Windows 8 32/64-bit versions. The utility has a test mode of operation, i.e. without actually removing data from the registry, and, just in case, creates a .reg-file to undo any changes. There is also a fully automatic mode. 
 
-Утилита USBOblivion предназначена для стирания следов подключения USB-дисков и CD-ROM'ов из реестра в Windows 2000, Windows XP, Windows 2003, Windows Vista, Windows 7, Windows 8 как 32, так и 64-битных версиях. Утилита имеет тестовый режим работы, т.е. без фактического удаления данных из реестра, и, на всякий случай, создаёт .reg-файл для отмены всех изменений. Также имеется полностью автоматический режим работы. 
+Утилита USBOblivion предназначена для стирания следов подключения USB-дисков и CD-ROM'ов из реестра в Windows XP, Windows 2003, Windows Vista, Windows 7, Windows 8 как 32, так и 64-битных версиях. Утилита имеет тестовый режим работы, т.е. без фактического удаления данных из реестра, и, на всякий случай, создаёт .reg-файл для отмены всех изменений. Также имеется полностью автоматический режим работы. 
 
 ========================================================================
 
@@ -40,6 +40,7 @@ Languages:
 	-lang:0c - French (by Mathieu Bergounioux)
 	-lang:10 - Italian (by Marcello)
 	-lang:12 - Korean (by 4Li)
+	-lang:15 - Polish (by dmocha)
 	-lang:16 - Brazilian Portuguese (by Paulo Guzmán)
 	-lang:19 - Russian (by Nikolay Raspopov)
 	-lang:1d - Swedish (by Ake Engelbrektson)
@@ -48,13 +49,18 @@ Languages:
 
 System Requirements:
 
-  * Windows 2000/XP/2003/Vista/2008/7/8 32/64-bit
-  * About 500 Kb of disk space. No installation needed.
+  * Windows XP/2003/Vista/2008/7/8 32/64-bit
+  * About 2 Mb of disk space. No installation needed.
   * Administrative privileges.
 
 ========================================================================
 
 Versions:
+
+1.10.2.0
+
+  * Added Polish translation (by dmocha)
+  * Dropped Windows 2000 support
 
 1.10.1.0
 
@@ -125,6 +131,6 @@ You should have received a copy of the GNU General Public License along with thi
 Copyrights:
 
 USB Oblivion
-Copyright (C) Nikolay Raspopov, 2009-2013.
+Copyright (C) Nikolay Raspopov, 2009-2014.
 E-Mail: raspopov@cherubicsoft.com
 Web site: http://code.google.com/p/usboblivion/
