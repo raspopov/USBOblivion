@@ -34,6 +34,7 @@ Params:
 
 Languages:
 
+	-lang:07 - German (by Kristine Baumgart)
 	-lang:08 - Greek (by Geogeo)
 	-lang:09 - English (by Nikolay Raspopov)
 	-lang:0a - Spanish (by CesarRG)
@@ -49,13 +50,17 @@ Languages:
 
 System Requirements:
 
-  * Windows XP/2003/Vista/2008/7/8 32/64-bit
+  * Windows XP/2003/Vista/2008/7/8/8.1 32/64-bit
   * About 2 Mb of disk space. No installation needed.
   * Administrative privileges.
 
 ========================================================================
 
 Versions:
+
+1.10.3.0
+
+  * Added German translation (by Kristine Baumgart)
 
 1.10.2.0
 
@@ -131,6 +136,6 @@ You should have received a copy of the GNU General Public License along with thi
 Copyrights:
 
 USB Oblivion
-Copyright (C) Nikolay Raspopov, 2009-2014.
+Copyright (C) Nikolay Raspopov, 2009-2015.
 E-Mail: raspopov@cherubicsoft.com
 Web site: http://code.google.com/p/usboblivion/
