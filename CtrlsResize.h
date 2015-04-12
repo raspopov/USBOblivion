@@ -1,8 +1,8 @@
 //
 // CtrlsResize.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2011.
-// This file is part of USB Oblivion (http://code.google.com/p/usboblivion/)
+// Copyright (c) Nikolay Raspopov, 2009-2015.
+// This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
