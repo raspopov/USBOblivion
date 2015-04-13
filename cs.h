@@ -1,3 +1,24 @@
+//
+// cs.h
+//
+// Copyright (c) Nikolay Raspopov, 2009-2015.
+// This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
+//
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License along
+// with this program; if not, write to the Free Software Foundation, Inc.,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
+
 #pragma once
 
 namespace c4u {
@@ -80,18 +101,22 @@ public:
 	{
 		m_mutex = CreateMutex (NULL, false, NULL);
 	}
+
 	inline ~mutex () throw ()
 	{
 		CloseHandle (m_mutex);
 	}
+
 	virtual void lock () const throw ()
 	{
 		CoWaitForSingleObject (m_mutex, INFINITE);
 	}
+
 	virtual void unlock () const throw ()
 	{
 		ReleaseMutex (m_mutex);
 	}
+
 	virtual bool try_lock (const DWORD timeout /* мс, 0 или INFINITE */) const throw ()
 	{
 		return (WaitForMultipleObjectsLoop (1, const_cast <const HANDLE*> (&m_mutex),
@@ -99,10 +124,11 @@ public:
 	}
 
 protected:
-	mutex (const mutex&);
-	mutex& operator = (const mutex&);
-
 	mutable HANDLE m_mutex;
+
+private:
+	mutex( const mutex& );
+	mutex& operator = ( const mutex& );
 };
 
 class cs : public locker
@@ -112,18 +138,22 @@ public:
 	{
 		InitializeCriticalSection  (&m_sect);
 	}
+
 	inline ~cs () throw ()
 	{
 		DeleteCriticalSection (&m_sect);
 	}
+
 	virtual void lock () const throw ()
 	{
 		EnterCriticalSection (&m_sect);
 	}
+
 	virtual void unlock () const throw ()
 	{
 		LeaveCriticalSection (&m_sect);
 	}
+
 	virtual bool try_lock (const DWORD timeout /* мс, 0 или INFINITE */) const throw ()
 	{
 		DWORD start_time = GetTickCount ();
@@ -140,10 +170,11 @@ public:
 	}
 
 protected:
-	cs (const cs&);
-	cs& operator = (const cs&);
-
 	mutable CRITICAL_SECTION m_sect;
+
+private:
+	cs( const cs& );
+	cs& operator = ( const cs& );
 };
 
 class locker_holder
@@ -156,6 +187,7 @@ public:
 			m_hold = c;
 		}
 	}
+
 	inline locker_holder (const locker* c, const DWORD timeout /* мс, 0 или INFINITE */) throw ()
 	{
 		if (c && c->try_lock (timeout)) {
@@ -163,10 +195,12 @@ public:
 		} else
 			m_hold = NULL;
 	}
+
 	inline operator bool () const throw ()
 	{
 		return (m_hold != NULL);
 	}
+
 	inline ~locker_holder () throw ()
 	{
 		if (m_hold) {
@@ -175,10 +209,11 @@ public:
 		}
 	}
 protected:
-	locker_holder (const locker_holder&);
-	locker_holder& operator = (const locker_holder&);
-
 	const locker* m_hold;
+
+private:
+	locker_holder( const locker_holder& );
+	locker_holder& operator = ( const locker_holder& );
 };
 
 }

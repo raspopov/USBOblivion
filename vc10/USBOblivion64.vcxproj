@@ -114,9 +114,8 @@
       <AdditionalDependencies>windowscodecs.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <DelayLoadDLLs>setupapi.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll</DelayLoadDLLs>
-      <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <PreBuildEvent>
       <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
@@ -152,8 +151,8 @@
       <AdditionalDependencies>windowscodecs.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
-      <DelayLoadDLLs>setupapi.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll</DelayLoadDLLs>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <PreBuildEvent>
       <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
@@ -194,8 +193,6 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX86</TargetMachine>
-      <MinimumRequiredVersion>5.0</MinimumRequiredVersion>
-      <DelayLoadDLLs>setupapi.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll</DelayLoadDLLs>
       <Profile>true</Profile>
     </Link>
     <PostBuildEvent />
@@ -236,7 +233,6 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX64</TargetMachine>
-      <DelayLoadDLLs>setupapi.dll;comdlg32.dll;winspool.drv;advapi32.dll;shell32.dll;comctl32.dll;shlwapi.dll;ole32.dll;oleacc.dll;oleaut32.dll;userenv.dll;lz32.dll</DelayLoadDLLs>
       <Profile>true</Profile>
     </Link>
     <PostBuildEvent />

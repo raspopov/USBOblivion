@@ -27,10 +27,7 @@
 #define _SECURE_ATL 1
 #endif
 
-#ifndef VC_EXTRALEAN
 #define VC_EXTRALEAN
-#endif
-
 #define WIN32_LEAN_AND_MEAN
 
 #include "targetver.h"
@@ -43,13 +40,11 @@
 
 #include <afxwin.h>
 #include <afxcmn.h>
-#include <afxtempl.h>
 #include <atlsecurity.h>
 #include <atlcoll.h>
 #include <tlhelp32.h>
 #include <shlwapi.h>
 #include <shlobj.h>
-//#include <dbt.h>
 #include <setupapi.h>
 #include <winioctl.h>
 #include <cfgmgr32.h>
