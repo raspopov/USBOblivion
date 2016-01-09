@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "USBOblivion32", "USBOblivion32.vcxproj", "{5399995C-6BEF-4ADD-9104-46F6C57A7FD6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "USBOblivion64", "USBOblivion64.vcxproj", "{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{35071523-7561-47AB-B0E0-E2C8E0AA1FFD}"
+	ProjectSection(SolutionItems) = preProject
+		..\ReadMe.txt = ..\ReadMe.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD6}.Debug|Win32.Build.0 = Debug|Win32
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD6}.Debug|x64.ActiveCfg = Debug|Win32
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD6}.Debug|x64.Build.0 = Debug|Win32
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD6}.Release|Win32.ActiveCfg = Release|Win32
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD6}.Release|Win32.Build.0 = Release|Win32
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD6}.Release|x64.ActiveCfg = Release|Win32
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD6}.Release|x64.Build.0 = Release|Win32
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Debug|Win32.ActiveCfg = Debug|x64
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Debug|Win32.Build.0 = Debug|x64
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Debug|x64.ActiveCfg = Debug|x64
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Debug|x64.Build.0 = Debug|x64
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Release|Win32.ActiveCfg = Release|x64
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Release|Win32.Build.0 = Release|x64
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Release|x64.ActiveCfg = Release|x64
+		{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(DPCodeReviewSolutionGUID) = preSolution
+		DPCodeReviewSolutionGUID = {00000000-0000-0000-0000-000000000000}
+	EndGlobalSection
+EndGlobal
