@@ -46,6 +46,8 @@
 #define IDS_RUN_FILES                   162
 #define IDS_RUN_LOG                     163
 #define IDS_RUN_LOGS                    164
+#define IDS_DELETE_FILE_ERROR           165
+#define IDS_DELETE_FILE_BOOT            166
 #define IDC_REPORT                      1000
 #define IDC_ENABLE                      1002
 #define IDC_SAVE                        1003

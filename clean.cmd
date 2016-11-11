@@ -10,6 +10,7 @@ for /d /r %%i in (*.*) do if exist "%%i\Win32\" rd /s /q "%%i\Win32\" && echo Cl
 for /d /r %%i in (*.*) do if exist "%%i\x64\" rd /s /q "%%i\x64\" && echo Cleaning %%i\x64\...
 rd /s /q ".\vc10\ipch\" 2>nul:
 rd /s /q ".\vc12\ipch\" 2>nul:
+rd /s /q ".\vc14\ipch\" 2>nul:
 rd /s /q ".\ipch\" 2>nul:
 rd /s /q ".\Win32\" 2>nul:
 rd /s /q ".\x64\" 2>nul:

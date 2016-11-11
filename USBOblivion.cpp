@@ -1,7 +1,7 @@
 //
 // USBOblivion.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2015.
+// Copyright (c) Nikolay Raspopov, 2009-2016.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -26,11 +26,6 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
-CString LoadString(UINT nID)
-{
-	return theApp.m_Loc.LoadString( nID );
-}
 
 BEGIN_MESSAGE_MAP(CUSBOblivionApp, CWinApp)
 END_MESSAGE_MAP()

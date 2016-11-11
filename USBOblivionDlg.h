@@ -1,7 +1,7 @@
 //
 // USBOblivionDlg.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2015.
+// Copyright (c) Nikolay Raspopov, 2009-2016.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -41,7 +41,7 @@ typedef struct CKeyDef
 	CKeyType	nMode;				// Тип ключа
 	LPCTSTR		szKeyName;			// Открыть данную папку (NULL - конец)
 	LPCTSTR		szKeySubstring;		// Эта строка должна содержаться в имени ключа/значения (NULL - любая)
-	LPCTSTR		szValueName;		// Проверка присутсвия данного ключа (NULL - не проверять)
+	LPCTSTR		szValueName;		// Проверка присутствия данного ключа (NULL - не проверять)
 	LPCTSTR		szValueSubstring;	// Эта строка должна содержаться в значении ключа (NULL - любое)
 	BOOL		bDeleteEmpty;		// Удалить сам ключ если он пустой
 } CKeyDef;
@@ -127,8 +127,8 @@ protected:
 	// Извлечение диска (Uwe Sieber - www.uwe-sieber.de)
 	bool EjectDrive(TCHAR DriveLetter);
 
-	void DeleteFile(LPCTSTR szPath);
-	void DeleteLog(LPCTSTR szName);
+	void DoDeleteFile(LPCTSTR szPath);
+	void DoDeleteLog(LPCTSTR szName);
 	void DeleteKey(HKEY hRoot, const CString& sSubKey);
 	void DeleteValue(HKEY hRoot, LPCTSTR szSubKey, LPCTSTR szValue);
 	void SaveKey(HKEY hRoot, LPCTSTR szKeyName, LPCTSTR szValueName = NULL);

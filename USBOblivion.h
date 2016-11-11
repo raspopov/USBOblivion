@@ -1,7 +1,7 @@
 //
 // USBOblivion.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2015.
+// Copyright (c) Nikolay Raspopov, 2009-2016.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -41,4 +41,7 @@ protected:
 extern CUSBOblivionApp theApp;
 
 // Загрузка строки из ресурса
-CString LoadString(UINT nID);
+inline CString LoadString(UINT nID)
+{
+	return theApp.m_Loc.LoadString( nID );
+}

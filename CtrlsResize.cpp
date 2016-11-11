@@ -30,7 +30,7 @@ static char THIS_FILE[]=__FILE__;
 
 // Construction/Destruction
 CCtrlResize::CControlInfo::CControlInfo () :
-	controlID(0), bindtype (BIND_UNKNOWN), rectInitial(NULL), m_pControlWnd(NULL)
+	controlID(0), bindtype (BIND_UNKNOWN), rectInitial(), m_pControlWnd(NULL)
 {
 }
 
