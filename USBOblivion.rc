@@ -193,6 +193,7 @@ END
 STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "USBOblivion"
+    AFX_IDS_COMPANY_NAME    "Raspopov"
 END
 
 STRINGTABLE
@@ -224,6 +225,8 @@ BEGIN
     IDS_RUN_LOGS            "Gathering journal data..."
     IDS_DELETE_FILE_ERROR   "File removal error:"
     IDS_DELETE_FILE_BOOT    "Removing file at boot-time:"
+    IDS_RUN_LOG_ERROR       "Journal cleanup error:"
+    IDS_RESTORE_POINT       "Creating System Restore Point..."
 END
 
 #endif    // Neutral resources

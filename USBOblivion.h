@@ -23,6 +23,11 @@
 
 #include "resource.h"
 
+#include "thread.h"
+#include "Localization\Localization.h"
+
+using namespace c4u;
+
 
 class CUSBOblivionApp : public CWinApp
 {
@@ -45,3 +50,26 @@ inline CString LoadString(UINT nID)
 {
 	return theApp.m_Loc.LoadString( nID );
 }
+
+// Сравнение строк без учёта регистра и локали
+bool CmpStrI(LPCTSTR szLeft, LPCTSTR szRight, int nCount = -1);
+
+// Проверка наличия строки в списке строк
+bool IfNotExist(const CStringList& lst, const CString& str);
+
+// Добавление строки в список строк без дубликатов
+void AddUnique(CStringList& lst, CString str);
+
+// Определение наличия административных прав своего процесса
+BOOL IsRunAsAdmin();
+
+// Определение наличия повышенных прав (UAC) своего процесса
+BOOL IsProcessElevated();
+
+// Открытие токена процесса с гарантированными правами
+HANDLE OpenProcessToken(HANDLE hProcess, DWORD dwAccess);
+
+// Возвращает хэндлер дискового устройства по его номеру (Uwe Sieber - www.uwe-sieber.de)
+DEVINST GetDrivesDevInstByDeviceNumber(DWORD DeviceNumber, UINT DriveType, LPCTSTR szDosDeviceName);
+
+BOOL InitializeCOMSecurity();

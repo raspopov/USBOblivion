@@ -110,6 +110,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -119,8 +120,9 @@
       <AdditionalDependencies>windowscodecs.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <DelayLoadDLLs>SETUPAPI.DLL;MSIMG32.DLL;WINSPOOL.DRV;ADVAPI32.DLL;SHELL32.DLL;COMCTL32.DLL;SHLWAPI.DLL;UXTHEME.DLL;OLE32.DLL;OLEAUT32.DLL;USERENV.DLL;LZ32.DLL;OLEACC.DLL;GDIPLUS.DLL;IMM32.DLL;WINMM.DLL</DelayLoadDLLs>
     </Link>
     <PreBuildEvent>
       <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
@@ -147,6 +149,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -156,8 +159,9 @@
       <AdditionalDependencies>windowscodecs.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <DelayLoadDLLs>SETUPAPI.DLL;MSIMG32.DLL;WINSPOOL.DRV;ADVAPI32.DLL;SHELL32.DLL;COMCTL32.DLL;SHLWAPI.DLL;UXTHEME.DLL;OLE32.DLL;OLEAUT32.DLL;USERENV.DLL;LZ32.DLL;OLEACC.DLL;GDIPLUS.DLL;IMM32.DLL;WINMM.DLL</DelayLoadDLLs>
     </Link>
     <PreBuildEvent>
       <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
@@ -186,6 +190,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -198,7 +203,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX86</TargetMachine>
-      <Profile>true</Profile>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <DelayLoadDLLs>SETUPAPI.DLL;MSIMG32.DLL;WINSPOOL.DRV;ADVAPI32.DLL;SHELL32.DLL;COMCTL32.DLL;SHLWAPI.DLL;UXTHEME.DLL;OLE32.DLL;OLEAUT32.DLL;USERENV.DLL;LZ32.DLL;OLEACC.DLL;GDIPLUS.DLL;IMM32.DLL;WINMM.DLL</DelayLoadDLLs>
     </Link>
     <PostBuildEvent />
     <PreBuildEvent>
@@ -226,6 +232,7 @@
       <WarningLevel>Level4</WarningLevel>
       <StringPooling>true</StringPooling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+      <DebugInformationFormat>None</DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -238,7 +245,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX64</TargetMachine>
-      <Profile>true</Profile>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <DelayLoadDLLs>SETUPAPI.DLL;MSIMG32.DLL;WINSPOOL.DRV;ADVAPI32.DLL;SHELL32.DLL;COMCTL32.DLL;SHLWAPI.DLL;UXTHEME.DLL;OLE32.DLL;OLEAUT32.DLL;USERENV.DLL;LZ32.DLL;OLEACC.DLL;GDIPLUS.DLL;IMM32.DLL;WINMM.DLL</DelayLoadDLLs>
     </Link>
     <PostBuildEvent />
     <PreBuildEvent>

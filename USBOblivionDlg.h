@@ -69,11 +69,12 @@ public:
 
 	enum { IDD = IDD_USBOBLIVION_DIALOG };
 
-	BOOL		m_bEnable;		// -enable		- Рабочий режим очистки, иначе симуляция
-	BOOL		m_bAuto;		// -auto		- Автоматический запуск
-	BOOL		m_bSave;		// -nosave		- Отмена сохранения .reg-файла (инверсия)
-	BOOL		m_bElevation;	// -elevation	- Режим с повышенными правами
-	BOOL		m_bSilent;		// -silent		- Тихий режим (работает только в автоматическом режиме)
+	BOOL		m_bEnable;		// -enable			- Рабочий режим очистки, иначе симуляция
+	BOOL		m_bAuto;		// -auto			- Автоматический запуск
+	BOOL		m_bSave;		// -nosave			- Отмена сохранения .reg-файла (инверсия)
+	BOOL		m_bRestorePoint;// -norestorepoint	- Disable creation of System Restore Point
+	BOOL		m_bElevation;	// -elevation		- Режим с повышенными правами
+	BOOL		m_bSilent;		// -silent			- Тихий режим (работает только в автоматическом режиме)
 
 	virtual INT_PTR DoModal();
 
@@ -84,19 +85,20 @@ protected:
 	int			m_nSelected;	// Текущая выбранная строка в отчёте
 	CFile		m_oFile;		// Путь до .reg-файла
 	CCtrlResize	m_CtrlsResize;	// Изменение размеров интерфейса
-	CRect		m_InitialRect;	// Начальные разсеры окна - минимальные размеры
+	CRect		m_InitialRect;	// Начальные размеры окна - минимальные размеры
 	DWORD		m_nDrives;		// Текущие диски
 	
-	CString		m_sDeleteKeyString;		// Кеш строки
-	CString		m_sDeleteValueString;	// Кеш строки
+	CString		m_sDeleteKeyString;		// Кэш строки
+	CString		m_sDeleteValueString;	// Кэш строки
 
 	typedef C2< CString, UINT > CLogItem;
 	typedef CList< CLogItem* > CLogList;
 	cs						m_pSection;		// Синхронизация доступа к отчёту
-	CAutoPtr< CLogList >	m_pReportList;	// Список строк для отчта
+	CAutoPtr< CLogList >	m_pReportList;	// Список строк для отчёта
 	bool					m_bRunning;		// Флаг обработки
 
 	LSTATUS (WINAPI *m_pRegDeleteKeyExW) (HKEY, LPCWSTR, REGSAM, DWORD);
+	BOOL (WINAPI *m_fnSRSetRestorePointW) (PRESTOREPOINTINFOW, PSTATEMGRSTATUS);
 
 	enum { Information = 0, Warning, Error, Search, Done, Clean, Regedit, Lock, Eject };
 

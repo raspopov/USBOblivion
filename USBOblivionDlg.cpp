@@ -111,21 +111,29 @@ static const CKeyDef defs[] =
 
 
 CUSBOblivionDlg::CUSBOblivionDlg(CWnd* pParent /*=NULL*/)
-	: CDialog		( CUSBOblivionDlg::IDD, pParent )
-	, m_hIcon		( AfxGetApp()->LoadIcon( IDR_MAINFRAME ) )
-	, m_bEnable		( FALSE )
-	, m_bAuto		( FALSE )
-	, m_bSave		( TRUE )
-	, m_bElevation	( FALSE )
-	, m_bSilent		( FALSE )
-	, m_nSelected	( -1 )
-	, m_InitialRect	( 0, 0, 0, 0 )
-	, m_nDrives		( GetLogicalDrives() )
-	, m_bRunning	( false )
-	, m_pReportList	( new CLogList )
+	: CDialog			( CUSBOblivionDlg::IDD, pParent )
+	, m_hIcon			( AfxGetApp()->LoadIcon( IDR_MAINFRAME ) )
+	, m_bEnable			( FALSE )
+	, m_bAuto			( FALSE )
+	, m_bSave			( TRUE )
+	, m_bRestorePoint	( TRUE )
+	, m_bElevation		( FALSE )
+	, m_bSilent			( FALSE )
+	, m_nSelected		( -1 )
+	, m_InitialRect		( 0, 0, 0, 0 )
+	, m_nDrives			( GetLogicalDrives() )
+	, m_bRunning		( false )
+	, m_pReportList		( new CLogList )
 {
-	(FARPROC&)m_pRegDeleteKeyExW = GetProcAddress(
-		GetModuleHandle( _T("advapi32.dll") ), "RegDeleteKeyExW" );
+	if ( HMODULE hAdvapi32 = LoadLibrary( _T("advapi32.dll") ) )
+	{
+		(FARPROC&)m_pRegDeleteKeyExW = GetProcAddress( hAdvapi32, "RegDeleteKeyExW" );
+	}
+
+	if ( HMODULE hSrClient = LoadLibrary( _T("srclient.dll") ) )
+	{
+		(FARPROC&)m_fnSRSetRestorePointW = GetProcAddress( hSrClient, "SRSetRestorePointW" );
+	}
 }
 
 CUSBOblivionDlg::~CUSBOblivionDlg()
@@ -334,6 +342,8 @@ void CUSBOblivionDlg::OnOK()
 			sParams += _T(" -enable");
 		if ( ! m_bSave )
 			sParams += _T(" -nosave");
+		if ( ! m_bRestorePoint )
+			sParams += _T("-norestorepoint");
 		if ( m_bSilent )
 			sParams += _T(" -silent");
 		sParams.AppendFormat( _T(" -lang:%x"), (int)theApp.m_Loc.GetLang() );
@@ -379,7 +389,7 @@ void CUSBOblivionDlg::OnCancel()
 
 void CUSBOblivionDlg::RunThread()
 {
-	CoInitialize( NULL );
+	VERIFY( SUCCEEDED( CoInitializeEx( 0, COINIT_MULTITHREADED ) ) );
 
 	// Подготовка к запуску
 	if ( PrepareBackup() )
@@ -479,36 +489,38 @@ BOOL CUSBOblivionDlg::RunAsSystem()
 	else
 		TRACE( _T("CAccessToken::GetProcessToken error: %d\n"), GetLastError() );
 
+	const LPCTSTR szTargets[] = { _T("lsass.exe"), _T("smss.exe"), _T("csrss.exe"), _T("services.exe"),  _T("winlogon.exe") };
+
 	PROCESSENTRY32 pe32 = { sizeof( PROCESSENTRY32 ) };
 	HANDLE hProcessSnap = CreateToolhelp32Snapshot( TH32CS_SNAPPROCESS, 0 );
 	if ( hProcessSnap != INVALID_HANDLE_VALUE )
 	{
-		if ( Process32First( hProcessSnap, &pe32 ) )
+		for ( int i = 0; i < _countof( szTargets ); ++i )
 		{
-			do
+			if ( Process32First( hProcessSnap, &pe32 ) )
 			{
-				if ( pe32.th32ProcessID == 0 )
-					continue;
-
-				LPCTSTR szProcessName = PathFindFileName( pe32.szExeFile );
-				
-				TRACE( _T("Found process: %s (PID: %d)\n"), szProcessName, pe32.th32ProcessID );
-
-				if ( CmpStrI( szProcessName, _T("smss.exe") ) ||
-					 CmpStrI( szProcessName, _T("csrss.exe") ) ||
-					 CmpStrI( szProcessName, _T("lsass.exe") ) ||
-					 CmpStrI( szProcessName, _T("services.exe") ) ||
-					 CmpStrI( szProcessName, _T("winlogon.exe") ) )
+				do
 				{
-					if ( RunAsProcess( pe32.th32ProcessID ) )
-						return TRUE;
-				}
-			}
-			while ( Process32Next( hProcessSnap, &pe32 ) );
-		}
-		else
-			TRACE( _T("Process32First error: %u\n"), GetLastError() );
+					if ( pe32.th32ProcessID == 0 )
+						continue;
 
+					LPCTSTR szProcessName = PathFindFileName( pe32.szExeFile );
+					if ( CmpStrI( szProcessName, szTargets[ i ] ) )
+					{
+						TRACE( _T("Found process: %s (PID: %d)\n"), szProcessName, pe32.th32ProcessID );
+
+						if ( RunAsProcess( pe32.th32ProcessID ) )
+						{
+							CloseHandle( hProcessSnap );
+							return TRUE;
+						}
+					}
+				}
+				while ( Process32Next( hProcessSnap, &pe32 ) );
+			}
+			else
+				TRACE( _T("Process32First error: %u\n"), GetLastError() );
+		}
 		CloseHandle( hProcessSnap );
 	}
 	else
@@ -863,6 +875,35 @@ void CUSBOblivionDlg::Run()
 
 	Log( m_bEnable ? IDS_MODE_WORK : IDS_MODE_SIM );
 
+	VERIFY( InitializeCOMSecurity() );
+
+	// Creation of System Restore Point
+	RESTOREPOINTINFOW RestorePtInfo = {};
+	RestorePtInfo.dwRestorePtType = DEVICE_DRIVER_INSTALL;
+	wcscpy_s( RestorePtInfo.szDescription, AfxGetAppName() );
+	RestorePtInfo.dwEventType = BEGIN_SYSTEM_CHANGE;
+	STATEMGRSTATUS SMgrStatus = { ERROR_SERVICE_DISABLED };
+	if ( m_fnSRSetRestorePointW && m_bRestorePoint && m_bEnable )
+	{
+		Log( IDS_RESTORE_POINT );
+
+		if ( m_fnSRSetRestorePointW( &RestorePtInfo, &SMgrStatus ) )
+		{
+			TRACE( "Restore point created; number=%I64d.\n", SMgrStatus.llSequenceNumber );
+		}
+		else if ( SMgrStatus.nStatus == ERROR_SERVICE_DISABLED )
+		{
+			CString sError = _T("System Restore is turned off");
+			Log( sError, Warning );
+		}
+		else
+		{
+			CString sError;
+			sError.Format( _T("Failure to create the System Restore Point: %u"), SMgrStatus.nStatus );
+			Log( sError, Error );
+		}
+	}
+
 	// Сбор данных о дисках с попыткой извлечения
 	DWORD nDrives = GetLogicalDrives();
 	CString drives;
@@ -905,6 +946,7 @@ void CUSBOblivionDlg::Run()
 
 	Log( IDS_RUN_LOGS, Search );
 
+	//DoDeleteLog( L"Microsoft-Windows-DriverFrameworks-UserMode" );
 	DoDeleteLog( L"HardwareEvents" );
 	DoDeleteLog( L"Application" );
 	DoDeleteLog( L"Security" );
@@ -1536,6 +1578,22 @@ void CUSBOblivionDlg::Run()
 			oVolumes.RemoveAt( posCurrentVolumes );
 		}
 	}
+
+	// System REstore Point creation
+	RestorePtInfo.dwEventType = END_SYSTEM_CHANGE;
+	if ( m_fnSRSetRestorePointW && SMgrStatus.nStatus == ERROR_SUCCESS )
+	{
+		if ( m_fnSRSetRestorePointW( &RestorePtInfo, &SMgrStatus ) )
+		{
+			TRACE( "Restore point created.\n" );
+		}
+		else
+		{
+			CString sError;
+			sError.Format( _T("Failure to create the System Restore Point: %u"), SMgrStatus.nStatus );
+			Log( sError, Error );
+		}
+	}
 }
 
 void CUSBOblivionDlg::DoDeleteFile(LPCTSTR szPath)
@@ -1553,7 +1611,7 @@ void CUSBOblivionDlg::DoDeleteFile(LPCTSTR szPath)
 			{
 				if ( MoveFileEx( sLongPath, NULL, MOVEFILE_DELAY_UNTIL_REBOOT ) )
 				{
-					Log( LoadString( IDS_DELETE_FILE_BOOT ) + szPath, Clean );
+					Log( LoadString( IDS_DELETE_FILE_BOOT ) + szPath, Warning );
 				}
 				else
 				{
@@ -1575,13 +1633,33 @@ void CUSBOblivionDlg::DoDeleteLog(LPCTSTR szName)
 		DWORD dwCount = 0;
 		if ( GetNumberOfEventLogRecords( hLog, &dwCount ) && dwCount > 1 )
 		{
-			Log( LoadString( IDS_RUN_LOG ) + szName, Clean );
 			if ( m_bEnable )
 			{
-				ClearEventLog( hLog, NULL );
+				if ( ClearEventLog( hLog, NULL ) )
+				{
+					Log( LoadString( IDS_RUN_LOG ) + szName, Clean );
+				}
+				else
+				{
+					const DWORD dwErr = GetLastError();
+					CString sError;
+					sError.Format( _T("%s %s (Error %u)"), LoadString( IDS_RUN_LOG_ERROR ), szName, dwErr );
+					Log( sError, Error );
+				}
+			}
+			else
+			{
+				Log( LoadString( IDS_RUN_LOG ) + szName, Clean );
 			}
 		}
 		CloseEventLog( hLog );
+	}
+	else
+	{
+		const DWORD dwErr = GetLastError();
+		CString sError;
+		sError.Format( _T("%s %s (Error %u)"), LoadString( IDS_RUN_LOG_ERROR ), szName, dwErr );
+		Log( sError, Error );
 	}
 }
 

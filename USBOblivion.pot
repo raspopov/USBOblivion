@@ -9,7 +9,6 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
 
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
@@ -206,3 +205,12 @@ msgstr ""
 #: STRING.166
 msgid "Removing file at boot-time:"
 msgstr ""
+
+#: STRING.167
+msgid "Journal cleanup error:"
+msgstr ""
+
+#: STRING.168
+msgid "Creating System Restore Point..."
+msgstr ""
+

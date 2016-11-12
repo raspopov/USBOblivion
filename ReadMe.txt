@@ -11,17 +11,31 @@ USB Oblivion utility designed to erase all traces of USB-connected drives and CD
 
 Usage:
 
-	USBOblivion[32|64].exe [params]
+	USBOblivion[32|64].exe [command-line options]
 
-Params:
-
-	-enable - Do real clean (simulation otherwise);
-	-auto - Automatic run;
-	-nosave - Don't save backup .reg-file;
-	-lang:XX - Use language XX (hex-code);
-	-silent - Hidden mode (if possible);
-	-? - Show this help.
+	Command-line options:
 	
+		Do real clean (simulation otherwise):
+			-enable
+	
+		Automatic run:
+			-auto
+	
+		Don't save a backup .reg-file:
+			-nosave
+	
+		Don't create a System Restore Point:
+			-norestorepoint
+	
+		Use language XX (hex-code):
+			-lang:XX
+	
+		Hidden mode (if possible):
+			-silent
+	
+		Show this help:
+			-?
+
 ========================================================================
 
 Languages:
@@ -50,7 +64,22 @@ System Requirements:
 
 Changes:
 
-  * Added German translation (by Kristine Baumgart)
+1.11.0.0
+
+	* Added Windows 10 support
+	* Added cleaning of "Enum\SWD\WPDBUSENUM"
+	* Added file deletion on reboot (and 2 strings for translation)
+	* Added creation of System Restore Point
+	* Added VS2015 compilation
+	* Fixed registry backup compatibility
+	* Fixed cleaning of "DeviceContainers"
+	* Fixed too aggressive cleaning of "usbflags"
+
+1.10.3.0
+
+	* Added German translation (by Kristine Baumgart)
+	* Project moved from closed Google Code to SourceForge.Net
+	* Added VS2013 compilation
 
 ========================================================================
 

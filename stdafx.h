@@ -1,7 +1,7 @@
 //
 // stdafx.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2015.
+// Copyright (c) Nikolay Raspopov, 2009-2016.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -27,7 +27,10 @@
 #define _SECURE_ATL 1
 #endif
 
-#define VC_EXTRALEAN
+#ifndef VC_EXTRALEAN
+#define VC_EXTRALEAN            // Exclude rarely-used stuff from Windows headers
+#endif
+
 #define WIN32_LEAN_AND_MEAN
 
 #include "targetver.h"
@@ -48,6 +51,7 @@
 #include <setupapi.h>
 #include <winioctl.h>
 #include <cfgmgr32.h>
+#include <SRRestorePtAPI.h>
 
 #ifndef BCM_FIRST
 #define BCM_FIRST 0x1600
@@ -61,9 +65,6 @@
 #define LVS_EX_DOUBLEBUFFER 0x00010000
 #endif
 
-#include "thread.h"
-#include "Localization\Localization.h"
-
 #ifdef _UNICODE
 #if defined _M_IX86
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='x86' publicKeyToken='6595b64144ccf1df' language='*'\"")
@@ -75,27 +76,3 @@
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
 #endif
 #endif
-
-
-// Сравнение строк без учёта регистра и локали
-bool CmpStrI(LPCTSTR szLeft, LPCTSTR szRight, int nCount = -1);
-
-// Проверка наличия строки в списке строк
-bool IfNotExist(const CStringList& lst, const CString& str);
-
-// Добавление строки в список строк без дубликатов
-void AddUnique(CStringList& lst, CString str);
-
-// Определение наличия административных прав своего процесса
-BOOL IsRunAsAdmin();
-
-// Определение наличия повышенных прав (UAC) своего процесса
-BOOL IsProcessElevated();
-
-// Открытие токена процесса с гарантированными правами
-HANDLE OpenProcessToken(HANDLE hProcess, DWORD dwAccess);
-
-// Возвращает хэндлер дискового устройства по его номеру (Uwe Sieber - www.uwe-sieber.de)
-DEVINST GetDrivesDevInstByDeviceNumber(DWORD DeviceNumber, UINT DriveType, LPCTSTR szDosDeviceName);
-
-using namespace c4u;
