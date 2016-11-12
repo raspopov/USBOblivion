@@ -64,22 +64,42 @@ System Requirements:
 
 Changes:
 
-1.11.0.0
+1.11.0.0 (11 Oct 2016)
 
 	* Added Windows 10 support
-	* Added cleaning of "Enum\SWD\WPDBUSENUM"
-	* Added file deletion on reboot (and 2 strings for translation)
-	* Added creation of System Restore Point
+	* Added "Microsoft-Windows-DriverFrameworks-UserMode/Operational" journal cleanup
+	* Added "Enum\SWD\WPDBUSENUM" registry key cleanup
+	* Added file deletion on reboot
+	* Added creation of System Restore Point (and "-norestorepoint" command-line option)
 	* Added VS2015 compilation
-	* Fixed registry backup compatibility
-	* Fixed cleaning of "DeviceContainers"
-	* Fixed too aggressive cleaning of "usbflags"
+	* Fixed registry backup
+	* Fixed "DeviceContainers" registry key cleanup
+	* Fixed too aggressive cleaning of "usbflags" registry key
+	* Translations must be updated
 
-1.10.3.0
+1.10.3.0 (13 Apr 2015)
 
 	* Added German translation (by Kristine Baumgart)
 	* Project moved from closed Google Code to SourceForge.Net
 	* Added VS2013 compilation
+
+========================================================================
+
+More cleanup methods:
+
+	USN Journal:
+
+		Some traces can be left inside NTFS file system itself in form of "USN Journal" (Update Sequence Number Journal), or "Change Journal". It is possible to delete this journal by using standard Microsoft utility FSUTIL.EXE.
+
+		Caution:
+			Deleting the journal impacts the Indexing Service, File Replication Service (FRS), Remote Installation Service (RIS), and Remote Storage, because it would require these services to perform a complete (and time-consuming) scan of the volume. This in turn negatively impacts FRS SYSVOL replication and replication between DFS link alternates while the volume is being rescanned.
+			Deleting or disabling an active journal is very time consuming, because the system must access all the records in the master file table (MFT) and set the last USN attribute to zero. This process can take several minutes, and can continue after the system restarts, if necessary. During this process, the change journal is not considered active, nor is it disabled. While the system is disabling the journal, it cannot be accessed, and all journal operations return errors. You should use extreme care when disabling an active journal, because it adversely affects other applications using the journal.
+
+		For example to clear disk "C:" journal you can use next command line:
+
+			fsutil usn deletejournal C:
+
+		More info here: https://technet.microsoft.com/en-us/library/cc788042(v=ws.11).aspx
 
 ========================================================================
 
