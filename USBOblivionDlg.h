@@ -72,9 +72,11 @@ public:
 	BOOL		m_bEnable;		// -enable			- Рабочий режим очистки, иначе симуляция
 	BOOL		m_bAuto;		// -auto			- Автоматический запуск
 	BOOL		m_bSave;		// -nosave			- Отмена сохранения .reg-файла (инверсия)
+	CString		m_sSave;		// -save:			- Save-file
 	BOOL		m_bRestorePoint;// -norestorepoint	- Disable creation of System Restore Point
 	BOOL		m_bElevation;	// -elevation		- Режим с повышенными правами
 	BOOL		m_bSilent;		// -silent			- Тихий режим (работает только в автоматическом режиме)
+	CString		m_sLog;			// -log:			- Log-file
 
 	virtual INT_PTR DoModal();
 

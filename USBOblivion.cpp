@@ -60,7 +60,7 @@ BOOL CUSBOblivionApp::InitInstance()
 	LPWSTR* szArglist = CommandLineToArgvW( GetCommandLineW(), &nArgs );
 	if ( szArglist )
 	{
-		for( int i = 0; i < nArgs; ++i )
+		for( int i = 1; i < nArgs; ++i )
 		{
 			if ( CmpStrI( szArglist[ i ], _T("-?") ) || CmpStrI( szArglist[ i ], _T("/?") ) )
 			{
@@ -80,7 +80,8 @@ BOOL CUSBOblivionApp::InitInstance()
 			}
 			else if ( CmpStrI( szArglist[ i ], _T("-nosave") ) || CmpStrI( szArglist[ i ], _T("/nosave") ) )
 			{
-				dlg.m_bSave = FALSE;
+				if ( dlg.m_sSave.IsEmpty() )
+					dlg.m_bSave = FALSE;
 			}
 			else if ( CmpStrI( szArglist[ i ], _T("-elevation") ) || CmpStrI( szArglist[ i ], _T("/elevation") ) )
 			{
@@ -97,6 +98,18 @@ BOOL CUSBOblivionApp::InitInstance()
 				{
 					nLang = (LANGID)lang;
 				}
+			}
+			else if ( CmpStrI( szArglist[ i ], _T("-log:"), 5 ) || CmpStrI( szArglist[ i ], _T("/log:"), 5 ) )
+			{
+				dlg.m_sLog = szArglist[ i ] + 5;
+				dlg.m_sLog.Trim( _T(" \t\r\n\"") );
+			}
+			else if ( CmpStrI( szArglist[ i ], _T("-save:"), 6 ) || CmpStrI( szArglist[ i ], _T("/save:"), 6 ) )
+			{
+				dlg.m_sSave = szArglist[ i ] + 6;
+				dlg.m_sSave.Trim( _T(" \t\r\n\"") );
+				if ( ! dlg.m_sSave.IsEmpty() )
+					dlg.m_bSave = TRUE;
 			}
 		}
 	}

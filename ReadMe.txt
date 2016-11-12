@@ -21,8 +21,14 @@ Usage:
 		Automatic run:
 			-auto
 	
-		Don't save a backup .reg-file:
+		Don't save a registry backup file (default: save it):
 			-nosave
+
+		Save a registry backup to this file (default: save it to My Documents):
+			-save:filename
+
+		Save working log to this file:
+			-log:filename
 	
 		Don't create a System Restore Point:
 			-norestorepoint
@@ -71,6 +77,8 @@ Changes:
 	* Added "Enum\SWD\WPDBUSENUM" registry key cleanup
 	* Added file deletion on reboot
 	* Added creation of System Restore Point (and "-norestorepoint" command-line option)
+	* Added "-log" command-line option
+	* Added "-save" command-line option
 	* Added VS2015 compilation
 	* Fixed registry backup
 	* Fixed "DeviceContainers" registry key cleanup

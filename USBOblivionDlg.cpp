@@ -413,27 +413,29 @@ bool CUSBOblivionDlg::PrepareBackup()
 	if ( ! m_bSave )
 		return true;
 
-	CString sComputer;
-	DWORD dwComputerLen = MAX_PATH;
-	GetComputerName( sComputer.GetBuffer( MAX_PATH + 1 ), &dwComputerLen );
-	sComputer.ReleaseBuffer();
+	CString sPath = m_sSave;
 
-	CString sLogFolder;
-	SHGetFolderPath( GetSafeHwnd(), CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT,
-		sLogFolder.GetBuffer( MAX_PATH + 1 ) );
-	sLogFolder.ReleaseBuffer();
-	sLogFolder.TrimRight( _T("\\") );
+	if ( sPath.IsEmpty() )
+	{
+		CString sComputer;
+		DWORD dwComputerLen = MAX_PATH;
+		GetComputerName( sComputer.GetBuffer( MAX_PATH + 1 ), &dwComputerLen );
+		sComputer.ReleaseBuffer();
 
-	CTime oTime = CTime::GetCurrentTime();
-	CString sPath;
-	sPath.Format(
-#ifdef WIN64
-		_T("%s\\USBOblivion-64-%s-%s.reg"),
-#else
-		_T("%s\\USBOblivion-32-%s-%s.reg"),
-#endif
-		(LPCTSTR)sLogFolder, (LPCTSTR)sComputer,
-		(LPCTSTR)oTime.Format( _T("%y%m%d-%H%M%S") ) );
+		CString sLogFolder;
+		SHGetFolderPath( GetSafeHwnd(), CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT,
+			sLogFolder.GetBuffer( MAX_PATH + 1 ) );
+		sLogFolder.ReleaseBuffer();
+		sLogFolder.TrimRight( _T("\\") );
+
+		sPath.Format(
+	#ifdef WIN64
+			_T("%s\\USBOblivion-64-%s-%s.reg"),
+	#else
+			_T("%s\\USBOblivion-32-%s-%s.reg"),
+	#endif
+			(LPCTSTR)sLogFolder, (LPCTSTR)sComputer, (LPCTSTR)CTime::GetCurrentTime().Format( _T("%y%m%d-%H%M%S") ) );
+	}
 
 	if ( ! m_oFile.Open( sPath, CFile::modeCreate | CFile::modeWrite ) )
 	{
@@ -580,6 +582,27 @@ void CUSBOblivionDlg::Log(const CString& sText, UINT nType)
 	locker_holder oLock( &m_pSection );
 
 	m_pReportList->AddTail( new CLogItem( sText, nType ) );
+
+	if ( ! m_sLog.IsEmpty() )
+	{
+		TRY
+
+			CFile file( m_sLog, CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite | CFile::shareDenyNone );
+
+			file.SeekToEnd();
+
+			if ( file.GetLength() == 0 )
+				file.Write( _T("\xfeff"), 2 );
+			
+			file.Write( sText, (UINT)( sText.GetLength() * sizeof( TCHAR ) ) );
+			file.Write( _T("\r\n"), (UINT)( 2 * sizeof( TCHAR ) ) );
+
+		CATCH_ALL(e)
+
+			e->Delete();
+
+		END_CATCH_ALL
+	}
 }
 
 void CUSBOblivionDlg::Write(LPCTSTR szText)
