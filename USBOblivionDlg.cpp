@@ -946,11 +946,11 @@ void CUSBOblivionDlg::Run()
 
 	Log( IDS_RUN_LOGS, Search );
 
-	//DoDeleteLog( L"Microsoft-Windows-DriverFrameworks-UserMode" );
-	DoDeleteLog( L"HardwareEvents" );
-	DoDeleteLog( L"Application" );
-	DoDeleteLog( L"Security" );
-	DoDeleteLog( L"System" );
+	const LPCTSTR szLogs[] = { _T("Microsoft-Windows-DriverFrameworks-UserMode/Operational"), _T("HardwareEvents"), _T("Application"), _T("Security"), _T("System") };
+	for ( int i = 0; i < _countof( szLogs ); ++i )
+	{
+		DoDeleteLog( szLogs[ i ] );
+	}
 
 	//////////////////////////////////////////////////////////////////////
 	// Чистка реестра
@@ -1628,12 +1628,28 @@ void CUSBOblivionDlg::DoDeleteFile(LPCTSTR szPath)
 
 void CUSBOblivionDlg::DoDeleteLog(LPCTSTR szName)
 {
-	if ( HANDLE hLog = OpenEventLog( NULL, szName ) )
+	if ( m_bEnable )
 	{
-		DWORD dwCount = 0;
-		if ( GetNumberOfEventLogRecords( hLog, &dwCount ) && dwCount > 1 )
+		// Using external utility - https://technet.microsoft.com/en-us/library/cc732848(v=ws.11).aspx
+		CString sCmd;
+		sCmd.Format( _T("wevtutil.exe cl %s"), szName );
+		STARTUPINFO si = {};
+		PROCESS_INFORMATION pi = {};
+		if ( CreateProcess( NULL, (LPTSTR)(LPCTSTR)sCmd, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi ) )
 		{
-			if ( m_bEnable )
+			// Wait until child process exits
+			WaitForSingleObject( pi.hProcess, INFINITE );
+
+			// Close process and thread handles
+			CloseHandle( pi.hProcess );
+			CloseHandle( pi.hThread );
+		}
+
+		// Using API
+		if ( HANDLE hLog = OpenEventLog( NULL, szName ) )
+		{
+			DWORD dwCount = 0;
+			if ( GetNumberOfEventLogRecords( hLog, &dwCount ) && dwCount > 1 )
 			{
 				if ( ClearEventLog( hLog, NULL ) )
 				{
@@ -1647,19 +1663,19 @@ void CUSBOblivionDlg::DoDeleteLog(LPCTSTR szName)
 					Log( sError, Error );
 				}
 			}
-			else
-			{
-				Log( LoadString( IDS_RUN_LOG ) + szName, Clean );
-			}
+			CloseEventLog( hLog );
 		}
-		CloseEventLog( hLog );
+		else
+		{
+			const DWORD dwErr = GetLastError();
+			CString sError;
+			sError.Format( _T("%s %s (Error %u)"), LoadString( IDS_RUN_LOG_ERROR ), szName, dwErr );
+			Log( sError, Error );
+		}
 	}
 	else
 	{
-		const DWORD dwErr = GetLastError();
-		CString sError;
-		sError.Format( _T("%s %s (Error %u)"), LoadString( IDS_RUN_LOG_ERROR ), szName, dwErr );
-		Log( sError, Error );
+		Log( LoadString( IDS_RUN_LOG ) + szName, Clean );
 	}
 }
 
