@@ -51,7 +51,7 @@ Languages:
 	-lang:09 - English (by Nikolay Raspopov)
 	-lang:0a - Spanish (by CesarRG)
 	-lang:0c - French (by Mathieu Bergounioux)
-	-lang:10 - Italian (by Marcello)
+	-lang:10 - Italian (by Marcello Gianola)
 	-lang:12 - Korean (by 4Li)
 	-lang:15 - Polish (by dmocha)
 	-lang:16 - Brazilian Portuguese (by Paulo Guzmán)
@@ -69,6 +69,10 @@ System Requirements:
 ========================================================================
 
 Changes:
+
+1.11.1.0
+
+	* Updated Italian translation (by Marcello Gianola)
 
 1.11.0.0 (11 Oct 2016)
 
