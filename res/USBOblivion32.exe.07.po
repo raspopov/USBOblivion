@@ -9,50 +9,41 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.8.11\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. Menu popup
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Context"
-
-#. Menu item
-#: MENUITEM.130.32771
-msgid "Copy"
-msgstr "Kopieren"
-
-#. Menu item
-#: MENUITEM.130.32772
-msgid "Copy all"
-msgstr "Alle kopieren"
-
-#. Dialog caption
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
 msgstr "USBOblivion"
 
-#. Dialog control
 #: DIALOGCONTROL.102.Button.1
 msgid "Clean"
 msgstr "Reinigung"
 
-#. Dialog control
-#: DIALOGCONTROL.102.Button.2
-msgid "Exit"
-msgstr "Beenden"
-
-#. Dialog control
 #: DIALOGCONTROL.102.Button.1002
 msgid "Do real clean (simulation otherwise)"
 msgstr "Wirkliches Säubern (im Gegensatz zur Simulation)"
 
-#. Dialog control
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr "Sicherungsdatei als *reg-Datei speichern"
 
-#. String resource
+#: DIALOGCONTROL.102.Button.2
+msgid "Exit"
+msgstr "Beenden"
+
+#: MENUITEM.130.32771
+msgid "Copy"
+msgstr "Kopieren"
+
+#: MENUITEM.130.32772
+msgid "Copy all"
+msgstr "Alle kopieren"
+
+#: MENUPOPUP.130.0
+msgid "Context"
+msgstr "Context"
+
 #: STRING.129
 msgid ""
 "Usage:\n"
@@ -63,184 +54,182 @@ msgid ""
 "\n"
 "-enable - Do real clean (simulation otherwise);\n"
 "-auto - Automatic run;\n"
-"-nosave - Don't save backup .reg-file;\n"
+"-nosave - Don't save a registry backup file;\n"
+"-save:filename - Save a registry backup to this file;\n"
+"-log:filename - Save working log to this file;\n"
+"-norestorepoint - Don't create a System Restore Point;\n"
 "-lang:XX - Use language XX (hex-code);\n"
 "-silent - Hidden mode (if possible);\n"
 "-? - Show this help.\n"
-msgstr "Benutzung: \ n \ nUSBOblivion [32 | 64] .exe [params] \ n \ nParams: \ n \ n-enable - Wirkliches Säubern (sonst Simulation), \ n-auto - Automatischer Ablauf; \ n-nosave - Don &#39;t speichern Backup REG-Datei; \ n-lang: XX - Verwenden Sie die Sprache XX (Hex-Code), \ n-silent - Versteckter Modus (wenn möglich); \ n-? - Zeigen Sie diese Hilfe. \ N"
+msgstr ""
+"Benutzung:\n"
+"\n"
+"USBOblivion [32 | 64] .exe [params]\n"
+" \n"
+"Params:\n"
+"\n"
+"-enable - Wirkliches Säubern (sonst Simulation),\n"
+"-auto - Automatischer Ablauf;\n"
+"-nosave - Don't speichern Backup REG-Datei;\n"
+"-save:filename - Save a registry backup to this file;\n"
+"-log:filename - Save working log to this file;\n"
+"-norestorepoint - Don't create a System Restore Point;\n"
+"-lang: XX - Verwenden Sie die Sprache XX (Hex-Code),\n"
+"-silent - Versteckter Modus (wenn möglich);\n"
+"-? - Zeigen Sie diese Hilfe.\n"
 
-#. String resource
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "WARNUNG! Entfernen Sie bitte alle Flash-Laufwerke vor der Reinigen."
 
-#. String resource
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
 msgstr "Drücken Sie auf die \"Reinigung\" Taste, um mit der Reinigung zu beginnen."
 
-#. String resource
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
 msgstr "Prozessmodus: reales Löschen (Daten werden bereinigt)."
 
-#. String resource
 #: STRING.133
 msgid "Process mode: simulation (no data will be cleaned)."
 msgstr "Prozessmodus: Simulation (keine Daten werden bereinigt)."
 
-#. String resource
 #: STRING.134
 msgid "File creation error: "
 msgstr "Fehler bei der Erstellung der Datei:"
 
-#. String resource
 #: STRING.135
 msgid "File write error: "
 msgstr "Fehler beim Schreiben der Datei:"
 
-#. String resource
 #: STRING.136
 msgid "Backup file: "
 msgstr "Sicherungsdatei:"
 
-#. String resource
 #: STRING.137
 msgid "Done."
 msgstr "Fertig."
 
-#. String resource
 #: STRING.138
 msgid "Gathering data from system registry..."
 msgstr "Sammeln von Daten aus der Systemregistrierung..."
 
-#. String resource
 #: STRING.139
 msgid "Found drives (will be ignored): "
 msgstr "Gefundene Laufwerke (wird ignoriert):"
 
-#. String resource
 #: STRING.140
 msgid "Cleaning..."
 msgstr "Reinigen..."
 
-#. String resource
 #: STRING.141
 msgid "Removing key: "
 msgstr "Schlüssel entfernt:"
 
-#. String resource
 #: STRING.142
 msgid "Removing value: "
 msgstr "Wert entfernen:"
 
-#. String resource
 #: STRING.143
 msgid "Gathering user data..."
 msgstr "Sammeln von Benutzerdaten..."
 
-#. String resource
 #: STRING.144
 msgid "Gathering data about user: "
 msgstr "Sammeln von Daten über Benutzer:"
 
-#. String resource
 #: STRING.145
 msgid "Found users: "
 msgstr "Gefundene Nutzer:"
 
-#. String resource
 #: STRING.146
 msgid "Found mount points: "
 msgstr "Gefundene Einhängepunkte:"
 
-#. String resource
 #: STRING.147
 msgid "Found Explorer drives: "
 msgstr "Gefundene Explorer Laufwerke:"
 
-#. String resource
 #: STRING.148
 msgid "Remove error: "
 msgstr "Fehler entfernen:"
 
-#. String resource
 #: STRING.149
 msgid "Gathering mount point's data..."
 msgstr "Sammeln von Einhängepunkt-Daten..."
 
-#. String resource
 #: STRING.150
 msgid "Found ControlSets: "
 msgstr "ControlSets gefunden:"
 
-#. String resource
 #: STRING.151
 msgid "Found keys: "
 msgstr "Gefundene Schlüssel:"
 
-#. String resource
 #: STRING.152
 msgid "Found values: "
 msgstr "Gefundene Werte:"
 
-#. String resource
 #: STRING.153
 msgid "Key access denied: "
 msgstr "Zugriff auf Schlüssel verweigert:"
 
-#. String resource
 #: STRING.154
 msgid "Disk %c: has been inserted."
 msgstr "Disk %c: wurde eingelegt."
 
-#. String resource
 #: STRING.155
 msgid "Logged-in under system account successfully."
 msgstr "Erfolgreich unter dem Systemkonto eingeloggt."
 
-#. String resource
 #: STRING.156
 msgid "Failed to login under system account."
 msgstr "Einloggen unter dem Systemkonto fehlgeschlagen."
 
-#. String resource
 #: STRING.157
 msgid "Re-starting under administrator..."
 msgstr "Neustart unter Administrator..."
 
-#. String resource
 #: STRING.158
 msgid "Disk %c: has been ejected."
 msgstr "Disk %c: wurde ausgeforfen."
 
-#. String resource
 #: STRING.159
 msgid "Failed to eject disk %c:."
 msgstr "Auswerfen der Disk %c: ist fehlgeschlagen."
 
-#. String resource
 #: STRING.160
 msgid "Ejecting disk %c:..."
 msgstr "Auswerfen der Disc % c:..."
 
-#. String resource
 #: STRING.161
 msgid "Removing file: "
 msgstr "Dateien entfernen:"
 
-#. String resource
 #: STRING.162
 msgid "Gathering file data..."
 msgstr "Sammeln von Dateidaten..."
 
-#. String resource
 #: STRING.163
 msgid "Cleaning journal: "
 msgstr "Protokoll reinigen:"
 
-#. String resource
 #: STRING.164
 msgid "Gathering journal data..."
 msgstr "Sammeln der Protokolldaten..."
 
+#: STRING.165
+msgid "File removal error:"
+msgstr ""
+
+#: STRING.166
+msgid "Removing file at boot-time:"
+msgstr ""
+
+#: STRING.167
+msgid "Journal cleanup error:"
+msgstr ""
+
+#: STRING.168
+msgid "Creating System Restore Point..."
+msgstr ""

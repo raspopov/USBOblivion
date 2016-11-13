@@ -9,49 +9,40 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"X-Generator: Poedit 1.8.11\n"
 
-#. Menu popup
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Kontext"
-
-#. Menu item
-#: MENUITEM.130.32771
-msgid "Copy"
-msgstr "Kopiera"
-
-#. Menu item
-#: MENUITEM.130.32772
-msgid "Copy all"
-msgstr "Kopiera alla"
-
-#. Dialog caption
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
 msgstr "USBOblivion"
 
-#. Dialog control
 #: DIALOGCONTROL.102.Button.1
 msgid "Clean"
 msgstr "Rensa"
 
-#. Dialog control
-#: DIALOGCONTROL.102.Button.2
-msgid "Exit"
-msgstr "Avsluta"
-
-#. Dialog control
 #: DIALOGCONTROL.102.Button.1002
 msgid "Do real clean (simulation otherwise)"
 msgstr "Rensa på riktigt (annars simulering)"
 
-#. Dialog control
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr "Spara säkerhetskopia (.reg-fil)"
 
-#. String resource
+#: DIALOGCONTROL.102.Button.2
+msgid "Exit"
+msgstr "Avsluta"
+
+#: MENUITEM.130.32771
+msgid "Copy"
+msgstr "Kopiera"
+
+#: MENUITEM.130.32772
+msgid "Copy all"
+msgstr "Kopiera alla"
+
+#: MENUPOPUP.130.0
+msgid "Context"
+msgstr "Kontext"
+
 #: STRING.129
 msgid ""
 "Usage:\n"
@@ -62,7 +53,10 @@ msgid ""
 "\n"
 "-enable - Do real clean (simulation otherwise);\n"
 "-auto - Automatic run;\n"
-"-nosave - Don't save backup .reg-file;\n"
+"-nosave - Don't save a registry backup file;\n"
+"-save:filename - Save a registry backup to this file;\n"
+"-log:filename - Save working log to this file;\n"
+"-norestorepoint - Don't create a System Restore Point;\n"
 "-lang:XX - Use language XX (hex-code);\n"
 "-silent - Hidden mode (if possible);\n"
 "-? - Show this help.\n"
@@ -76,181 +70,165 @@ msgstr ""
 "-enable - Utför skarp rensning (annars simulering);\n"
 "-auto - Kör automatiskt;\n"
 "-nosave - Spara ingen säkerhetskopia (.reg-fil);\n"
+"-save:filename - Save a registry backup to this file;\n"
+"-log:filename - Save working log to this file;\n"
+"-norestorepoint - Don't create a System Restore Point;\n"
 "-lang:XX - Användarspråk XX (hex-kod);\n"
 "-silent - Dolt läge (om möjligt);\n"
 "-? - Visa denna hjälp.\n"
 
-#. String resource
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "Varning! Mata ut alla flash-enheter före rensning!"
 
-#. String resource
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
 msgstr "Tryck \"Rensa\" för att påbörja radering."
 
-#. String resource
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
 msgstr "Processläge: Skarpt (data kommer att rensas)."
 
-#. String resource
 #: STRING.133
 msgid "Process mode: simulation (no data will be cleaned)."
 msgstr "Processläge: Simulering (ingen data rensas)."
 
-#. String resource
 #: STRING.134
 msgid "File creation error: "
 msgstr "Fel vid filskapande: "
 
-#. String resource
 #: STRING.135
 msgid "File write error: "
 msgstr "Skrivfel: "
 
-#. String resource
 #: STRING.136
 msgid "Backup file: "
 msgstr "Säkerhetskopia: "
 
-#. String resource
 #: STRING.137
 msgid "Done."
 msgstr "Klar."
 
-#. String resource
 #: STRING.138
 msgid "Gathering data from system registry..."
 msgstr "Samlar in data från registret..."
 
-#. String resource
 #: STRING.139
 msgid "Found drives (will be ignored): "
 msgstr "Upptäckta diskenheter (undantas): "
 
-#. String resource
 #: STRING.140
 msgid "Cleaning..."
 msgstr "Rensar..."
 
-#. String resource
 #: STRING.141
 msgid "Removing key: "
 msgstr "Tar bort nyckel: "
 
-#. String resource
 #: STRING.142
 msgid "Removing value: "
 msgstr "Tar bort värde: "
 
-#. String resource
 #: STRING.143
 msgid "Gathering user data..."
 msgstr "Samlar in användardata..."
 
-#. String resource
 #: STRING.144
 msgid "Gathering data about user: "
 msgstr "Samlar in data om användare: "
 
-#. String resource
 #: STRING.145
 msgid "Found users: "
 msgstr "Hittade användare: "
 
-#. String resource
 #: STRING.146
 msgid "Found mount points: "
 msgstr "Hittade monteringspunkter: "
 
-#. String resource
 #: STRING.147
 msgid "Found Explorer drives: "
 msgstr "Hittade utforskarenheter: "
 
-#. String resource
 #: STRING.148
 msgid "Remove error: "
 msgstr "Borttagningsfel: "
 
-#. String resource
 #: STRING.149
 msgid "Gathering mount point's data..."
 msgstr "Samlar in data för monteringspunkter: "
 
-#. String resource
 #: STRING.150
 msgid "Found ControlSets: "
 msgstr "Hittade kontrolluppsättningar: "
 
-#. String resource
 #: STRING.151
 msgid "Found keys: "
 msgstr "Hittade nycklar: "
 
-#. String resource
 #: STRING.152
 msgid "Found values: "
 msgstr "Hittade värden: "
 
-#. String resource
 #: STRING.153
 msgid "Key access denied: "
 msgstr "Nekad nyckelåtkomst: "
 
-#. String resource
 #: STRING.154
 msgid "Disk %c: has been inserted."
 msgstr "Enhet %c: har anslutits."
 
-#. String resource
 #: STRING.155
 msgid "Logged-in under system account successfully."
 msgstr "Inloggad under systemkonto."
 
-#. String resource
 #: STRING.156
 msgid "Failed to login under system account."
 msgstr "Kunde inte logga in under systemkonto."
 
-#. String resource
 #: STRING.157
 msgid "Re-starting under administrator..."
 msgstr "Startar om som admininistratör..."
 
-#. String resource
 #: STRING.158
 msgid "Disk %c: has been ejected."
 msgstr "Enhet %c: har matats ut."
 
-#. String resource
 #: STRING.159
 msgid "Failed to eject disk %c:."
 msgstr "Kunde inte mata ut enhet %c:."
 
-#. String resource
 #: STRING.160
 msgid "Ejecting disk %c:..."
 msgstr "Matar ut enhet %c:..."
 
-#. String resource
 #: STRING.161
 msgid "Removing file: "
 msgstr "Tar bort fil: "
 
-#. String resource
 #: STRING.162
 msgid "Gathering file data..."
 msgstr "Samlar in fildata..."
 
-#. String resource
 #: STRING.163
 msgid "Cleaning journal: "
 msgstr "Rensar journal: "
 
-#. String resource
 #: STRING.164
 msgid "Gathering journal data..."
 msgstr "Samlar in journaldata..."
+
+#: STRING.165
+msgid "File removal error:"
+msgstr ""
+
+#: STRING.166
+msgid "Removing file at boot-time:"
+msgstr ""
+
+#: STRING.167
+msgid "Journal cleanup error:"
+msgstr ""
+
+#: STRING.168
+msgid "Creating System Restore Point..."
+msgstr ""

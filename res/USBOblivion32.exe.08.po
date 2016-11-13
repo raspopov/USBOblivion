@@ -9,51 +9,40 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.5\n"
-"X-Poedit-Language: Greek\n"
-"X-Poedit-Country: GREECE\n"
+"X-Generator: Poedit 1.8.11\n"
 
-#. Menu popup
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Πλαίσιο"
-
-#. Menu item
-#: MENUITEM.130.32771
-msgid "Copy"
-msgstr "Αντιγραφή"
-
-#. Menu item
-#: MENUITEM.130.32772
-msgid "Copy all"
-msgstr "Αντιγραφή όλων"
-
-#. Dialog caption
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
 msgstr "USBOblivion"
 
-#. Dialog control
 #: DIALOGCONTROL.102.Button.1
 msgid "Clean"
 msgstr "Εκκαθάριση"
 
-#. Dialog control
-#: DIALOGCONTROL.102.Button.2
-msgid "Exit"
-msgstr "Έξοδος"
-
-#. Dialog control
 #: DIALOGCONTROL.102.Button.1002
 msgid "Do real clean (simulation otherwise)"
 msgstr "Να γίνει πραγματική εκκαθάριση (ειδάλλως προσομοίωση)"
 
-#. Dialog control
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr "Αποθήκευση αντιγράφου ασφαλείας αρχείου .reg"
 
-#. String resource
+#: DIALOGCONTROL.102.Button.2
+msgid "Exit"
+msgstr "Έξοδος"
+
+#: MENUITEM.130.32771
+msgid "Copy"
+msgstr "Αντιγραφή"
+
+#: MENUITEM.130.32772
+msgid "Copy all"
+msgstr "Αντιγραφή όλων"
+
+#: MENUPOPUP.130.0
+msgid "Context"
+msgstr "Πλαίσιο"
+
 #: STRING.129
 msgid ""
 "Usage:\n"
@@ -64,7 +53,10 @@ msgid ""
 "\n"
 "-enable - Do real clean (simulation otherwise);\n"
 "-auto - Automatic run;\n"
-"-nosave - Don't save backup .reg-file;\n"
+"-nosave - Don't save a registry backup file;\n"
+"-save:filename - Save a registry backup to this file;\n"
+"-log:filename - Save working log to this file;\n"
+"-norestorepoint - Don't create a System Restore Point;\n"
 "-lang:XX - Use language XX (hex-code);\n"
 "-silent - Hidden mode (if possible);\n"
 "-? - Show this help.\n"
@@ -78,181 +70,167 @@ msgstr ""
 "-enable - Να γίνει πραγματική εκκαθάριση (ειδάλλως προσομοίωση)\n"
 "-auto - Αυτόματη εκτέλεση\n"
 "-nosave - Να μη γίνει αποθήκευση του αρχείου ασφαλείας .reg\n"
+"-save:filename - Save a registry backup to this file;\n"
+"-log:filename - Save working log to this file;\n"
+"-norestorepoint - Don't create a System Restore Point;\n"
 "-lang:XX - Χρήση γλώσσας XX (δεκαεξαδικός κωδικός)\n"
 "-silent -Κρυφή λειτουργία (εάν είναι δυνατή)\n"
 "-? - Εμφάνιση αυτής της βοήθειας\n"
 
-#. String resource
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
-msgstr "ΠΡΟΕΙΔΟΠΟΙΗΣΗ! Παρακαλούμε αποσυνδέστε όλες τις μονάδες αποθήκευσης flash, πριν τον καθαρισμό."
+msgstr ""
+"ΠΡΟΕΙΔΟΠΟΙΗΣΗ! Παρακαλούμε αποσυνδέστε όλες τις μονάδες αποθήκευσης flash, "
+"πριν τον καθαρισμό."
 
-#. String resource
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
 msgstr "Πατήστε το κουμπί \"Εκκαθάριση\" για έναρξη της εκκαθάρισης."
 
-#. String resource
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
 msgstr "Λειτουργία διαδικασίας: Πραγματική (τα δεδομένα θα καθαριστούν)."
 
-#. String resource
 #: STRING.133
 msgid "Process mode: simulation (no data will be cleaned)."
 msgstr "Λειτουργία διαδικασίας: Προσομοίωση (τα δεδομένα δεν θα καθαριστούν)."
 
-#. String resource
 #: STRING.134
 msgid "File creation error: "
 msgstr "Σφάλμα δημιουργίας αρχείου: "
 
-#. String resource
 #: STRING.135
 msgid "File write error: "
 msgstr "Σφάλμα εγγραφής στο αρχείο: "
 
-#. String resource
 #: STRING.136
 msgid "Backup file: "
 msgstr "Αντίγραφο ασφαλείας: "
 
-#. String resource
 #: STRING.137
 msgid "Done."
 msgstr "Ολοκληρώθηκε."
 
-#. String resource
 #: STRING.138
 msgid "Gathering data from system registry..."
 msgstr "Συλλογή δεδομένων από το μητρώο συστήματος..."
 
-#. String resource
 #: STRING.139
 msgid "Found drives (will be ignored): "
 msgstr "Δίσκοι που βρέθηκαν (θα αγνοηθούν): "
 
-#. String resource
 #: STRING.140
 msgid "Cleaning..."
 msgstr "Εκκαθάριση..."
 
-#. String resource
 #: STRING.141
 msgid "Removing key: "
 msgstr "Κατάργηση κλειδιού: "
 
-#. String resource
 #: STRING.142
 msgid "Removing value: "
 msgstr "Κατάργηση τιμής: "
 
-#. String resource
 #: STRING.143
 msgid "Gathering user data..."
 msgstr "Συλλογή δεδομένων χρήστη..."
 
-#. String resource
 #: STRING.144
 msgid "Gathering data about user: "
 msgstr "Συλλογή δεδομένων σχετικά με το χρήστη..."
 
-#. String resource
 #: STRING.145
 msgid "Found users: "
 msgstr "Χρήστες που βρέθηκαν: "
 
-#. String resource
 #: STRING.146
 msgid "Found mount points: "
 msgstr "Σημεία σύνδεσης που βρέθηκαν: "
 
-#. String resource
 #: STRING.147
 msgid "Found Explorer drives: "
 msgstr "Δίσκοι που βρέθηκαν στην Εξερεύνηση: "
 
-#. String resource
 #: STRING.148
 msgid "Remove error: "
 msgstr "Σφάλμα κατάργησης: "
 
-#. String resource
 #: STRING.149
 msgid "Gathering mount point's data..."
 msgstr "Συλλογή δεδομένων σημείων σύνδεσης..."
 
-#. String resource
 #: STRING.150
 msgid "Found ControlSets: "
 msgstr "ControlSets που βρέθηκαν: "
 
-#. String resource
 #: STRING.151
 msgid "Found keys: "
 msgstr "Κλειδιά που βρέθηκαν: "
 
-#. String resource
 #: STRING.152
 msgid "Found values: "
 msgstr "Τιμές που βρέθηκαν: "
 
-#. String resource
 #: STRING.153
 msgid "Key access denied: "
 msgstr "Δεν επιτρέπεται η πρόσβαση στο κλειδί: "
 
-#. String resource
 #: STRING.154
 msgid "Disk %c: has been inserted."
 msgstr "Δίσκος %c: Έχει εισαχθεί."
 
-#. String resource
 #: STRING.155
 msgid "Logged-in under system account successfully."
 msgstr "Η σύνδεση στο λογαριασμό συστήματος έγινε με επιτυχία."
 
-#. String resource
 #: STRING.156
 msgid "Failed to login under system account."
 msgstr "Αποτυχία σύνδεσης στο λογαριασμό συστήματος."
 
-#. String resource
 #: STRING.157
 msgid "Re-starting under administrator..."
 msgstr "Επανεκκίνηση με δικαιώματα διαχειριστή..."
 
-#. String resource
 #: STRING.158
 msgid "Disk %c: has been ejected."
 msgstr "Δίσκος %c: Έχει εξαχθεί."
 
-#. String resource
 #: STRING.159
 msgid "Failed to eject disk %c:."
 msgstr "Αποτυχία εξαγωγής του δίσκου %c:."
 
-#. String resource
 #: STRING.160
 msgid "Ejecting disk %c:..."
 msgstr "Εξαγωγή του δίσκου %c:..."
 
-#. String resource
 #: STRING.161
 msgid "Removing file: "
 msgstr "Κατάργηση αρχείου: "
 
-#. String resource
 #: STRING.162
 msgid "Gathering file data..."
 msgstr "Συλλογή δεδομένων αρχείου..."
 
-#. String resource
 #: STRING.163
 msgid "Cleaning journal: "
 msgstr "Εκκαθάριση ιστορικού: "
 
-#. String resource
 #: STRING.164
 msgid "Gathering journal data..."
 msgstr "Εκκαθάριση δεδομένων ιστορικού..."
+
+#: STRING.165
+msgid "File removal error:"
+msgstr ""
+
+#: STRING.166
+msgid "Removing file at boot-time:"
+msgstr ""
+
+#: STRING.167
+msgid "Journal cleanup error:"
+msgstr ""
+
+#: STRING.168
+msgid "Creating System Restore Point..."
+msgstr ""
