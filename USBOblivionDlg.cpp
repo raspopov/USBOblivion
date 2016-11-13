@@ -33,10 +33,31 @@
 void AFXAPI AfxHookWindowCreate(CWnd* pWnd);
 BOOL AFXAPI AfxUnhookWindowCreate();
 
-const LPCTSTR szSYS		= _T("SYSTEM");
-const LPCTSTR szMD		= _T("SYSTEM\\MountedDevices");
-const LPCTSTR szMP2		= _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2");
-const LPCTSTR szCPC		= _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume");
+// Files to delete
+const LPCTSTR szFiles[] =
+{
+	_T("%SystemRoot%\\setup*.log"),
+	_T("%SystemRoot%\\inf\\setupapi*.log"),
+	_T("%SystemRoot%\\inf\\INFCACHE.1"),
+	_T("%SystemRoot%\\System32\\wbem\\Logs\\wmiprov.log")
+};
+
+// Event logs to clear
+const LPCTSTR szLogs[] =
+{
+	_T("Microsoft-Windows-DriverFrameworks-UserMode/Operational"),
+	_T("HardwareEvents"),
+	_T("Application"),
+	_T("Security"),
+	_T("System")
+};
+
+const CString sSYS				= _T("SYSTEM");
+const CString sMD				= _T("SYSTEM\\MountedDevices");
+const CString sMP2				= _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2");
+const CString sCPC				= _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume");
+// Example: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Search\VolumeInfoCache\E:"
+const CString sVolumeInfoCache	= _T("SOFTWARE\\Microsoft\\Windows Search\\VolumeInfoCache");
 
 static const CKeyDef defs[] =
 {
@@ -586,7 +607,7 @@ void CUSBOblivionDlg::Log(const CString& sText, UINT nType)
 	if ( ! m_sLog.IsEmpty() )
 	{
 		TRY
-
+		{
 			CFile file( m_sLog, CFile::modeCreate | CFile::modeNoTruncate | CFile::modeWrite | CFile::shareDenyNone );
 
 			file.SeekToEnd();
@@ -596,11 +617,11 @@ void CUSBOblivionDlg::Log(const CString& sText, UINT nType)
 			
 			file.Write( sText, (UINT)( sText.GetLength() * sizeof( TCHAR ) ) );
 			file.Write( _T("\r\n"), (UINT)( 2 * sizeof( TCHAR ) ) );
-
+		}
 		CATCH_ALL(e)
-
-			e->Delete();
-
+		{
+			DELETE_EXCEPTION(e);
+		}
 		END_CATCH_ALL
 	}
 }
@@ -612,17 +633,17 @@ void CUSBOblivionDlg::Write(LPCTSTR szText)
 
 LPCTSTR CUSBOblivionDlg::GetKeyName(HKEY hRoot) const
 {
-	switch ( (DWORD_PTR)hRoot )
+	switch ( (ULONG_PTR)hRoot )
 	{
-	case HKEY_CLASSES_ROOT:
+	case (ULONG_PTR)HKEY_CLASSES_ROOT:
 		return _T("HKEY_CLASSES_ROOT");
-	case HKEY_CURRENT_USER:
+	case (ULONG_PTR)HKEY_CURRENT_USER:
 		return _T("HKEY_CURRENT_USER");
-	case HKEY_LOCAL_MACHINE:
+	case (ULONG_PTR)HKEY_LOCAL_MACHINE:
 		return _T("HKEY_LOCAL_MACHINE");
-	case HKEY_USERS:
+	case (ULONG_PTR)HKEY_USERS:
 		return _T("HKEY_USERS");
-	case HKEY_CURRENT_CONFIG:
+	case (ULONG_PTR)HKEY_CURRENT_CONFIG:
 		return _T("HKEY_CURRENT_CONFIG");
 	default:
 		ASSERT( FALSE );
@@ -632,8 +653,9 @@ LPCTSTR CUSBOblivionDlg::GetKeyName(HKEY hRoot) const
 
 LSTATUS CUSBOblivionDlg::RegOpenKeyFull(HKEY hKey, LPCTSTR lpSubKey, REGSAM samDesired, PHKEY phkResult)
 {
-	LSTATUS ret = RegOpenKeyEx( hKey, lpSubKey, 0, samDesired |
-		KEY_WOW64_32KEY | KEY_WOW64_64KEY, phkResult );
+	LSTATUS ret = RegOpenKeyEx( hKey, lpSubKey, 0, samDesired | KEY_WOW64_64KEY, phkResult );
+	if ( ret != ERROR_SUCCESS )
+		ret = RegOpenKeyEx( hKey, lpSubKey, 0, samDesired | KEY_WOW64_32KEY, phkResult );
 	if ( ret != ERROR_SUCCESS )
 		ret = RegOpenKeyEx( hKey, lpSubKey, 0, samDesired, phkResult );
 	if ( ret == ERROR_ACCESS_DENIED )
@@ -695,7 +717,9 @@ LSTATUS CUSBOblivionDlg::RegDeleteKeyFull(HKEY hKey, const CString& sSubKey)
 	{
 		if ( m_pRegDeleteKeyExW )
 		{
-			ret = m_pRegDeleteKeyExW( hKey, sSubKey, KEY_WOW64_32KEY | KEY_WOW64_64KEY, 0 );
+			ret = m_pRegDeleteKeyExW( hKey, sSubKey, KEY_WOW64_64KEY, 0 );
+			if ( ret != ERROR_SUCCESS )
+				ret = m_pRegDeleteKeyExW( hKey, sSubKey, KEY_WOW64_32KEY, 0 );
 			if ( ret != ERROR_SUCCESS )
 				ret = m_pRegDeleteKeyExW( hKey, sSubKey, 0, 0 );
 		}
@@ -954,22 +978,19 @@ void CUSBOblivionDlg::Run()
 
 	Log( IDS_RUN_FILES, Search );
 
-	CString sWindows;
-	GetWindowsDirectory( sWindows.GetBuffer( MAX_PATH ), MAX_PATH );
-	sWindows.ReleaseBuffer();
-	DoDeleteFile( sWindows + _T("\\setupdi.log") );
-	DoDeleteFile( sWindows + _T("\\setupapi.log") );
-	DoDeleteFile( sWindows + _T("\\inf\\setupapi.dev.log") );
-	DoDeleteFile( sWindows + _T("\\inf\\setupapi.app.log") );
-	DoDeleteFile( sWindows + _T("\\inf\\INFCACHE.1") );
-	DoDeleteFile( sWindows + _T("\\System32\\wbem\\Logs\\wmiprov.log") );
+	for ( int i = 0; i < _countof( szFiles ); ++i )
+	{
+		CString sFile;
+		ExpandEnvironmentStrings( szFiles[ i ], sFile.GetBuffer( 1024 ), 1024 );
+		sFile.ReleaseBuffer();
+		DoDeleteFile( sFile );
+	}
 
 	//////////////////////////////////////////////////////////////////////
 	// Чистка журналов
 
 	Log( IDS_RUN_LOGS, Search );
 
-	const LPCTSTR szLogs[] = { _T("Microsoft-Windows-DriverFrameworks-UserMode/Operational"), _T("HardwareEvents"), _T("Application"), _T("Security"), _T("System") };
 	for ( int i = 0; i < _countof( szLogs ); ++i )
 	{
 		DoDeleteLog( szLogs[ i ] );
@@ -992,7 +1013,7 @@ void CUSBOblivionDlg::Run()
 	CStringList oControlSets;
 	{
 		HKEY hSYS = NULL;
-		ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, szSYS, KEY_READ, &hSYS );
+		ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sSYS, KEY_READ, &hSYS );
 		if ( ret == ERROR_SUCCESS )
 		{
 			for ( DWORD dwIndex = 0; ; ++dwIndex )
@@ -1019,8 +1040,7 @@ void CUSBOblivionDlg::Run()
 
 	for ( POSITION posControlSets = oControlSets.GetHeadPosition(); posControlSets; )
 	{
-		const CString sControlSetKey = CString( szSYS ) + _T("\\") + oControlSets.GetNext( posControlSets ) + _T("\\");
-
+		const CString sControlSetKey = sSYS + _T("\\") + oControlSets.GetNext( posControlSets ) + _T("\\");
 
 		// Detection of "USBSTOR#Disk" or "USBSTOR#CdRom" volumes inside "Enum\STORAGE\Volume" 
 		{
@@ -1359,7 +1379,7 @@ void CUSBOblivionDlg::Run()
 	CStringList oMountedDevs;
 	{
 		HKEY hMD = NULL;
-		ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, szMD, KEY_READ, &hMD );
+		ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sMD, KEY_READ, &hMD );
 		if ( ret == ERROR_SUCCESS )
 		{
 			for ( DWORD dwIndex = 0; ; ++dwIndex )
@@ -1401,30 +1421,58 @@ void CUSBOblivionDlg::Run()
 
 		// HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices
 		// -> "\DosDevices\X:"
-		if ( sDev.GetLength() == 14 &&
-			 sDev.Left( 12 ) == _T("\\DosDevices\\") &&
-			 // не трогать подключенные устройства
-			( nDrives & ( 1 << ( sDev.GetAt( 12 ) - _T('A') ) ) ) == 0 )
+		if ( sDev.GetLength() == 14 && sDev.Left( 12 ) == _T("\\DosDevices\\") )
 		{
-			if ( bLog )
+			// не трогать подключенные устройства
+			if ( ( nDrives & ( 1 << ( sDev.GetAt( 12 ) - _T('A') ) ) ) == 0 )
 			{
-				bLog = false;
-				Log( IDS_RUN_CLEAN, Clean );
+				if ( bLog )
+				{
+					bLog = false;
+					Log( IDS_RUN_CLEAN, Clean );
+				}
+				DeleteValue( HKEY_LOCAL_MACHINE, sMD, sDev );
+				oMountedDevs.RemoveAt( posCurrent );
 			}
-			DeleteValue( HKEY_LOCAL_MACHINE, szMD, sDev );
-			oMountedDevs.RemoveAt( posCurrent );
 		}
 		// -> "\??\Volume{CLSID}"
-		else if ( sDev.GetLength() == 48 &&
-			sDev.Left( 11 ) == _T("\\??\\Volume{") )
+		else if ( sDev.GetLength() == 48 && sDev.Left( 11 ) == _T("\\??\\Volume{") )
 		{
 			if ( bLog )
 			{
 				bLog = false;
 				Log( IDS_RUN_CLEAN, Clean );
 			}
-			DeleteValue( HKEY_LOCAL_MACHINE, szMD, sDev );
+			DeleteValue( HKEY_LOCAL_MACHINE, sMD, sDev );
 			oMountedDevs.RemoveAt( posCurrent );
+		}
+	}
+
+	// Deletion of Windows Search cache
+	{
+		HKEY hKeys = NULL;
+		ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sVolumeInfoCache, KEY_READ, &hKeys );
+		if ( ret == ERROR_SUCCESS )
+		{
+			for ( DWORD dwIndex = 0; ; ++dwIndex )
+			{
+				pszName[ 0 ] = 0;
+				cchName = _countof( pszName );
+				ret = SHEnumKeyEx( hKeys, dwIndex, pszName, &cchName );
+				if ( ret != ERROR_SUCCESS )
+					break;
+
+				// не трогать подключенные устройства
+				if ( pszName[ 1 ] == _T(':') && ( nDrives & ( 1 << ( pszName[ 0 ] - _T('A') ) ) ) == 0 )
+				{
+					if ( bLog )
+					{
+						bLog = false;
+						Log( IDS_RUN_CLEAN, Clean );
+					}
+					DeleteKey( HKEY_LOCAL_MACHINE, sVolumeInfoCache + _T("\\") + pszName );
+				}
+			}
 		}
 	}
 
@@ -1475,7 +1523,7 @@ void CUSBOblivionDlg::Run()
 
 		{
 			HKEY hMP2 = NULL;
-			ret = RegOpenKeyFull( HKEY_USERS, sKey + szMP2, KEY_READ, &hMP2 );
+			ret = RegOpenKeyFull( HKEY_USERS, sKey + sMP2, KEY_READ, &hMP2 );
 			if ( ret == ERROR_SUCCESS )
 			{
 				for ( DWORD dwIndex = 0; ; ++dwIndex )
@@ -1485,7 +1533,7 @@ void CUSBOblivionDlg::Run()
 					ret = SHEnumKeyEx( hMP2, dwIndex, pszName, &cchName );
 					if ( ret != ERROR_SUCCESS )
 						break;
-					AddUnique( oPoints, sKey + szMP2 + _T("\\") + pszName );
+					AddUnique( oPoints, sKey + sMP2 + _T("\\") + pszName );
 				}
 				RegCloseKey( hMP2 );
 			}
@@ -1496,7 +1544,7 @@ void CUSBOblivionDlg::Run()
 
 		{
 			HKEY hCPC = NULL;
-			ret = RegOpenKeyFull( HKEY_USERS, sKey + szCPC, KEY_READ, &hCPC );
+			ret = RegOpenKeyFull( HKEY_USERS, sKey + sCPC, KEY_READ, &hCPC );
 			if ( ret == ERROR_SUCCESS )
 			{
 				for ( DWORD dwIndex = 0; ; ++dwIndex )
@@ -1506,7 +1554,7 @@ void CUSBOblivionDlg::Run()
 					ret = SHEnumKeyEx( hCPC, dwIndex, pszName, &cchName );
 					if ( ret != ERROR_SUCCESS )
 						break;
-					AddUnique( oVolumes, sKey + szCPC + _T("\\") + pszName );
+					AddUnique( oVolumes, sKey + sCPC + _T("\\") + pszName );
 				}
 				RegCloseKey( hCPC );
 			}
@@ -1517,7 +1565,7 @@ void CUSBOblivionDlg::Run()
 
 		{
 			HKEY hCPC = NULL;
-			ret = RegOpenKeyFull( HKEY_USERS, sKey + szCPC, KEY_READ, &hCPC );
+			ret = RegOpenKeyFull( HKEY_USERS, sKey + sCPC, KEY_READ, &hCPC );
 			if ( ret == ERROR_SUCCESS )
 			{
 				for ( DWORD dwIndex = 0; ; ++dwIndex )
@@ -1527,7 +1575,7 @@ void CUSBOblivionDlg::Run()
 					ret = SHEnumKeyEx( hCPC, dwIndex, pszName, &cchName );
 					if ( ret != ERROR_SUCCESS )
 						break;
-					AddUnique( oVolumes, sKey + szCPC + _T("\\") + pszName );
+					AddUnique( oVolumes, sKey + sCPC + _T("\\") + pszName );
 				}
 				RegCloseKey( hCPC );
 			}
@@ -1621,30 +1669,37 @@ void CUSBOblivionDlg::Run()
 
 void CUSBOblivionDlg::DoDeleteFile(LPCTSTR szPath)
 {
-	if ( GetFileAttributes( szPath ) != INVALID_FILE_ATTRIBUTES )
+	CFileFind ff;
+	BOOL bWorking = ff.FindFile( szPath );
+	while ( bWorking )
 	{
-		if ( m_bEnable )
+		bWorking = ff.FindNextFile();
+		const CString sPath = ff.GetFilePath();
+		if ( ! ff.IsDirectory() )
 		{
-			const CString sLongPath = CString( _T("\\\\?\\") ) + szPath;
-			if ( DeleteFile( sLongPath ) )
+			if ( m_bEnable )
 			{
-				Log( LoadString( IDS_DELETE_FILE ) + szPath, Clean );
-			}
-			else
-			{
-				if ( MoveFileEx( sLongPath, NULL, MOVEFILE_DELAY_UNTIL_REBOOT ) )
+				const CString sLongPath = CString( _T("\\\\?\\") ) + sPath;
+				if ( DeleteFile( sLongPath ) )
 				{
-					Log( LoadString( IDS_DELETE_FILE_BOOT ) + szPath, Warning );
+					Log( LoadString( IDS_DELETE_FILE ) + sPath, Clean );
 				}
 				else
 				{
-					Log( LoadString( IDS_DELETE_FILE_ERROR ) + szPath, Error );
+					if ( MoveFileEx( sLongPath, NULL, MOVEFILE_DELAY_UNTIL_REBOOT ) )
+					{
+						Log( LoadString( IDS_DELETE_FILE_BOOT ) + sPath, Warning );
+					}
+					else
+					{
+						Log( LoadString( IDS_DELETE_FILE_ERROR ) + sPath, Error );
+					}
 				}
 			}
-		}
-		else
-		{
-			Log( LoadString( IDS_DELETE_FILE ) + szPath, Clean );
+			else
+			{
+				Log( LoadString( IDS_DELETE_FILE ) + sPath, Clean );
+			}
 		}
 	}
 }
@@ -1656,7 +1711,8 @@ void CUSBOblivionDlg::DoDeleteLog(LPCTSTR szName)
 		// Using external utility - https://technet.microsoft.com/en-us/library/cc732848(v=ws.11).aspx
 		CString sCmd;
 		sCmd.Format( _T("wevtutil.exe cl %s"), szName );
-		STARTUPINFO si = {};
+		STARTUPINFO si = { sizeof( STARTUPINFO ) };
+		si.dwFlags = STARTF_USESHOWWINDOW;
 		PROCESS_INFORMATION pi = {};
 		if ( CreateProcess( NULL, (LPTSTR)(LPCTSTR)sCmd, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi ) )
 		{

@@ -72,6 +72,9 @@ Changes:
 
 1.11.1.0
 
+	* Added "HKLM\SOFTWARE\Microsoft\Windows Search\VolumeInfoCache" registry key cleanup
+	* Extended "%SystemRoot%\setup*.log" and "%SystemRoot%\inf\setupapi*.log" files deletion
+	* Minor fixes
 	* Updated Italian translation (by Marcello Gianola)
 
 1.11.0.0 (11 Oct 2016)
