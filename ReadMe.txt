@@ -63,7 +63,7 @@ Languages:
 System Requirements:
 
   * Windows XP/2003/Vista/2008/7/8/8.1/10 32/64-bit
-  * About 2 Mb of disk space. No installation needed.
+  * About 3 Mb of disk space. No installation needed.
   * Administrative privileges.
 
 ========================================================================

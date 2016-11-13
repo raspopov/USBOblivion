@@ -29,14 +29,14 @@ BEGIN
         BLOCK "041904b0"
         BEGIN
 		VALUE "CompanyName", "Raspopov"
-            VALUE "FileDescription", "Erase all traces of USB-connected drives and CD-ROMs from the registry. http://www.cherubicsoft.com/en/projects/usboblivion"
+            VALUE "FileDescription", "Erase all traces of USB-connected drives and CD-ROMs from the registry."
             VALUE "FileVersion", "1.11.1.0"
 #ifdef WIN64
             VALUE "InternalName", "USBOblivion64"
 #else
             VALUE "InternalName", "USBOblivion32"
 #endif
-            VALUE "LegalCopyright", "Copyright © Nikolay Raspopov, 2009-2016."
+            VALUE "LegalCopyright", "Copyright © Nikolay Raspopov, 2009-2016. http://www.cherubicsoft.com/en/projects/usboblivion"
 #ifdef WIN64
             VALUE "OriginalFilename", "USBOblivion64.exe"
 #else

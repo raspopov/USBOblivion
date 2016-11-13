@@ -173,7 +173,7 @@ END
 
 STRINGTABLE
 BEGIN
-    IDS_ABOUT               "Usage:\n\nUSBOblivion[32|64].exe [params]\n\nParams:\n\n-enable - Do real clean (simulation otherwise);\n-auto - Automatic run;\n-nosave - Don't save backup .reg-file;\n-lang:XX - Use language XX (hex-code);\n-silent - Hidden mode (if possible);\n-? - Show this help.\n"
+    IDS_ABOUT               "Usage:\n\nUSBOblivion[32|64].exe [params]\n\nParams:\n\n-enable - Do real clean (simulation otherwise);\n-auto - Automatic run;\n-nosave - Don't save a registry backup file;\n-save:filename - Save a registry backup to this file;\n-log:filename - Save working log to this file;\n-norestorepoint - Don't create a System Restore Point;\n-lang:XX - Use language XX (hex-code);\n-silent - Hidden mode (if possible);\n-? - Show this help.\n"
     IDS_WARNING             "WARNING! Eject all flash drives before cleaning please."
     IDS_START               "Press ""Clean"" button to begin cleaning."
     IDS_MODE_WORK           "Process mode: real (data will be cleaned)."
