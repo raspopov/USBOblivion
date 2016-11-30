@@ -21,7 +21,7 @@ msgstr "Czyść"
 
 #: DIALOGCONTROL.102.Button.1002
 msgid "Do real clean (simulation otherwise)"
-msgstr "Czyść naprawdę (w przeciwnym razie będzie to symulacja)"
+msgstr "Czyść naprawdę (w przeciwnym razie będzie to tylko symulacja)"
 
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
@@ -41,7 +41,7 @@ msgstr "Kopiuj wszystko"
 
 #: MENUPOPUP.130.0
 msgid "Context"
-msgstr "Kontext"
+msgstr "Kontekst"
 
 #: STRING.129
 msgid ""
@@ -67,19 +67,19 @@ msgstr ""
 "\n"
 "Parametry:\n"
 "\n"
-"-enable - Czyść naprawdę (w przeciwnym razie będzie to symulacja);\n"
+"-enable - Czyść naprawdę (w przeciwnym razie będzie to tylko symulacja);\n"
 "-auto - Automatyczne uruchomienie;\n"
 "-nosave - Nie zachowuj pliku kopii .reg;\n"
-"-save:filename - Save a registry backup to this file;\n"
-"-log:filename - Save working log to this file;\n"
-"-norestorepoint - Don't create a System Restore Point;\n"
+"-save:filename - Zapisz do pliku kopię rejestru;\n"
+"-log:filename - Zapisz do pliku dziennik pracy;\n"
+"-norestorepoint - Nie twórz punktu przywracania systemu;\n"
 "-lang:XX - Użyj języka XX (kod szestnastkowy);\n"
 "-silent - Tryb ukryty (jeśli dostępny);\n"
 "-? - Pokaż tę pomoc.\n"
 
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
-msgstr "UWAGA! Należy wysunąć wszystkie napędy flash przed czyszczeniem."
+msgstr "UWAGA! Przed rozpoczęciem czyszczenia należy wysunąć wszystkie napędy flash."
 
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
@@ -159,7 +159,7 @@ msgstr "Zbieranie danych punktu montowania..."
 
 #: STRING.150
 msgid "Found ControlSets: "
-msgstr "Znaleziono ControlSets: "
+msgstr "Znaleziono Zestawy Sterowania: "
 
 #: STRING.151
 msgid "Found keys: "
@@ -219,16 +219,16 @@ msgstr "Zbieranie danych z dziennika..."
 
 #: STRING.165
 msgid "File removal error:"
-msgstr ""
+msgstr "Plik usuwania błędu:"
 
 #: STRING.166
 msgid "Removing file at boot-time:"
-msgstr ""
+msgstr "Usuwanie pliku w czasie rozruchu:"
 
 #: STRING.167
 msgid "Journal cleanup error:"
-msgstr ""
+msgstr "Dziennik błędów czyszczenie:"
 
 #: STRING.168
 msgid "Creating System Restore Point..."
-msgstr ""
+msgstr "Tworzenie punktu przywracania systemu..."
