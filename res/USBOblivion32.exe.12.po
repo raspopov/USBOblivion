@@ -21,7 +21,7 @@ msgstr "지우기"
 
 #: DIALOGCONTROL.102.Button.1002
 msgid "Do real clean (simulation otherwise)"
-msgstr "실제로 지우기 (그렇지 않으면 시뮬레이션)"
+msgstr "실제로 지우기 (그렇지 않으면, 모의 시험)"
 
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
@@ -67,23 +67,23 @@ msgstr ""
 "\n"
 "매개 변수:\n"
 "\n"
-"-enable - 실제로 지우기 (그렇지 않으면 시뮬레이션);\n"
-"-auto - 자동으로 실행;\n"
-"-nosave - .reg 파일로 백업 저장 안함;\n"
-"-save:filename - Save a registry backup to this file;\n"
-"-log:filename - Save working log to this file;\n"
-"-norestorepoint - Don't create a System Restore Point;\n"
+"-enable - 실제로 지우기 (그렇지 않으면, 모의 시험);\n"
+"-auto - 자동으 실행;\n"
+"-nosave - 레지스트리 백업 파일을 저장하지 않기;\n"
+"-save:파일 이름 - 레지스트리 백업을 이 파일로 저장;\n"
+"-log:파일 이름 - 작업 기록을 이 파일로 저장;\n"
+"-norestorepoint - 시스템 복원 지점을 만들지 않기;\n"
 "-lang:XX - XX (16진수) 언어 사용;\n"
 "-silent - 숨김 방식 (가능한 경우);\n"
-"-? - 이 도움말 보이기\n"
+"-? - 이 도움말을 보입니다.\n"
 
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
-msgstr "경고! 지우기 전에 모든 플래시 드라이브를 꺼내세요."
+msgstr "경고!  지우기 전에 모든 플래시 드라이브를 꺼내세요."
 
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
-msgstr "지우기를 시작하려면, \"지우기\" 버튼을 누르세요."
+msgstr "지우기를 시작하려면, '지우기' 버튼을 누르세요."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
@@ -91,7 +91,7 @@ msgstr "처리 방식: 실제 (데이터가 지워집니다.)"
 
 #: STRING.133
 msgid "Process mode: simulation (no data will be cleaned)."
-msgstr "처리 방식: 시뮬레이션 (데이터는 지워지지 않습니다.)"
+msgstr "처리 방식: 모의 시험 (데이터가 지워지지 않습니다.)"
 
 #: STRING.134
 msgid "File creation error: "
@@ -107,15 +107,15 @@ msgstr "백업 파일: "
 
 #: STRING.137
 msgid "Done."
-msgstr "마침."
+msgstr "마쳤습니다."
 
 #: STRING.138
 msgid "Gathering data from system registry..."
-msgstr "시스템 레지스트리에서 데이터 수집하는 중..."
+msgstr "시스템 레지스트리로부터 데이터를 수집하는 중..."
 
 #: STRING.139
 msgid "Found drives (will be ignored): "
-msgstr "(무시되는) 드라이브 찾음: "
+msgstr "드라이브 발견 (무시됩니다.): "
 
 #: STRING.140
 msgid "Cleaning..."
@@ -123,15 +123,15 @@ msgstr "지우는 중..."
 
 #: STRING.141
 msgid "Removing key: "
-msgstr "키 제거하는 중: "
+msgstr "키를 제거하는 중: "
 
 #: STRING.142
 msgid "Removing value: "
-msgstr "값 제거하는 중: "
+msgstr "값을 제거하는 중: "
 
 #: STRING.143
 msgid "Gathering user data..."
-msgstr "사용자 데이터 수집하는 중..."
+msgstr "사용자 데이터를 수집하는 중..."
 
 #: STRING.144
 msgid "Gathering data about user: "
@@ -139,19 +139,19 @@ msgstr "사용자에 대한 데이터를 수집하는 중: "
 
 #: STRING.145
 msgid "Found users: "
-msgstr "사용자 찾음: "
+msgstr "사용자 발견: "
 
 #: STRING.146
 msgid "Found mount points: "
-msgstr "탑재 지점 찾음: "
+msgstr "탑재 지점 발견: "
 
 #: STRING.147
 msgid "Found Explorer drives: "
-msgstr "탐색기 드라이브 찾음: "
+msgstr "탐색기 드라이브 발견: "
 
 #: STRING.148
 msgid "Remove error: "
-msgstr "오류 제거: "
+msgstr "제거 오류: "
 
 #: STRING.149
 msgid "Gathering mount point's data..."
@@ -159,15 +159,15 @@ msgstr "탑재 지점의 데이터를 수집하는 중..."
 
 #: STRING.150
 msgid "Found ControlSets: "
-msgstr "ControlSets 찾음: "
+msgstr "ControlSets 발견: "
 
 #: STRING.151
 msgid "Found keys: "
-msgstr "키 찾음: "
+msgstr "키 발견: "
 
 #: STRING.152
 msgid "Found values: "
-msgstr "값 찾음: "
+msgstr "값 발견: "
 
 #: STRING.153
 msgid "Key access denied: "
@@ -179,11 +179,11 @@ msgstr "디스크 %c: (은)는 삽입됐습니다."
 
 #: STRING.155
 msgid "Logged-in under system account successfully."
-msgstr "성공적으로 시스템 계정에 로그인했습니다."
+msgstr "시스템 계정에 잘 로그인했습니다."
 
 #: STRING.156
 msgid "Failed to login under system account."
-msgstr "시스템 계정으로의 로그인이 실패했습니다."
+msgstr "시스템 계정으로 로그인하지 못했습니다."
 
 #: STRING.157
 msgid "Re-starting under administrator..."
@@ -195,7 +195,7 @@ msgstr "디스크 %c: (은)는 꺼내졌습니다."
 
 #: STRING.159
 msgid "Failed to eject disk %c:."
-msgstr "디스크 %c: 꺼내기 실패."
+msgstr "디스크 %c: (을)를 꺼내지 못했습니다."
 
 #: STRING.160
 msgid "Ejecting disk %c:..."
@@ -203,7 +203,7 @@ msgstr "디스크 %c: 꺼내는 중..."
 
 #: STRING.161
 msgid "Removing file: "
-msgstr "파일 제거하는 중: "
+msgstr "파일을 제거하는 중: "
 
 #: STRING.162
 msgid "Gathering file data..."
@@ -219,16 +219,16 @@ msgstr "저널 데이터를 수집하는 중..."
 
 #: STRING.165
 msgid "File removal error:"
-msgstr ""
+msgstr "파일 제거 오류:"
 
 #: STRING.166
 msgid "Removing file at boot-time:"
-msgstr ""
+msgstr "부트시 파일 제거:"
 
 #: STRING.167
 msgid "Journal cleanup error:"
-msgstr ""
+msgstr "저널 지우기 오류:"
 
 #: STRING.168
 msgid "Creating System Restore Point..."
-msgstr ""
+msgstr "시스템 복원 지점을 만드는 중..."
