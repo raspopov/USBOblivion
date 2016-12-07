@@ -3,7 +3,7 @@
 //
 // CtrlsResize.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2015.
+// Copyright (c) Nikolay Raspopov, 2009-2016.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -32,7 +32,7 @@ static char THIS_FILE[]=__FILE__;
 
 // Construction/Destruction
 CCtrlResize::CControlInfo::CControlInfo () :
-	controlID(0), bindtype (BIND_UNKNOWN), rectInitial(), m_pControlWnd(NULL)
+	controlID(0), bindtype (BIND_UNKNOWN), rectInitial( 0, 0, 0, 0 ), m_pControlWnd(NULL)
 {
 }
 
@@ -52,8 +52,17 @@ CCtrlResize::CCtrlResize() :
 
 CCtrlResize::~CCtrlResize()
 {
-	for (INT_PTR i = 0; i < m_aCtrls.GetSize(); i++)
+	Clear();
+}
+
+void CCtrlResize::Clear()
+{
+	m_pWnd = NULL;
+	for ( int i = 0; i < m_aCtrls.GetSize(); ++i )
+	{
 		delete m_aCtrls.GetAt(i);
+	}
+	m_aCtrls.RemoveAll();
 }
 
 int CCtrlResize::AddControl (int _controlID, int _bindtype, const CRect &_rectInitial)
@@ -69,19 +78,21 @@ int CCtrlResize::AddControl (CWnd* _pWnd, int _bindtype, const CRect &_rectIniti
 
 int CCtrlResize::FixControls()
 {
-	if (!m_pWnd)
+	if ( ! m_pWnd || ! IsWindow( m_pWnd->m_hWnd ) )
 		return 1;
 
 	m_pWnd->GetClientRect(&m_rectInitialParent);
 	m_pWnd->ScreenToClient(&m_rectInitialParent);
 	
-	for (INT_PTR i = 0; i < m_aCtrls.GetSize(); i++) {
-		CControlInfo* pInfo = m_aCtrls.GetAt(i);
-		CWnd* pControlWnd = pInfo->m_pControlWnd ? pInfo->m_pControlWnd :
-			m_pWnd->GetDlgItem (pInfo->controlID);
-		if (pControlWnd) {
-			pControlWnd->GetWindowRect (&pInfo->rectInitial);
-			m_pWnd->ScreenToClient (&pInfo->rectInitial);
+	for ( int i = 0; i < m_aCtrls.GetSize(); ++i )
+	{
+		if ( CControlInfo* pInfo = m_aCtrls.GetAt( i ) )
+		{
+			if ( CWnd* pControlWnd = ( pInfo->m_pControlWnd ? pInfo->m_pControlWnd : m_pWnd->GetDlgItem( pInfo->controlID ) ) )
+			{
+				pControlWnd->GetWindowRect( &pInfo->rectInitial );
+				m_pWnd->ScreenToClient( &pInfo->rectInitial );
+			}
 		}
 	}
 	return 0;
@@ -94,35 +105,33 @@ void CCtrlResize::SetParentWnd(CWnd *pWnd)
 
 void CCtrlResize::OnSize()
 {
-	if (!m_pWnd || !m_pWnd->IsWindowVisible())
+	if ( ! m_pWnd || ! IsWindow( m_pWnd->m_hWnd ) )
 		return;
 
-	CRect rr, rectWnd;
+	CRect rectWnd;
 	m_pWnd->GetClientRect(&rectWnd);
-	
-	for (INT_PTR i = 0; i < m_aCtrls.GetSize(); i++) {
-		CControlInfo* pInfo = m_aCtrls.GetAt(i);
-		if (pInfo) {
-			CWnd* pControlWnd = pInfo->m_pControlWnd ? pInfo->m_pControlWnd :
-				m_pWnd->GetDlgItem (pInfo->controlID);
-			if (pControlWnd) {
 
-				rr = pInfo->rectInitial;
+	for ( int i = 0; i < m_aCtrls.GetSize(); ++i )
+	{
+		if ( const CControlInfo* pInfo = m_aCtrls.GetAt( i ) )
+		{
+			if ( CWnd* pControlWnd = ( pInfo->m_pControlWnd ? pInfo->m_pControlWnd : m_pWnd->GetDlgItem( pInfo->controlID ) ) )
+			{
+				CRect rr = pInfo->rectInitial;
 				if (pInfo->bindtype & BIND_RIGHT) 
-					rr.right = rectWnd.right -
-						(m_rectInitialParent.Width() - pInfo->rectInitial.right);
+					rr.right = rectWnd.right - ( m_rectInitialParent.Width() - pInfo->rectInitial.right );
 				if (pInfo->bindtype & BIND_BOTTOM) 
-					rr.bottom = rectWnd.bottom -
-						(m_rectInitialParent.Height() - pInfo->rectInitial.bottom);
-				if (pInfo->bindtype & BIND_TOP);
+					rr.bottom = rectWnd.bottom - ( m_rectInitialParent.Height() - pInfo->rectInitial.bottom );
+				if (pInfo->bindtype & BIND_TOP)
+					;
 				else
 					rr.top = rr.bottom - pInfo->rectInitial.Height();
-				if (pInfo->bindtype & BIND_LEFT);
+				if (pInfo->bindtype & BIND_LEFT)
+					;
 				else
 					rr.left = rr.right - pInfo->rectInitial.Width();
-				
-				pControlWnd->MoveWindow(&rr);
-				pControlWnd->Invalidate(FALSE);
+				pControlWnd->MoveWindow( &rr );
+				pControlWnd->Invalidate( FALSE );
 			}
 		}
 	}

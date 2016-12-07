@@ -47,6 +47,10 @@ const LPCTSTR szFiles[] =
 // Event logs to clear
 const LPCTSTR szLogs[] =
 {
+	_T("Microsoft-Windows-DeviceSetupManager/Operational"),
+	_T("Microsoft-Windows-DeviceSetupManager/Admin"),
+	_T("Microsoft-Windows-Kernel-PnP/Configuration"),
+	_T("Microsoft-Windows-Kernel-ShimEngine/Operational"),
 	_T("Microsoft-Windows-DriverFrameworks-UserMode/Operational"),
 	_T("HardwareEvents"),
 	_T("Application"),
@@ -1076,7 +1080,7 @@ void CUSBOblivionDlg::Run()
 		}
 
 		// Windows 8/10
-		// Detection of "USBSTOR#Disk" or "USBSTOR#CdRom" device containers
+		// Detection of "USBSTOR" device containers
 		{
 			// Enumerate keys of "Control\DeviceContainers\{CLSID}"
 			const CString sDeviceContainersKey = sControlSetKey + _T("Control\\DeviceContainers");
@@ -1111,7 +1115,7 @@ void CUSBOblivionDlg::Run()
 								break;
 							pszValue[ cchValue ] = 0;
 							pszValue[ cchValue + 1 ] = 0;
-							if ( StrStrI( (LPCTSTR)pszName, _T("USBSTOR#Disk") ) || StrStrI( (LPCTSTR)pszName, _T("USBSTOR#CdRom") ) )
+							if ( StrStrI( (LPCTSTR)pszName, _T("USBSTOR") ) )
 							{
 								AddUnique( oKeys, sBaseContainersKey );
 								break;
@@ -1156,12 +1160,12 @@ void CUSBOblivionDlg::Run()
 								ret = SHEnumKeyEx( hDevKeys, dwDelIndex, pszName, &cchName );
 								if ( ret != ERROR_SUCCESS )
 									break;
+
 								dwType = 0;
 								pszValue[ 0 ] = 0;
 								pszValue[ 1 ] = 0;
 								cchValue = sizeof( pszValue );
-								ret = SHGetValue( hDevKeys, pszName, _T("Service"),
-									&dwType, pszValue, &cchValue );
+								ret = SHGetValue( hDevKeys, pszName, _T("Service"), &dwType, pszValue, &cchValue );
 								if ( ret == ERROR_SUCCESS && CmpStrI( (LPCTSTR)pszValue, _T("USBSTOR") ) )
 								{
 									dwDeleted++;
@@ -1170,12 +1174,23 @@ void CUSBOblivionDlg::Run()
 
 									AddUnique( oSubKeys, sDevKey + _T("\\") + pszName );
 
+									// Delete device container
 									dwType = 0;
 									pszValue[ 0 ] = 0;
 									pszValue[ 1 ] = 0;
 									cchValue = sizeof( pszValue );
-									ret = SHGetValue( hDevKeys, pszName, _T("Driver"),
-										&dwType, pszValue, &cchValue );
+									ret = SHGetValue( hDevKeys, pszName, _T("ContainerID"), &dwType, pszValue, &cchValue );
+									if ( ret == ERROR_SUCCESS )
+									{
+										AddUnique( oKeys, sControlSetKey + _T("Control\\DeviceContainers\\") + (LPCTSTR)pszValue );
+									}
+
+									// Delete driver
+									dwType = 0;
+									pszValue[ 0 ] = 0;
+									pszValue[ 1 ] = 0;
+									cchValue = sizeof( pszValue );
+									ret = SHGetValue( hDevKeys, pszName, _T("Driver"), &dwType, pszValue, &cchValue );
 									if ( ret == ERROR_SUCCESS )
 									{
 										AddUnique( oKeys, sControlSetKey + _T("Control\\Class\\") + (LPCTSTR)pszValue );
@@ -1269,8 +1284,7 @@ void CUSBOblivionDlg::Run()
 						pszValue[ 0 ] = 0;
 						pszValue[ 1 ] = 0;
 						cchValue = sizeof( pszValue );
-						ret = SHGetValue( hKeys, pszName, _T("DeviceInstance"),
-							&dwType, pszValue, &cchValue );
+						ret = SHGetValue( hKeys, pszName, _T("DeviceInstance"), &dwType, pszValue, &cchValue );
 						if ( ret == ERROR_SUCCESS )
 						{
 							const CString sEnumKey = sControlSetKey + _T("Enum\\") + (LPCTSTR)pszValue;
@@ -1278,8 +1292,7 @@ void CUSBOblivionDlg::Run()
 							pszValue[ 0 ] = 0;
 							pszValue[ 1 ] = 0;
 							cchValue = sizeof( pszValue );
-							ret = SHGetValue( HKEY_LOCAL_MACHINE, sEnumKey,
-								_T("Service"), &dwType, pszValue, &cchValue );
+							ret = SHGetValue( HKEY_LOCAL_MACHINE, sEnumKey, _T("Service"), &dwType, pszValue, &cchValue );
 							if ( ret == ERROR_SUCCESS && CmpStrI( (LPCTSTR)pszValue, _T("USBSTOR") ) )
 							{
 								AddUnique( oKeys, sFullKey + _T("\\") + pszName );
@@ -1292,9 +1305,11 @@ void CUSBOblivionDlg::Run()
 			}
 		}
 
-		// Deletion of "Control\usbflags"
+		// Deletion of control flags
+		LPCTSTR szControlFlags[] = {  _T("Control\\usbflags"), _T("Control\\usbstor") };
+		for ( int i = 0; i < _countof( szControlFlags ); ++i )
 		{
-			const CString sFullKey = sControlSetKey + _T("Control\\usbflags");
+			const CString sFullKey = sControlSetKey + szControlFlags[ i ];
 			HKEY hKeys = NULL;
 			ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sFullKey, KEY_READ, &hKeys );
 			if ( ret == ERROR_SUCCESS )
@@ -1320,6 +1335,7 @@ void CUSBOblivionDlg::Run()
 						}
 					}
 				}
+				RegCloseKey( hKeys );
 			}
 		}
 

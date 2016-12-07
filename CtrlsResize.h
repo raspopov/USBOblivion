@@ -1,7 +1,7 @@
 //
 // CtrlsResize.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2015.
+// Copyright (c) Nikolay Raspopov, 2009-2016.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -28,19 +28,17 @@ const int BIND_BOTTOM =	0x08;
 const int BIND_ALL =	0x0F;
 const int BIND_UNKNOWN = 0x00;
 
-#pragma warning (push)
-#pragma warning (disable : 4239)
-
 class CCtrlResize
 {
 public:
 	CCtrlResize();
 	~CCtrlResize();
+	void Clear();
 	void OnSize ();
 	void SetParentWnd (CWnd *pWnd);
 	int FixControls ();
-	int AddControl (int _controlID, int _bindtype, const CRect& _rectInitial = CRect(NULL));
-	int AddControl (CWnd *_pControl, int _bindtype, const CRect& _rectInitial = CRect(NULL));
+	int AddControl (int _controlID, int _bindtype, const CRect& _rectInitial = CRect( 0, 0, 0, 0 ));
+	int AddControl (CWnd *_pControl, int _bindtype, const CRect& _rectInitial = CRect( 0, 0, 0, 0 ));
 
 	class CControlInfo  
 	{
@@ -58,5 +56,3 @@ private:
 	CArray <CControlInfo*, CControlInfo*> m_aCtrls;
 	CRect m_rectInitialParent;
 };
-
-#pragma warning (pop)

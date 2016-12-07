@@ -70,6 +70,19 @@ System Requirements:
 
 Changes:
 
+1.11.2.0
+
+	* Added "Microsoft-Windows-DeviceSetupManager/Operational" journal cleanup
+	* Added "Microsoft-Windows-DeviceSetupManager/Admin" journal cleanup
+	* Added "Microsoft-Windows-Kernel-PnP/Configuration" journal cleanup
+	* Added "Microsoft-Windows-Kernel-ShimEngine/Operational" journal cleanup
+	* Added "Control\usbstor" registry key selective cleanup
+	* Fixed USB-HDD cleanup
+	* Minor fixes
+	* Updated Italian translation (by Marcello Gianola)
+	* Updated Polish translation (by dmocha)
+	* Updated Korean translation (by 4Li)
+
 1.11.1.0
 
 	* Added "HKLM\SOFTWARE\Microsoft\Windows Search\VolumeInfoCache" registry key cleanup
