@@ -1,3 +1,5 @@
+// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 //
 // USBOblivionDlg.cpp
 //
@@ -631,7 +633,7 @@ void CUSBOblivionDlg::Write(LPCTSTR szText)
 	m_oFile.Write( szText, (UINT)( _tcslen( szText ) * sizeof( TCHAR ) ) );
 }
 
-LPCTSTR CUSBOblivionDlg::GetKeyName(HKEY hRoot) const
+CString CUSBOblivionDlg::GetKeyName(HKEY hRoot)
 {
 	switch ( (ULONG_PTR)hRoot )
 	{
@@ -647,7 +649,7 @@ LPCTSTR CUSBOblivionDlg::GetKeyName(HKEY hRoot) const
 		return _T("HKEY_CURRENT_CONFIG");
 	default:
 		ASSERT( FALSE );
-		return NULL;
+		return _T("");
 	}
 }
 

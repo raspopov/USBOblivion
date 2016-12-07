@@ -108,7 +108,7 @@ protected:
 	void Log(UINT nID, UINT nType = Information);
 	void Write(LPCTSTR szText);
 
-	LPCTSTR GetKeyName(HKEY hRoot) const;
+	static CString GetKeyName(HKEY hRoot);
 	LSTATUS RegOpenKeyFull(HKEY hKey, LPCTSTR lpSubKey, REGSAM samDesired, PHKEY phkResult);
 	LSTATUS RegDeleteKeyFull(HKEY hKey, const CString& sSubKey);
 	LSTATUS RegDeleteValueFull(HKEY hKey, LPCTSTR lpSubKey, LPCTSTR lpValue);
