@@ -31,13 +31,13 @@
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140_xp</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -102,7 +102,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_ATL_XP_TARGETING;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -111,6 +111,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/Zc:threadSafeInit- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -122,7 +123,9 @@
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>Debug</GenerateDebugInformation>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <DelayLoadDLLs>SETUPAPI.DLL;MSIMG32.DLL;WINSPOOL.DRV;ADVAPI32.DLL;SHELL32.DLL;COMCTL32.DLL;SHLWAPI.DLL;UXTHEME.DLL;OLE32.DLL;OLEAUT32.DLL;USERENV.DLL;LZ32.DLL;OLEACC.DLL;GDIPLUS.DLL;IMM32.DLL;WINMM.DLL</DelayLoadDLLs>
+      <DelayLoadDLLs>ADVAPI32.DLL;COMCTL32.DLL;GDIPLUS.DLL;IMM32.DLL;LZ32.DLL;MSIMG32.DLL;OLE32.DLL;OLEACC.DLL;OLEAUT32.DLL;OLEDLG.DLL;SETUPAPI.DLL;SHELL32.DLL;SHLWAPI.DLL;USERENV.DLL;UXTHEME.DLL;WINMM.DLL;WINSPOOL.DRV;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <SwapRunFromCD>true</SwapRunFromCD>
+      <SwapRunFromNET>true</SwapRunFromNET>
     </Link>
     <PreBuildEvent>
       <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
@@ -132,6 +135,9 @@
     </PreBuildEvent>
     <PostBuildEvent />
     <PostBuildEvent />
+    <PostBuildEvent>
+      <Command>editbin /NOLOGO /RELEASE /VERSION:5.0 /SUBSYSTEM:WINDOWS,5.0 "$(TargetPath)" &gt; nul:</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -150,6 +156,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <SDLCheck>true</SDLCheck>
+      <AdditionalOptions>/Zc:threadSafeInit- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -161,7 +168,9 @@
       <TargetMachine>MachineX64</TargetMachine>
       <GenerateDebugInformation>Debug</GenerateDebugInformation>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
-      <DelayLoadDLLs>SETUPAPI.DLL;MSIMG32.DLL;WINSPOOL.DRV;ADVAPI32.DLL;SHELL32.DLL;COMCTL32.DLL;SHLWAPI.DLL;UXTHEME.DLL;OLE32.DLL;OLEAUT32.DLL;USERENV.DLL;LZ32.DLL;OLEACC.DLL;GDIPLUS.DLL;IMM32.DLL;WINMM.DLL</DelayLoadDLLs>
+      <DelayLoadDLLs>ADVAPI32.DLL;COMCTL32.DLL;GDIPLUS.DLL;IMM32.DLL;LZ32.DLL;MSIMG32.DLL;OLE32.DLL;OLEACC.DLL;OLEAUT32.DLL;OLEDLG.DLL;SETUPAPI.DLL;SHELL32.DLL;SHLWAPI.DLL;USERENV.DLL;UXTHEME.DLL;WINMM.DLL;WINSPOOL.DRV;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <SwapRunFromCD>true</SwapRunFromCD>
+      <SwapRunFromNET>true</SwapRunFromNET>
     </Link>
     <PreBuildEvent>
       <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
@@ -184,13 +193,14 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Size</FavorSizeOrSpeed>
       <OmitFramePointers>true</OmitFramePointers>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_ATL_XP_TARGETING;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <StringPooling>true</StringPooling>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <AdditionalOptions>/Zc:threadSafeInit- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -204,7 +214,10 @@
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX86</TargetMachine>
       <GenerateDebugInformation>No</GenerateDebugInformation>
-      <DelayLoadDLLs>SETUPAPI.DLL;MSIMG32.DLL;WINSPOOL.DRV;ADVAPI32.DLL;SHELL32.DLL;COMCTL32.DLL;SHLWAPI.DLL;UXTHEME.DLL;OLE32.DLL;OLEAUT32.DLL;USERENV.DLL;LZ32.DLL;OLEACC.DLL;GDIPLUS.DLL;IMM32.DLL;WINMM.DLL</DelayLoadDLLs>
+      <DelayLoadDLLs>ADVAPI32.DLL;COMCTL32.DLL;GDIPLUS.DLL;IMM32.DLL;LZ32.DLL;MSIMG32.DLL;OLE32.DLL;OLEACC.DLL;OLEAUT32.DLL;OLEDLG.DLL;SETUPAPI.DLL;SHELL32.DLL;SHLWAPI.DLL;USERENV.DLL;UXTHEME.DLL;WINMM.DLL;WINSPOOL.DRV;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <SwapRunFromCD>true</SwapRunFromCD>
+      <SwapRunFromNET>true</SwapRunFromNET>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
     <PostBuildEvent />
     <PreBuildEvent>
@@ -213,6 +226,9 @@
     <PreBuildEvent>
       <Message>Localization</Message>
     </PreBuildEvent>
+    <PostBuildEvent>
+      <Command>editbin /NOLOGO /RELEASE /VERSION:5.0 /SUBSYSTEM:WINDOWS,5.0 "$(TargetPath)" &gt; nul:</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
@@ -233,6 +249,7 @@
       <StringPooling>true</StringPooling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <DebugInformationFormat>None</DebugInformationFormat>
+      <AdditionalOptions>/Zc:threadSafeInit- %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -246,7 +263,9 @@
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX64</TargetMachine>
       <GenerateDebugInformation>No</GenerateDebugInformation>
-      <DelayLoadDLLs>SETUPAPI.DLL;MSIMG32.DLL;WINSPOOL.DRV;ADVAPI32.DLL;SHELL32.DLL;COMCTL32.DLL;SHLWAPI.DLL;UXTHEME.DLL;OLE32.DLL;OLEAUT32.DLL;USERENV.DLL;LZ32.DLL;OLEACC.DLL;GDIPLUS.DLL;IMM32.DLL;WINMM.DLL</DelayLoadDLLs>
+      <DelayLoadDLLs>ADVAPI32.DLL;COMCTL32.DLL;GDIPLUS.DLL;IMM32.DLL;LZ32.DLL;MSIMG32.DLL;OLE32.DLL;OLEACC.DLL;OLEAUT32.DLL;OLEDLG.DLL;SETUPAPI.DLL;SHELL32.DLL;SHLWAPI.DLL;USERENV.DLL;UXTHEME.DLL;WINMM.DLL;WINSPOOL.DRV;%(DelayLoadDLLs)</DelayLoadDLLs>
+      <SwapRunFromCD>true</SwapRunFromCD>
+      <SwapRunFromNET>true</SwapRunFromNET>
     </Link>
     <PostBuildEvent />
     <PreBuildEvent>
@@ -266,6 +285,10 @@
     </ClCompile>
     <ClCompile Include="..\USBOblivion.cpp" />
     <ClCompile Include="..\USBOblivionDlg.cpp" />
+    <ClCompile Include="..\vc_crt_fix_impl.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CtrlsResize.h" />
@@ -302,6 +325,14 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\vc_crt_fix.asm">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+      <GenerateDebugInformation Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</GenerateDebugInformation>
+      <GenerateDebugInformation Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</GenerateDebugInformation>
+    </MASM>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

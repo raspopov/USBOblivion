@@ -12,8 +12,8 @@
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,11,2,0
- PRODUCTVERSION 1,11,2,0
+ FILEVERSION 1,11,3,0
+ PRODUCTVERSION 1,11,3,0
  FILEFLAGSMASK 0x3fL
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -30,7 +30,7 @@ BEGIN
         BEGIN
 		VALUE "CompanyName", "Raspopov"
             VALUE "FileDescription", "Erase all traces of USB-connected drives and CD-ROMs from the registry."
-            VALUE "FileVersion", "1.11.2.0"
+            VALUE "FileVersion", "1.11.3.0"
 #ifdef WIN64
             VALUE "InternalName", "USBOblivion64"
 #else
@@ -47,7 +47,7 @@ BEGIN
 #else
             VALUE "ProductName", "USB Oblivion 32-bit"
 #endif
-            VALUE "ProductVersion", "1.11.2.0"
+            VALUE "ProductVersion", "1.11.3.0"
         END
     END
     BLOCK "VarFileInfo"

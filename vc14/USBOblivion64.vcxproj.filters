@@ -27,6 +27,9 @@
     <ClCompile Include="..\USBOblivionDlg.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\vc_crt_fix_impl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CtrlsResize.h">
@@ -117,5 +120,10 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <MASM Include="..\vc_crt_fix.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
   </ItemGroup>
 </Project>
