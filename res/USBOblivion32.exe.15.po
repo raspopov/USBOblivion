@@ -1,11 +1,11 @@
-msgid ""
+﻿msgid ""
 msgstr ""
 "Project-Id-Version: USBOblivion32.exe\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: dmocha <dmocha@gmail.com>\n"
 "Language-Team: \n"
-"Language: pl\n"
+"Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -61,25 +61,25 @@ msgid ""
 "-silent - Hidden mode (if possible);\n"
 "-? - Show this help.\n"
 msgstr ""
-"Użycie:\n"
+"Sposób użycia:\n"
 "\n"
 "USBOblivion[32|64].exe [parametry]\n"
 "\n"
 "Parametry:\n"
 "\n"
 "-enable - Czyść naprawdę (w przeciwnym razie będzie to tylko symulacja);\n"
-"-auto - Automatyczne uruchomienie;\n"
-"-nosave - Nie zachowuj pliku kopii .reg;\n"
-"-save:filename - Zapisz do pliku kopię rejestru;\n"
-"-log:filename - Zapisz do pliku dziennik pracy;\n"
+"-auto - Automatyczny start;\n"
+"-nosave - Nie zapisuj pliku kopii zapasowej rejestru;\n"
+"-save:filename - Zapisz kopię zapasową rejestru do tego pliku;\n"
+"-log:filename - Zapisz dziennik roboczy do tego pliku;\n"
 "-norestorepoint - Nie twórz punktu przywracania systemu;\n"
-"-lang:XX - Użyj języka XX (kod szestnastkowy);\n"
+"-lang:XX - Użyj pliku językowego XX (kod szestnastkowy);\n"
 "-silent - Tryb ukryty (jeśli dostępny);\n"
 "-? - Pokaż tę pomoc.\n"
 
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
-msgstr "UWAGA! Przed rozpoczęciem czyszczenia należy wysunąć wszystkie napędy flash."
+msgstr "OSTRZEŻENIE! Przed rozpoczęciem czyszczenia należy wysunąć wszystkie napędy flash."
 
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
@@ -115,7 +115,7 @@ msgstr "Zbieranie danych z rejestru systemowego..."
 
 #: STRING.139
 msgid "Found drives (will be ignored): "
-msgstr "Znalezione napędy (będą ignorowane): "
+msgstr "Znaleziono napędy (będą ignorowane): "
 
 #: STRING.140
 msgid "Cleaning..."
@@ -151,7 +151,7 @@ msgstr "Znaleziono napędy explorera: "
 
 #: STRING.148
 msgid "Remove error: "
-msgstr "Usunąć błąd: "
+msgstr "Usuwanie błędu: "
 
 #: STRING.149
 msgid "Gathering mount point's data..."
@@ -159,7 +159,7 @@ msgstr "Zbieranie danych punktu montowania..."
 
 #: STRING.150
 msgid "Found ControlSets: "
-msgstr "Znaleziono Zestawy Sterowania: "
+msgstr "Znaleziono zestawy sterowania: "
 
 #: STRING.151
 msgid "Found keys: "
@@ -183,7 +183,7 @@ msgstr "Zalogowanie do konta systemowego powiodło się."
 
 #: STRING.156
 msgid "Failed to login under system account."
-msgstr "Zalogowanie do konta systemowego nie powiodło się."
+msgstr "Nie powiodło się zalogowanie do konta systemowego."
 
 #: STRING.157
 msgid "Re-starting under administrator..."
@@ -219,15 +219,15 @@ msgstr "Zbieranie danych z dziennika..."
 
 #: STRING.165
 msgid "File removal error:"
-msgstr "Plik usuwania błędu:"
+msgstr "Błąd podczas usuwania pliku: "
 
 #: STRING.166
 msgid "Removing file at boot-time:"
-msgstr "Usuwanie pliku w czasie rozruchu:"
+msgstr "Usuwanie pliku w czasie rozruchu: "
 
 #: STRING.167
 msgid "Journal cleanup error:"
-msgstr "Dziennik błędów czyszczenie:"
+msgstr "Błąd podczas czyszczenia dziennika: "
 
 #: STRING.168
 msgid "Creating System Restore Point..."
