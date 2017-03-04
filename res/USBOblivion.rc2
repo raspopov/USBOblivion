@@ -36,7 +36,7 @@ BEGIN
 #else
             VALUE "InternalName", "USBOblivion32"
 #endif
-            VALUE "LegalCopyright", "Copyright © Nikolay Raspopov, 2009-2017. http://www.cherubicsoft.com/en/projects/usboblivion"
+            VALUE "LegalCopyright", "Copyright (C) Nikolay Raspopov, 2009-2017. http://www.cherubicsoft.com/en/projects/usboblivion"
 #ifdef WIN64
             VALUE "OriginalFilename", "USBOblivion64.exe"
 #else
