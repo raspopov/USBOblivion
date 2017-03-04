@@ -1,0 +1,235 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: USBOblivion32.exe\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.12\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr_TR\n"
+
+#: DIALOGCAPTION.102
+msgid "USBOblivion"
+msgstr "USBOblivion"
+
+#: DIALOGCONTROL.102.Button.1
+msgid "Clean"
+msgstr "Temizle"
+
+#: DIALOGCONTROL.102.Button.1002
+msgid "Do real clean (simulation otherwise)"
+msgstr "İşaretleyin, (aksi halde similasyon işlevi görür)"
+
+#: DIALOGCONTROL.102.Button.1003
+msgid "Save backup .reg-file"
+msgstr ".reg Kurtarma Dosyasını Kaydet"
+
+#: DIALOGCONTROL.102.Button.2
+msgid "Exit"
+msgstr "Çıkış"
+
+#: MENUITEM.130.32771
+msgid "Copy"
+msgstr "Kopyala"
+
+#: MENUITEM.130.32772
+msgid "Copy all"
+msgstr "Hepsini Kopyala"
+
+#: MENUPOPUP.130.0
+msgid "Context"
+msgstr "Durum"
+
+#: STRING.129
+msgid ""
+"Usage:\n"
+"\n"
+"USBOblivion[32|64].exe [params]\n"
+"\n"
+"Params:\n"
+"\n"
+"-enable - Do real clean (simulation otherwise);\n"
+"-auto - Automatic run;\n"
+"-nosave - Don't save a registry backup file;\n"
+"-save:filename - Save a registry backup to this file;\n"
+"-log:filename - Save working log to this file;\n"
+"-norestorepoint - Don't create a System Restore Point;\n"
+"-lang:XX - Use language XX (hex-code);\n"
+"-silent - Hidden mode (if possible);\n"
+"-? - Show this help.\n"
+msgstr ""
+"Kullanımı:\n"
+"\n"
+"USBOblivion[32-64].exe [parametreler]\n"
+"\n"
+"Parametreler:\n"
+"\n"
+"-enable - Gerçek Temizlik için İşaretleyin (Aksi Halde Simülasyon yaparsınız);\n"
+"-auto - Otomatik Çalıştır;\n"
+"-nosave - Kayıt Defteri Dosyasını Yedekleme;\n"
+"-save:Dosya Adı - Kayıt Defteri Dosyasını Yedekle;\n"
+"-log:Dosya Adı - Çalışma Günlüğünü Bu Dosyaya Kaydedin;\n"
+"-norestorepoint - Sistem Geri Yükleme Noktası Oluşturma;\n"
+"-lang:XX - XX Dil Dosyanızın Numarası (Hex-Kodu);\n"
+"-silent - Gizli Mod (Mümkünse);\n"
+"-? - Yardımı Görüntüle.\n"
+
+#: STRING.130
+msgid "WARNING! Eject all flash drives before cleaning please."
+msgstr "UYARI! Temizlemeden Önce Tüm Flash Sürücüleri(Bellekleri) Çıkarın Lütfen."
+
+#: STRING.131
+msgid "Press \"Clean\" button to begin cleaning."
+msgstr "Temizlemeye Başlamak için \"Temizle\" Düğmesine Basın."
+
+#: STRING.132
+msgid "Process mode: real (data will be cleaned)."
+msgstr "İşlem Modu: Gerçek (Veriler Temizlenir)."
+
+#: STRING.133
+msgid "Process mode: simulation (no data will be cleaned)."
+msgstr "İşlem Modu: Simülasyon (Hiçbir Veri temizlenmez)."
+
+#: STRING.134
+msgid "File creation error: "
+msgstr "Dosya Oluşturma Hatası:"
+
+#: STRING.135
+msgid "File write error: "
+msgstr "Dosya Yazma Hatası:"
+
+#: STRING.136
+msgid "Backup file: "
+msgstr "Yedeklenen Dosya:"
+
+#: STRING.137
+msgid "Done."
+msgstr "Tamamlandı."
+
+#: STRING.138
+msgid "Gathering data from system registry..."
+msgstr "Sistem Kayıt Defterinden Veri Toplanıyor ..."
+
+#: STRING.139
+msgid "Found drives (will be ignored): "
+msgstr "Bulunan Sürücüler (Yoksayılacak):"
+
+#: STRING.140
+msgid "Cleaning..."
+msgstr "Temizleniyor..."
+
+#: STRING.141
+msgid "Removing key: "
+msgstr "Silinen Anahtar:"
+
+#: STRING.142
+msgid "Removing value: "
+msgstr "Silinen Değer:"
+
+#: STRING.143
+msgid "Gathering user data..."
+msgstr "Kullanıcı Verileri Toplanıyor ..."
+
+#: STRING.144
+msgid "Gathering data about user: "
+msgstr "Kullanıcı Hakkındaki Toplanan Veriler:"
+
+#: STRING.145
+msgid "Found users: "
+msgstr "Bulunan Kullanıcılar:"
+
+#: STRING.146
+msgid "Found mount points: "
+msgstr "Bulunan Bağlantı Noktaları;"
+
+#: STRING.147
+msgid "Found Explorer drives: "
+msgstr "Bulunan Explorer Sürücüleri:"
+
+#: STRING.148
+msgid "Remove error: "
+msgstr "Kaldırma Hatası:"
+
+#: STRING.149
+msgid "Gathering mount point's data..."
+msgstr "Bağlama Noktası Verileri Toplanıyor ..."
+
+#: STRING.150
+msgid "Found ControlSets: "
+msgstr "ControlSet'de Bulunanlar:"
+
+#: STRING.151
+msgid "Found keys: "
+msgstr "Bulunan Anahtarlar:"
+
+#: STRING.152
+msgid "Found values: "
+msgstr "Bulunan Değerler:"
+
+#: STRING.153
+msgid "Key access denied: "
+msgstr "Anahtar Erişim Hatası:"
+
+#: STRING.154
+msgid "Disk %c: has been inserted."
+msgstr "Disk %c: Yerleştirildi."
+
+#: STRING.155
+msgid "Logged-in under system account successfully."
+msgstr "Sistem Hesabı Altında Başarıyla Oturum Açıldı."
+
+#: STRING.156
+msgid "Failed to login under system account."
+msgstr "Sistem Hesabı Altında Oturum Açılamadı."
+
+#: STRING.157
+msgid "Re-starting under administrator..."
+msgstr "Yönetici Modunda Tekrar Başlatılıyor ..."
+
+#: STRING.158
+msgid "Disk %c: has been ejected."
+msgstr "Disk %c: Çıkarıldı."
+
+#: STRING.159
+msgid "Failed to eject disk %c:."
+msgstr "Disk Çıkartma Başarısız %c:."
+
+#: STRING.160
+msgid "Ejecting disk %c:..."
+msgstr " %c: Diski Çıkartılıyor ..."
+
+#: STRING.161
+msgid "Removing file: "
+msgstr "Kaldırılan Dosya:"
+
+#: STRING.162
+msgid "Gathering file data..."
+msgstr "Dosya Verilerini Topluyor..."
+
+#: STRING.163
+msgid "Cleaning journal: "
+msgstr "Günlük Temizleniyor:"
+
+#: STRING.164
+msgid "Gathering journal data..."
+msgstr "Günlük Verilerini Topluyor..."
+
+#: STRING.165
+msgid "File removal error:"
+msgstr "Dosya Kaldırma Hatası:"
+
+#: STRING.166
+msgid "Removing file at boot-time:"
+msgstr "Önyükleme Sırasından Dosya Kaldırılıyor:"
+
+#: STRING.167
+msgid "Journal cleanup error:"
+msgstr "Günlük Temizleme Hatası:"
+
+#: STRING.168
+msgid "Creating System Restore Point..."
+msgstr "Sistem Geri Yükleme Noktası Oluşturuluyor..."

@@ -1,6 +1,6 @@
 ﻿USB Oblivion
 
-Copyright (C) Nikolay Raspopov, 2009-2016.
+Copyright (C) Nikolay Raspopov, 2009-2017.
 http://www.cherubicsoft.com/en/projects/usboblivion
 
 ========================================================================
@@ -57,18 +57,25 @@ Languages:
 	-lang:16 - Brazilian Portuguese (by Paulo Guzmán)
 	-lang:19 - Russian (by Nikolay Raspopov)
 	-lang:1d - Swedish (by Ake Engelbrektson)
+	-lang:1f - Turkish (by Murat)
 
 ========================================================================
 
 System Requirements:
 
-  * Windows XP/2003/Vista/2008/7/8/8.1/10 32/64-bit
+  * Windows 2000/XP/2003/Vista/2008/7/8/8.1/10 32/64-bit
   * About 3 Mb of disk space. No installation needed.
   * Administrative privileges.
 
 ========================================================================
 
 Changes:
+
+1.11.3.0
+
+	* Added Turkish translation (by Murat)
+	* Windows 2000 compatibility
+	* Updated Polish translation (by dmocha)
 
 1.11.2.0
 

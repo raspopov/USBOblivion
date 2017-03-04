@@ -30,21 +30,13 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\USBOblivion.ico"
-
 IDI_INF                 ICON                    "res\\info.ico"
-
 IDI_WARN                ICON                    "res\\warning.ico"
-
 IDI_ERR                 ICON                    "res\\error.ico"
-
 IDI_SEARCH              ICON                    "res\\search.ico"
-
 IDI_DONE                ICON                    "res\\done.ico"
-
 IDI_REGEDIT             ICON                    "res\\regedit.ico"
-
 IDI_LOCK                ICON                    "res\\lock.ico"
-
 IDI_EJECT               ICON                    "res\\eject.ico"
 
 
@@ -54,24 +46,16 @@ IDI_EJECT               ICON                    "res\\eject.ico"
 //
 
 7                       PO                      "res\\USBOblivion32.exe.07.po_"
-
 8                       PO                      "res\\USBOblivion32.exe.08.po_"
-
 10                      PO                      "res\\USBOblivion32.exe.0a.po_"
-
 12                      PO                      "res\\USBOblivion32.exe.0c.po_"
-
 16                      PO                      "res\\USBOblivion32.exe.10.po_"
-
 18                      PO                      "res\\USBOblivion32.exe.12.po_"
-
 21                      PO                      "res\\USBOblivion32.exe.15.po_"
-
 22                      PO                      "res\\USBOblivion32.exe.16.po_"
-
 25                      PO                      "res\\USBOblivion32.exe.19.po_"
-
 29                      PO                      "res\\USBOblivion32.exe.1d.po_"
+31                      PO                      "res\\USBOblivion32.exe.1f.po_"
 
 
 /////////////////////////////////////////////////////////////////////////////
