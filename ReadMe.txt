@@ -56,6 +56,7 @@ Languages:
 	-lang:15 - Polish (by dmocha)
 	-lang:16 - Brazilian Portuguese (by Paulo Guzmán)
 	-lang:19 - Russian (by Nikolay Raspopov)
+	-lang:20 - Czech (by Jaaka)
 	-lang:1d - Swedish (by Ake Engelbrektson)
 	-lang:1f - Turkish (by Murat)
 
@@ -70,6 +71,10 @@ System Requirements:
 ========================================================================
 
 Changes:
+
+1.11.4.0
+
+	* Added Czech translation (by Jaaka)
 
 1.11.3.0
 

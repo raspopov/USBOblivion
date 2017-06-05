@@ -1,0 +1,235 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: USBOblivion32.exe\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.2\n"
+"Last-Translator: jaaka\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Language: cs_CZ\n"
+
+#: DIALOGCAPTION.102
+msgid "USBOblivion"
+msgstr "USBOblivion"
+
+#: DIALOGCONTROL.102.Button.1
+msgid "Clean"
+msgstr "Čistit"
+
+#: DIALOGCONTROL.102.Button.1002
+msgid "Do real clean (simulation otherwise)"
+msgstr "Vyčistit systémový registr (NE simulace)"
+
+#: DIALOGCONTROL.102.Button.1003
+msgid "Save backup .reg-file"
+msgstr "Zálohovat systémový registr"
+
+#: DIALOGCONTROL.102.Button.2
+msgid "Exit"
+msgstr "Konec"
+
+#: MENUITEM.130.32771
+msgid "Copy"
+msgstr "Kopírovat"
+
+#: MENUITEM.130.32772
+msgid "Copy all"
+msgstr "Kopírovat vše"
+
+#: MENUPOPUP.130.0
+msgid "Context"
+msgstr "Kontext"
+
+#: STRING.129
+msgid ""
+"Usage:\n"
+"\n"
+"USBOblivion[32|64].exe [params]\n"
+"\n"
+"Params:\n"
+"\n"
+"-enable - Do real clean (simulation otherwise);\n"
+"-auto - Automatic run;\n"
+"-nosave - Don't save a registry backup file;\n"
+"-save:filename - Save a registry backup to this file;\n"
+"-log:filename - Save working log to this file;\n"
+"-norestorepoint - Don't create a System Restore Point;\n"
+"-lang:XX - Use language XX (hex-code);\n"
+"-silent - Hidden mode (if possible);\n"
+"-? - Show this help.\n"
+msgstr ""
+"Použití:\n"
+"\n"
+"USBOblivion[32|64].exe [parametry]\n"
+"\n"
+"Parametry:\n"
+"\n"
+"-enable - Vyčistit (NE simulace);\n"
+"-auto - Automatické spuštění;\n"
+"-nosave - Nezálohovat registr systému do souboru;\n"
+"-save:filename - Uložit zálohu registru do souboru filename;\n"
+"-log:filename - Ukládat log činnosti do souboru filename;\n"
+"-norestorepoint - Nevytvářet bod obnovení;\n"
+"-lang:XX - Použít jazyk XX (hexadecimální kód);\n"
+"-silent - Skrytý mód (je-li možné);\n"
+"-? - Tato nápověda.\n"
+
+#: STRING.130
+msgid "WARNING! Eject all flash drives before cleaning please."
+msgstr "VAROVÁNÍ: Odpojte před čistěním všechny flash disky."
+
+#: STRING.131
+msgid "Press \"Clean\" button to begin cleaning."
+msgstr "Pro spuštění čistění stiskněte tlačítko \"Čistit\"."
+
+#: STRING.132
+msgid "Process mode: real (data will be cleaned)."
+msgstr "Typ procesu: skutečné (data budou vymazána)."
+
+#: STRING.133
+msgid "Process mode: simulation (no data will be cleaned)."
+msgstr "Typ procesu: simuace (data nebudou vymazána)."
+
+#: STRING.134
+msgid "File creation error: "
+msgstr "Chyba vytvoření souboru:"
+
+#: STRING.135
+msgid "File write error: "
+msgstr "Chyba zápisu do souboru:"
+
+#: STRING.136
+msgid "Backup file: "
+msgstr "Záloha souboru:"
+
+#: STRING.137
+msgid "Done."
+msgstr "Hotovo."
+
+#: STRING.138
+msgid "Gathering data from system registry..."
+msgstr "Načítám data ze systémového registu..."
+
+#: STRING.139
+msgid "Found drives (will be ignored): "
+msgstr "Nalezené jednotky (bude ignorováno):"
+
+#: STRING.140
+msgid "Cleaning..."
+msgstr "Čistění..."
+
+#: STRING.141
+msgid "Removing key: "
+msgstr "Odstraněn klíč:"
+
+#: STRING.142
+msgid "Removing value: "
+msgstr "Odstraněna hodnota:"
+
+#: STRING.143
+msgid "Gathering user data..."
+msgstr "Načítám uživatelská data..."
+
+#: STRING.144
+msgid "Gathering data about user: "
+msgstr "Načítám data o uživateli:"
+
+#: STRING.145
+msgid "Found users: "
+msgstr "Nalezeni uživatelé:"
+
+#: STRING.146
+msgid "Found mount points: "
+msgstr "Nalezen bod obnovy:"
+
+#: STRING.147
+msgid "Found Explorer drives: "
+msgstr "Nalezeny jednotky Exploreru:"
+
+#: STRING.148
+msgid "Remove error: "
+msgstr "Odstranit chybu:"
+
+#: STRING.149
+msgid "Gathering mount point's data..."
+msgstr "Načítám data o bodu obnovení..."
+
+#: STRING.150
+msgid "Found ControlSets: "
+msgstr "Nalezené systémové ControlSets:"
+
+#: STRING.151
+msgid "Found keys: "
+msgstr "Nalezené klíče:"
+
+#: STRING.152
+msgid "Found values: "
+msgstr "Nalezené hodnoty:"
+
+#: STRING.153
+msgid "Key access denied: "
+msgstr "Přístup ke klíči zakázán:"
+
+#: STRING.154
+msgid "Disk %c: has been inserted."
+msgstr "Disk %c: vložen."
+
+#: STRING.155
+msgid "Logged-in under system account successfully."
+msgstr "Přihlášení bylo úspěšné."
+
+#: STRING.156
+msgid "Failed to login under system account."
+msgstr "Přihlášení nebylo úspěšné."
+
+#: STRING.157
+msgid "Re-starting under administrator..."
+msgstr "Restartuji jako administrator..."
+
+#: STRING.158
+msgid "Disk %c: has been ejected."
+msgstr "Disk %c: odpojen."
+
+#: STRING.159
+msgid "Failed to eject disk %c:."
+msgstr "Chyba odpojení disku %c:"
+
+#: STRING.160
+msgid "Ejecting disk %c:..."
+msgstr "Odpojuji disk %c:..."
+
+#: STRING.161
+msgid "Removing file: "
+msgstr "Odstranění souboru:"
+
+#: STRING.162
+msgid "Gathering file data..."
+msgstr "Načítám data..."
+
+#: STRING.163
+msgid "Cleaning journal: "
+msgstr "Čištění žurnálu:"
+
+#: STRING.164
+msgid "Gathering journal data..."
+msgstr "Načítám data žurnálu..."
+
+#: STRING.165
+msgid "File removal error:"
+msgstr "Chyba odstranění souboru:"
+
+#: STRING.166
+msgid "Removing file at boot-time:"
+msgstr "Odstranit soubor po restartu:"
+
+#: STRING.167
+msgid "Journal cleanup error:"
+msgstr "Chyba při čištění žurnálu:"
+
+#: STRING.168
+msgid "Creating System Restore Point..."
+msgstr "Vytvářím bod obnovení..."

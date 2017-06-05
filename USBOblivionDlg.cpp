@@ -1756,7 +1756,7 @@ void CUSBOblivionDlg::DoDeleteLog(LPCTSTR szName)
 				{
 					const DWORD dwErr = GetLastError();
 					CString sError;
-					sError.Format( _T("%s %s (Error %u)"), LoadString( IDS_RUN_LOG_ERROR ), szName, dwErr );
+					sError.Format( _T("%s %s (Error %u)"), (LPCTSTR)LoadString( IDS_RUN_LOG_ERROR ), szName, dwErr );
 					Log( sError, Error );
 				}
 			}
@@ -1766,7 +1766,7 @@ void CUSBOblivionDlg::DoDeleteLog(LPCTSTR szName)
 		{
 			const DWORD dwErr = GetLastError();
 			CString sError;
-			sError.Format( _T("%s %s (Error %u)"), LoadString( IDS_RUN_LOG_ERROR ), szName, dwErr );
+			sError.Format( _T("%s %s (Error %u)"), (LPCTSTR)LoadString( IDS_RUN_LOG_ERROR ), szName, dwErr );
 			Log( sError, Error );
 		}
 	}

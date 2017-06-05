@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -31,26 +31,26 @@
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseOfMfc>Static</UseOfMfc>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -121,7 +121,7 @@
       <AdditionalDependencies>windowscodecs.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX86</TargetMachine>
-      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <DelayLoadDLLs>ADVAPI32.DLL;COMCTL32.DLL;GDIPLUS.DLL;IMM32.DLL;LZ32.DLL;MSIMG32.DLL;OLE32.DLL;OLEACC.DLL;OLEAUT32.DLL;OLEDLG.DLL;SETUPAPI.DLL;SHELL32.DLL;SHLWAPI.DLL;USERENV.DLL;UXTHEME.DLL;WINMM.DLL;WINSPOOL.DRV;%(DelayLoadDLLs)</DelayLoadDLLs>
       <SwapRunFromCD>true</SwapRunFromCD>
@@ -166,7 +166,7 @@
       <AdditionalDependencies>windowscodecs.lib;setupapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
       <TargetMachine>MachineX64</TargetMachine>
-      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
       <DelayLoadDLLs>ADVAPI32.DLL;COMCTL32.DLL;GDIPLUS.DLL;IMM32.DLL;LZ32.DLL;MSIMG32.DLL;OLE32.DLL;OLEACC.DLL;OLEAUT32.DLL;OLEDLG.DLL;SETUPAPI.DLL;SHELL32.DLL;SHLWAPI.DLL;USERENV.DLL;UXTHEME.DLL;WINMM.DLL;WINSPOOL.DRV;%(DelayLoadDLLs)</DelayLoadDLLs>
       <SwapRunFromCD>true</SwapRunFromCD>
@@ -319,6 +319,7 @@
     <None Include="..\res\USBOblivion32.exe.19.po_" />
     <None Include="..\res\USBOblivion32.exe.1d.po_" />
     <None Include="..\res\USBOblivion32.exe.1f.po_" />
+    <None Include="..\res\USBOblivion32.exe.20.po_" />
     <None Include="..\res\warning.ico" />
   </ItemGroup>
   <ItemGroup>
