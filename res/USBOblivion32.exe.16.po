@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.3\n"
 
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
@@ -21,7 +21,7 @@ msgstr "Limpar"
 
 #: DIALOGCONTROL.102.Button.1002
 msgid "Do real clean (simulation otherwise)"
-msgstr "Simular Limpeza Real"
+msgstr "Fazer limpeza real (simulação se marcado)"
 
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
@@ -61,13 +61,13 @@ msgid ""
 "-silent - Hidden mode (if possible);\n"
 "-? - Show this help.\n"
 msgstr ""
-"Em uso:\n"
+"Uso:\n"
 "\n"
 "USBOblivion[32|64].exe [parâmetros]\n"
 "\n"
 "Parâmetros:\n"
 "\n"
-"-enable - Simular Limpeza Real;\n"
+"-enable - Limpeza Real(simulação se marcado);\n"
 "-auto - Executar automaticamente;\n"
 "-nosave - Não salvar backup em arquivo .reg;\n"
 "-save:filename - Save a registry backup to this file;\n"
@@ -79,7 +79,7 @@ msgstr ""
 
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
-msgstr "ATENÇÃO! Por favor, remova todos os drivers flash antes de limpar."
+msgstr "ATENÇÃO! Por favor, remova todos os drives flash antes de limpar."
 
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
@@ -95,15 +95,15 @@ msgstr "Modo de processamento: simulação (nenhum dado será limpo)."
 
 #: STRING.134
 msgid "File creation error: "
-msgstr "Erro ao criar o arquivo:"
+msgstr "Erro ao criar o arquivo: "
 
 #: STRING.135
 msgid "File write error: "
-msgstr "Erro ao salvar o arquivo:"
+msgstr "Erro ao salvar o arquivo: "
 
 #: STRING.136
 msgid "Backup file: "
-msgstr "Arquivo de backup:"
+msgstr "Arquivo de backup: "
 
 #: STRING.137
 msgid "Done."
@@ -123,11 +123,11 @@ msgstr "Limpando..."
 
 #: STRING.141
 msgid "Removing key: "
-msgstr "Chave removida:"
+msgstr "Chave removida: "
 
 #: STRING.142
 msgid "Removing value: "
-msgstr "Valor removido:"
+msgstr "Valor removido: "
 
 #: STRING.143
 msgid "Gathering user data..."
@@ -135,23 +135,23 @@ msgstr "Coletando dados do usuário..."
 
 #: STRING.144
 msgid "Gathering data about user: "
-msgstr "Coletando dados sobre o usuário:"
+msgstr "Coletando dados sobre o usuário: "
 
 #: STRING.145
 msgid "Found users: "
-msgstr "Usuários encontrados:"
+msgstr "Usuários encontrados: "
 
 #: STRING.146
 msgid "Found mount points: "
-msgstr "Pontos de montagem encontrados:"
+msgstr "Pontos de montagem encontrados: "
 
 #: STRING.147
 msgid "Found Explorer drives: "
-msgstr "Unidades encontradas no Explorer:"
+msgstr "Unidades encontradas no Explorer: "
 
 #: STRING.148
 msgid "Remove error: "
-msgstr "Erro removido:"
+msgstr "Erro na remoção: "
 
 #: STRING.149
 msgid "Gathering mount point's data..."
@@ -159,19 +159,19 @@ msgstr "Coletando dados do ponto de montagem..."
 
 #: STRING.150
 msgid "Found ControlSets: "
-msgstr "Conjuntos de Controle encontrados:"
+msgstr "Conjuntos de Controle encontrados: "
 
 #: STRING.151
 msgid "Found keys: "
-msgstr "Chaves encontradas:"
+msgstr "Chaves encontradas: "
 
 #: STRING.152
 msgid "Found values: "
-msgstr "Valores encontrados:"
+msgstr "Valores encontrados: "
 
 #: STRING.153
 msgid "Key access denied: "
-msgstr "Chave de acesso negada:"
+msgstr "Chave de acesso negada: "
 
 #: STRING.154
 msgid "Disk %c: has been inserted."
@@ -183,23 +183,23 @@ msgstr "Autenticado na conta do sistema com êxito."
 
 #: STRING.156
 msgid "Failed to login under system account."
-msgstr "Falhou ao efetuar login na conta do sistema."
+msgstr "Falha ao fazer login na conta do sistema."
 
 #: STRING.157
 msgid "Re-starting under administrator..."
-msgstr "Reiniciar como Administrador"
+msgstr "Reiniciar como Administrador..."
 
 #: STRING.158
 msgid "Disk %c: has been ejected."
-msgstr "O dispositivo %c: foi ejetado."
+msgstr "O dispositivo %c: foi removido."
 
 #: STRING.159
 msgid "Failed to eject disk %c:."
-msgstr "Falha ao ejatar o dispositivo %c:."
+msgstr "Falha ao remover o dispositivo %c:."
 
 #: STRING.160
 msgid "Ejecting disk %c:..."
-msgstr "Ejetando o dispositivo %c:..."
+msgstr "Removendo o dispositivo %c:..."
 
 #: STRING.161
 msgid "Removing file: "
@@ -211,24 +211,24 @@ msgstr "Coletando dados do arquivo..."
 
 #: STRING.163
 msgid "Cleaning journal: "
-msgstr "Limpeza:"
+msgstr "Limpeza de histórico: "
 
 #: STRING.164
 msgid "Gathering journal data..."
-msgstr "Coletando os dados para limpeza..."
+msgstr "Coletando os dados de hitórico..."
 
 #: STRING.165
 msgid "File removal error:"
-msgstr ""
+msgstr "Falha na remoção do arquivo:"
 
 #: STRING.166
 msgid "Removing file at boot-time:"
-msgstr ""
+msgstr "Arquivo será removido na hora da reinicialização:"
 
 #: STRING.167
 msgid "Journal cleanup error:"
-msgstr ""
+msgstr "Erro na limpeza do histórico:"
 
 #: STRING.168
 msgid "Creating System Restore Point..."
-msgstr ""
+msgstr "Criando Ponto de Restauração do Sistema..."
