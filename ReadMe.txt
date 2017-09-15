@@ -50,15 +50,15 @@ Languages:
 	-lang:08 - Greek (by Geogeo)
 	-lang:09 - English (by Nikolay Raspopov)
 	-lang:0a - Spanish (by CesarRG)
-	-lang:0c - French (by Mathieu Bergounioux)
+	-lang:0c - French (by Mathieu Bergounioux, Rico-sos)
 	-lang:10 - Italian (by Marcello Gianola)
 	-lang:12 - Korean (by 4Li)
 	-lang:15 - Polish (by dmocha)
-	-lang:16 - Brazilian Portuguese (by Paulo Guzmán)
+	-lang:16 - Brazilian Portuguese (by Paulo Guzmán, Newton Apostolico)
 	-lang:19 - Russian (by Nikolay Raspopov)
-	-lang:20 - Czech (by Jaaka)
 	-lang:1d - Swedish (by Ake Engelbrektson)
 	-lang:1f - Turkish (by Murat)
+	-lang:20 - Czech (by Jaaka)
 
 ========================================================================
 
@@ -71,6 +71,12 @@ System Requirements:
 ========================================================================
 
 Changes:
+
+1.11.5.0
+
+	* Updated Greek translation (by Geogeo)
+	* Updated Brazilian Portuguese translation (by Newton Apostolico)
+	* Updated French translation (by Rico-sos)
 
 1.11.4.0
 

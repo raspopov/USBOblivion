@@ -23,7 +23,7 @@
     <ProjectGuid>{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}</ProjectGuid>
     <RootNamespace>USBOblivion64</RootNamespace>
     <Keyword>MFCProj</Keyword>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -126,6 +126,7 @@
       <DelayLoadDLLs>ADVAPI32.DLL;COMCTL32.DLL;GDIPLUS.DLL;IMM32.DLL;LZ32.DLL;MSIMG32.DLL;OLE32.DLL;OLEACC.DLL;OLEAUT32.DLL;OLEDLG.DLL;SETUPAPI.DLL;SHELL32.DLL;SHLWAPI.DLL;USERENV.DLL;UXTHEME.DLL;WINMM.DLL;WINSPOOL.DRV;%(DelayLoadDLLs)</DelayLoadDLLs>
       <SwapRunFromCD>true</SwapRunFromCD>
       <SwapRunFromNET>true</SwapRunFromNET>
+      <Version>5.01</Version>
     </Link>
     <PreBuildEvent>
       <Command>for %%i in ($(SolutionDir)..\res\*.po) do "$(SolutionDir)..\Localization\compress.exe" "%%i" "%%i_"</Command>
@@ -218,6 +219,7 @@
       <SwapRunFromCD>true</SwapRunFromCD>
       <SwapRunFromNET>true</SwapRunFromNET>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
+      <Version>5.01</Version>
     </Link>
     <PostBuildEvent />
     <PreBuildEvent>

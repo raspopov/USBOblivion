@@ -95,7 +95,7 @@ BOOL CUSBOblivionApp::InitInstance()
 			}
 			else if ( CmpStrI( szArglist[ i ], _T("-lang:"), 6 ) || CmpStrI( szArglist[ i ], _T("/lang:"), 6 ) )
 			{
-				int lang;
+				unsigned lang;
 				if ( _stscanf_s( szArglist[ i ] + 6, _T("%x"), &lang ) == 1 )
 				{
 					nLang = (LANGID)lang;

@@ -31,18 +31,20 @@ static char THIS_FILE[]=__FILE__;
 #endif
 
 // Construction/Destruction
-CCtrlResize::CControlInfo::CControlInfo () :
-	controlID(0), bindtype (BIND_UNKNOWN), rectInitial( 0, 0, 0, 0 ), m_pControlWnd(NULL)
+CCtrlResize::CControlInfo::CControlInfo ()
+	: controlID(0)
+	, bindtype (BIND_UNKNOWN)
+	, rectInitial( 0, 0, 0, 0 )
+	, m_pControlWnd(NULL)
 {
 }
 
-CCtrlResize::CControlInfo::CControlInfo (int _controlID, int _bindtype,
-	const CRect& _rectInitial, CWnd* _pWnd)
+CCtrlResize::CControlInfo::CControlInfo (int _controlID, int _bindtype, const CRect& _rectInitial, CWnd* _pWnd)
+	: controlID ( _controlID )
+	, bindtype ( _bindtype )
+	, rectInitial ( _rectInitial )
+	, m_pControlWnd ( _pWnd )
 {
-	controlID = _controlID;
-	bindtype = _bindtype;
-	rectInitial = _rectInitial;
-	m_pControlWnd = _pWnd;
 }
 
 CCtrlResize::CCtrlResize() :
