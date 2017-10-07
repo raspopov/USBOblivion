@@ -50,9 +50,21 @@
 #define IDS_DELETE_FILE_BOOT            166
 #define IDS_RUN_LOG_ERROR               167
 #define IDS_RESTORE_POINT               168
+#define IDS_RUN_EXPLORER                169
+#define IDS_RUN_WINDOWS_SEARCH          170
+#define IDS_ERROR_RESTORE_POINT         171
+#define IDS_OK_RESTORE_POINT            172
+#define IDS_DISABLED_RESTORE_POINT      173
+#define IDS_RUN_REBOOT                  174
+#define IDS_RUN_START_EXPLORER          175
+#define IDS_ERROR_REBOOT                176
+#define IDS_SIMULATE                    177
+#define IDS_CLEAN                       178
 #define IDC_REPORT                      1000
 #define IDC_ENABLE                      1002
 #define IDC_SAVE                        1003
+#define IDC_REBOOT                      1004
+#define IDC_EXPLORER                    1005
 #define IDI_ERR                         32513
 #define IDI_WARN                        32515
 #define IDI_INF                         32516
@@ -63,7 +75,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        139
+#define _APS_NEXT_RESOURCE_VALUE        140
 #define _APS_NEXT_COMMAND_VALUE         32773
 #define _APS_NEXT_CONTROL_VALUE         1004
 #define _APS_NEXT_SYMED_VALUE           101

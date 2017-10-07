@@ -9,13 +9,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
 msgstr "USBOblivion"
 
-#: DIALOGCONTROL.102.Button.1
+#: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Очистка"
 
@@ -26,6 +26,14 @@ msgstr "Произвести реальную очистку (иначе сим�
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr "Сохранить .reg-файл отмены"
+
+#: DIALOGCONTROL.102.Button.1004
+msgid "Reboot Windows (RECOMMENDED)"
+msgstr "Перезапустить Windows (РЕКОМЕНДУЕТСЯ)"
+
+#: DIALOGCONTROL.102.Button.1005
+msgid "Close Windows Explorer (RECOMMENDED)"
+msgstr "Закрыть Проводник Windows (РЕКОМЕНДУЕТСЯ)"
 
 #: DIALOGCONTROL.102.Button.2
 msgid "Exit"
@@ -57,6 +65,8 @@ msgid ""
 "-save:filename - Save a registry backup to this file;\n"
 "-log:filename - Save working log to this file;\n"
 "-norestorepoint - Don't create a System Restore Point;\n"
+"-norestart - Don't restart Windows;\n"
+"-noexplorer - Don't close Windows Explorer;\n"
 "-lang:XX - Use language XX (hex-code);\n"
 "-silent - Hidden mode (if possible);\n"
 "-? - Show this help.\n"
@@ -70,9 +80,11 @@ msgstr ""
 "-enable - Рабочий режим очистки, иначе симуляция;\n"
 "-auto - Автоматический запуск;\n"
 "-nosave - Отмена сохранения резервной копии реестра;\n"
-"-save:filename - Сохранять резервную копию реестра в этот файл;\n"
-"-log:filename - Сохранять отчёт в этот файл;\n"
-"-norestorepoint - Отмена создания системной точки восстановления;\n"
+"-save:filename - Сохранять резервную копию реестра в файл;\n"
+"-log:filename - Сохранять отчёт в файл;\n"
+"-norestorepoint - Отмена создания точки восстановления;\n"
+"-norestart - Отмена перезапуска Windows;\n"
+"-noexplorer - Отмена закрытия Проводника;\n"
 "-lang:XX - Использовать язык XX (шестнадцатиричный код);\n"
 "-silent - Режим скрытности (если возможно);\n"
 "-? - Выдача этой справки.\n"
@@ -232,3 +244,39 @@ msgstr "Ошибка очистки журнала:"
 #: STRING.168
 msgid "Creating System Restore Point..."
 msgstr "Создание Системной Точки Восстановления..."
+
+#: STRING.169
+msgid "Closing Windows Explorer..."
+msgstr "Закрытие Проводника Windows..."
+
+#: STRING.170
+msgid "Gathering Windows Search cache data..."
+msgstr "Идёт сбор данных о кэшах Поиска Windows..."
+
+#: STRING.171
+msgid "System Restore Point creation error: "
+msgstr "Ошибка создания Системной Точки Восстановления: "
+
+#: STRING.172
+msgid "System Restore Point created successfully."
+msgstr "Системная Точка Восстановления создана."
+
+#: STRING.173
+msgid "System Restore Point disabled."
+msgstr "Системные Точки Восстановления выключены."
+
+#: STRING.174
+msgid "Restarting Windows..."
+msgstr "Перезапуск Windows..."
+
+#: STRING.175
+msgid "Restarting Windows Explorer..."
+msgstr "Перезапуск Проводника Windows..."
+
+#: STRING.176
+msgid "Failed to restart Windows: "
+msgstr "Ошибка перезапуска Windows: "
+
+#: STRING.177
+msgid "Simulate"
+msgstr "Симуляция"

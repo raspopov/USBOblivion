@@ -1,7 +1,7 @@
 //
 // USBOblivion.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2016.
+// Copyright (c) Nikolay Raspopov, 2009-2017.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -25,6 +25,7 @@
 
 #include "thread.h"
 #include "Localization\Localization.h"
+#include "DllLoader.h"
 
 using namespace c4u;
 
@@ -35,6 +36,22 @@ public:
 	CUSBOblivionApp();
 
 	CLocalization	m_Loc;
+
+	CDllLoader	m_advapi32;
+	FuncPtrType( LSTATUS ( WINAPI * )( _In_ HKEY hKey, _In_ LPCWSTR lpSubKey, _In_ REGSAM samDesired, _Reserved_ DWORD Reserved ) ) dyn_RegDeleteKeyExW;
+
+	CDllLoader	m_srclient;
+	FuncPtrType( BOOL  ( WINAPI * )( _In_ PRESTOREPOINTINFOW pRestorePtSpec, _Out_ PSTATEMGRSTATUS pSMgrStatus ) ) dyn_SRSetRestorePointW;
+
+	CDllLoader	m_rstrtmgr;
+	FuncPtrType( DWORD ( WINAPI * )( _Out_ DWORD *pSessionHandle, _Reserved_ DWORD dwSessionFlags, _Out_writes_( CCH_RM_SESSION_KEY + 1 ) WCHAR strSessionKey[] ) ) dyn_RmStartSession;
+	FuncPtrType( DWORD ( WINAPI * )( _In_ DWORD dwSessionHandle ) ) dyn_RmEndSession;
+	FuncPtrType( DWORD ( WINAPI * )( _In_ DWORD dwSessionHandle, _In_ UINT nFiles, _In_reads_opt_( nFiles ) LPCWSTR rgsFileNames[], _In_ UINT nApplications, _In_reads_opt_( nApplications ) RM_UNIQUE_PROCESS rgApplications[], _In_ UINT nServices, _In_reads_opt_( nServices ) LPCWSTR rgsServiceNames[] ) ) dyn_RmRegisterResources;
+	FuncPtrType( DWORD ( WINAPI * )( _In_ DWORD dwSessionHandle, _In_ ULONG lActionFlags, _In_opt_ RM_WRITE_STATUS_CALLBACK fnStatus ) ) dyn_RmShutdown;
+
+	CDllLoader	m_psapi;
+	FuncPtrType( BOOL  ( WINAPI * )( _Out_writes_bytes_( cb ) DWORD * lpidProcess, _In_ DWORD cb, _Out_ LPDWORD lpcbNeeded ) ) dyn_EnumProcesses;
+	FuncPtrType( DWORD ( WINAPI * )( _In_ HANDLE hProcess, _Out_writes_( nSize ) LPWSTR lpImageFileName, _In_ DWORD nSize ) ) dyn_GetProcessImageFileNameW;
 
 protected:
 	virtual BOOL InitInstance();

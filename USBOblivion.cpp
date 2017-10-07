@@ -3,7 +3,7 @@
 //
 // USBOblivion.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2016.
+// Copyright (c) Nikolay Raspopov, 2009-2017.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -31,16 +31,28 @@
 #define new DEBUG_NEW
 #endif
 
-#define LOCALE_INVARIANT_W2K \
-	(MAKELCID(MAKELANGID(LANG_ENGLISH, SUBLANG_ENGLISH_US), SORT_DEFAULT))
-
 BEGIN_MESSAGE_MAP(CUSBOblivionApp, CWinApp)
 END_MESSAGE_MAP()
 
 CUSBOblivionApp theApp;
 
 CUSBOblivionApp::CUSBOblivionApp()
+	: m_advapi32( _T( "advapi32.dll" ) )
+	, m_srclient( _T( "srclient.dll" ) )
+	, m_rstrtmgr( _T( "rstrtmgr.dll" ) )
+	, m_psapi	( _T( "psapi.dll" ) )
 {
+	FuncLoad( m_advapi32, RegDeleteKeyExW );
+
+	FuncLoad( m_srclient, SRSetRestorePointW );
+
+	FuncLoad( m_rstrtmgr, RmStartSession );
+	FuncLoad( m_rstrtmgr, RmEndSession );
+	FuncLoad( m_rstrtmgr, RmRegisterResources );
+	FuncLoad( m_rstrtmgr, RmShutdown );
+
+	FuncLoad( m_psapi, EnumProcesses );
+	FuncLoad( m_psapi, GetProcessImageFileNameW );
 }
 
 BOOL CUSBOblivionApp::InitInstance()
@@ -52,7 +64,7 @@ BOOL CUSBOblivionApp::InitInstance()
 
 	CWinApp::InitInstance();
 
-	SetRegistryKey( AfxGetAppName() );
+	SetRegistryKey( AFX_IDS_APP_TITLE );
 
 	CUSBOblivionDlg dlg;
 
@@ -75,6 +87,14 @@ BOOL CUSBOblivionApp::InitInstance()
 			else if ( CmpStrI( szArglist[ i ], _T("-auto") ) || CmpStrI( szArglist[ i ], _T("/auto") ) )
 			{
 				dlg.m_bAuto = TRUE;
+			}
+			else if ( CmpStrI( szArglist[ i ], _T( "-noexplorer" ) ) || CmpStrI( szArglist[ i ], _T( "/noexplorer" ) ) )
+			{
+				dlg.m_bCloseExplorer = FALSE;
+			}
+			else if ( CmpStrI( szArglist[ i ], _T( "-norestart" ) ) || CmpStrI( szArglist[ i ], _T( "/norestart" ) ) )
+			{
+				dlg.m_bReboot = FALSE;
 			}
 			else if ( CmpStrI( szArglist[ i ], _T("-norestorepoint") ) || CmpStrI( szArglist[ i ], _T("/norestorepoint") ) )
 			{
@@ -122,7 +142,7 @@ BOOL CUSBOblivionApp::InitInstance()
 
 	if ( bHelp )
 	{
-		AfxMessageBox( LoadString( IDS_ABOUT ) );
+		AfxMessageBox( LoadString( IDS_ABOUT ), MB_OK | MB_ICONINFORMATION );
 	}
 	else
 	{
@@ -143,37 +163,11 @@ int CUSBOblivionApp::ExitInstance()
 	return 0;
 }
 
-/*HMODULE AfxLoadSystemLibraryUsingFullPath(_In_z_ const WCHAR *pszLibrary)
-{
-WCHAR wszLoadPath[ MAX_PATH + 1 ];
-if ( ::GetSystemDirectoryW( wszLoadPath, _countof( wszLoadPath ) ) == 0 )
-{
-return NULL;
-}
-
-if ( wszLoadPath[ wcslen( wszLoadPath ) - 1 ] != L'\\' )
-{
-if ( wcscat_s( wszLoadPath, _countof( wszLoadPath ), L"\\") != 0 )
-{
-return NULL;
-}
-}
-
-if ( wcscat_s( wszLoadPath, _countof( wszLoadPath ), pszLibrary ) != 0 )
-{
-return NULL;
-}
-
-return ( ::AfxCtxLoadLibraryW( wszLoadPath ) );
-}*/
-
 bool CmpStrI(LPCTSTR szLeft, LPCTSTR szRight, int nCount)
 {
-	int ret = CompareString( LOCALE_INVARIANT, NORM_IGNORECASE,
-		szLeft, nCount, szRight, nCount );
+	int ret = CompareString( LOCALE_INVARIANT, NORM_IGNORECASE, szLeft, nCount, szRight, nCount );
 	if ( ! ret )
-		ret = CompareString( LOCALE_INVARIANT_W2K, NORM_IGNORECASE,
-			szLeft, nCount, szRight, nCount );
+		ret = CompareString( LOCALE_INVARIANT_W2K, NORM_IGNORECASE, szLeft, nCount, szRight, nCount );
 	ASSERT( ret );
 	return ( ret == CSTR_EQUAL );
 }
@@ -206,8 +200,7 @@ BOOL IsRunAsAdmin()
 {
 	PSID pAdministratorsGroup = NULL;
 	SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
-	if ( ! AllocateAndInitializeSid( &NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID,
-		DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &pAdministratorsGroup ) )
+	if ( ! AllocateAndInitializeSid( &NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &pAdministratorsGroup ) )
 	{
 		TRACE( _T("AllocateAndInitializeSid error: %d\n"), GetLastError() );
 		return FALSE;
@@ -236,8 +229,7 @@ BOOL IsProcessElevated()
 
 	TOKEN_ELEVATION elevation = {};
 	DWORD dwSize = 0;
-	if ( ! GetTokenInformation( hToken, TokenElevation, &elevation, 
-		sizeof( elevation ), &dwSize ) )
+	if ( ! GetTokenInformation( hToken, TokenElevation, &elevation, sizeof( elevation ), &dwSize ) )
 	{
 		TRACE( _T("GetTokenInformation error: %d\n"), GetLastError() );
 		CloseHandle( hToken );
@@ -267,7 +259,7 @@ HANDLE OpenProcessToken(HANDLE hProcess, DWORD dwAccess)
 		if ( GetTokenInformation( hSelfToken, TokenUser, pBuf, dwLen, &dwLen ) )
 		{
 			// Сборка дополнительного члена DACL, где своему SIDу разрешён нужный доступ
-			EXPLICIT_ACCESS ea = 
+			EXPLICIT_ACCESS ea =
 			{
 				dwAccess,
 				GRANT_ACCESS,
@@ -281,30 +273,23 @@ HANDLE OpenProcessToken(HANDLE hProcess, DWORD dwAccess)
 				}
 			};
 
-			// Открытие токена процесса с правами перезаписи DACL
-			// (нужна соответствующая привелегия)
-			if ( OpenProcessToken( hProcess, TOKEN_READ | WRITE_OWNER |
-				WRITE_DAC, &hToken ) )
+			// Открытие токена процесса с правами перезаписи DACL (нужна соответствующая привилегия)
+			if ( OpenProcessToken( hProcess, TOKEN_READ | WRITE_OWNER | WRITE_DAC, &hToken ) )
 			{
 				// Получение текущего DACL токена
 				PACL pOrigDacl = NULL;
 				PSECURITY_DESCRIPTOR pSD = NULL;
-				if ( GetSecurityInfo( hToken, SE_KERNEL_OBJECT,
-					DACL_SECURITY_INFORMATION, NULL, NULL,
-					&pOrigDacl, NULL, &pSD ) == ERROR_SUCCESS )
+				if ( GetSecurityInfo( hToken, SE_KERNEL_OBJECT, DACL_SECURITY_INFORMATION, NULL, NULL, &pOrigDacl, NULL, &pSD ) == ERROR_SUCCESS )
 				{
 					// Добавление себя в DACL токена
 					PACL pNewDacl = NULL;
 					if ( SetEntriesInAcl( 1, &ea, pOrigDacl, &pNewDacl ) == ERROR_SUCCESS )
 					{
 						// Установка нового DACL токена (перманентно!)
-						if ( SetSecurityInfo( hToken, SE_KERNEL_OBJECT,
-							DACL_SECURITY_INFORMATION, NULL, NULL,
-							pNewDacl, NULL ) == ERROR_SUCCESS )
+						if ( SetSecurityInfo( hToken, SE_KERNEL_OBJECT, DACL_SECURITY_INFORMATION, NULL, NULL, pNewDacl, NULL ) == ERROR_SUCCESS )
 						{
 							// Переоткрытие хэндла с нужными правами
-							if ( DuplicateHandle( hSelfProcess, hToken, hSelfProcess,
-								&hToken, dwAccess, FALSE, DUPLICATE_CLOSE_SOURCE ) )
+							if ( DuplicateHandle( hSelfProcess, hToken, hSelfProcess, &hToken, dwAccess, FALSE, DUPLICATE_CLOSE_SOURCE ) )
 							{
 								TRACE( _T("Got it!\n") );
 							}
@@ -382,7 +367,7 @@ DEVINST GetDrivesDevInstByDeviceNumber(DWORD DeviceNumber, UINT DriveType, LPCTS
 					// that contains the '&' char...
 
 					//DEVINST DevInstParent = 0;
-					//CM_Get_Parent(&DevInstParent, spdd.DevInst, 0); 
+					//CM_Get_Parent(&DevInstParent, spdd.DevInst, 0);
 					//char szDeviceIdString[MAX_PATH];
 					//CM_Get_Device_ID(DevInstParent, szDeviceIdString, MAX_PATH, 0);
 					//printf("DeviceId=%s\n", szDeviceIdString);
@@ -419,71 +404,10 @@ DEVINST GetDrivesDevInstByDeviceNumber(DWORD DeviceNumber, UINT DriveType, LPCTS
 	return 0;
 }
 
-/*
-BOOL ClearLog(LPCWSTR szLog = L"Microsoft-Windows-DriverFrameworks-UserMode/Operational" )
-{
-CComPtr< IWbemLocator > pLoc;
-HRESUILT hr = pLoc.CoCreateInstance( CLSID_WbemLocator );
-if ( SUCCEEDED( hr ) && pLoc )
-{
-CComPtr< IWbemServices > pSvc;
-hr = pLoc->ConnectServer(
-CComBSTR(L"ROOT\\CIMV2"), // Object path of WMI namespace
-NULL,                    // User name. NULL = current user
-NULL,                    // User password. NULL = current
-0,                       // Locale. NULL indicates current
-NULL,                    // Security flags.
-0,                       // Authority (for example, Kerberos)
-0,                       // Context object 
-&pSvc                    // pointer to IWbemServices proxy
-);
-if ( SUCCEEDED( hr ) && pSvc )
-{
-hr = CoSetProxyBlanket(
-pSvc,                        // Indicates the proxy to set
-RPC_C_AUTHN_WINNT,           // RPC_C_AUTHN_xxx
-RPC_C_AUTHZ_NONE,            // RPC_C_AUTHZ_xxx
-NULL,                        // Server principal name 
-RPC_C_AUTHN_LEVEL_CALL,      // RPC_C_AUTHN_LEVEL_xxx 
-RPC_C_IMP_LEVEL_IMPERSONATE, // RPC_C_IMP_LEVEL_xxx
-NULL,                        // client identity
-EOAC_NONE                    // proxy capabilities 
-);
-
-CComPtr< IEnumWbemClassObject > pEnumerator;
-hr = pSvc->ExecQuery(
-CComBSTR( L"WQL" ), 
-CComBSTR( CStringW( L"SELECT * FROM Win32_NTEventLogFile WHERE LogFileName=\"" ) + szLog + L"\"" ),
-WBEM_FLAG_BIDIRECTIONAL | WBEM_FLAG_RETURN_IMMEDIATELY, 
-NULL,
-&pEnumerator );
-if ( SUCCEEDED( hr ) && pEnumerator )
-{
-for ( ;; )
-{
-CComPtr< IWbemClassObject > pclsObj;
-ULONG uReturn = 0;
-hr = pEnumerator->Next( WBEM_INFINITE, 1, &pclsObj, &uReturn );
-if ( 0 == uReturn || ! pclsObj )
-break;
-
-CComVariant vtPath;
-hr = pclsObj->Get( L"__Path", 0, &vtPath, NULL, NULL );
-if ( SUCCEEDED( hr ) )
-{
-hr = pSvc->ExecMethod( vtPath.bstrVal, CComBSTR( L"ClearEventLog" ), 0, NULL, NULL, NULL, NULL );
-}
-}
-}
-}
-}
-}
-*/
-
 BOOL InitializeCOMSecurity()
-{   
+{
 	// Create the security descriptor explicitly as follows because
-	// CoInitializeSecurity() will not accept the relative security descriptors  
+	// CoInitializeSecurity() will not accept the relative security descriptors
 	// returned by ConvertStringSecurityDescriptorToSecurityDescriptor().
 	SECURITY_DESCRIPTOR securityDesc = {};
 	EXPLICIT_ACCESS   ea[5] = {};

@@ -3,7 +3,7 @@
 //
 // USBOblivionDlg.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2016.
+// Copyright (c) Nikolay Raspopov, 2009-2017.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -29,113 +29,6 @@
 #define new DEBUG_NEW
 #endif
 
-#define DELETE_EXCEPTION(e) do { if(e) { e->Delete(); } } while (0)
-
-// window creation hooking
-void AFXAPI AfxHookWindowCreate(CWnd* pWnd);
-BOOL AFXAPI AfxUnhookWindowCreate();
-
-// Files to delete
-const LPCTSTR szFiles[] =
-{
-	_T("%SystemRoot%\\setup*.log"),
-	_T("%SystemRoot%\\inf\\setupapi*.log"),
-	_T("%SystemRoot%\\inf\\INFCACHE.1"),
-	_T("%SystemRoot%\\System32\\wbem\\Logs\\wmiprov.log")
-};
-
-// Event logs to clear
-const LPCTSTR szLogs[] =
-{
-	_T("Microsoft-Windows-DeviceSetupManager/Operational"),
-	_T("Microsoft-Windows-DeviceSetupManager/Admin"),
-	_T("Microsoft-Windows-Kernel-PnP/Configuration"),
-	_T("Microsoft-Windows-Kernel-ShimEngine/Operational"),
-	_T("Microsoft-Windows-DriverFrameworks-UserMode/Operational"),
-	_T("HardwareEvents"),
-	_T("Application"),
-	_T("Security"),
-	_T("System")
-};
-
-const CString sSYS				= _T("SYSTEM");
-const CString sMD				= _T("SYSTEM\\MountedDevices");
-const CString sMP2				= _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2");
-const CString sCPC				= _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\MountPoints2\\CPC\\Volume");
-// Example: "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Search\VolumeInfoCache\E:"
-const CString sVolumeInfoCache	= _T("SOFTWARE\\Microsoft\\Windows Search\\VolumeInfoCache");
-
-static const CKeyDef defs[] =
-{
-	// "USB Mass Storage Device" 7/8/10, "Universal Serial Bus controllers" XP/Vista
-	{ mControlSet_Key, _T("Control\\Class\\{36FC9E60-C465-11CF-8056-444553540000}"), NULL, _T("InfSection"), _T("USBSTOR_BULK"), FALSE },
-	// "DVD/CD-ROM drives" XP, Vista
-	//{ mControlSet_Key, _T("Control\\Class\\{4D36E965-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("cdrom_install"), FALSE },
-	// "Disk drives" XP, Vista
-	//{ mControlSet_Key, _T("Control\\Class\\{4D36E967-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("disk_install"), FALSE },
-	// "Portable Devices" Vista
-	{ mControlSet_Key, _T("Control\\Class\\{EEC5AD98-8080-425F-922A-DABF3DE3F69A}"), NULL, _T("InfSection"), _T("Basic_Install"), FALSE },
-	// XP, Vista
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f56307-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f56308-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
-	// XP
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f5630a-b6bf-11d0-94f2-00a0c91efb8b}"), _T("STORAGE#RemovableMedia"), NULL, NULL, FALSE },
-	// XP, Vista
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}"), _T("STORAGE#RemovableMedia"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
-	// Vista
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
-	// Vista
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
-	// Windows 7
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
-	// windows 8
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Control\\DeviceClasses\\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
-	// XP
-	{ mControlSet_Key, _T("Enum\\STORAGE\\RemovableMedia"), NULL, NULL, NULL, FALSE },
-	// Vista
-	{ mControlSet_Key, _T("Enum\\STORAGE\\Volume"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Enum\\STORAGE\\Volume"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
-	// Windows 10
-	{ mControlSet_Key, _T("Enum\\SWD\\WPDBUSENUM"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Enum\\SWD\\WPDBUSENUM"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
-	// XP, Vista
-	{ mControlSet_Key, _T("Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
-	{ mControlSet_Key, _T("Services\\USBSTOR\\Enum"), NULL, NULL, NULL, TRUE },
-	// Vista
-	{ mControlSet_Key, _T("Enum\\WpdBusEnumRoot\\UMB"), _T("USBSTOR#Disk"), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T("Enum\\WpdBusEnumRoot\\UMB"), _T("USBSTOR#CdRom"), NULL, NULL, FALSE },
-	// Vista
-	{ mControlSet_Key, _T("Hardware Profiles\\0000\\System\\CurrentControlSet\\Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
-	{ mControlSet_Key, _T("Hardware Profiles\\0001\\System\\CurrentControlSet\\Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
-	{ mControlSet_Key, _T("Hardware Profiles\\0002\\System\\CurrentControlSet\\Enum\\USBSTOR"), NULL, NULL, NULL, TRUE },
-	// Vista
-	{ mHKLM_Val, _T("SOFTWARE\\Microsoft\\WBEM\\WDM"), _T("USBSTOR"), NULL, NULL, FALSE },
-	// Vista
-	{ mHKLM_Val, _T("SOFTWARE\\Microsoft\\WBEM\\WDM\\DREDGE"), _T("USBSTOR"), NULL, NULL, FALSE },
-	// Vista ReadyBoost
-	{ mHKLM_Key, _T("SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt"), NULL, NULL, NULL, FALSE },
-	// Vista
-	{ mHKLM_Key, _T("SOFTWARE\\Microsoft\\Windows Portable Devices\\Devices"), NULL, NULL, NULL, FALSE },
-	// AutoPlay
-	{ mHKCU_Key, _T("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\KnownDevices"), NULL, NULL, NULL, TRUE },
-	// SafelyRemove
-	{ mHKCU_Key, _T("SOFTWARE\\Software\\SafelyRemove\\Drives"), NULL, NULL, NULL, TRUE },
-	// MuiCache
-	{ mHKCU_Key, _T("SOFTWARE\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache"), NULL, NULL, NULL, TRUE },
-	// HandlerInstances
-	{ mHKCU_Key, _T("SOFTWARE\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\SyncMgr\\HandlerInstances"), NULL, NULL, NULL, TRUE },
-	// end
-	{ mControlSet_Key, NULL, NULL, NULL, NULL, FALSE }
-};
-
 
 CUSBOblivionDlg::CUSBOblivionDlg(CWnd* pParent /*=NULL*/)
 	: CDialog			( CUSBOblivionDlg::IDD, pParent )
@@ -146,21 +39,14 @@ CUSBOblivionDlg::CUSBOblivionDlg(CWnd* pParent /*=NULL*/)
 	, m_bRestorePoint	( TRUE )
 	, m_bElevation		( FALSE )
 	, m_bSilent			( FALSE )
+	, m_bReboot			( TRUE )
+	, m_bCloseExplorer	( TRUE )
 	, m_nSelected		( -1 )
 	, m_InitialRect		( 0, 0, 0, 0 )
 	, m_nDrives			( GetLogicalDrives() )
 	, m_bRunning		( false )
 	, m_pReportList		( new CLogList )
 {
-	if ( HMODULE hAdvapi32 = LoadLibrary( _T("advapi32.dll") ) )
-	{
-		(FARPROC&)m_pRegDeleteKeyExW = GetProcAddress( hAdvapi32, "RegDeleteKeyExW" );
-	}
-
-	if ( HMODULE hSrClient = LoadLibrary( _T("srclient.dll") ) )
-	{
-		(FARPROC&)m_fnSRSetRestorePointW = GetProcAddress( hSrClient, "SRSetRestorePointW" );
-	}
 }
 
 CUSBOblivionDlg::~CUSBOblivionDlg()
@@ -177,9 +63,11 @@ void CUSBOblivionDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialog::DoDataExchange(pDX);
 
-	DDX_Control(pDX, IDC_REPORT, m_pReport);
-	DDX_Check(pDX, IDC_ENABLE, m_bEnable);
-	DDX_Check(pDX, IDC_SAVE, m_bSave);
+	DDX_Control( pDX, IDC_REPORT, m_pReport );
+	DDX_Check( pDX, IDC_ENABLE, m_bEnable );
+	DDX_Check( pDX, IDC_SAVE, m_bSave );
+	DDX_Check( pDX, IDC_REBOOT, m_bReboot );
+	DDX_Check( pDX, IDC_EXPLORER, m_bCloseExplorer );
 }
 
 void CUSBOblivionDlg::CopyToClipboard(const CString& sData)
@@ -215,6 +103,7 @@ BEGIN_MESSAGE_MAP(CUSBOblivionDlg, CDialog)
 	ON_WM_HELPINFO()
 	ON_WM_DEVICECHANGE()
 	ON_WM_TIMER()
+	ON_BN_CLICKED( IDC_ENABLE, &CUSBOblivionDlg::OnBnClickedEnable )
 END_MESSAGE_MAP()
 
 BOOL CUSBOblivionDlg::OnInitDialog()
@@ -235,6 +124,8 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 	m_CtrlsResize.AddControl( IDCANCEL, BIND_RIGHT | BIND_BOTTOM );
 	m_CtrlsResize.AddControl( IDC_ENABLE, BIND_LEFT | BIND_BOTTOM);
 	m_CtrlsResize.AddControl( IDC_SAVE, BIND_LEFT | BIND_BOTTOM);
+	m_CtrlsResize.AddControl( IDC_REBOOT, BIND_LEFT | BIND_BOTTOM );
+	m_CtrlsResize.AddControl( IDC_EXPLORER, BIND_LEFT | BIND_BOTTOM );
 	m_CtrlsResize.FixControls();
 
 	SetIcon( m_hIcon, TRUE );
@@ -275,6 +166,7 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 	UpdateData( FALSE );
 
 	GetDlgItem( IDOK )->SendMessage( BCM_SETSHIELD, 0, ! IsProcessElevated() );
+	SetDlgItemText( IDOK, LoadString( m_bEnable ? IDS_CLEAN : IDS_SIMULATE ) );
 
 	if ( m_bAuto || m_bElevation )
 		PostMessage( WM_COMMAND, IDOK );
@@ -348,10 +240,12 @@ void CUSBOblivionDlg::OnOK()
 
 	GetDlgItem( IDC_ENABLE )->EnableWindow( FALSE );
 	GetDlgItem( IDC_SAVE )->EnableWindow( FALSE );
+	GetDlgItem( IDC_REBOOT )->EnableWindow( FALSE );
+	GetDlgItem( IDC_EXPLORER )->EnableWindow( FALSE );
 	GetDlgItem( IDOK )->EnableWindow( FALSE );
 	GetDlgItem( IDCANCEL )->EnableWindow( FALSE );
 
-	// Нужнен ли запуск под админом?
+	// Нужен ли запуск под админом?
 	if ( IsRunAsAdmin() || m_bElevation )
 	{
 		m_bRunning = true;
@@ -364,15 +258,19 @@ void CUSBOblivionDlg::OnOK()
 
 		CString sParams = _T("-elevation");
 		if ( m_bAuto )
-			sParams += _T(" -auto");
+			sParams += _T( " -auto" );
 		if ( m_bEnable )
-			sParams += _T(" -enable");
+			sParams += _T( " -enable" );
 		if ( ! m_bSave )
-			sParams += _T(" -nosave");
+			sParams += _T( " -nosave" );
 		if ( ! m_bRestorePoint )
-			sParams += _T("-norestorepoint");
+			sParams += _T( " -norestorepoint" );
+		if ( ! m_bCloseExplorer )
+			sParams += _T( " -noexplorer" );
+		if ( ! m_bReboot )
+			sParams += _T( " -norestart" );
 		if ( m_bSilent )
-			sParams += _T(" -silent");
+			sParams += _T( " -silent" );
 		sParams.AppendFormat( _T(" -lang:%x"), (int)theApp.m_Loc.GetLang() );
 
 		CString sPath;
@@ -397,11 +295,13 @@ void CUSBOblivionDlg::OnOK()
 
 	GetDlgItem( IDC_ENABLE )->EnableWindow( TRUE );
 	GetDlgItem( IDC_SAVE )->EnableWindow( TRUE );
+	GetDlgItem( IDC_REBOOT )->EnableWindow( TRUE );
+	GetDlgItem( IDC_EXPLORER )->EnableWindow( TRUE );
 	GetDlgItem( IDOK )->EnableWindow( TRUE );
 	GetDlgItem( IDCANCEL )->EnableWindow( TRUE );
 
 	Log( IDS_RUN_DONE, Done );
-	
+
 	if ( m_bAuto )
 		CDialog::OnOK();
 }
@@ -421,83 +321,32 @@ void CUSBOblivionDlg::RunThread()
 	// Подготовка к запуску
 	if ( PrepareBackup() )
 	{
-		// Запуск #1: с привелегиями
+		// Запуск #1: с привилегиями
 		if ( ! RunAsSystem() )
-			// Запуск #2: без привелегий
+			// Запуск #2: без привилегий
 			Run();
 	}
 
 	// Подчистка
 	FinishBackup();
 
+	Reboot();
+
+	if ( !m_bReboot && m_bCloseExplorer )
+	{
+		// Если нет перезагрузки, но Проводник был закрыт, то перезапуск Проводника
+		StartExplorer();
+	}
+
 	Log( IDS_RUN_DONE, Done );
 
 	CoUninitialize();
 }
 
-bool CUSBOblivionDlg::PrepareBackup()
-{
-	if ( ! m_bSave )
-		return true;
-
-	CString sPath = m_sSave;
-
-	if ( sPath.IsEmpty() )
-	{
-		CString sComputer;
-		DWORD dwComputerLen = MAX_PATH;
-		GetComputerName( sComputer.GetBuffer( MAX_PATH + 1 ), &dwComputerLen );
-		sComputer.ReleaseBuffer();
-
-		CString sLogFolder;
-		SHGetFolderPath( GetSafeHwnd(), CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT,
-			sLogFolder.GetBuffer( MAX_PATH + 1 ) );
-		sLogFolder.ReleaseBuffer();
-		sLogFolder.TrimRight( _T("\\") );
-
-		sPath.Format(
-	#ifdef WIN64
-			_T("%s\\USBOblivion-64-%s-%s.reg"),
-	#else
-			_T("%s\\USBOblivion-32-%s-%s.reg"),
-	#endif
-			(LPCTSTR)sLogFolder, (LPCTSTR)sComputer, (LPCTSTR)CTime::GetCurrentTime().Format( _T("%y%m%d-%H%M%S") ) );
-	}
-
-	if ( ! m_oFile.Open( sPath, CFile::modeCreate | CFile::modeWrite ) )
-	{
-		Log( LoadString( IDS_ERROR_FILE_CREATE ) + sPath, Error );
-		return false;
-	}
-
-	try
-	{
-		Write( _T("\xfeffWindows Registry Editor Version 5.00\r\n") );
-	}
-	catch ( CException* e )
-	{
-		e->Delete();
-		Log( LoadString( IDS_ERROR_FILE_WRITE ) + sPath, Error );
-		return false;
-	}
-
-	Log( LoadString( IDS_FILE_REG ) + sPath, Regedit );
-
-	return true;
-}
-
-void CUSBOblivionDlg::FinishBackup()
-{
-	if ( m_oFile != INVALID_HANDLE_VALUE )
-	{
-		m_oFile.Close();
-	}
-}
-
 BOOL CUSBOblivionDlg::RunAsSystem()
 {
 	CAccessToken oToken;
-    if ( oToken.GetProcessToken( TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY ) ) 
+    if ( oToken.GetProcessToken( TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY ) )
     {
 		// Для перечисления всех процессов
 		if ( ! oToken.EnablePrivilege( SE_DEBUG_NAME ) )
@@ -568,8 +417,7 @@ BOOL CUSBOblivionDlg::RunAsProcess(DWORD dwProcessID)
 	if ( HANDLE hProcess = OpenProcess( PROCESS_QUERY_INFORMATION, FALSE, dwProcessID ) )
 	{
 		// Нужен токен с имперсонацией
-		if ( HANDLE hToken = OpenProcessToken( hProcess,
-			TOKEN_QUERY | TOKEN_IMPERSONATE | TOKEN_DUPLICATE ) )
+		if ( HANDLE hToken = OpenProcessToken( hProcess, TOKEN_QUERY | TOKEN_IMPERSONATE | TOKEN_DUPLICATE ) )
 		{
 			// Вход под системным аккаунтом
 			if ( ImpersonateLoggedOnUser( hToken ) )
@@ -585,7 +433,7 @@ BOOL CUSBOblivionDlg::RunAsProcess(DWORD dwProcessID)
 			}
 			else
 				TRACE( _T("ImpersonateLoggedOnUser error: %u (PID: %d)\n"), GetLastError(), dwProcessID );
-		
+
 			CloseHandle( hToken );
 		}
 		else
@@ -620,7 +468,7 @@ void CUSBOblivionDlg::Log(const CString& sText, UINT nType)
 
 			if ( file.GetLength() == 0 )
 				file.Write( _T("\xfeff"), 2 );
-			
+
 			file.Write( sText, (UINT)( sText.GetLength() * sizeof( TCHAR ) ) );
 			file.Write( _T("\r\n"), (UINT)( 2 * sizeof( TCHAR ) ) );
 		}
@@ -630,11 +478,6 @@ void CUSBOblivionDlg::Log(const CString& sText, UINT nType)
 		}
 		END_CATCH_ALL
 	}
-}
-
-void CUSBOblivionDlg::Write(LPCTSTR szText)
-{
-	m_oFile.Write( szText, (UINT)( _tcslen( szText ) * sizeof( TCHAR ) ) );
 }
 
 CString CUSBOblivionDlg::GetKeyName(HKEY hRoot)
@@ -721,16 +564,19 @@ LSTATUS CUSBOblivionDlg::RegDeleteKeyFull(HKEY hKey, const CString& sSubKey)
 	// Удаление самого ключа
 	if ( m_bEnable )
 	{
-		if ( m_pRegDeleteKeyExW )
+		if ( theApp.dyn_RegDeleteKeyExW )
 		{
-			ret = m_pRegDeleteKeyExW( hKey, sSubKey, KEY_WOW64_64KEY, 0 );
+			ret = theApp.dyn_RegDeleteKeyExW( hKey, sSubKey, KEY_WOW64_64KEY, 0 );
 			if ( ret != ERROR_SUCCESS )
-				ret = m_pRegDeleteKeyExW( hKey, sSubKey, KEY_WOW64_32KEY, 0 );
+				ret = theApp.dyn_RegDeleteKeyExW( hKey, sSubKey, KEY_WOW64_32KEY, 0 );
 			if ( ret != ERROR_SUCCESS )
-				ret = m_pRegDeleteKeyExW( hKey, sSubKey, 0, 0 );
+				ret = theApp.dyn_RegDeleteKeyExW( hKey, sSubKey, 0, 0 );
 		}
 		else
+		{
 			ret = RegDeleteKeyW( hKey, sSubKey );
+		}
+
 		if ( ret == ERROR_ACCESS_DENIED )
 		{
 			Log( LoadString( IDS_DELETE_ERROR ) + GetKeyName( hKey ) + _T("\\") + sSubKey, Error );
@@ -853,8 +699,7 @@ bool CUSBOblivionDlg::EjectDrive(TCHAR DriveLetter)
 	DWORD DeviceNumber = (DWORD)-1;
 	STORAGE_DEVICE_NUMBER sdn = {};
 	DWORD dwBytesReturned = 0;
-	if ( DeviceIoControl( hVolume, IOCTL_STORAGE_GET_DEVICE_NUMBER,
-		NULL, 0, &sdn, sizeof( sdn ), &dwBytesReturned, NULL ) )
+	if ( DeviceIoControl( hVolume, IOCTL_STORAGE_GET_DEVICE_NUMBER, NULL, 0, &sdn, sizeof( sdn ), &dwBytesReturned, NULL ) )
 	{
 		DeviceNumber = sdn.DeviceNumber;
 	}
@@ -872,8 +717,7 @@ bool CUSBOblivionDlg::EjectDrive(TCHAR DriveLetter)
 		return false;
 
 	// get the device instance handle of the storage volume by means of a SetupDi enum and matching the device number
-	DEVINST DevInst = GetDrivesDevInstByDeviceNumber( DeviceNumber,
-		DriveType, szDosDeviceName );
+	DEVINST DevInst = GetDrivesDevInstByDeviceNumber( DeviceNumber, DriveType, szDosDeviceName );
 	if ( ! DevInst )
 		return false;
 
@@ -892,7 +736,7 @@ bool CUSBOblivionDlg::EjectDrive(TCHAR DriveLetter)
 	for ( int tries = 1; tries <= 3; ++tries )
 	{
 		// sometimes we need some tries...
-		PNP_VETO_TYPE VetoType = PNP_VetoTypeUnknown; 
+		PNP_VETO_TYPE VetoType = PNP_VetoTypeUnknown;
 		TCHAR szVetoName[ MAX_PATH ] = {};
 
 		// CM_Query_And_Remove_SubTree doesn't work for restricted users
@@ -919,768 +763,62 @@ bool CUSBOblivionDlg::EjectDrive(TCHAR DriveLetter)
 void CUSBOblivionDlg::Run()
 {
 	CString msg;
-	LRESULT ret;
-	TCHAR pszName[ 1024 ] = {};
-	DWORD cchName;
-	DWORD dwType;
-	BYTE pszValue[ 4096 ] = {};
-	DWORD cchValue;
 
 	Log( m_bEnable ? IDS_MODE_WORK : IDS_MODE_SIM );
 
 	VERIFY( InitializeCOMSecurity() );
 
-	// Creation of System Restore Point
-	RESTOREPOINTINFOW RestorePtInfo = {};
-	RestorePtInfo.dwRestorePtType = DEVICE_DRIVER_INSTALL;
+	EjectDrives();
+
+	CloseExplorer();
+
+	// Creation of System Restore Point - begin
+	RESTOREPOINTINFOW RestorePtInfo = { BEGIN_SYSTEM_CHANGE, DEVICE_DRIVER_INSTALL };
 	wcscpy_s( RestorePtInfo.szDescription, AfxGetAppName() );
-	RestorePtInfo.dwEventType = BEGIN_SYSTEM_CHANGE;
 	STATEMGRSTATUS SMgrStatus = { ERROR_SERVICE_DISABLED };
-	if ( m_fnSRSetRestorePointW && m_bRestorePoint && m_bEnable )
+	if ( theApp.dyn_SRSetRestorePointW && m_bRestorePoint )
 	{
 		Log( IDS_RESTORE_POINT );
 
-		if ( m_fnSRSetRestorePointW( &RestorePtInfo, &SMgrStatus ) )
+		if ( theApp.dyn_SRSetRestorePointW( &RestorePtInfo, &SMgrStatus ) )
 		{
-			TRACE( "Restore point created; number=%I64d.\n", SMgrStatus.llSequenceNumber );
+			// OK
 		}
 		else if ( SMgrStatus.nStatus == ERROR_SERVICE_DISABLED )
 		{
-			CString sError = _T("System Restore is turned off");
-			Log( sError, Warning );
+			Log( IDS_DISABLED_RESTORE_POINT, Warning );
 		}
 		else
 		{
-			CString sError;
-			sError.Format( _T("Failure to create the System Restore Point: %u"), SMgrStatus.nStatus );
-			Log( sError, Error );
+			msg.Format( _T( "%u" ), SMgrStatus.nStatus );
+			Log( LoadString( IDS_ERROR_RESTORE_POINT ) + msg, Error );
 		}
 	}
 
-	// Сбор данных о дисках с попыткой извлечения
-	DWORD nDrives = GetLogicalDrives();
-	CString drives;
-	DWORD nMask = 1;
-	for ( TCHAR i = _T('A'); i <= _T('Z'); ++i, nMask <<= 1 )
-	{
-		if ( ( nDrives & nMask ) != 0 )
-		{
-			CString drive;
-			drive += i;
-			drive += _T(":");		
+	CleanFiles();
 
-			UINT nType = GetDriveType( drive );
-			if ( ( nType == DRIVE_REMOVABLE /*|| nType == DRIVE_CDROM*/ ) && EjectDrive( i ) )
-			{
-				// Извлечено!
-			}
-			else
-				drives += drive + _T(" ");
-		}
-	}
+	CleanLogs();
 
-	//////////////////////////////////////////////////////////////////////
-	// Чистка файлов
+	CleanLocalMachine();
 
-	Log( IDS_RUN_FILES, Search );
+	CleanMountedDevices();
 
-	for ( int i = 0; i < _countof( szFiles ); ++i )
-	{
-		CString sFile;
-		ExpandEnvironmentStrings( szFiles[ i ], sFile.GetBuffer( 1024 ), 1024 );
-		sFile.ReleaseBuffer();
-		DoDeleteFile( sFile );
-	}
+	CleanWindowsSearch();
 
-	//////////////////////////////////////////////////////////////////////
-	// Чистка журналов
+	CleanUsers();
 
-	Log( IDS_RUN_LOGS, Search );
-
-	for ( int i = 0; i < _countof( szLogs ); ++i )
-	{
-		DoDeleteLog( szLogs[ i ] );
-	}
-
-	//////////////////////////////////////////////////////////////////////
-	// Чистка реестра
-
-	Log( IDS_RUN_REGISTRY, Search );
-
-	Log( LoadString( IDS_RUN_DISK_FOUND ) + drives );
-
-	// Обновление данных о дисках чтобы дважды не сообщать
-	Sleep( 2000 );
-	m_nDrives = GetLogicalDrives();
-
-	//////////////////////////////////////////////////////////////////////
-	// Сбор данных
-
-	CStringList oControlSets;
-	{
-		HKEY hSYS = NULL;
-		ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sSYS, KEY_READ, &hSYS );
-		if ( ret == ERROR_SUCCESS )
-		{
-			for ( DWORD dwIndex = 0; ; ++dwIndex )
-			{
-				cchName = _countof( pszName );
-				ret = SHEnumKeyEx( hSYS, dwIndex, pszName, &cchName );
-				if ( ret != ERROR_SUCCESS )
-					break;
-				if ( _tcslen( pszName ) == 13 && StrCmpNI( pszName, _T("ControlSet"), 10 ) == 0 )
-				{
-					oControlSets.AddTail( pszName );
-				}
-			}
-			RegCloseKey( hSYS );
-		}
-	}
-
-	msg.Format( _T("%d"), (int)oControlSets.GetCount() );
-	Log( LoadString( IDS_RUN_CONTROLSETS_FOUND ) + msg );
-
-	CStringList oKeys;			// Keys marked for deletion
-	CStringC2List oValues;		// Values marked for deletion
-	CStringList oIDs;			// Vendor IDs marked for deletion
-
-	for ( POSITION posControlSets = oControlSets.GetHeadPosition(); posControlSets; )
-	{
-		const CString sControlSetKey = sSYS + _T("\\") + oControlSets.GetNext( posControlSets ) + _T("\\");
-
-		// Detection of "USBSTOR#Disk" or "USBSTOR#CdRom" volumes inside "Enum\STORAGE\Volume" 
-		{
-			const CString sVolumeKey = sControlSetKey + _T("Enum\\STORAGE\\Volume");
-			HKEY hVolumeKey = NULL;
-			ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sVolumeKey, KEY_READ, &hVolumeKey );
-			if ( ret == ERROR_SUCCESS )
-			{
-				for ( DWORD dwVolumeIndex = 0; ; ++dwVolumeIndex )
-				{
-					pszName[ 0 ] = 0;
-					cchName = _countof( pszName );
-					ret = SHEnumKeyEx( hVolumeKey, dwVolumeIndex, pszName, &cchName );
-					if ( ret != ERROR_SUCCESS )
-						break;
-					if ( StrStrI( (LPCTSTR)pszName, _T("USBSTOR#Disk") ) || StrStrI( (LPCTSTR)pszName, _T("USBSTOR#CdRom") ) )
-					{
-						dwType = 0;
-						pszValue[ 0 ] = 0;
-						pszValue[ 1 ] = 0;
-						cchValue = sizeof( pszValue );
-						ret = SHGetValue( hVolumeKey, pszName, _T("Driver"), &dwType, pszValue, &cchValue );
-						if ( ret == ERROR_SUCCESS )
-						{
-							AddUnique( oKeys, sControlSetKey + _T("Control\\Class\\") + (LPCTSTR)pszValue );
-						}
-					}
-				}
-				RegCloseKey( hVolumeKey );
-			}
-		}
-
-		// Windows 8/10
-		// Detection of "USBSTOR" device containers
-		{
-			// Enumerate keys of "Control\DeviceContainers\{CLSID}"
-			const CString sDeviceContainersKey = sControlSetKey + _T("Control\\DeviceContainers");
-			HKEY hDeviceContainersKey = NULL;
-			ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sDeviceContainersKey, KEY_READ, &hDeviceContainersKey );
-			if ( ret == ERROR_SUCCESS )
-			{
-				for ( DWORD dwDeviceContainersIndex = 0; ; ++dwDeviceContainersIndex )
-				{
-					pszName[ 0 ] = 0;
-					cchName = _countof( pszName );
-					ret = SHEnumKeyEx( hDeviceContainersKey, dwDeviceContainersIndex, pszName, &cchName );
-					if ( ret != ERROR_SUCCESS )
-						break;
-					
-					// Enumerate values of "Control\DeviceContainers\{CLSID}\BaseContainers\{CLSID}"
-					const CString sBaseContainersKey = sDeviceContainersKey + _T("\\") + pszName;
-					HKEY hBaseContainersKey = NULL;
-					ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sBaseContainersKey + _T("\\BaseContainers\\") + pszName, KEY_READ, &hBaseContainersKey );
-					if ( ret == ERROR_SUCCESS )
-					{
-						for ( DWORD dwBaseContainersIndex = 0; ; ++dwBaseContainersIndex )
-						{
-							pszName[ 0 ] = 0;
-							cchName = _countof( pszName );
-							dwType = 0;
-							pszValue[ 0 ] = 0;
-							pszValue[ 1 ] = 0;
-							cchValue = sizeof( pszValue );
-							ret = SHEnumValue( hBaseContainersKey, dwBaseContainersIndex, pszName, &cchName, &dwType, pszValue, &cchValue );
-							if ( ret != ERROR_SUCCESS )
-								break;
-							pszValue[ cchValue ] = 0;
-							pszValue[ cchValue + 1 ] = 0;
-							if ( StrStrI( (LPCTSTR)pszName, _T("USBSTOR") ) )
-							{
-								AddUnique( oKeys, sBaseContainersKey );
-								break;
-							}
-						}
-						RegCloseKey( hBaseContainersKey );
-					}
-				}
-				RegCloseKey( hDeviceContainersKey );
-			}
-		}
-
-		// XP, Vista
-		// Удаление всех остальных ключей "Enum\\USB\\VID_xxx\\yyy" у которых значение "Service" равен "USBSTOR"
-		{
-			const CString sUSBKey = sControlSetKey + _T("Enum\\USB");
-			HKEY hUSBKeys = NULL;
-			ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sUSBKey, KEY_READ, &hUSBKeys );
-			if ( ret == ERROR_SUCCESS )
-			{
-				for ( DWORD dwUSBIndex = 0; ; ++dwUSBIndex )
-				{
-					pszName[ 0 ] = 0;
-					cchName = _countof( pszName );
-					ret = SHEnumKeyEx( hUSBKeys, dwUSBIndex, pszName, &cchName );
-					if ( ret != ERROR_SUCCESS )
-						break;
-					if ( CmpStrI( pszName, _T("Vid_"), 4 ) )
-					{
-						const CString sID = pszName;
-						const CString sDevKey = sUSBKey + _T("\\") + pszName;
-						HKEY hDevKeys = NULL;
-						ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sDevKey, KEY_READ, &hDevKeys );
-						if ( ret == ERROR_SUCCESS )
-						{
-							CStringList oSubKeys;
-							DWORD dwDelIndex = 0, dwDeleted = 0;
-							for ( ; ; ++dwDelIndex )
-							{
-								pszName[ 0 ] = 0;
-								cchName = _countof( pszName );
-								ret = SHEnumKeyEx( hDevKeys, dwDelIndex, pszName, &cchName );
-								if ( ret != ERROR_SUCCESS )
-									break;
-
-								dwType = 0;
-								pszValue[ 0 ] = 0;
-								pszValue[ 1 ] = 0;
-								cchValue = sizeof( pszValue );
-								ret = SHGetValue( hDevKeys, pszName, _T("Service"), &dwType, pszValue, &cchValue );
-								if ( ret == ERROR_SUCCESS && CmpStrI( (LPCTSTR)pszValue, _T("USBSTOR") ) )
-								{
-									dwDeleted++;
-
-									AddUnique( oIDs, sID );
-
-									AddUnique( oSubKeys, sDevKey + _T("\\") + pszName );
-
-									// Delete device container
-									dwType = 0;
-									pszValue[ 0 ] = 0;
-									pszValue[ 1 ] = 0;
-									cchValue = sizeof( pszValue );
-									ret = SHGetValue( hDevKeys, pszName, _T("ContainerID"), &dwType, pszValue, &cchValue );
-									if ( ret == ERROR_SUCCESS )
-									{
-										AddUnique( oKeys, sControlSetKey + _T("Control\\DeviceContainers\\") + (LPCTSTR)pszValue );
-									}
-
-									// Delete driver
-									dwType = 0;
-									pszValue[ 0 ] = 0;
-									pszValue[ 1 ] = 0;
-									cchValue = sizeof( pszValue );
-									ret = SHGetValue( hDevKeys, pszName, _T("Driver"), &dwType, pszValue, &cchValue );
-									if ( ret == ERROR_SUCCESS )
-									{
-										AddUnique( oKeys, sControlSetKey + _T("Control\\Class\\") + (LPCTSTR)pszValue );
-									}
-								}
-							}
-							RegCloseKey( hDevKeys );
-
-							// Удалены все подключи?
-							if ( dwDelIndex && dwDeleted == dwDelIndex )
-							{
-								// Удаление главного ключа
-								AddUnique( oKeys, sDevKey );
-								oSubKeys.RemoveAll();
-							}
-
-							for ( POSITION posSubKeys = oSubKeys.GetHeadPosition() ; posSubKeys; )
-								AddUnique( oKeys, oSubKeys.GetNext( posSubKeys ) );
-						}
-					}
-				}
-				RegCloseKey( hUSBKeys );
-			}
-		}
-	
-		// XP, Vista
-		// Удаление ссылок на драйвера (параметр "Driver") у устройств из "Enum\USBSTOR"
-		{
-			const CString sFullKey = sControlSetKey + _T("Enum\\USBSTOR");
-			HKEY hKeys = NULL;
-			ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sFullKey, KEY_READ, &hKeys );
-			if ( ret == ERROR_SUCCESS )
-			{
-				for ( DWORD dwIndex = 0; ; ++dwIndex )
-				{
-					pszName[ 0 ] = 0;
-					cchName = _countof( pszName );
-					ret = SHEnumKeyEx( hKeys, dwIndex, pszName, &cchName );
-					if ( ret != ERROR_SUCCESS )
-						break;
-
-					const CString sSubFullKey = sFullKey + _T("\\") + pszName;
-					HKEY hSubKeys = NULL;
-					ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sSubFullKey, KEY_READ, &hSubKeys );
-					if ( ret == ERROR_SUCCESS )
-					{
-						for ( DWORD dwSubIndex = 0; ; ++dwSubIndex )
-						{
-							pszName[ 0 ] = 0;
-							cchName = _countof( pszName );
-							ret = SHEnumKeyEx( hSubKeys, dwSubIndex, pszName, &cchName );
-							if ( ret != ERROR_SUCCESS )
-								break;
-
-							dwType = 0;
-							pszValue[ 0 ] = 0;
-							pszValue[ 1 ] = 0;
-							cchValue = sizeof( pszValue );
-							ret = SHGetValue( hSubKeys, pszName, _T("Driver"),
-								&dwType, pszValue, &cchValue );
-							if ( ret == ERROR_SUCCESS )
-							{
-								AddUnique( oKeys, sControlSetKey + _T("Control\\Class\\") + (LPCTSTR)pszValue );
-							}
-						}
-						RegCloseKey( hSubKeys );
-					}
-				}
-				RegCloseKey( hKeys );
-			}
-		}
-
-		// XP, Vista
-		// Удаление связанных пар "Control\\DeviceClasses\\{a5dcbf10-6530-11d2-901f-00c04fb951ed}" и "Enum\\USB"
-		{
-			const CString sFullKey = sControlSetKey + _T("Control\\DeviceClasses\\{a5dcbf10-6530-11d2-901f-00c04fb951ed}");
-			HKEY hKeys = NULL;
-			ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sFullKey, KEY_READ, &hKeys );
-			if ( ret == ERROR_SUCCESS )
-			{
-				for ( DWORD dwIndex = 0; ; ++dwIndex )
-				{
-					pszName[ 0 ] = 0;
-					cchName = _countof( pszName );
-					ret = SHEnumKeyEx( hKeys, dwIndex, pszName, &cchName );
-					if ( ret != ERROR_SUCCESS )
-						break;
-					if ( StrStrI( pszName, _T("USB#Vid") ) )
-					{
-						dwType = 0;
-						pszValue[ 0 ] = 0;
-						pszValue[ 1 ] = 0;
-						cchValue = sizeof( pszValue );
-						ret = SHGetValue( hKeys, pszName, _T("DeviceInstance"), &dwType, pszValue, &cchValue );
-						if ( ret == ERROR_SUCCESS )
-						{
-							const CString sEnumKey = sControlSetKey + _T("Enum\\") + (LPCTSTR)pszValue;
-							dwType = 0;
-							pszValue[ 0 ] = 0;
-							pszValue[ 1 ] = 0;
-							cchValue = sizeof( pszValue );
-							ret = SHGetValue( HKEY_LOCAL_MACHINE, sEnumKey, _T("Service"), &dwType, pszValue, &cchValue );
-							if ( ret == ERROR_SUCCESS && CmpStrI( (LPCTSTR)pszValue, _T("USBSTOR") ) )
-							{
-								AddUnique( oKeys, sFullKey + _T("\\") + pszName );
-								AddUnique( oKeys, sEnumKey );
-							}
-						}
-					}
-				}
-				RegCloseKey( hKeys );
-			}
-		}
-
-		// Deletion of control flags
-		LPCTSTR szControlFlags[] = {  _T("Control\\usbflags"), _T("Control\\usbstor") };
-		for ( int i = 0; i < _countof( szControlFlags ); ++i )
-		{
-			const CString sFullKey = sControlSetKey + szControlFlags[ i ];
-			HKEY hKeys = NULL;
-			ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sFullKey, KEY_READ, &hKeys );
-			if ( ret == ERROR_SUCCESS )
-			{
-				for ( DWORD dwIndex = 0; ; ++dwIndex )
-				{
-					pszName[ 0 ] = 0;
-					cchName = _countof( pszName );
-					ret = SHEnumKeyEx( hKeys, dwIndex, pszName, &cchName );
-					if ( ret != ERROR_SUCCESS )
-						break;
-
-					// VID_AAAA&PID_BBBB == AAAABBBBCCCC
-					const CString sName = pszName;
-					const CString sUsbflagsID = _T("vid_") + sName.Mid( 0, 4 ) + _T("&pid_") + sName.Mid( 4, 4 );
-					for ( POSITION posIDs = oIDs.GetHeadPosition(); posIDs; )
-					{
-						const CString sID = oKeys.GetNext( posIDs );
-						if ( sID.CompareNoCase( sUsbflagsID ) == 0 )
-						{
-							AddUnique( oKeys, sFullKey + _T("\\") + pszName );
-							break;
-						}
-					}
-				}
-				RegCloseKey( hKeys );
-			}
-		}
-
-		// Подчистка всего остального
-		for (int i = 0; defs[ i ].szKeyName; ++i )
-		{
-			if ( defs[ i ].nMode == mControlSet_Key )
-				ProcessKey( HKEY_LOCAL_MACHINE, sControlSetKey, defs[ i ], oKeys );
-			else if ( defs[ i ].nMode == mControlSet_Val )
-				ProcessValue( HKEY_LOCAL_MACHINE, sControlSetKey, defs[ i ], oValues );
-		}
-	}
-
-	// Обработка ключей
-	for (int i = 0; defs[ i ].szKeyName; ++i )
-	{
-		if ( defs[ i ].nMode == mHKLM_Key )
-			ProcessKey( HKEY_LOCAL_MACHINE, CString(), defs[ i ], oKeys );
-		else if ( defs[ i ].nMode == mHKCR_Key )
-			ProcessKey( HKEY_CLASSES_ROOT, CString(), defs[ i ], oKeys );
-	}
-
-	// Обработка переменных
-	for (int i = 0; defs[ i ].szKeyName; ++i )
-	{
-		if ( defs[ i ].nMode == mHKLM_Val )
-			ProcessValue( HKEY_LOCAL_MACHINE, CString(), defs[ i ], oValues );
-		else if ( defs[ i ].nMode == mHKCR_Val )
-			ProcessValue( HKEY_CLASSES_ROOT, CString(), defs[ i ], oValues );
-	}
-
-	msg.Format( _T("%d"), (int)oKeys.GetCount() );
-	Log( LoadString( IDS_RUN_KEYS_FOUND ) + msg );
-	msg.Format( _T("%d"), (int)oValues.GetCount() );
-	Log( LoadString( IDS_RUN_VALUES_FOUND ) + msg );
-
-	//////////////////////////////////////////////////////////////////////
-	// Удаление
-
-	if ( oKeys.GetCount() || oValues.GetCount() )
-		Log( IDS_RUN_CLEAN, Clean );
-
-	for ( POSITION posKeys = oKeys.GetHeadPosition(); posKeys; )
-	{
-		DeleteKey( HKEY_LOCAL_MACHINE, oKeys.GetNext( posKeys ) );
-	}
-
-	for ( POSITION posValues = oValues.GetHeadPosition(); posValues; )
-	{
-		const CStringC2& pValue = oValues.GetNext( posValues );
-		DeleteValue( HKEY_LOCAL_MACHINE, pValue.first, pValue.second );
-	}
-
-	//////////////////////////////////////////////////////////////////////
-	// Сбор данных
-
-	Log( IDS_RUN_MOUNTS, Search );
-
-	CStringList oMountedDevs;
-	{
-		HKEY hMD = NULL;
-		ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sMD, KEY_READ, &hMD );
-		if ( ret == ERROR_SUCCESS )
-		{
-			for ( DWORD dwIndex = 0; ; ++dwIndex )
-			{
-				pszName[ 0 ] = 0;
-				cchName = _countof( pszName );
-				dwType = 0;
-				pszValue[ 0 ] = 0;
-				pszValue[ 1 ] = 0;
-				cchValue = sizeof( pszValue );
-				ret = SHEnumValue( hMD, dwIndex, pszName, &cchName, &dwType, pszValue, &cchValue );
-				if ( ret != ERROR_SUCCESS )
-					break;
-				pszValue[ cchValue ] = 0;
-				pszValue[ cchValue + 1 ] = 0;
-				if ( StrStrI( (LPCTSTR)pszValue, _T("USBSTOR#Disk") ) ||
-					 StrStrI( (LPCTSTR)pszValue, _T("USBSTOR#CdRom") ) ||
-					 StrStrI( (LPCTSTR)pszValue, _T("STORAGE#RemovableMedia") ) )
-				{
-					oMountedDevs.AddTail( pszName );
-				}
-			}
-			RegCloseKey( hMD );
-		}
-	}
-
-	msg.Format( _T("%d"), (int)oMountedDevs.GetCount() );
-	Log( LoadString( IDS_RUN_MOUNT_FOUND ) + msg );
-
-	//////////////////////////////////////////////////////////////////////
-	// Удаление
-
-	bool bLog = true;
-
-	for ( POSITION posMountedDevs = oMountedDevs.GetHeadPosition(); posMountedDevs; )
-	{
-		POSITION posCurrent = posMountedDevs;
-		CString sDev = oMountedDevs.GetNext( posMountedDevs );
-
-		// HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices
-		// -> "\DosDevices\X:"
-		if ( sDev.GetLength() == 14 && sDev.Left( 12 ) == _T("\\DosDevices\\") )
-		{
-			// не трогать подключенные устройства
-			if ( ( nDrives & ( 1 << ( sDev.GetAt( 12 ) - _T('A') ) ) ) == 0 )
-			{
-				if ( bLog )
-				{
-					bLog = false;
-					Log( IDS_RUN_CLEAN, Clean );
-				}
-				DeleteValue( HKEY_LOCAL_MACHINE, sMD, sDev );
-				oMountedDevs.RemoveAt( posCurrent );
-			}
-		}
-		// -> "\??\Volume{CLSID}"
-		else if ( sDev.GetLength() == 48 && sDev.Left( 11 ) == _T("\\??\\Volume{") )
-		{
-			if ( bLog )
-			{
-				bLog = false;
-				Log( IDS_RUN_CLEAN, Clean );
-			}
-			DeleteValue( HKEY_LOCAL_MACHINE, sMD, sDev );
-			oMountedDevs.RemoveAt( posCurrent );
-		}
-	}
-
-	// Deletion of Windows Search cache
-	{
-		HKEY hKeys = NULL;
-		ret = RegOpenKeyFull( HKEY_LOCAL_MACHINE, sVolumeInfoCache, KEY_READ, &hKeys );
-		if ( ret == ERROR_SUCCESS )
-		{
-			for ( DWORD dwIndex = 0; ; ++dwIndex )
-			{
-				pszName[ 0 ] = 0;
-				cchName = _countof( pszName );
-				ret = SHEnumKeyEx( hKeys, dwIndex, pszName, &cchName );
-				if ( ret != ERROR_SUCCESS )
-					break;
-
-				// не трогать подключенные устройства
-				if ( pszName[ 1 ] == _T(':') && ( nDrives & ( 1 << ( pszName[ 0 ] - _T('A') ) ) ) == 0 )
-				{
-					if ( bLog )
-					{
-						bLog = false;
-						Log( IDS_RUN_CLEAN, Clean );
-					}
-					DeleteKey( HKEY_LOCAL_MACHINE, sVolumeInfoCache + _T("\\") + pszName );
-				}
-			}
-		}
-	}
-
-	//////////////////////////////////////////////////////////////////////
-	// Сбор данных
-
-	Log( IDS_RUN_USERS, Search );
-
-	CStringList oUsers;
-	for ( DWORD dwIndex = 0; ; ++dwIndex )
-	{
-		cchName = _countof( pszName );
-		ret = SHEnumKeyEx( HKEY_USERS, dwIndex, pszName, &cchName );
-		if ( ret != ERROR_SUCCESS )
-			break;
-		if ( StrStrI( pszName, _T("_Classes") ) == 0 ) // исключить "_Classes"
-		{
-			oUsers.AddTail( pszName );
-		}
-	}
-
-	msg.Format( _T("%d"), (int)oUsers.GetCount() );
-	Log( LoadString( IDS_RUN_USERS_FOUND ) + msg );
-
-	for ( POSITION posUsers = oUsers.GetHeadPosition(); posUsers; )
-	{
-		CStringList oPoints, oVolumes;
-		CString sKey = oUsers.GetNext( posUsers ) + _T("\\");
-	
-		Log( LoadString( IDS_RUN_USER ) + sKey.Left( sKey.Find( _T('\\') ) ), Search );
-		
-		CStringList oUKeys;
-		CStringC2List oUValues;
-
-		// Обработка ключей
-		for (int i = 0; defs[ i ].szKeyName; ++i )
-		{
-			if ( defs[ i ].nMode == mHKCU_Key )
-				ProcessKey( HKEY_USERS, sKey, defs[ i ], oUKeys );
-		}
-
-		// Обработка переменных
-		for (int i = 0; defs[ i ].szKeyName; ++i )
-		{
-			if ( defs[ i ].nMode == mHKCU_Val )
-				ProcessValue( HKEY_USERS, sKey, defs[ i ], oUValues );
-		}
-
-		{
-			HKEY hMP2 = NULL;
-			ret = RegOpenKeyFull( HKEY_USERS, sKey + sMP2, KEY_READ, &hMP2 );
-			if ( ret == ERROR_SUCCESS )
-			{
-				for ( DWORD dwIndex = 0; ; ++dwIndex )
-				{
-					pszName[ 0 ] = 0;
-					cchName = _countof( pszName );
-					ret = SHEnumKeyEx( hMP2, dwIndex, pszName, &cchName );
-					if ( ret != ERROR_SUCCESS )
-						break;
-					AddUnique( oPoints, sKey + sMP2 + _T("\\") + pszName );
-				}
-				RegCloseKey( hMP2 );
-			}
-		}
-
-		msg.Format( _T("%d"), (int)oPoints.GetCount() );
-		Log( LoadString( IDS_RUN_MOUNT_FOUND ) + msg );
-
-		{
-			HKEY hCPC = NULL;
-			ret = RegOpenKeyFull( HKEY_USERS, sKey + sCPC, KEY_READ, &hCPC );
-			if ( ret == ERROR_SUCCESS )
-			{
-				for ( DWORD dwIndex = 0; ; ++dwIndex )
-				{
-					pszName[ 0 ] = 0;
-					cchName = _countof( pszName );
-					ret = SHEnumKeyEx( hCPC, dwIndex, pszName, &cchName );
-					if ( ret != ERROR_SUCCESS )
-						break;
-					AddUnique( oVolumes, sKey + sCPC + _T("\\") + pszName );
-				}
-				RegCloseKey( hCPC );
-			}
-		}
-
-		msg.Format( _T("%d"), (int)oVolumes.GetCount() );
-		Log( LoadString( IDS_RUN_EXPLORER_FOUND ) + msg );
-
-		{
-			HKEY hCPC = NULL;
-			ret = RegOpenKeyFull( HKEY_USERS, sKey + sCPC, KEY_READ, &hCPC );
-			if ( ret == ERROR_SUCCESS )
-			{
-				for ( DWORD dwIndex = 0; ; ++dwIndex )
-				{
-					pszName[ 0 ] = 0;
-					cchName = _countof( pszName );
-					ret = SHEnumKeyEx( hCPC, dwIndex, pszName, &cchName );
-					if ( ret != ERROR_SUCCESS )
-						break;
-					AddUnique( oVolumes, sKey + sCPC + _T("\\") + pszName );
-				}
-				RegCloseKey( hCPC );
-			}
-		}
-
-		//////////////////////////////////////////////////////////////////
-		// Удаление
-
-		bLog = true;
-
-		if ( oUKeys.GetCount() || oUValues.GetCount() )
-		{
-			bLog = false;
-			Log( IDS_RUN_CLEAN, Clean );
-		}
-
-		for ( POSITION posKeys = oUKeys.GetHeadPosition(); posKeys; )
-		{
-			DeleteKey( HKEY_USERS, oUKeys.GetNext( posKeys ) );
-		}
-
-		for ( POSITION posValues = oUValues.GetHeadPosition(); posValues; )
-		{
-			const CStringC2& pValue = oUValues.GetNext( posValues );
-			DeleteValue( HKEY_USERS, pValue.first, pValue.second );
-		}
-
-		for ( POSITION posPoints = oPoints.GetHeadPosition(); posPoints; )
-		{
-			POSITION posCurrent = posPoints;
-			CString sPoint = oPoints.GetNext( posPoints );
-			CString sPointName = sPoint.Mid( sPoint.ReverseFind( _T('\\') ) + 1 );
-			if ( sPointName.GetLength() == 1 &&
-				// не трогать подключенные устройства
-				( nDrives & ( 1 << ( sPointName.GetAt( 0 ) - _T('A') ) ) ) == 0 )
-			{
-				if ( bLog )
-				{
-					bLog = false;
-					Log( IDS_RUN_CLEAN, Clean );
-				}
-				DeleteKey( HKEY_USERS, sPoint );
-				oPoints.RemoveAt( posCurrent );
-			}
-		}
-
-		for ( POSITION posVolumes = oVolumes.GetHeadPosition(); posVolumes; )
-		{
-			POSITION posCurrentVolumes = posVolumes;
-			CString sVolume = oVolumes.GetNext( posVolumes );
-			CString sVolumeName = sVolume.Mid( sVolume.ReverseFind( _T('\\') ) + 1 );
-			if ( bLog )
-			{
-				bLog = false;
-				Log( IDS_RUN_CLEAN, Clean );
-			}
-			for ( POSITION posPoints = oPoints.GetHeadPosition(); posPoints; )
-			{
-				POSITION posCurrentPoints = posPoints;
-				CString sPoint = oPoints.GetNext( posPoints );
-				CString sPointName = sPoint.Mid( sPoint.ReverseFind( _T('\\') ) + 1 );
-
-				if ( sPointName == sVolumeName )
-				{
-					DeleteKey( HKEY_USERS, sPoint );
-					oPoints.RemoveAt( posCurrentPoints );
-					break;
-				}
-			}
-			DeleteKey( HKEY_USERS, sVolume );
-			oVolumes.RemoveAt( posCurrentVolumes );
-		}
-	}
-
-	// System REstore Point creation
+	// Creation of System Restore Point - end
 	RestorePtInfo.dwEventType = END_SYSTEM_CHANGE;
-	if ( m_fnSRSetRestorePointW && SMgrStatus.nStatus == ERROR_SUCCESS )
+	if ( theApp.dyn_SRSetRestorePointW && m_bRestorePoint && SMgrStatus.nStatus == ERROR_SUCCESS )
 	{
-		if ( m_fnSRSetRestorePointW( &RestorePtInfo, &SMgrStatus ) )
+		if ( theApp.dyn_SRSetRestorePointW( &RestorePtInfo, &SMgrStatus ) )
 		{
-			TRACE( "Restore point created.\n" );
+			Log( IDS_OK_RESTORE_POINT, Done );
 		}
 		else
 		{
-			CString sError;
-			sError.Format( _T("Failure to create the System Restore Point: %u"), SMgrStatus.nStatus );
-			Log( sError, Error );
+			msg.Format( _T("%u"), SMgrStatus.nStatus );
+			Log( LoadString( IDS_ERROR_RESTORE_POINT ) + msg, Error );
 		}
 	}
 }
@@ -1698,13 +836,13 @@ void CUSBOblivionDlg::DoDeleteFile(LPCTSTR szPath)
 			if ( m_bEnable )
 			{
 				const CString sLongPath = CString( _T("\\\\?\\") ) + sPath;
-				if ( DeleteFile( sLongPath ) )
+				if ( ::DeleteFile( sLongPath ) )
 				{
 					Log( LoadString( IDS_DELETE_FILE ) + sPath, Clean );
 				}
 				else
 				{
-					if ( MoveFileEx( sLongPath, NULL, MOVEFILE_DELAY_UNTIL_REBOOT ) )
+					if ( ::MoveFileEx( sLongPath, NULL, MOVEFILE_DELAY_UNTIL_REBOOT ) )
 					{
 						Log( LoadString( IDS_DELETE_FILE_BOOT ) + sPath, Warning );
 					}
@@ -1727,12 +865,13 @@ void CUSBOblivionDlg::DoDeleteLog(LPCTSTR szName)
 	if ( m_bEnable )
 	{
 		// Using external utility - https://technet.microsoft.com/en-us/library/cc732848(v=ws.11).aspx
-		CString sCmd;
-		sCmd.Format( _T("wevtutil.exe cl %s"), szName );
+		TCHAR szCommand[ MAX_PATH ] = _T("wevtutil.exe cl ");
+		_tcscat_s( szCommand, szName );
+
 		STARTUPINFO si = { sizeof( STARTUPINFO ) };
 		si.dwFlags = STARTF_USESHOWWINDOW;
 		PROCESS_INFORMATION pi = {};
-		if ( CreateProcess( NULL, (LPTSTR)(LPCTSTR)sCmd, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi ) )
+		if ( CreateProcess( NULL, szCommand, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi ) )
 		{
 			// Wait until child process exits
 			WaitForSingleObject( pi.hProcess, INFINITE );
@@ -1754,20 +893,18 @@ void CUSBOblivionDlg::DoDeleteLog(LPCTSTR szName)
 				}
 				else
 				{
-					const DWORD dwErr = GetLastError();
-					CString sError;
-					sError.Format( _T("%s %s (Error %u)"), (LPCTSTR)LoadString( IDS_RUN_LOG_ERROR ), szName, dwErr );
-					Log( sError, Error );
+					CString msg;
+					msg.Format( _T("%s %s (%u)"), (LPCTSTR)LoadString( IDS_RUN_LOG_ERROR ), szName, GetLastError() );
+					Log( msg, Error );
 				}
 			}
 			CloseEventLog( hLog );
 		}
 		else
 		{
-			const DWORD dwErr = GetLastError();
-			CString sError;
-			sError.Format( _T("%s %s (Error %u)"), (LPCTSTR)LoadString( IDS_RUN_LOG_ERROR ), szName, dwErr );
-			Log( sError, Error );
+			CString msg;
+			msg.Format( _T("%s %s (%u)"), (LPCTSTR)LoadString( IDS_RUN_LOG_ERROR ), szName, GetLastError() );
+			Log( msg, Error );
 		}
 	}
 	else
@@ -1795,135 +932,6 @@ void CUSBOblivionDlg::DeleteValue(HKEY hRoot, LPCTSTR szSubKey, LPCTSTR szValue)
 		RegDeleteValueFull( hRoot, szSubKey, szValue );
 }
 
-void CUSBOblivionDlg::SaveKey(HKEY hRoot, LPCTSTR szKeyName, LPCTSTR szValueName)
-{
-	if ( m_oFile == INVALID_HANDLE_VALUE )
-		return;
-
-	TCHAR pszName[ 1024 ] = {};
-	DWORD cchName;
-	DWORD dwType;
-	BYTE pszValue[ 4096 ] = {};
-	DWORD cchValue;
-
-	HKEY hKey = NULL;
-	LSTATUS ret = RegOpenKeyFull( hRoot, szKeyName, KEY_READ, &hKey );
-	if ( ret == ERROR_SUCCESS )
-	{
-		Write( CString( _T("\r\n[") ) + GetKeyName( hRoot ) + _T("\\") +
-			szKeyName + _T("]\r\n") );
-
-		for ( DWORD dwIndex = 0; ; ++dwIndex )
-		{
-			pszName[ 0 ] = 0;
-			cchName = _countof( pszName );
-			dwType = 0;
-			pszValue[ 0 ] = 0;
-			pszValue[ 1 ] = 0;
-			cchValue = sizeof( pszValue );
-			ret = SHEnumValue( hKey, dwIndex, pszName, &cchName, &dwType,
-				pszValue, &cchValue );
-			if ( ret != ERROR_SUCCESS )
-				break;
-			pszValue[ cchValue ] = 0;
-			pszValue[ cchValue + 1 ] = 0;
-			if ( ! szValueName || CmpStrI( szValueName, pszName ) )
-			{
-				SaveValue( pszName, dwType, pszValue, cchValue );
-				if ( szValueName )
-					break;
-			}
-		}
-
-		if ( ! szValueName )
-		{
-			for ( DWORD dwIndex = 0; ; ++dwIndex )
-			{
-				pszName[ 0 ] = 0;
-				cchName = _countof( pszName );
-				ret = SHEnumKeyEx( hKey, dwIndex, pszName, &cchName );
-				if ( ret != ERROR_SUCCESS )
-					break;
-				SaveKey( hRoot, CString( szKeyName ) + _T("\\") + pszName );
-			}
-		}
-
-		RegCloseKey( hRoot );
-	}
-}
-
-void CUSBOblivionDlg::SaveValue(LPCTSTR szName, DWORD dwType, LPBYTE pData, DWORD dwSize)
-{
-	CString str;
-
-	if ( m_oFile == INVALID_HANDLE_VALUE )
-		return;
-
-	if ( *szName )
-	{
-		Write( _T("\"") );
-		Write( szName );
-		Write( _T("\"=") );
-	}
-	else if ( dwType != REG_SZ || dwSize != 0 )
-	{
-		Write( _T("@=") );
-	}
-
-	switch( dwType )
-	{
-	case REG_SZ:
-		Write( _T("\"") );
-		str = (LPCTSTR)pData;
-		str.Replace( _T("\\"), _T("\\\\") );
-		str.Replace( _T("\""), _T("\\\"") );
-		Write( (LPCTSTR)str );
-		Write( _T("\"") );
-		break;
-
-	case REG_DWORD:
-		ASSERT( dwSize == sizeof( DWORD ) );
-		str.Format( _T("dword:%08x"), *(DWORD*)pData );
-		Write( str );
-		break;
-
-	case REG_NONE:
-		ASSERT( dwSize == 0 );
-		Write( _T("hex(0):") );
-		break;
-
-	default:
-		switch( dwType )
-		{
-		case REG_BINARY:
-			Write( _T("hex:") );
-			break;
-		case REG_EXPAND_SZ:
-			Write( _T("hex(2):") );
-			break;
-		case REG_MULTI_SZ:
-			Write( _T("hex(7):") );
-			break;
-		case REG_QWORD:
-			ASSERT( dwSize == sizeof( QWORD ) );
-			Write( _T("hex(b):") );
-			break;
-		default:
-			str.Format( _T("hex(%08x):"), dwType );
-			Write( str );
-		}
-		for ( DWORD i = 0; i < dwSize; ++i )
-		{
-			if ( i == 0 )
-				str.Format( _T("%02x"), pData[ i ] );
-			else
-				str.Format( _T(",%02x"), pData[ i ] );
-			Write( str );
-		}
-	}
-	Write( _T("\r\n") );
-}
-
 void CUSBOblivionDlg::OnNMRClickReport(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
@@ -1938,7 +946,7 @@ void CUSBOblivionDlg::OnNMRClickReport(NMHDR *pNMHDR, LRESULT *pResult)
 		oMenu.LoadMenu( IDR_CONTEXT );
 		theApp.m_Loc.Translate( oMenu.GetSafeHmenu(), IDR_CONTEXT );
 		oMenu.GetSubMenu( 0 )->TrackPopupMenu( TPM_LEFTALIGN |TPM_RIGHTBUTTON,
-			pNMItemActivate->ptAction.x, 
+			pNMItemActivate->ptAction.x,
 			pNMItemActivate->ptAction.y, this );
 	}
 
@@ -2031,12 +1039,14 @@ void CUSBOblivionDlg::OnTimer(UINT_PTR nIDEvent)
 		m_bRunning = false;
 
 		m_threadRunThread.close();
-		
+
 		GetDlgItem( IDC_ENABLE )->EnableWindow( TRUE );
 		GetDlgItem( IDC_SAVE )->EnableWindow( TRUE );
+		GetDlgItem( IDC_REBOOT )->EnableWindow( TRUE );
+		GetDlgItem( IDC_EXPLORER )->EnableWindow( TRUE );
 		GetDlgItem( IDOK )->EnableWindow( TRUE );
 		GetDlgItem( IDCANCEL )->EnableWindow( TRUE );
-	
+
 		if ( m_bAuto )
 			CDialog::OnOK();
 	}
@@ -2085,7 +1095,7 @@ INT_PTR CUSBOblivionDlg::DoModal()
 		{
 			//
 			// We are hosted by non-MFC container
-			// 
+			//
 			pMainWnd->EnableWindow(FALSE);
 			bEnableMainWnd = TRUE;
 		}
@@ -2142,3 +1152,13 @@ INT_PTR CUSBOblivionDlg::DoModal()
 
 	return m_nModalResult;
 }
+
+void CUSBOblivionDlg::OnBnClickedEnable()
+{
+	UpdateData();
+
+	SetDlgItemText( IDOK, LoadString( m_bEnable ? IDS_CLEAN : IDS_SIMULATE ) );
+}
+
+#include "USBClean.inl"
+#include "USBBackup.inl"

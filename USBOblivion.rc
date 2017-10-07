@@ -30,13 +30,21 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDR_MAINFRAME           ICON                    "res\\USBOblivion.ico"
+
 IDI_INF                 ICON                    "res\\info.ico"
+
 IDI_WARN                ICON                    "res\\warning.ico"
+
 IDI_ERR                 ICON                    "res\\error.ico"
+
 IDI_SEARCH              ICON                    "res\\search.ico"
+
 IDI_DONE                ICON                    "res\\done.ico"
+
 IDI_REGEDIT             ICON                    "res\\regedit.ico"
+
 IDI_LOCK                ICON                    "res\\lock.ico"
+
 IDI_EJECT               ICON                    "res\\eject.ico"
 
 
@@ -46,16 +54,27 @@ IDI_EJECT               ICON                    "res\\eject.ico"
 //
 
 7                       PO                      "res\\USBOblivion32.exe.07.po_"
+
 8                       PO                      "res\\USBOblivion32.exe.08.po_"
+
 10                      PO                      "res\\USBOblivion32.exe.0a.po_"
+
 12                      PO                      "res\\USBOblivion32.exe.0c.po_"
+
 16                      PO                      "res\\USBOblivion32.exe.10.po_"
+
 18                      PO                      "res\\USBOblivion32.exe.12.po_"
+
 21                      PO                      "res\\USBOblivion32.exe.15.po_"
+
 22                      PO                      "res\\USBOblivion32.exe.16.po_"
+
 25                      PO                      "res\\USBOblivion32.exe.19.po_"
+
 29                      PO                      "res\\USBOblivion32.exe.1d.po_"
+
 31                      PO                      "res\\USBOblivion32.exe.1f.po_"
+
 32                      PO                      "res\\USBOblivion32.exe.20.po_"
 
 
@@ -79,17 +98,20 @@ END
 // Dialog
 //
 
-IDD_USBOBLIVION_DIALOG DIALOGEX 0, 0, 401, 202
+IDD_USBOBLIVION_DIALOG DIALOGEX 0, 0, 401, 228
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CLIPCHILDREN | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
 EXSTYLE WS_EX_APPWINDOW
 CAPTION "USBOblivion"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
-    DEFPUSHBUTTON   "Clean",IDOK,267,179,60,16
-    PUSHBUTTON      "Exit",IDCANCEL,334,179,60,16
+    DEFPUSHBUTTON   "Clean",IDOK,267,205,60,16
+    PUSHBUTTON      "Exit",IDCANCEL,334,205,60,16
     CONTROL         "",IDC_REPORT,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_ALIGNLEFT | LVS_NOCOLUMNHEADER | LVS_NOSORTHEADER | WS_BORDER | WS_TABSTOP,7,7,387,160
     CONTROL         "Do real clean (simulation otherwise)",IDC_ENABLE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,171,250,10
-    CONTROL         "Save backup .reg-file",IDC_SAVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,185,250,10
+    CONTROL         "Save backup .reg-file",IDC_SAVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,184,250,10
+    CONTROL         "Reboot Windows (RECOMMENDED)",IDC_REBOOT,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,212,250,10
+    CONTROL         "Close Windows Explorer (RECOMMENDED)",IDC_EXPLORER,
+                    "Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,198,250,10
 END
 
 
@@ -107,7 +129,7 @@ BEGIN
         RIGHTMARGIN, 394
         VERTGUIDE, 257
         TOPMARGIN, 7
-        BOTTOMMARGIN, 195
+        BOTTOMMARGIN, 221
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -153,12 +175,23 @@ END
 
 /////////////////////////////////////////////////////////////////////////////
 //
+// AFX_DIALOG_LAYOUT
+//
+
+IDD_USBOBLIVION_DIALOG AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
 // String Table
 //
 
 STRINGTABLE
 BEGIN
-    IDS_ABOUT               "Usage:\n\nUSBOblivion[32|64].exe [params]\n\nParams:\n\n-enable - Do real clean (simulation otherwise);\n-auto - Automatic run;\n-nosave - Don't save a registry backup file;\n-save:filename - Save a registry backup to this file;\n-log:filename - Save working log to this file;\n-norestorepoint - Don't create a System Restore Point;\n-lang:XX - Use language XX (hex-code);\n-silent - Hidden mode (if possible);\n-? - Show this help.\n"
+    IDS_ABOUT               "Usage:\n\nUSBOblivion[32|64].exe [params]\n\nParams:\n\n-enable - Do real clean (simulation otherwise);\n-auto - Automatic run;\n-nosave - Don't save a registry backup file;\n-save:filename - Save a registry backup to this file;\n-log:filename - Save working log to this file;\n-norestorepoint - Don't create a System Restore Point;\n-norestart - Don't restart Windows;\n-noexplorer - Don't close Windows Explorer;\n-lang:XX - Use language XX (hex-code);\n-silent - Hidden mode (if possible);\n-? - Show this help.\n"
     IDS_WARNING             "WARNING! Eject all flash drives before cleaning please."
     IDS_START               "Press ""Clean"" button to begin cleaning."
     IDS_MODE_WORK           "Process mode: real (data will be cleaned)."
@@ -179,6 +212,7 @@ STRINGTABLE
 BEGIN
     AFX_IDS_APP_TITLE       "USBOblivion"
     AFX_IDS_COMPANY_NAME    "Raspopov"
+    AFX_IDS_APP_ID          "USBOblivion"
 END
 
 STRINGTABLE
@@ -212,6 +246,20 @@ BEGIN
     IDS_DELETE_FILE_BOOT    "Removing file at boot-time:"
     IDS_RUN_LOG_ERROR       "Journal cleanup error:"
     IDS_RESTORE_POINT       "Creating System Restore Point..."
+    IDS_RUN_EXPLORER        "Closing Windows Explorer..."
+    IDS_RUN_WINDOWS_SEARCH  "Gathering Windows Search cache data..."
+    IDS_ERROR_RESTORE_POINT "System Restore Point creation error: "
+    IDS_OK_RESTORE_POINT    "System Restore Point created successfully."
+    IDS_DISABLED_RESTORE_POINT "System Restore Point disabled."
+    IDS_RUN_REBOOT          "Restarting Windows..."
+    IDS_RUN_START_EXPLORER  "Restarting Windows Explorer..."
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ERROR_REBOOT        "Failed to restart Windows: "
+    IDS_SIMULATE            "Simulate"
+    IDS_CLEAN               "Clean"
 END
 
 #endif    // Neutral resources

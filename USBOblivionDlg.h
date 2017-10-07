@@ -1,7 +1,7 @@
 //
 // USBOblivionDlg.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2016.
+// Copyright (c) Nikolay Raspopov, 2009-2017.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -77,6 +77,8 @@ public:
 	BOOL		m_bElevation;	// -elevation		- Режим с повышенными правами
 	BOOL		m_bSilent;		// -silent			- Тихий режим (работает только в автоматическом режиме)
 	CString		m_sLog;			// -log:			- Log-file
+	BOOL		m_bReboot;
+	BOOL		m_bCloseExplorer;
 
 	virtual INT_PTR DoModal();
 
@@ -89,7 +91,7 @@ protected:
 	CCtrlResize	m_CtrlsResize;	// Изменение размеров интерфейса
 	CRect		m_InitialRect;	// Начальные размеры окна - минимальные размеры
 	DWORD		m_nDrives;		// Текущие диски
-	
+
 	CString		m_sDeleteKeyString;		// Кэш строки
 	CString		m_sDeleteValueString;	// Кэш строки
 
@@ -99,14 +101,10 @@ protected:
 	CAutoPtr< CLogList >	m_pReportList;	// Список строк для отчёта
 	bool					m_bRunning;		// Флаг обработки
 
-	LSTATUS (WINAPI *m_pRegDeleteKeyExW) (HKEY, LPCWSTR, REGSAM, DWORD);
-	BOOL (WINAPI *m_fnSRSetRestorePointW) (PRESTOREPOINTINFOW, PSTATEMGRSTATUS);
-
 	enum { Information = 0, Warning, Error, Search, Done, Clean, Regedit, Lock, Eject };
 
 	void Log(const CString& sText, UINT nType = Information);
 	void Log(UINT nID, UINT nType = Information);
-	void Write(LPCTSTR szText);
 
 	static CString GetKeyName(HKEY hRoot);
 	LSTATUS RegOpenKeyFull(HKEY hKey, LPCTSTR lpSubKey, REGSAM samDesired, PHKEY phkResult);
@@ -118,25 +116,59 @@ protected:
 
 	// Открытие .reg-файла
 	bool PrepareBackup();
-	// Собственно обработка реестра
-	void Run();
 	// Закрытие .reg-файла
 	void FinishBackup();
+	// Запись в .reg-файл
+	void Write( LPCTSTR szText );
+	// Сохранение ключа в .reg-файле
+	void SaveKey( HKEY hRoot, LPCTSTR szKeyName, LPCTSTR szValueName = NULL );
+	// Сохранение значения в .reg-файле
+	void SaveValue( LPCTSTR szName, DWORD dwType, LPBYTE pData, DWORD dwSize );
 
 	// Вход под системный аккаунтом и вызов Run()
 	BOOL RunAsSystem();
 	// Вход под аккаунтом указанного процесса и вызов Run()
 	BOOL RunAsProcess(DWORD dwProcessID);
+	// Собственно обработка реестра
+	void Run();
 
 	// Извлечение диска (Uwe Sieber - www.uwe-sieber.de)
 	bool EjectDrive(TCHAR DriveLetter);
+
+	// Сбор данных о дисках с попыткой извлечения
+	void EjectDrives();
+
+	// Закрытие Windows Explorer
+	void CloseExplorer();
+
+	// Запуск Windows Explorer
+	void StartExplorer();
+
+	// Чистка файлов
+	void CleanFiles();
+
+	// Чистка журналов
+	void CleanLogs();
+
+	// Чистка драйверов
+	void CleanLocalMachine();
+
+	// Чистка подключённых дисков
+	void CleanMountedDevices();
+
+	// Чистка Windows Search
+	void CleanWindowsSearch();
+
+	// Чистка пользовательских данных
+	void CleanUsers();
+
+	// Перезагрузка Windows
+	void Reboot();
 
 	void DoDeleteFile(LPCTSTR szPath);
 	void DoDeleteLog(LPCTSTR szName);
 	void DeleteKey(HKEY hRoot, const CString& sSubKey);
 	void DeleteValue(HKEY hRoot, LPCTSTR szSubKey, LPCTSTR szValue);
-	void SaveKey(HKEY hRoot, LPCTSTR szKeyName, LPCTSTR szValueName = NULL);
-	void SaveValue(LPCTSTR szName, DWORD dwType, LPBYTE pData, DWORD dwSize);
 	void CopyToClipboard(const CString& sData);
 
 	virtual void DoDataExchange(CDataExchange* pDX);	// поддержка DDX/DDV
@@ -159,4 +191,6 @@ protected:
 	DECLARE_MESSAGE_MAP()
 
 	THREAD(CUSBOblivionDlg,RunThread)
+public:
+	afx_msg void OnBnClickedEnable();
 };
