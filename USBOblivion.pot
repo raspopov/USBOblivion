@@ -9,13 +9,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
 msgstr "USBOblivion"
 
-#: DIALOGCONTROL.102.Button.1
-#: STRING.178
+#: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr ""
 
@@ -52,7 +52,24 @@ msgid "Context"
 msgstr "Context"
 
 #: STRING.129
-msgid "Usage:\n\nUSBOblivion[32|64].exe [params]\n\nParams:\n\n-enable - Do real clean (simulation otherwise);\n-auto - Automatic run;\n-nosave - Don't save a registry backup file;\n-save:filename - Save a registry backup to this file;\n-log:filename - Save working log to this file;\n-norestorepoint - Don't create a System Restore Point;\n-norestart - Don't restart Windows;\n-noexplorer - Don't close Windows Explorer;\n-lang:XX - Use language XX (hex-code);\n-silent - Hidden mode (if possible);\n-? - Show this help.\n"
+msgid ""
+"Usage:\n"
+"\n"
+"USBOblivion[32|64].exe [params]\n"
+"\n"
+"Params:\n"
+"\n"
+"-enable - Do real clean (simulation otherwise)\n"
+"-auto - Automatic run\n"
+"-nosave - Don't save a registry backup file\n"
+"-save:filename - Save a registry backup to this file\n"
+"-log:filename - Save working log to this file\n"
+"-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
+"-lang:XX - Use language XX (hex-code)\n"
+"-silent - Hidden mode (if possible)\n"
+"-? - Show this help\n"
 msgstr ""
 
 #: STRING.130
@@ -246,4 +263,3 @@ msgstr ""
 #: STRING.177
 msgid "Simulate"
 msgstr ""
-
