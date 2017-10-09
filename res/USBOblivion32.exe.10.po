@@ -9,13 +9,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
 msgstr "USBOblivion"
 
-#: DIALOGCONTROL.102.Button.1
+#: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Pulisci"
 
@@ -26,6 +26,14 @@ msgstr "Esegui pulizia reale (altrimenti simulazione)"
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr "Salva una copia di sicurezza in un file .reg"
+
+#: DIALOGCONTROL.102.Button.1004
+msgid "Reboot Windows (RECOMMENDED)"
+msgstr "Riavvia Windows (RACCOMANDATO)"
+
+#: DIALOGCONTROL.102.Button.1005
+msgid "Close Windows Explorer (RECOMMENDED)"
+msgstr "Chiudi Windows Explorer (RACCOMANDATO)"
 
 #: DIALOGCONTROL.102.Button.2
 msgid "Exit"
@@ -57,6 +65,8 @@ msgid ""
 "-save:filename - Save a registry backup to this file\n"
 "-log:filename - Save working log to this file\n"
 "-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - Use language XX (hex-code)\n"
 "-silent - Hidden mode (if possible)\n"
 "-? - Show this help\n"
@@ -70,9 +80,12 @@ msgstr ""
 "-enable - Esegue pulizia reale (altrimenti simula)\n"
 "-auto - Esecuzione automatica\n"
 "-nosave - Nessun salvataggio della copia di sicurezza del registro\n"
-"-save:filename - Salva una copia di sicurezza del registro nel file specificato\n"
+"-save:filename - Salva una copia di sicurezza del registro nel file "
+"specificato\n"
 "-log:filename - Salva il log nel file specificato\n"
 "-norestorepoint - Nessuna creazione del punto di ripristino\n"
+"-norestart - Nessun riavvio di Windows\n"
+"-noexplorer - Nessuna chiusura di Windows Explorer\n"
 "-lang:XX - Utilizza la lingua XX (codice esadecimale)\n"
 "-silent -Modalità nascosta (se possibile)\n"
 "-? - Visualizza questa guida\n"
@@ -171,7 +184,7 @@ msgstr "Valori trovati: "
 
 #: STRING.153
 msgid "Key access denied: "
-msgstr "Tasto di accesso negato: "
+msgstr "Accesso negato alla chiave: "
 
 #: STRING.154
 msgid "Disk %c: has been inserted."
@@ -232,3 +245,39 @@ msgstr "Errore alla pulizia diario:"
 #: STRING.168
 msgid "Creating System Restore Point..."
 msgstr "Creo un punto di ripristino..."
+
+#: STRING.169
+msgid "Closing Windows Explorer..."
+msgstr "Chiudo Windows Explorer..."
+
+#: STRING.170
+msgid "Gathering Windows Search cache data..."
+msgstr "Raccolgo i dati di cache di Windows Search..."
+
+#: STRING.171
+msgid "System Restore Point creation error: "
+msgstr "Errore di creazione del punto di ripristino: "
+
+#: STRING.172
+msgid "System Restore Point created successfully."
+msgstr "Ho creato il punto di ripristino."
+
+#: STRING.173
+msgid "System Restore Point disabled."
+msgstr "Punto di ripristino disabilitato..."
+
+#: STRING.174
+msgid "Restarting Windows..."
+msgstr "Sto riavviando Windows..."
+
+#: STRING.175
+msgid "Restarting Windows Explorer..."
+msgstr "Sto riavviando Windows Explorer..."
+
+#: STRING.176
+msgid "Failed to restart Windows: "
+msgstr "Riavvio di Windows fallito: "
+
+#: STRING.177
+msgid "Simulate"
+msgstr "Simulare"
