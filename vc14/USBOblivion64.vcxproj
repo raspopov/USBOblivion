@@ -22,7 +22,7 @@
     <ProjectName>USBOblivion64</ProjectName>
     <ProjectGuid>{5399995C-6BEF-4ADD-9104-46F6C57A7FD7}</ProjectGuid>
     <Keyword>MFCProj</Keyword>
-    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -332,9 +332,6 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\USBOblivion.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="..\ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <MASM Include="..\vc_crt_fix.asm">

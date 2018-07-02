@@ -134,9 +134,6 @@
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <MASM Include="..\vc_crt_fix.asm">
       <Filter>Source Files</Filter>
     </MASM>
