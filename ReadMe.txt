@@ -1,12 +1,12 @@
 ﻿ USB Oblivion
 ---------------------------------
 
-Copyright (C) Nikolay Raspopov, 2009-2017.
+Copyright (C) Nikolay Raspopov, 2009-2018.
 http://www.cherubicsoft.com/en/projects/usboblivion
 
 USB Oblivion utility designed to erase all traces of USB-connected drives and CD-ROMs from the registry in Windows XP, Windows 2003, Windows Vista, Windows 7, Windows 8, Windows 10 32/64-bit versions.
 
-The utility has a test mode of operation, i.e. without actually removing data from the registry, and, just in case, creates a .reg-file to undo any changes. There is also a fully automatic mode. 
+The utility has a test mode of operation, i.e. without actually removing data from the registry, and, just in case, creates a .reg-file to undo any changes. There is also a fully automatic mode.
 
  Warnings
 ----------------------
@@ -20,7 +20,7 @@ FAQ
 ----------------------
 
 Q: Why Windows after clean can't detect my USB drive?
-	
+
 	A: Cached data about USB drive somehow (for example you ignored a Windows restart or just no luck) was written back to the registry, so drive now erroneously partially registered. You must run utility again to clean up the mess and immediately restart Window. Repeat twice.
 
 Q: Why my USB Hewlett-Packard printer not working after clean?
@@ -31,17 +31,17 @@ Q: Why my USB Hewlett-Packard printer not working after clean?
 		3) After that printer will be re-installed as a regular USB printer and utility will not affect it anymore
 
 	More info about "HP Smart Install" here: http://www.hp.com/hpinfo/newsroom/press_kits/2010/plugandprint/pdf/Smart_Install_FAQ.pdf
-	
+
 Q: How to restore a saved .reg-file?
-	
+
 	A1: You can also restore from a System Restore Point: https://support.microsoft.com/en-us/help/12415/windows-10-recovery-options
-	
+
 	A2: You must import saved .reg-file using System account, the administrative privileges are not sufficient:
 		1) Download PsExec utility here: https://docs.microsoft.com/en-us/sysinternals/downloads/psexec
 		2) Run cmd.exe as Administrator and type on its console window:
-	
+
 			psexec.exe -i -s regedit.exe
-			
+
 		3) In opened Registry Editor import .reg-file using menu File -> Import...
 		4) Restart Windows
 
@@ -91,6 +91,13 @@ Q: How to restore a saved .reg-file?
 
  Changes
 ----------------------
+
+1.12.0.0
+
+	* Added cleaning of "HKEY_LOCAL_MACHINE\SYSTEM\ControlSet\*\Control\DeviceMigration" key
+	* Added cleaning of "HKEY_LOCAL_MACHINE\SYSTEM\Setup\Upgrade" key
+	* Added cleaning of "HKEY_LOCAL_MACHINE\SYSTEM\Setup\SetupapiLogStatus" key
+	* Added removing of "%SystemRoot%\inf\setupapi.ev*" files (* = 1,2,3)
 
 1.11.6.0
 

@@ -1,7 +1,7 @@
 //
 // USBClean.inl
 //
-// Copyright (c) Nikolay Raspopov, 2009-2017.
+// Copyright (c) Nikolay Raspopov, 2009-2018.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -25,6 +25,10 @@
 
 static const CKeyDef defs[] =
 {
+	// Windows 10 Upgrades
+	{ mControlSet_Key, _T( "Control\\DeviceMigration" ), NULL, NULL, NULL, TRUE },
+	{ mHKLM_Key, _T( "SYSTEM\\Setup\\Upgrade" ), NULL, NULL, NULL, TRUE },
+	{ mHKLM_Key, _T( "SYSTEM\\Setup\\SetupapiLogStatus" ), NULL, NULL, NULL, TRUE },
 	// "USB Mass Storage Device" 7/8/10, "Universal Serial Bus controllers" XP/Vista
 	{ mControlSet_Key, _T( "Control\\Class\\{36FC9E60-C465-11CF-8056-444553540000}" ), NULL, _T( "InfSection" ), _T( "USBSTOR_BULK" ), FALSE },
 	// "DVD/CD-ROM drives" XP, Vista
@@ -94,6 +98,31 @@ static const CKeyDef defs[] =
 	{ mControlSet_Key, NULL, NULL, NULL, NULL, FALSE }
 };
 
+// Event logs to clear
+static const LPCTSTR szLogs[] =
+{
+	_T( "Microsoft-Windows-DeviceSetupManager/Operational" ),
+	_T( "Microsoft-Windows-DeviceSetupManager/Admin" ),
+	_T( "Microsoft-Windows-Kernel-PnP/Configuration" ),
+	_T( "Microsoft-Windows-Kernel-ShimEngine/Operational" ),
+	_T( "Microsoft-Windows-DriverFrameworks-UserMode/Operational" ),
+	_T( "HardwareEvents" ),
+	_T( "Application" ),
+	_T( "Security" ),
+	_T( "System" )
+};
+
+// Files to delete
+static const LPCTSTR szFiles[] =
+{
+	_T( "%SystemRoot%\\setup*.log" ),
+	_T( "%SystemRoot%\\inf\\setupapi*.log" ),
+	_T( "%SystemRoot%\\inf\\setupapi.ev1" ),
+	_T( "%SystemRoot%\\inf\\setupapi.ev2" ),
+	_T( "%SystemRoot%\\inf\\setupapi.ev3" ),
+	_T( "%SystemRoot%\\inf\\INFCACHE.1" ),
+	_T( "%SystemRoot%\\System32\\wbem\\Logs\\wmiprov.log" )
+};
 
 void CUSBOblivionDlg::EjectDrives()
 {
@@ -226,15 +255,6 @@ void CUSBOblivionDlg::CleanFiles()
 {
 	Log( IDS_RUN_FILES, Search );
 
-	// Files to delete
-	static const LPCTSTR szFiles[] =
-	{
-		_T( "%SystemRoot%\\setup*.log" ),
-		_T( "%SystemRoot%\\inf\\setupapi*.log" ),
-		_T( "%SystemRoot%\\inf\\INFCACHE.1" ),
-		_T( "%SystemRoot%\\System32\\wbem\\Logs\\wmiprov.log" )
-	};
-
 	for ( int i = 0; i < _countof( szFiles ); ++i )
 	{
 		CString sFile;
@@ -248,20 +268,6 @@ void CUSBOblivionDlg::CleanFiles()
 void CUSBOblivionDlg::CleanLogs()
 {
 	Log( IDS_RUN_LOGS, Search );
-
-	// Event logs to clear
-	static const LPCTSTR szLogs[] =
-	{
-		_T( "Microsoft-Windows-DeviceSetupManager/Operational" ),
-		_T( "Microsoft-Windows-DeviceSetupManager/Admin" ),
-		_T( "Microsoft-Windows-Kernel-PnP/Configuration" ),
-		_T( "Microsoft-Windows-Kernel-ShimEngine/Operational" ),
-		_T( "Microsoft-Windows-DriverFrameworks-UserMode/Operational" ),
-		_T( "HardwareEvents" ),
-		_T( "Application" ),
-		_T( "Security" ),
-		_T( "System" )
-	};
 
 	for ( int i = 0; i < _countof( szLogs ); ++i )
 	{
