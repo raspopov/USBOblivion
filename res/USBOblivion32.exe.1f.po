@@ -3,20 +3,19 @@ msgstr ""
 "Project-Id-Version: USBOblivion32.exe\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
+"Last-Translator: Murat5038\n"
 "Language-Team: \n"
+"Language: tr-TR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.12\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: tr_TR\n"
+"X-Generator: Poedit 2.0.4\n"
 
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
 msgstr "USBOblivion"
 
-#: DIALOGCONTROL.102.Button.1
+#: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Temizle"
 
@@ -27,6 +26,14 @@ msgstr "İşaretleyin, (aksi halde similasyon işlevi görür)"
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr ".reg Kurtarma Dosyasını Kaydet"
+
+#: DIALOGCONTROL.102.Button.1004
+msgid "Reboot Windows (RECOMMENDED)"
+msgstr "Windows'u Yeniden Başlat (Tavsiye Edilen)"
+
+#: DIALOGCONTROL.102.Button.1005
+msgid "Close Windows Explorer (RECOMMENDED)"
+msgstr "Windows Gezgini'ni Kapat (Tavsiye Edilen)"
 
 #: DIALOGCONTROL.102.Button.2
 msgid "Exit"
@@ -58,13 +65,15 @@ msgid ""
 "-save:filename - Save a registry backup to this file\n"
 "-log:filename - Save working log to this file\n"
 "-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - Use language XX (hex-code)\n"
 "-silent - Hidden mode (if possible)\n"
 "-? - Show this help\n"
 msgstr ""
 "Kullanımı:\n"
 "\n"
-"USBOblivion[32-64].exe [parametreler]\n"
+"USBOblivion[32|64].exe [parametreler]\n"
 "\n"
 "Parametreler:\n"
 "\n"
@@ -74,6 +83,8 @@ msgstr ""
 "-save:Dosya Adı - Kayıt Defteri Dosyasını Yedekle\n"
 "-log:Dosya Adı - Çalışma Günlüğünü Bu Dosyaya Kaydedin\n"
 "-norestorepoint - Sistem Geri Yükleme Noktası Oluşturma\n"
+"-norestart - Windows'u Yeniden Başlatmak İstemiyorum\n"
+"-noexplorer - Windows Gezgini'ni Kapatmak İstemiyorum\n"
 "-lang:XX - XX Dil Dosyanızın Numarası (Hex-Kodu)\n"
 "-silent - Gizli Mod (Mümkünse)\n"
 "-? - Yardımı Görüntüle\n"
@@ -233,3 +244,39 @@ msgstr "Günlük Temizleme Hatası:"
 #: STRING.168
 msgid "Creating System Restore Point..."
 msgstr "Sistem Geri Yükleme Noktası Oluşturuluyor..."
+
+#: STRING.169
+msgid "Closing Windows Explorer..."
+msgstr "Windows Gezgini Kapatılıyor..."
+
+#: STRING.170
+msgid "Gathering Windows Search cache data..."
+msgstr "Windows Arama Önbellek Verileri Toplanıyor..."
+
+#: STRING.171
+msgid "System Restore Point creation error: "
+msgstr "Sistem Geri Yükleme Noktası Oluşturma Hatası: "
+
+#: STRING.172
+msgid "System Restore Point created successfully."
+msgstr "Sistem Geri Yükleme Noktası Başarıyla Oluşturuldu."
+
+#: STRING.173
+msgid "System Restore Point disabled."
+msgstr "Sistem Geri Yükleme Noktası devre dışı."
+
+#: STRING.174
+msgid "Restarting Windows..."
+msgstr "Windows Yeniden Başlatılıyor..."
+
+#: STRING.175
+msgid "Restarting Windows Explorer..."
+msgstr "Windows Gezgini Yeniden Başlatılıyor..."
+
+#: STRING.176
+msgid "Failed to restart Windows: "
+msgstr "Windows Yeniden Başlatma Başarısız: "
+
+#: STRING.177
+msgid "Simulate"
+msgstr "Simüle Et"
