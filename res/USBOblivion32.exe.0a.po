@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
@@ -211,24 +211,24 @@ msgstr "Recopilando archivos de datos..."
 
 #: STRING.163
 msgid "Cleaning journal: "
-msgstr "Limpiando diario: "
+msgstr "Limpiando registro: "
 
 #: STRING.164
 msgid "Gathering journal data..."
-msgstr "Recopilando datos del diario..."
+msgstr "Recopilando datos del registro..."
 
 #: STRING.165
 msgid "File removal error:"
-msgstr ""
+msgstr "Error de eliminación de archivos:"
 
 #: STRING.166
 msgid "Removing file at boot-time:"
-msgstr ""
+msgstr "Removiendo el archivo en el siguiente arranque:"
 
 #: STRING.167
 msgid "Journal cleanup error:"
-msgstr ""
+msgstr "Error de limpieza del registro"
 
 #: STRING.168
 msgid "Creating System Restore Point..."
-msgstr ""
+msgstr "Creando Punto de Restauración del Sistema..."
