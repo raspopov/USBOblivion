@@ -110,7 +110,7 @@
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <SDLCheck>true</SDLCheck>
@@ -205,7 +205,7 @@
       <StringPooling>true</StringPooling>
       <RuntimeTypeInfo>false</RuntimeTypeInfo>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DebugInformationFormat>None</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalOptions>/Zc:threadSafeInit- %(AdditionalOptions)</AdditionalOptions>
       <SDLCheck>true</SDLCheck>
       <ControlFlowGuard>Guard</ControlFlowGuard>
@@ -221,7 +221,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX86</TargetMachine>
-      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <DelayLoadDLLs>ADVAPI32.DLL;COMCTL32.DLL;GDIPLUS.DLL;IMM32.DLL;LZ32.DLL;MSIMG32.DLL;OLE32.DLL;OLEACC.DLL;OLEAUT32.DLL;OLEDLG.DLL;SETUPAPI.DLL;SHELL32.DLL;SHLWAPI.DLL;USERENV.DLL;UXTHEME.DLL;WINMM.DLL;WINSPOOL.DRV;%(DelayLoadDLLs)</DelayLoadDLLs>
       <SwapRunFromCD>true</SwapRunFromCD>
       <SwapRunFromNET>true</SwapRunFromNET>
@@ -257,7 +257,7 @@
       <WarningLevel>Level4</WarningLevel>
       <StringPooling>true</StringPooling>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <DebugInformationFormat>None</DebugInformationFormat>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalOptions>/Zc:threadSafeInit- %(AdditionalOptions)</AdditionalOptions>
       <SDLCheck>true</SDLCheck>
       <ControlFlowGuard>Guard</ControlFlowGuard>
@@ -273,7 +273,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <SetChecksum>true</SetChecksum>
       <TargetMachine>MachineX64</TargetMachine>
-      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <DelayLoadDLLs>ADVAPI32.DLL;COMCTL32.DLL;GDIPLUS.DLL;IMM32.DLL;LZ32.DLL;MSIMG32.DLL;OLE32.DLL;OLEACC.DLL;OLEAUT32.DLL;OLEDLG.DLL;SETUPAPI.DLL;SHELL32.DLL;SHLWAPI.DLL;USERENV.DLL;UXTHEME.DLL;WINMM.DLL;WINSPOOL.DRV;%(DelayLoadDLLs)</DelayLoadDLLs>
       <SwapRunFromCD>true</SwapRunFromCD>
       <SwapRunFromNET>true</SwapRunFromNET>
