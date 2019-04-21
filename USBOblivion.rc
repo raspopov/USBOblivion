@@ -65,6 +65,8 @@ IDI_EJECT               ICON                    "res\\eject.ico"
 
 18                      PO                      "res\\USBOblivion32.exe.12.po_"
 
+19                      PO                      "res\\USBOblivion32.exe.13.po_"
+
 21                      PO                      "res\\USBOblivion32.exe.15.po_"
 
 22                      PO                      "res\\USBOblivion32.exe.16.po_"

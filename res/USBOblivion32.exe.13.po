@@ -1,0 +1,283 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: USBOblivion32.exe\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Last-Translator: Jeroen Westera\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: nl_NL\n"
+
+#: DIALOGCAPTION.102
+msgid "USBOblivion"
+msgstr "USBOblivion"
+
+#: DIALOGCONTROL.102.Button.1 STRING.178
+msgid "Clean"
+msgstr "Opruimen"
+
+#: DIALOGCONTROL.102.Button.1002
+msgid "Do real clean (simulation otherwise)"
+msgstr "Voer werkelijke opruimactie uit (anders simuleren)"
+
+#: DIALOGCONTROL.102.Button.1003
+msgid "Save backup .reg-file"
+msgstr "Bewaar een back-up reg-bestand"
+
+#: DIALOGCONTROL.102.Button.1004
+msgid "Reboot Windows (RECOMMENDED)"
+msgstr "Windows herstarten (aanbevolen)"
+
+#: DIALOGCONTROL.102.Button.1005
+msgid "Close Windows Explorer (RECOMMENDED)"
+msgstr "Windows Verkenner sluiten (aanbevolen)"
+
+#: DIALOGCONTROL.102.Button.2
+msgid "Exit"
+msgstr "Afsluiten"
+
+#: MENUITEM.130.32771
+msgid "Copy"
+msgstr "Kopiëren"
+
+#: MENUITEM.130.32772
+msgid "Copy all"
+msgstr "Alles kopiëren"
+
+#: MENUPOPUP.130.0
+msgid "Context"
+msgstr "Context"
+
+#: STRING.129
+msgid ""
+"Usage:\n"
+"\n"
+"USBOblivion[32|64].exe [params]\n"
+"\n"
+"Params:\n"
+"\n"
+"-enable - Do real clean (simulation otherwise)\n"
+"-auto - Automatic run\n"
+"-nosave - Don't save a registry backup file\n"
+"-save:filename - Save a registry backup to this file\n"
+"-log:filename - Save working log to this file\n"
+"-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
+"-lang:XX - Use language XX (hex-code)\n"
+"-silent - Hidden mode (if possible)\n"
+"-? - Show this help\n"
+msgstr ""
+"Gebruik:\n"
+"\n"
+"USBOblivion[32|64].exe [parameters]\n"
+"\n"
+"Parameters:\n"
+"\n"
+"-enable - Voer werkelijke opruimactie uit (anders simuleren)\n"
+"-auto - Automatisch uitvoeren\n"
+"-nosave - Geen register back-up maken\n"
+"-save:filename - Maak een register back-up naar dit bestand\n"
+"-log:filename - Bewaar een logbestand naar dit bestand\n"
+"-norestorepoint - Geen systeemherstelpunt maken\n"
+"-norestart - Windows niet herstarten\n"
+"-noexplorer - Windows verkenner niet sluiten\n"
+"-lang:XX - Gebruik taal XX (hex-code)\n"
+"-silent - Verborgen modus (indien mogelijk)\n"
+"-? - Toon dit help bestand\n"
+
+#: STRING.130
+msgid "WARNING! Eject all flash drives before cleaning please."
+msgstr "WAARSCHUWING! Verwijder a.u.b. alle usb schijven voor de opruimactie."
+
+#: STRING.131
+msgid "Press \"Clean\" button to begin cleaning."
+msgstr "Druk op \"Opruimen\" om de opruimactie te starten."
+
+#: STRING.132
+msgid "Process mode: real (data will be cleaned)."
+msgstr "Uitvoermodus: Opruimen (data zal worden gewist)."
+
+#: STRING.133
+msgid "Process mode: simulation (no data will be cleaned)."
+msgstr "Uitvoermodus: Simulatie (er wordt geen data gewist)."
+
+#: STRING.134
+msgid "File creation error: "
+msgstr "Fout bij bestand maken: "
+
+#: STRING.135
+msgid "File write error: "
+msgstr "Fout bij wegschrijven bestand: "
+
+#: STRING.136
+msgid "Backup file: "
+msgstr "Back-up bestand: "
+
+#: STRING.137
+msgid "Done."
+msgstr "Klaar."
+
+#: STRING.138
+msgid "Gathering data from system registry..."
+msgstr "Data vanuit het register verzamelen..."
+
+#: STRING.139
+msgid "Found drives (will be ignored): "
+msgstr "Gevonden schijven (zullen worden genegeerd): "
+
+#: STRING.140
+msgid "Cleaning..."
+msgstr "Opruimen..."
+
+#: STRING.141
+msgid "Removing key: "
+msgstr "Verwijderen sleutel: "
+
+#: STRING.142
+msgid "Removing value: "
+msgstr "Verwijderen waarde: "
+
+#: STRING.143
+msgid "Gathering user data..."
+msgstr "Verzamelen gebruikers data..."
+
+#: STRING.144
+msgid "Gathering data about user: "
+msgstr "Verzamelen data over gebruiker: "
+
+#: STRING.145
+msgid "Found users: "
+msgstr "Gevonden gebruikers: "
+
+#: STRING.146
+msgid "Found mount points: "
+msgstr "Gevonden koppelpunt(en): "
+
+#: STRING.147
+msgid "Found Explorer drives: "
+msgstr "Gevonden schijven: "
+
+#: STRING.148
+msgid "Remove error: "
+msgstr "Fout bij verwijderen: "
+
+#: STRING.149
+msgid "Gathering mount point's data..."
+msgstr "Verzamelen data koppelpunt(en)..."
+
+#: STRING.150
+msgid "Found ControlSets: "
+msgstr "Gevonden controlSets: "
+
+#: STRING.151
+msgid "Found keys: "
+msgstr "Gevonden sleutels: "
+
+#: STRING.152
+msgid "Found values: "
+msgstr "Gevonden waarden: "
+
+#: STRING.153
+msgid "Key access denied: "
+msgstr "Toegang tot sleutel verboden: "
+
+#: STRING.154
+msgid "Disk %c: has been inserted."
+msgstr "Schijf %c: is net aangesloten."
+
+#: STRING.155
+msgid "Logged-in under system account successfully."
+msgstr "Succesvol ingelogd als systeem account."
+
+#: STRING.156
+msgid "Failed to login under system account."
+msgstr "Inloggen als systeem account mislukt."
+
+#: STRING.157
+msgid "Re-starting under administrator..."
+msgstr "Herstarten als administrator..."
+
+#: STRING.158
+msgid "Disk %c: has been ejected."
+msgstr "Schijf %c: is net verwijderd."
+
+#: STRING.159
+msgid "Failed to eject disk %c:."
+msgstr "Verwijderen van schijf %c: is mislukt."
+
+#: STRING.160
+msgid "Ejecting disk %c:..."
+msgstr "Verwijderen van schijf %c:..."
+
+#: STRING.161
+msgid "Removing file: "
+msgstr "Verwijderen van bestand: "
+
+#: STRING.162
+msgid "Gathering file data..."
+msgstr "Verzamelen van bestandsdata..."
+
+#: STRING.163
+msgid "Cleaning journal: "
+msgstr "Opschonen journaal: "
+
+#: STRING.164
+msgid "Gathering journal data..."
+msgstr "Verzamelen van journaal data."
+
+#: STRING.165
+msgid "File removal error:"
+msgstr "Fout bij bestandsverwijdering:"
+
+#: STRING.166
+msgid "Removing file at boot-time:"
+msgstr "Verwijderen van bestand bij opstarten:"
+
+#: STRING.167
+msgid "Journal cleanup error:"
+msgstr "Fout bij opruimen journaal:"
+
+#: STRING.168
+msgid "Creating System Restore Point..."
+msgstr "Maken van systeemherstelpunt..."
+
+#: STRING.169
+msgid "Closing Windows Explorer..."
+msgstr "Windows Verkenner sluiten..."
+
+#: STRING.170
+msgid "Gathering Windows Search cache data..."
+msgstr "Verzamelen van data uit de cache van Windows zoeken..."
+
+#: STRING.171
+msgid "System Restore Point creation error: "
+msgstr "Fout bij het maken van een systeemherstelpunt: "
+
+#: STRING.172
+msgid "System Restore Point created successfully."
+msgstr "Maken van systeemherstelpunt gelukt."
+
+#: STRING.173
+msgid "System Restore Point disabled."
+msgstr "Systeemherstelpunt uitgeschakeld."
+
+#: STRING.174
+msgid "Restarting Windows..."
+msgstr "Herstarten Windows..."
+
+#: STRING.175
+msgid "Restarting Windows Explorer..."
+msgstr "Herstarten Windows Verkenner."
+
+#: STRING.176
+msgid "Failed to restart Windows: "
+msgstr "Herstarten van Windows mislukt: "
+
+#: STRING.177
+msgid "Simulate"
+msgstr "Simuleren"

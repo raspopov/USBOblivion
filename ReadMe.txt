@@ -1,7 +1,7 @@
 ﻿ USB Oblivion
 ---------------------------------
 
-Copyright (C) Nikolay Raspopov, 2009-2018.
+Copyright (C) Nikolay Raspopov, 2009-2019.
 http://www.cherubicsoft.com/en/projects/usboblivion
 
 USB Oblivion utility designed to erase all traces of USB-connected drives and CD-ROMs from the registry in Windows XP, Windows 2003, Windows Vista, Windows 7, Windows 8, Windows 10 32/64-bit versions.
@@ -75,6 +75,7 @@ Q: How to restore a saved .reg-file?
 	-lang:0c - French (by Mathieu Bergounioux, Rico-sos)
 	-lang:10 - Italian (by Marcello Gianola)
 	-lang:12 - Korean (by 4Li)
+	-lang:13 - Dutch (by Jeroen Westera)
 	-lang:15 - Polish (by dmocha)
 	-lang:16 - Brazilian Portuguese (by Paulo Guzmán, Newton Apostolico)
 	-lang:19 - Russian (by Nikolay Raspopov)
@@ -91,6 +92,10 @@ Q: How to restore a saved .reg-file?
 
  Changes
 ----------------------
+
+1.12.1.0
+
+	* Added Dutch translation (by Jeroen Westera)
 
 1.12.0.0
 
