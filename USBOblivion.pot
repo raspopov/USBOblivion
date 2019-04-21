@@ -263,3 +263,8 @@ msgstr ""
 #: STRING.177
 msgid "Simulate"
 msgstr ""
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr ""
+

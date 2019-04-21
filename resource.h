@@ -60,6 +60,7 @@
 #define IDS_ERROR_REBOOT                176
 #define IDS_SIMULATE                    177
 #define IDS_CLEAN                       178
+#define IDS_RUN_SERVICES                179
 #define IDC_REPORT                      1000
 #define IDC_ENABLE                      1002
 #define IDC_SAVE                        1003

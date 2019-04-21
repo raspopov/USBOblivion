@@ -1,7 +1,7 @@
 //
 // USBOblivionDlg.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2017.
+// Copyright (c) Nikolay Raspopov, 2009-2019.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -131,6 +131,9 @@ protected:
 	BOOL RunAsProcess(DWORD dwProcessID);
 	// Собственно обработка реестра
 	void Run();
+
+	// Stop specified services
+	void StopServices();
 
 	// Извлечение диска (Uwe Sieber - www.uwe-sieber.de)
 	bool EjectDrive(TCHAR DriveLetter);

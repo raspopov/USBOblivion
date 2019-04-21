@@ -262,6 +262,7 @@ BEGIN
     IDS_ERROR_REBOOT        "Failed to restart Windows: "
     IDS_SIMULATE            "Simulate"
     IDS_CLEAN               "Clean"
+    IDS_RUN_SERVICES        "Stopping Windows Services..."
 END
 
 #endif    // Neutral resources

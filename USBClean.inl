@@ -1,7 +1,7 @@
 //
 // USBClean.inl
 //
-// Copyright (c) Nikolay Raspopov, 2009-2018.
+// Copyright (c) Nikolay Raspopov, 2009-2019.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -26,76 +26,77 @@
 static const CKeyDef defs[] =
 {
 	// Windows 10 Upgrades
-	{ mControlSet_Key, _T( "Control\\DeviceMigration" ), NULL, NULL, NULL, TRUE },
-	{ mHKLM_Key, _T( "SYSTEM\\Setup\\Upgrade" ), NULL, NULL, NULL, TRUE },
-	{ mHKLM_Key, _T( "SYSTEM\\Setup\\SetupapiLogStatus" ), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key,	_T( "Control\\DeviceMigration" ), NULL, NULL, NULL, TRUE },
+	{ mHKLM_Key,		_T( "SYSTEM\\Setup\\Upgrade" ), NULL, NULL, NULL, TRUE },
+	{ mHKLM_Key,		_T( "SYSTEM\\Setup\\SetupapiLogStatus" ), NULL, NULL, NULL, TRUE },
 	// "USB Mass Storage Device" 7/8/10, "Universal Serial Bus controllers" XP/Vista
-	{ mControlSet_Key, _T( "Control\\Class\\{36FC9E60-C465-11CF-8056-444553540000}" ), NULL, _T( "InfSection" ), _T( "USBSTOR_BULK" ), FALSE },
+	{ mControlSet_Key,	_T( "Control\\Class\\{36FC9E60-C465-11CF-8056-444553540000}" ), NULL, _T( "InfSection" ), _T( "USBSTOR_BULK" ), FALSE },
 	// "DVD/CD-ROM drives" XP, Vista
-	//{ mControlSet_Key, _T("Control\\Class\\{4D36E965-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("cdrom_install"), FALSE },
+//	{ mControlSet_Key,	_T("Control\\Class\\{4D36E965-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("cdrom_install"), FALSE },
 	// "Disk drives" XP, Vista
-	//{ mControlSet_Key, _T("Control\\Class\\{4D36E967-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("disk_install"), FALSE },
+//	{ mControlSet_Key,	_T("Control\\Class\\{4D36E967-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("disk_install"), FALSE },
 	// "Portable Devices" Vista
-	{ mControlSet_Key, _T( "Control\\Class\\{EEC5AD98-8080-425F-922A-DABF3DE3F69A}" ), NULL, _T( "InfSection" ), _T( "Basic_Install" ), FALSE },
+	{ mControlSet_Key,	_T( "Control\\Class\\{EEC5AD98-8080-425F-922A-DABF3DE3F69A}" ), NULL, _T( "InfSection" ), _T( "Basic_Install" ), FALSE },
 	// XP, Vista
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{53f56307-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{53f56308-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f56307-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f56308-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
 	// XP
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{53f5630a-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "STORAGE#RemovableMedia" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f5630a-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "STORAGE#RemovableMedia" ), NULL, NULL, FALSE },
 	// XP, Vista
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "STORAGE#RemovableMedia" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "STORAGE#RemovableMedia" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
 	// Vista
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
 	// Vista
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
 	// Windows 7
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
 	// windows 8
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Control\\DeviceClasses\\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
 	// XP
-	{ mControlSet_Key, _T( "Enum\\STORAGE\\RemovableMedia" ), NULL, NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Enum\\STORAGE\\RemovableMedia" ), NULL, NULL, NULL, FALSE },
 	// Vista
-	{ mControlSet_Key, _T( "Enum\\STORAGE\\Volume" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Enum\\STORAGE\\Volume" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Enum\\STORAGE\\Volume" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Enum\\STORAGE\\Volume" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
 	// Windows 10
-	{ mControlSet_Key, _T( "Enum\\SWD\\WPDBUSENUM" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Enum\\SWD\\WPDBUSENUM" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Enum\\SWD\\WPDBUSENUM" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Enum\\SWD\\WPDBUSENUM" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
 	// XP, Vista
-	{ mControlSet_Key, _T( "Enum\\USBSTOR" ), NULL, NULL, NULL, TRUE },
-	{ mControlSet_Key, _T( "Services\\USBSTOR\\Enum" ), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key,	_T( "Enum\\USBSTOR" ), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key,	_T( "Services\\USBSTOR\\Enum" ), NULL, NULL, NULL, TRUE },
 	// Vista
-	{ mControlSet_Key, _T( "Enum\\WpdBusEnumRoot\\UMB" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
-	{ mControlSet_Key, _T( "Enum\\WpdBusEnumRoot\\UMB" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Enum\\WpdBusEnumRoot\\UMB" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Enum\\WpdBusEnumRoot\\UMB" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
 	// Vista
-	{ mControlSet_Key, _T( "Hardware Profiles\\0000\\System\\CurrentControlSet\\Enum\\USBSTOR" ), NULL, NULL, NULL, TRUE },
-	{ mControlSet_Key, _T( "Hardware Profiles\\0001\\System\\CurrentControlSet\\Enum\\USBSTOR" ), NULL, NULL, NULL, TRUE },
-	{ mControlSet_Key, _T( "Hardware Profiles\\0002\\System\\CurrentControlSet\\Enum\\USBSTOR" ), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key,	_T( "Hardware Profiles\\0000\\System\\CurrentControlSet\\Enum\\USBSTOR" ), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key,	_T( "Hardware Profiles\\0001\\System\\CurrentControlSet\\Enum\\USBSTOR" ), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key,	_T( "Hardware Profiles\\0002\\System\\CurrentControlSet\\Enum\\USBSTOR" ), NULL, NULL, NULL, TRUE },
 	// Vista
-	{ mHKLM_Val, _T( "SOFTWARE\\Microsoft\\WBEM\\WDM" ), _T( "USBSTOR" ), NULL, NULL, FALSE },
+	{ mHKLM_Val,		_T( "SOFTWARE\\Microsoft\\WBEM\\WDM" ), _T( "USBSTOR" ), NULL, NULL, FALSE },
 	// Vista
-	{ mHKLM_Val, _T( "SOFTWARE\\Microsoft\\WBEM\\WDM\\DREDGE" ), _T( "USBSTOR" ), NULL, NULL, FALSE },
+	{ mHKLM_Val,		_T( "SOFTWARE\\Microsoft\\WBEM\\WDM\\DREDGE" ), _T( "USBSTOR" ), NULL, NULL, FALSE },
 	// Vista ReadyBoost
-	{ mHKLM_Key, _T( "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt" ), NULL, NULL, NULL, FALSE },
+	{ mHKLM_Key,		_T( "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt" ), NULL, NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Services\\rdyboost\\AttachState" ), _T( "USBSTOR" ), NULL, NULL, FALSE },
 	// Vista
-	{ mHKLM_Key, _T( "SOFTWARE\\Microsoft\\Windows Portable Devices\\Devices" ), NULL, NULL, NULL, FALSE },
+	{ mHKLM_Key,		_T( "SOFTWARE\\Microsoft\\Windows Portable Devices\\Devices" ), NULL, NULL, NULL, FALSE },
 	// AutoPlay
-	{ mHKCU_Key, _T( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\KnownDevices" ), NULL, NULL, NULL, TRUE },
+	{ mHKCU_Key,		_T( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\KnownDevices" ), NULL, NULL, NULL, TRUE },
 	// SafelyRemove
-	{ mHKCU_Key, _T( "SOFTWARE\\Software\\SafelyRemove\\Drives" ), NULL, NULL, NULL, TRUE },
+	{ mHKCU_Key,		_T( "SOFTWARE\\Software\\SafelyRemove\\Drives" ), NULL, NULL, NULL, TRUE },
 	// MuiCache
-	{ mHKCU_Key, _T( "SOFTWARE\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache" ), NULL, NULL, NULL, TRUE },
+	{ mHKCU_Key,		_T( "SOFTWARE\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\MuiCache" ), NULL, NULL, NULL, TRUE },
 	// HandlerInstances
-	{ mHKCU_Key, _T( "SOFTWARE\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\SyncMgr\\HandlerInstances" ), NULL, NULL, NULL, TRUE },
+	{ mHKCU_Key,		_T( "SOFTWARE\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\SyncMgr\\HandlerInstances" ), NULL, NULL, NULL, TRUE },
 	// end
-	{ mControlSet_Key, NULL, NULL, NULL, NULL, FALSE }
+	{ mControlSet_Key,	NULL, NULL, NULL, NULL, FALSE }
 };
 
 // Event logs to clear
@@ -123,6 +124,72 @@ static const LPCTSTR szFiles[] =
 	_T( "%SystemRoot%\\inf\\INFCACHE.1" ),
 	_T( "%SystemRoot%\\System32\\wbem\\Logs\\wmiprov.log" )
 };
+
+// Services to stop
+static const LPCTSTR szServices[] =
+{
+	// Virtual Disk Service (VDS)
+	_T("vds"),
+	// Windows SuperFetch (includes modern ReadyBoost)
+	_T("SysMain"),
+	// Windows Vista ReadyBoost
+	_T("EMDMgmt")
+};
+
+void CUSBOblivionDlg::StopServices()
+{
+	Log( IDS_RUN_SERVICES );
+
+	if ( SC_HANDLE hSCM = OpenSCManager( NULL, NULL, SC_MANAGER_ALL_ACCESS ) )
+	{
+		for ( int i = 0; i < _countof( szServices ); ++i )
+		{
+			if ( SC_HANDLE hService = OpenService( hSCM, szServices[ i ], SERVICE_ALL_ACCESS ) )
+			{
+				SERVICE_STATUS ss = {};
+				if ( ControlService( hService, SERVICE_CONTROL_STOP, &ss ) )
+				{
+					for ( const DWORD dwStartTime = GetTickCount();; )
+					{
+						SERVICE_STATUS_PROCESS ssp = {};
+						DWORD dwBytesNeeded = 0;
+						if ( ! QueryServiceStatusEx( hService, SC_STATUS_PROCESS_INFO, (LPBYTE)&ssp, sizeof( SERVICE_STATUS_PROCESS ), &dwBytesNeeded ) )
+						{
+							TRACE( _T("QueryServiceStatusEx(\"%s\") error: %u\n"), szServices[ i ], GetLastError() );
+							break;
+						}
+						if ( ssp.dwCurrentState != SERVICE_STOP_PENDING )
+						{
+							// Already stopped
+							break;
+						}
+						const DWORD dwWaitTime = min( 10000, max( 1000, ssp.dwWaitHint / 10 ) );
+						Sleep( dwWaitTime );
+						if ( GetTickCount() > dwStartTime + 20000 )
+						{
+							TRACE( _T("ControlService(\"%s\") error: Time-out\n"), szServices[ i ] );
+							break;
+						}
+					}
+				}
+				else
+				{
+					TRACE( _T("ControlService(\"%s\") error: %u\n"), szServices[ i ], GetLastError() );
+				}
+				CloseServiceHandle( hService );
+			}
+			else
+			{
+				TRACE( _T("OpenService(\"%s\") error: %u\n"), szServices[ i ], GetLastError() );
+			}
+		}
+		CloseServiceHandle( hSCM );
+	}
+	else
+	{
+		TRACE( _T("OpenSCManager() error: %u\n"), GetLastError() );
+	}
+}
 
 void CUSBOblivionDlg::EjectDrives()
 {

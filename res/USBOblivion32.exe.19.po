@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.2.1\n"
 
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
@@ -280,3 +280,7 @@ msgstr "Ошибка перезапуска Windows: "
 #: STRING.177
 msgid "Simulate"
 msgstr "Симуляция"
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr "Остановка Служб Windows..."

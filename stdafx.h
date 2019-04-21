@@ -1,7 +1,7 @@
 //
 // stdafx.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2017.
+// Copyright (c) Nikolay Raspopov, 2009-2019.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -21,14 +21,12 @@
 
 #pragma once
 
-#pragma warning(disable: 4201)
-
 #ifndef _SECURE_ATL
-#define _SECURE_ATL 1
+	#define _SECURE_ATL 1
 #endif
 
 #ifndef VC_EXTRALEAN
-#define VC_EXTRALEAN            // Exclude rarely-used stuff from Windows headers
+	#define VC_EXTRALEAN            // Exclude rarely-used stuff from Windows headers
 #endif
 
 #define WIN32_LEAN_AND_MEAN
@@ -52,21 +50,22 @@
 #include <shlobj.h>
 #include <setupapi.h>
 #include <winioctl.h>
+#include <winsvc.h>
 #include <cfgmgr32.h>
 #include <SRRestorePtAPI.h>
 #include <psapi.h>
 #include <RestartManager.h>
 
 #ifndef BCM_FIRST
-#define BCM_FIRST 0x1600
+	#define BCM_FIRST 0x1600
 #endif
 
 #ifndef BCM_SETSHIELD
-#define BCM_SETSHIELD (BCM_FIRST + 0x000C)
+	#define BCM_SETSHIELD (BCM_FIRST + 0x000C)
 #endif
 
 #ifndef LVS_EX_DOUBLEBUFFER
-#define LVS_EX_DOUBLEBUFFER 0x00010000
+	#define LVS_EX_DOUBLEBUFFER 0x00010000
 #endif
 
 #define DELETE_EXCEPTION(e) do { if(e) { e->Delete(); } } while (0)

@@ -1,4 +1,4 @@
-﻿ USB Oblivion
+ USB Oblivion
 ---------------------------------
 
 Copyright (C) Nikolay Raspopov, 2009-2019.
@@ -95,6 +95,8 @@ Q: How to restore a saved .reg-file?
 
 1.12.1.0
 
+	* Added Windows Services closing (VDS, ReadyBoost, SuperFetch)
+	* Added ReadyBoost entries removing
 	* Added Dutch translation (by Jeroen Westera)
 	* Updated Spanish translation (by Boris Gilmar Terrazas Miranda)
 
