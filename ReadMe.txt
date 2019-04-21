@@ -71,7 +71,7 @@ Q: How to restore a saved .reg-file?
 	-lang:07 - German (by Kristine Baumgart)
 	-lang:08 - Greek (by Geogeo)
 	-lang:09 - English (by Nikolay Raspopov)
-	-lang:0a - Spanish (by CesarRG)
+	-lang:0a - Spanish (by CesarRG, Boris Gilmar Terrazas Miranda)
 	-lang:0c - French (by Mathieu Bergounioux, Rico-sos)
 	-lang:10 - Italian (by Marcello Gianola)
 	-lang:12 - Korean (by 4Li)
@@ -96,6 +96,7 @@ Q: How to restore a saved .reg-file?
 1.12.1.0
 
 	* Added Dutch translation (by Jeroen Westera)
+	* Updated Spanish translation (by Boris Gilmar Terrazas Miranda)
 
 1.12.0.0
 
