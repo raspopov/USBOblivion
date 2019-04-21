@@ -22,4 +22,5 @@ exit /b 1
 md "..\redist" 2>nul:
 del "..\redist\usboblivion-%version%.zip" 2>nul:
 %zip% a -m5 -ed -ep  -r -k -s -tl -afzip -cfg- "..\redist\usboblivion-%version%.zip" ReadMe.txt Win32\release\USBOblivion32.exe x64\release\USBOblivion64.exe
+%zip% a -m5 -ed -ep  -r -k -s -tl -afzip -cfg- "..\redist\usboblivion-%version%_symbols.zip" Win32\release\USBOblivion32.pdb x64\release\USBOblivion64.pdb
 %zip% a -m5 -ed -ep1 -r -k -s -tl -afzip -cfg- "..\redist\usboblivion-%version%_src.zip" *.* -x*.db -x*.opensdf -x*.user -x*.aps -x*.sdf -x*.ncb -x*.suo -x*.zip -x*.po_ -x*\.vs\* -x*\.svn\* -x*\Win32\* -x*\x64\* -x*\ipch\*
