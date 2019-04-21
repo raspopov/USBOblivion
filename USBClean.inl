@@ -84,7 +84,8 @@ static const CKeyDef defs[] =
 	{ mHKLM_Val,		_T( "SOFTWARE\\Microsoft\\WBEM\\WDM\\DREDGE" ), _T( "USBSTOR" ), NULL, NULL, FALSE },
 	// Vista ReadyBoost
 	{ mHKLM_Key,		_T( "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\EMDMgmt" ), NULL, NULL, NULL, FALSE },
-	{ mControlSet_Key,	_T( "Services\\rdyboost\\AttachState" ), _T( "USBSTOR" ), NULL, NULL, FALSE },
+	{ mControlSet_Key,	_T( "Services\\rdyboost\\AttachState" ), NULL, NULL, NULL, TRUE },
+	{ mControlSet_Key,	_T( "Services\\rdyboost\\Enum" ), NULL, NULL, NULL, TRUE },
 	// Vista
 	{ mHKLM_Key,		_T( "SOFTWARE\\Microsoft\\Windows Portable Devices\\Devices" ), NULL, NULL, NULL, FALSE },
 	// AutoPlay
