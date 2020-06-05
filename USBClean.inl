@@ -1,7 +1,7 @@
 //
 // USBClean.inl
 //
-// Copyright (c) Nikolay Raspopov, 2009-2019.
+// Copyright (c) Nikolay Raspopov, 2009-2020.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -25,6 +25,25 @@
 
 static const CKeyDef defs[] =
 {
+	// USB\UNKNOWN										"Unknown USB Device (Device Failed Enumeration)"
+	{ mControlSet_Key,	_T( "Enum\\USB\\VID_0000&PID_0000" ), NULL, NULL, NULL, TRUE },
+	// USB\RESET_FAILURE								"Unknown USB Device (Port Reset Failed)"
+	{ mControlSet_Key,	_T( "Enum\\USB\\VID_0000&PID_0001" ), NULL, NULL, NULL, TRUE },
+	// USB\DEVICE_DESCRIPTOR_FAILURE					"Unknown USB Device (Device Descriptor Request Failed)"
+	{ mControlSet_Key,	_T( "Enum\\USB\\VID_0000&PID_0002" ), NULL, NULL, NULL, TRUE },
+	// USB\CONFIGURATION_DESCRIPTOR_VALIDATION_FAILURE	"Unknown USB Device (Invalid Configuration Descriptor)"
+	{ mControlSet_Key,	_T( "Enum\\USB\\VID_0000&PID_0003" ), NULL, NULL, NULL, TRUE },
+	// USB\SET_ADDRESS_FAILURE							"Unknown USB Device (Set Address Failed)"
+	{ mControlSet_Key,	_T( "Enum\\USB\\VID_0000&PID_0004" ), NULL, NULL, NULL, TRUE },
+	// USB\DEVICE_DESCRIPTOR_VALIDATION_FAILURE			"Unknown USB Device (Invalid Device Descriptor)"
+	{ mControlSet_Key,	_T( "Enum\\USB\\VID_0000&PID_0005" ), NULL, NULL, NULL, TRUE },
+	// USB\CONFIG_DESCRIPTOR_FAILURE					"Unknown USB Device (Configuration Descriptor Request Failed)"
+	{ mControlSet_Key,	_T( "Enum\\USB\\VID_0000&PID_0006" ), NULL, NULL, NULL, TRUE },
+	// USB\PORT_LINK_SSINACTIVE							"Unknown USB Device (Link In SSInactive)"
+	{ mControlSet_Key,	_T( "Enum\\USB\\VID_0000&PID_0007" ), NULL, NULL, NULL, TRUE },
+	// USB\PORT_LINK_COMPLIANCE_MODE					"Unknown USB Device (Link in Compliance Mode)"
+	{ mControlSet_Key,	_T( "Enum\\USB\\VID_0000&PID_0008" ), NULL, NULL, NULL, TRUE },
+
 	// Windows 10 Upgrades
 	{ mControlSet_Key,	_T( "Control\\DeviceMigration" ), NULL, NULL, NULL, TRUE },
 	{ mHKLM_Key,		_T( "SYSTEM\\Setup\\Upgrade" ), NULL, NULL, NULL, TRUE },
@@ -37,16 +56,17 @@ static const CKeyDef defs[] =
 //	{ mControlSet_Key,	_T("Control\\Class\\{4D36E967-E325-11CE-BFC1-08002BE10318}"), NULL, _T("InfSection"), _T("disk_install"), FALSE },
 	// "Portable Devices" Vista
 	{ mControlSet_Key,	_T( "Control\\Class\\{EEC5AD98-8080-425F-922A-DABF3DE3F69A}" ), NULL, _T( "InfSection" ), _T( "Basic_Install" ), FALSE },
-	// XP, Vista
+	// XP, Vista (GUID_DEVINTERFACE_DISK)
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f56307-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
+	// XP, Vista (GUID_DEVINTERFACE_CDROM)
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f56308-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
-	// XP
+	// XP (GUID_DEVINTERFACE_PARTITION)
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f5630a-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "STORAGE#RemovableMedia" ), NULL, NULL, FALSE },
-	// XP, Vista
+	// XP, Vista (GUID_DEVINTERFACE_VOLUME)
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "STORAGE#RemovableMedia" ), NULL, NULL, FALSE },
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{53f5630d-b6bf-11d0-94f2-00a0c91efb8b}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
-	// Vista
+	// Vista (GUID_DEVINTERFACE_WPD)
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}" ), _T( "USBSTOR#Disk" ), NULL, NULL, FALSE },
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}" ), _T( "USBSTOR#CdRom" ), NULL, NULL, FALSE },
 	// Vista
@@ -606,7 +626,7 @@ void CUSBOblivionDlg::CleanLocalMachine()
 			}
 		}
 
-		// XP, Vista
+		// XP, Vista (GUID_DEVINTERFACE_USB_DEVICE)
 		// Удаление связанных пар "Control\\DeviceClasses\\{a5dcbf10-6530-11d2-901f-00c04fb951ed}" и "Enum\\USB"
 		{
 			const CString sFullKey = sControlSetKey + _T( "Control\\DeviceClasses\\{a5dcbf10-6530-11d2-901f-00c04fb951ed}" );
