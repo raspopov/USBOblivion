@@ -31,15 +31,15 @@ static char THIS_FILE[]=__FILE__;
 #endif
 
 // Construction/Destruction
-CCtrlResize::CControlInfo::CControlInfo ()
+CCtrlResize::CControlInfo::CControlInfo() noexcept
 	: controlID(0)
 	, bindtype (BIND_UNKNOWN)
 	, rectInitial( 0, 0, 0, 0 )
-	, m_pControlWnd(NULL)
+	, m_pControlWnd(nullptr)
 {
 }
 
-CCtrlResize::CControlInfo::CControlInfo (int _controlID, int _bindtype, const CRect& _rectInitial, CWnd* _pWnd)
+CCtrlResize::CControlInfo::CControlInfo(int _controlID, int _bindtype, const CRect& _rectInitial, CWnd* _pWnd) noexcept
 	: controlID ( _controlID )
 	, bindtype ( _bindtype )
 	, rectInitial ( _rectInitial )
@@ -47,8 +47,8 @@ CCtrlResize::CControlInfo::CControlInfo (int _controlID, int _bindtype, const CR
 {
 }
 
-CCtrlResize::CCtrlResize() :
-	m_pWnd (NULL)
+CCtrlResize::CCtrlResize() noexcept
+	: m_pWnd (nullptr)
 {
 }
 
@@ -59,7 +59,7 @@ CCtrlResize::~CCtrlResize()
 
 void CCtrlResize::Clear()
 {
-	m_pWnd = NULL;
+	m_pWnd = nullptr;
 	for ( int i = 0; i < m_aCtrls.GetSize(); ++i )
 	{
 		delete m_aCtrls.GetAt(i);
@@ -85,12 +85,12 @@ int CCtrlResize::FixControls()
 
 	m_pWnd->GetClientRect(&m_rectInitialParent);
 	m_pWnd->ScreenToClient(&m_rectInitialParent);
-	
+
 	for ( int i = 0; i < m_aCtrls.GetSize(); ++i )
 	{
 		if ( CControlInfo* pInfo = m_aCtrls.GetAt( i ) )
 		{
-			if ( CWnd* pControlWnd = ( pInfo->m_pControlWnd ? pInfo->m_pControlWnd : m_pWnd->GetDlgItem( pInfo->controlID ) ) )
+			if ( const CWnd* pControlWnd = ( pInfo->m_pControlWnd ? pInfo->m_pControlWnd : m_pWnd->GetDlgItem( pInfo->controlID ) ) )
 			{
 				pControlWnd->GetWindowRect( &pInfo->rectInitial );
 				m_pWnd->ScreenToClient( &pInfo->rectInitial );
@@ -100,7 +100,7 @@ int CCtrlResize::FixControls()
 	return 0;
 }
 
-void CCtrlResize::SetParentWnd(CWnd *pWnd)
+void CCtrlResize::SetParentWnd(CWnd *pWnd) noexcept
 {
 	m_pWnd = pWnd;
 }
@@ -120,9 +120,9 @@ void CCtrlResize::OnSize()
 			if ( CWnd* pControlWnd = ( pInfo->m_pControlWnd ? pInfo->m_pControlWnd : m_pWnd->GetDlgItem( pInfo->controlID ) ) )
 			{
 				CRect rr = pInfo->rectInitial;
-				if (pInfo->bindtype & BIND_RIGHT) 
+				if (pInfo->bindtype & BIND_RIGHT)
 					rr.right = rectWnd.right - ( m_rectInitialParent.Width() - pInfo->rectInitial.right );
-				if (pInfo->bindtype & BIND_BOTTOM) 
+				if (pInfo->bindtype & BIND_BOTTOM)
 					rr.bottom = rectWnd.bottom - ( m_rectInitialParent.Height() - pInfo->rectInitial.bottom );
 				if (pInfo->bindtype & BIND_TOP)
 					;

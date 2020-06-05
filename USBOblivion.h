@@ -33,7 +33,7 @@ using namespace c4u;
 class CUSBOblivionApp : public CWinApp
 {
 public:
-	CUSBOblivionApp();
+	CUSBOblivionApp() noexcept;
 
 	CLocalization	m_Loc;
 

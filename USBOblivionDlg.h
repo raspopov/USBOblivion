@@ -50,8 +50,8 @@ template < class T1, class T2 >
 class C2
 {
 public:
-	C2() {}
-	C2(const T1& f, const T2& s) : first( f ), second( s ) {}
+	inline C2() noexcept {}
+	inline C2(const T1& f, const T2& s) noexcept : first( f ), second( s ) {}
 	T1 first;
 	T2 second;
 };
@@ -64,7 +64,7 @@ typedef CList < CStringC2 > CStringC2List;
 class CUSBOblivionDlg : public CDialog
 {
 public:
-	CUSBOblivionDlg(CWnd* pParent = NULL);
+	CUSBOblivionDlg(CWnd* pParent = nullptr) noexcept;
 	virtual ~CUSBOblivionDlg();
 
 	enum { IDD = IDD_USBOBLIVION_DIALOG };
@@ -121,7 +121,7 @@ protected:
 	// Запись в .reg-файл
 	void Write( LPCTSTR szText );
 	// Сохранение ключа в .reg-файле
-	void SaveKey( HKEY hRoot, LPCTSTR szKeyName, LPCTSTR szValueName = NULL );
+	void SaveKey( HKEY hRoot, LPCTSTR szKeyName, LPCTSTR szValueName = nullptr );
 	// Сохранение значения в .reg-файле
 	void SaveValue( LPCTSTR szName, DWORD dwType, LPBYTE pData, DWORD dwSize );
 
@@ -190,10 +190,9 @@ protected:
 	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 	afx_msg BOOL OnDeviceChange(UINT nEventType, DWORD_PTR dwData);
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
+	afx_msg void OnBnClickedEnable();
 
 	DECLARE_MESSAGE_MAP()
 
 	THREAD(CUSBOblivionDlg,RunThread)
-public:
-	afx_msg void OnBnClickedEnable();
 };

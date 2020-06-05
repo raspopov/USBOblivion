@@ -31,20 +31,20 @@ const int BIND_UNKNOWN = 0x00;
 class CCtrlResize
 {
 public:
-	CCtrlResize();
+	CCtrlResize() noexcept;
 	~CCtrlResize();
 	void Clear();
 	void OnSize ();
-	void SetParentWnd (CWnd *pWnd);
+	void SetParentWnd (CWnd *pWnd) noexcept;
 	int FixControls ();
 	int AddControl (int _controlID, int _bindtype, const CRect& _rectInitial = CRect( 0, 0, 0, 0 ));
 	int AddControl (CWnd *_pControl, int _bindtype, const CRect& _rectInitial = CRect( 0, 0, 0, 0 ));
 
-	class CControlInfo  
+	class CControlInfo
 	{
 	public:
-		CControlInfo ();
-		CControlInfo (int _controlID, int _bindtype, const CRect& _rectInitial, CWnd* _m_pControlWnd = NULL);
+		CControlInfo() noexcept;
+		CControlInfo(int _controlID, int _bindtype, const CRect& _rectInitial, CWnd* _m_pControlWnd = nullptr) noexcept;
 		int controlID;
 		int bindtype;
 		CRect rectInitial;

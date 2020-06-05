@@ -27,12 +27,12 @@ inline DWORD WaitForMultipleObjectsLoop (
 	const DWORD nCount,
 	const HANDLE* const pHandles,
 	const BOOL fWaitAll,
-	const DWORD dwMilliseconds)
+	const DWORD dwMilliseconds) noexcept
 {
     MSG msg;
 	DWORD res;
 	do {
-		while (PeekMessage (&msg, NULL, NULL, NULL, PM_REMOVE)) {
+		while (PeekMessage (&msg, nullptr, 0, 0, PM_REMOVE)) {
 			TranslateMessage (&msg);
 			DispatchMessage (&msg);
 		}
@@ -41,7 +41,7 @@ inline DWORD WaitForMultipleObjectsLoop (
 	return res;
 }
 
-inline DWORD CoWaitForSingleObject (HANDLE Handle, const DWORD dwMilliseconds)
+inline DWORD CoWaitForSingleObject (HANDLE Handle, const DWORD dwMilliseconds) noexcept
 {
 	return WaitForMultipleObjectsLoop (1, &Handle, FALSE, dwMilliseconds);
 }
@@ -64,7 +64,7 @@ inline DWORD CoWaitForMultipleObjects (
 									   const DWORD nCount,
 									   const HANDLE* const lpHandles,
 									   const BOOL bWaitAll,
-									   const DWORD dwMilliseconds)
+									   const DWORD dwMilliseconds) noexcept
 {
 	return WaitForMultipleObjectsLoop (nCount, lpHandles, bWaitAll, dwMilliseconds);
 }
@@ -97,27 +97,27 @@ public:
 class mutex : public locker
 {
 public:
-	inline mutex () throw ()
+	inline mutex () noexcept
 	{
-		m_mutex = CreateMutex (NULL, false, NULL);
+		m_mutex = CreateMutex (nullptr, false, nullptr);
 	}
 
-	inline ~mutex () throw ()
+	inline ~mutex () noexcept
 	{
 		CloseHandle (m_mutex);
 	}
 
-	virtual void lock () const throw ()
+	virtual void lock () const noexcept override
 	{
 		CoWaitForSingleObject (m_mutex, INFINITE);
 	}
 
-	virtual void unlock () const throw ()
+	virtual void unlock () const noexcept override
 	{
 		ReleaseMutex (m_mutex);
 	}
 
-	virtual bool try_lock (const DWORD timeout /* мс, 0 или INFINITE */) const throw ()
+	virtual bool try_lock (const DWORD timeout /* мс, 0 или INFINITE */) const noexcept override
 	{
 		return (WaitForMultipleObjectsLoop (1, const_cast <const HANDLE*> (&m_mutex),
 			FALSE, timeout) == WAIT_OBJECT_0);
@@ -134,34 +134,34 @@ private:
 class cs : public locker
 {
 public:
-	inline cs () throw ()
+	inline cs () noexcept
 	{
 		InitializeCriticalSection  (&m_sect);
 	}
 
-	inline ~cs () throw ()
+	inline ~cs () noexcept
 	{
 		DeleteCriticalSection (&m_sect);
 	}
 
-	virtual void lock () const throw ()
+	virtual void lock () const noexcept override
 	{
 		EnterCriticalSection (&m_sect);
 	}
 
-	virtual void unlock () const throw ()
+	virtual void unlock () const noexcept override
 	{
 		LeaveCriticalSection (&m_sect);
 	}
 
-	virtual bool try_lock (const DWORD timeout /* мс, 0 или INFINITE */) const throw ()
+	virtual bool try_lock (const DWORD timeout /* мс, 0 или INFINITE */) const noexcept override
 	{
 		DWORD start_time = GetTickCount ();
 		do {
 			if (TryEnterCriticalSection (&m_sect))
 				return true;
 			MSG msg;
-			while (PeekMessage (&msg, NULL, NULL, NULL, PM_REMOVE)) {
+			while (PeekMessage (&msg, nullptr, 0, 0, PM_REMOVE)) {
 				TranslateMessage (&msg);
 				DispatchMessage (&msg);
 			}
@@ -180,7 +180,7 @@ private:
 class locker_holder
 {
 public:
-	inline locker_holder (const locker* c) throw ()
+	inline locker_holder (const locker* c) noexcept
 	{
 		if (c) {
 			c->lock ();
@@ -188,24 +188,24 @@ public:
 		}
 	}
 
-	inline locker_holder (const locker* c, const DWORD timeout /* мс, 0 или INFINITE */) throw ()
+	inline locker_holder (const locker* c, const DWORD timeout /* мс, 0 или INFINITE */) noexcept
 	{
 		if (c && c->try_lock (timeout)) {
 			m_hold = c;
 		} else
-			m_hold = NULL;
+			m_hold = nullptr;
 	}
 
-	inline operator bool () const throw ()
+	inline operator bool () const noexcept
 	{
-		return (m_hold != NULL);
+		return (m_hold != nullptr);
 	}
 
-	inline ~locker_holder () throw ()
+	inline ~locker_holder () noexcept
 	{
 		if (m_hold) {
 			m_hold->unlock ();
-			m_hold = NULL;
+			m_hold = nullptr;
 		}
 	}
 protected:

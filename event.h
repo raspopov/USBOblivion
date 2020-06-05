@@ -28,60 +28,60 @@ namespace c4u {
 class event
 {
 public:
-	event (BOOL manual = TRUE, BOOL initial = FALSE, LPCTSTR name = NULL) throw()
+	event (BOOL manual = TRUE, BOOL initial = FALSE, LPCTSTR name = nullptr) noexcept
 	{
-		m_event = CreateEvent (NULL, manual, initial, name);
+		m_event = CreateEvent (nullptr, manual, initial, name);
 	}
-	~event () throw()
-	{
-		if (m_event)
-			CloseHandle (m_event);
-	}
-	bool create (BOOL manual = TRUE, BOOL initial = FALSE, LPCTSTR name = NULL) throw()
+	~event () noexcept
 	{
 		if (m_event)
 			CloseHandle (m_event);
-		m_event = CreateEvent (NULL, manual, initial, name);
-		return (m_event != NULL);
 	}
-	inline operator HANDLE () const throw()
+	bool create (BOOL manual = TRUE, BOOL initial = FALSE, LPCTSTR name = nullptr) noexcept
+	{
+		if (m_event)
+			CloseHandle (m_event);
+		m_event = CreateEvent (nullptr, manual, initial, name);
+		return (m_event != nullptr);
+	}
+	inline operator HANDLE () const noexcept
 	{
 		return m_event;
 	}
-	inline bool check () const throw()
+	inline bool check () const noexcept
 	{
 		return (CoWaitForSingleObject (m_event, 0) == WAIT_OBJECT_0);
 	}
-	inline DWORD wait (const DWORD timeout) const throw()
+	inline DWORD wait (const DWORD timeout) const noexcept
 	{
 		return CoWaitForSingleObject (m_event, timeout);
 	}
-	inline bool set () throw()
+	inline bool set () noexcept
 	{
 		return (SetEvent (m_event) != FALSE);
 	}
-	inline bool reset () throw()
+	inline bool reset () noexcept
 	{
 		return (ResetEvent (m_event) != FALSE);
 	}
-	inline bool pulse () throw()
+	inline bool pulse () noexcept
 	{
 		return (PulseEvent (m_event) != FALSE);
 	}
 	struct set_event {
-		inline void operator () (const HANDLE h) throw ()
+		inline void operator () (const HANDLE h) noexcept
 		{
 			SetEvent (h);
 		}
 	};
 	struct reset_event {
-		inline void operator () (const HANDLE h) throw ()
+		inline void operator () (const HANDLE h) noexcept
 		{
 			ResetEvent (h);
 		}
 	};
 	struct pulse_event {
-		inline void operator () (const HANDLE h) throw ()
+		inline void operator () (const HANDLE h) noexcept
 		{
 			PulseEvent (h);
 		}

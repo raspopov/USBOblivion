@@ -36,7 +36,7 @@ END_MESSAGE_MAP()
 
 CUSBOblivionApp theApp;
 
-CUSBOblivionApp::CUSBOblivionApp()
+CUSBOblivionApp::CUSBOblivionApp() noexcept
 	: m_advapi32( _T( "advapi32.dll" ) )
 	, m_srclient( _T( "srclient.dll" ) )
 	, m_rstrtmgr( _T( "rstrtmgr.dll" ) )
@@ -198,7 +198,7 @@ void AddUnique(CStringList& lst, CString str)
 
 BOOL IsRunAsAdmin()
 {
-	PSID pAdministratorsGroup = NULL;
+	PSID pAdministratorsGroup = nullptr;
 	SID_IDENTIFIER_AUTHORITY NtAuthority = SECURITY_NT_AUTHORITY;
 	if ( ! AllocateAndInitializeSid( &NtAuthority, 2, SECURITY_BUILTIN_DOMAIN_RID, DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &pAdministratorsGroup ) )
 	{
@@ -207,7 +207,7 @@ BOOL IsRunAsAdmin()
 	}
 
 	BOOL bIsRunAsAdmin = FALSE;
-	if ( ! CheckTokenMembership( NULL, pAdministratorsGroup, &bIsRunAsAdmin ) )
+	if ( ! CheckTokenMembership( nullptr, pAdministratorsGroup, &bIsRunAsAdmin ) )
 	{
 		TRACE( _T("CheckTokenMembership error: %d\n"), GetLastError() );
 		FreeSid( pAdministratorsGroup );
@@ -220,7 +220,7 @@ BOOL IsRunAsAdmin()
 
 BOOL IsProcessElevated()
 {
-	HANDLE hToken = NULL;
+	HANDLE hToken = nullptr;
 	if ( ! OpenProcessToken( GetCurrentProcess(), TOKEN_QUERY, &hToken ) )
 	{
 		TRACE( _T("OpenProcessToken error: %d\n"), GetLastError() );
@@ -243,7 +243,7 @@ BOOL IsProcessElevated()
 HANDLE OpenProcessToken(HANDLE hProcess, DWORD dwAccess)
 {
 	// Вначале открытие токена "по хорошему"
-	HANDLE hToken = NULL;
+	HANDLE hToken = nullptr;
 	if ( OpenProcessToken( hProcess, dwAccess, &hToken ) )
 		return hToken;
 
@@ -251,7 +251,7 @@ HANDLE OpenProcessToken(HANDLE hProcess, DWORD dwAccess)
 
 	// Получение своего SIDа из токена своего процесса
 	HANDLE hSelfProcess = GetCurrentProcess();
-	HANDLE hSelfToken = NULL;
+	HANDLE hSelfToken = nullptr;
 	if ( OpenProcessToken( hSelfProcess, TOKEN_READ, &hSelfToken ) )
 	{
 		BYTE pBuf[ 512 ] = {};
@@ -265,7 +265,7 @@ HANDLE OpenProcessToken(HANDLE hProcess, DWORD dwAccess)
 				GRANT_ACCESS,
 				NO_INHERITANCE,
 				{
-					NULL,
+					nullptr,
 					NO_MULTIPLE_TRUSTEE,
 					TRUSTEE_IS_SID,
 					TRUSTEE_IS_USER,
@@ -277,16 +277,16 @@ HANDLE OpenProcessToken(HANDLE hProcess, DWORD dwAccess)
 			if ( OpenProcessToken( hProcess, TOKEN_READ | WRITE_OWNER | WRITE_DAC, &hToken ) )
 			{
 				// Получение текущего DACL токена
-				PACL pOrigDacl = NULL;
-				PSECURITY_DESCRIPTOR pSD = NULL;
-				if ( GetSecurityInfo( hToken, SE_KERNEL_OBJECT, DACL_SECURITY_INFORMATION, NULL, NULL, &pOrigDacl, NULL, &pSD ) == ERROR_SUCCESS )
+				PACL pOrigDacl = nullptr;
+				PSECURITY_DESCRIPTOR pSD = nullptr;
+				if ( GetSecurityInfo( hToken, SE_KERNEL_OBJECT, DACL_SECURITY_INFORMATION, nullptr, nullptr, &pOrigDacl, nullptr, &pSD ) == ERROR_SUCCESS )
 				{
 					// Добавление себя в DACL токена
-					PACL pNewDacl = NULL;
+					PACL pNewDacl = nullptr;
 					if ( SetEntriesInAcl( 1, &ea, pOrigDacl, &pNewDacl ) == ERROR_SUCCESS )
 					{
 						// Установка нового DACL токена (перманентно!)
-						if ( SetSecurityInfo( hToken, SE_KERNEL_OBJECT, DACL_SECURITY_INFORMATION, NULL, NULL, pNewDacl, NULL ) == ERROR_SUCCESS )
+						if ( SetSecurityInfo( hToken, SE_KERNEL_OBJECT, DACL_SECURITY_INFORMATION, nullptr, nullptr, pNewDacl, nullptr ) == ERROR_SUCCESS )
 						{
 							// Переоткрытие хэндла с нужными правами
 							if ( DuplicateHandle( hSelfProcess, hToken, hSelfProcess, &hToken, dwAccess, FALSE, DUPLICATE_CLOSE_SOURCE ) )
@@ -294,7 +294,7 @@ HANDLE OpenProcessToken(HANDLE hProcess, DWORD dwAccess)
 								TRACE( _T("Got it!\n") );
 							}
 							else
-								hToken = NULL;
+								hToken = nullptr;
 						}
 						LocalFree( pNewDacl );
 					}
@@ -313,7 +313,7 @@ DEVINST GetDrivesDevInstByDeviceNumber(DWORD DeviceNumber, UINT DriveType, LPCTS
 	switch ( DriveType )
 	{
 	case DRIVE_REMOVABLE:
-		if ( StrStrI( szDosDeviceName, _T("\\Floppy") ) != NULL )
+		if ( StrStrI( szDosDeviceName, _T("\\Floppy") ) != nullptr )
 			guid = (GUID*)&GUID_DEVINTERFACE_FLOPPY;
 		else
 			guid = (GUID*)&GUID_DEVINTERFACE_DISK;
@@ -332,7 +332,7 @@ DEVINST GetDrivesDevInstByDeviceNumber(DWORD DeviceNumber, UINT DriveType, LPCTS
 	}
 
 	// Get device interface info set handle for all devices attached to system
-	HDEVINFO hDevInfo = SetupDiGetClassDevs( guid, NULL, NULL,
+	HDEVINFO hDevInfo = SetupDiGetClassDevs( guid, nullptr, nullptr,
 		DIGCF_PRESENT | DIGCF_DEVICEINTERFACE );
 	if ( hDevInfo == INVALID_HANDLE_VALUE )
 		return 0;
@@ -341,12 +341,12 @@ DEVINST GetDrivesDevInstByDeviceNumber(DWORD DeviceNumber, UINT DriveType, LPCTS
 	for ( DWORD dwIndex = 0; ; ++dwIndex )
 	{
 		SP_DEVICE_INTERFACE_DATA spdid = { sizeof( SP_DEVICE_INTERFACE_DATA ) };
-		if ( ! SetupDiEnumDeviceInterfaces( hDevInfo, NULL, guid, dwIndex, &spdid ) )
+		if ( ! SetupDiEnumDeviceInterfaces( hDevInfo, nullptr, guid, dwIndex, &spdid ) )
 			break;
 
 		// check the buffer size
 		DWORD dwSize = 0;
-		SetupDiGetDeviceInterfaceDetail( hDevInfo, &spdid, NULL, 0, &dwSize, NULL );
+		SetupDiGetDeviceInterfaceDetail( hDevInfo, &spdid, nullptr, 0, &dwSize, nullptr );
 
 		if ( dwSize != 0 )
 		{
@@ -374,14 +374,14 @@ DEVINST GetDrivesDevInstByDeviceNumber(DWORD DeviceNumber, UINT DriveType, LPCTS
 
 					// open the disk or cd-rom or floppy
 					HANDLE hDrive = CreateFile( pspdidd->DevicePath, 0,
-						FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, 0, NULL );
+						FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, 0, nullptr );
 					if ( hDrive != INVALID_HANDLE_VALUE )
 					{
 						// get its device number
 						STORAGE_DEVICE_NUMBER sdn = {};
 						DWORD dwBytesReturned = 0;
 						if ( DeviceIoControl( hDrive, IOCTL_STORAGE_GET_DEVICE_NUMBER,
-							NULL, 0, &sdn, sizeof( sdn ), &dwBytesReturned, NULL ) )
+							nullptr, 0, &sdn, sizeof( sdn ), &dwBytesReturned, nullptr ) )
 						{
 							if ( DeviceNumber == sdn.DeviceNumber )
 							{
@@ -411,7 +411,7 @@ BOOL InitializeCOMSecurity()
 	// returned by ConvertStringSecurityDescriptorToSecurityDescriptor().
 	SECURITY_DESCRIPTOR securityDesc = {};
 	EXPLICIT_ACCESS   ea[5] = {};
-	ACL        *pAcl = NULL;
+	ACL        *pAcl = nullptr;
 	ULONGLONG  rgSidBA[(SECURITY_MAX_SID_SIZE+sizeof(ULONGLONG)-1)/sizeof(ULONGLONG)]={};
 	ULONGLONG  rgSidLS[(SECURITY_MAX_SID_SIZE+sizeof(ULONGLONG)-1)/sizeof(ULONGLONG)]={};
 	ULONGLONG  rgSidNS[(SECURITY_MAX_SID_SIZE+sizeof(ULONGLONG)-1)/sizeof(ULONGLONG)]={};
@@ -430,7 +430,7 @@ BOOL InitializeCOMSecurity()
 
 	// Create an administrator group security identifier (SID).
 	cbSid = sizeof( rgSidBA );
-	fRet = ::CreateWellKnownSid( WinBuiltinAdministratorsSid, NULL, rgSidBA, &cbSid );
+	fRet = ::CreateWellKnownSid( WinBuiltinAdministratorsSid, nullptr, rgSidBA, &cbSid );
 	if( !fRet )
 	{
 		goto exit;
@@ -438,7 +438,7 @@ BOOL InitializeCOMSecurity()
 
 	// Create a local service security identifier (SID).
 	cbSid = sizeof( rgSidLS );
-	fRet = ::CreateWellKnownSid( WinLocalServiceSid, NULL, rgSidLS, &cbSid );
+	fRet = ::CreateWellKnownSid( WinLocalServiceSid, nullptr, rgSidLS, &cbSid );
 	if( !fRet )
 	{
 		goto exit;
@@ -446,7 +446,7 @@ BOOL InitializeCOMSecurity()
 
 	// Create a network service security identifier (SID).
 	cbSid = sizeof( rgSidNS );
-	fRet = ::CreateWellKnownSid( WinNetworkServiceSid, NULL, rgSidNS, &cbSid );
+	fRet = ::CreateWellKnownSid( WinNetworkServiceSid, nullptr, rgSidNS, &cbSid );
 	if( !fRet )
 	{
 		goto exit;
@@ -454,7 +454,7 @@ BOOL InitializeCOMSecurity()
 
 	// Create a personal account security identifier (SID).
 	cbSid = sizeof( rgSidPS );
-	fRet = ::CreateWellKnownSid( WinSelfSid, NULL, rgSidPS, &cbSid );
+	fRet = ::CreateWellKnownSid( WinSelfSid, nullptr, rgSidPS, &cbSid );
 	if( !fRet )
 	{
 		goto exit;
@@ -462,7 +462,7 @@ BOOL InitializeCOMSecurity()
 
 	// Create a local service security identifier (SID).
 	cbSid = sizeof( rgSidSY );
-	fRet = ::CreateWellKnownSid( WinLocalSystemSid, NULL, rgSidSY, &cbSid );
+	fRet = ::CreateWellKnownSid( WinLocalSystemSid, nullptr, rgSidSY, &cbSid );
 	if( !fRet )
 	{
 		goto exit;
@@ -473,7 +473,7 @@ BOOL InitializeCOMSecurity()
 	ea[0].grfAccessPermissions = COM_RIGHTS_EXECUTE | COM_RIGHTS_EXECUTE_LOCAL;
 	ea[0].grfAccessMode = SET_ACCESS;
 	ea[0].grfInheritance = NO_INHERITANCE;
-	ea[0].Trustee.pMultipleTrustee = NULL;
+	ea[0].Trustee.pMultipleTrustee = nullptr;
 	ea[0].Trustee.MultipleTrusteeOperation = NO_MULTIPLE_TRUSTEE;
 	ea[0].Trustee.TrusteeForm = TRUSTEE_IS_SID;
 	ea[0].Trustee.TrusteeType = TRUSTEE_IS_GROUP;
@@ -482,7 +482,7 @@ BOOL InitializeCOMSecurity()
 	ea[1].grfAccessPermissions = COM_RIGHTS_EXECUTE | COM_RIGHTS_EXECUTE_LOCAL;
 	ea[1].grfAccessMode = SET_ACCESS;
 	ea[1].grfInheritance = NO_INHERITANCE;
-	ea[1].Trustee.pMultipleTrustee = NULL;
+	ea[1].Trustee.pMultipleTrustee = nullptr;
 	ea[1].Trustee.MultipleTrusteeOperation = NO_MULTIPLE_TRUSTEE;
 	ea[1].Trustee.TrusteeForm = TRUSTEE_IS_SID;
 	ea[1].Trustee.TrusteeType = TRUSTEE_IS_GROUP;
@@ -491,7 +491,7 @@ BOOL InitializeCOMSecurity()
 	ea[2].grfAccessPermissions = COM_RIGHTS_EXECUTE | COM_RIGHTS_EXECUTE_LOCAL;
 	ea[2].grfAccessMode = SET_ACCESS;
 	ea[2].grfInheritance = NO_INHERITANCE;
-	ea[2].Trustee.pMultipleTrustee = NULL;
+	ea[2].Trustee.pMultipleTrustee = nullptr;
 	ea[2].Trustee.MultipleTrusteeOperation = NO_MULTIPLE_TRUSTEE;
 	ea[2].Trustee.TrusteeForm = TRUSTEE_IS_SID;
 	ea[2].Trustee.TrusteeType = TRUSTEE_IS_GROUP;
@@ -500,7 +500,7 @@ BOOL InitializeCOMSecurity()
 	ea[3].grfAccessPermissions = COM_RIGHTS_EXECUTE | COM_RIGHTS_EXECUTE_LOCAL;
 	ea[3].grfAccessMode = SET_ACCESS;
 	ea[3].grfInheritance = NO_INHERITANCE;
-	ea[3].Trustee.pMultipleTrustee = NULL;
+	ea[3].Trustee.pMultipleTrustee = nullptr;
 	ea[3].Trustee.MultipleTrusteeOperation = NO_MULTIPLE_TRUSTEE;
 	ea[3].Trustee.TrusteeForm = TRUSTEE_IS_SID;
 	ea[3].Trustee.TrusteeType = TRUSTEE_IS_GROUP;
@@ -509,15 +509,15 @@ BOOL InitializeCOMSecurity()
 	ea[4].grfAccessPermissions = COM_RIGHTS_EXECUTE | COM_RIGHTS_EXECUTE_LOCAL;
 	ea[4].grfAccessMode = SET_ACCESS;
 	ea[4].grfInheritance = NO_INHERITANCE;
-	ea[4].Trustee.pMultipleTrustee = NULL;
+	ea[4].Trustee.pMultipleTrustee = nullptr;
 	ea[4].Trustee.MultipleTrusteeOperation = NO_MULTIPLE_TRUSTEE;
 	ea[4].Trustee.TrusteeForm = TRUSTEE_IS_SID;
 	ea[4].Trustee.TrusteeType = TRUSTEE_IS_GROUP;
 	ea[4].Trustee.ptstrName = (LPTSTR)rgSidSY;
 
 	// Create an access control list (ACL) using this ACE list.
-	dwRet = ::SetEntriesInAcl( ARRAYSIZE( ea ), ea, NULL, &pAcl );
-	if( dwRet != ERROR_SUCCESS || pAcl == NULL )
+	dwRet = ::SetEntriesInAcl( ARRAYSIZE( ea ), ea, nullptr, &pAcl );
+	if( dwRet != ERROR_SUCCESS || pAcl == nullptr )
 	{
 		fRet = FALSE;
 		goto exit;
@@ -547,13 +547,13 @@ BOOL InitializeCOMSecurity()
 	// Initialize COM
 	hrRet = ::CoInitializeSecurity( &securityDesc,
 		-1,
-		NULL,
-		NULL,
+		nullptr,
+		nullptr,
 		RPC_C_AUTHN_LEVEL_PKT_PRIVACY,
 		RPC_C_IMP_LEVEL_IDENTIFY,
-		NULL,
+		nullptr,
 		EOAC_DISABLE_AAA | EOAC_NO_CUSTOM_MARSHAL,
-		NULL );
+		nullptr );
 	if( FAILED( hrRet ) && hrRet != RPC_E_TOO_LATE )
 	{
 		fRet = FALSE;

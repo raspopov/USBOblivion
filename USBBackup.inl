@@ -36,7 +36,7 @@ bool CUSBOblivionDlg::PrepareBackup()
 		sComputer.ReleaseBuffer();
 
 		CString sLogFolder;
-		SHGetFolderPath( GetSafeHwnd(), CSIDL_PERSONAL, NULL, SHGFP_TYPE_CURRENT,
+		SHGetFolderPath( GetSafeHwnd(), CSIDL_PERSONAL, nullptr, SHGFP_TYPE_CURRENT,
 			sLogFolder.GetBuffer( MAX_PATH + 1 ) );
 		sLogFolder.ReleaseBuffer();
 		sLogFolder.TrimRight( _T( "\\" ) );
@@ -99,7 +99,7 @@ void CUSBOblivionDlg::SaveKey( HKEY hRoot, LPCTSTR szKeyName, LPCTSTR szValueNam
 	BYTE pszValue[ 4096 ] = {};
 	DWORD cchValue;
 
-	HKEY hKey = NULL;
+	HKEY hKey = nullptr;
 	LSTATUS ret = RegOpenKeyFull( hRoot, szKeyName, KEY_READ, &hKey );
 	if ( ret == ERROR_SUCCESS )
 	{

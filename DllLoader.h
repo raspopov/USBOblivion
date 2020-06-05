@@ -37,14 +37,14 @@ private:
 	HINSTANCE	m_pDll;
 
 public:
-	inline CDllLoader()
-		: m_pDll ( 0 )
+	inline CDllLoader() noexcept
+		: m_pDll ( nullptr )
 	{
 	}
 
 	inline CDllLoader(LPCTSTR szDllName, bool bloadNow = true)
 		: m_sDllName	( szDllName )
-		, m_pDll		( 0 )
+		, m_pDll		( nullptr )
 	{
 		if ( bloadNow )
 		{
@@ -68,9 +68,9 @@ public:
 		return LoadLibrary();
 	}
 
-	inline operator bool() const
+	inline operator bool() const noexcept
 	{
-		return ( m_pDll != 0 );
+		return ( m_pDll != nullptr );
 	}
 
 	template < typename FuncTTT >
@@ -78,31 +78,31 @@ public:
 	{
 		// existing lib loaded?
 		if ( ! LoadLibrary() )
-			return (FuncTTT)NULL;
+			return (FuncTTT)nullptr;
 
 		// load func from dll
 		FuncTTT fPtr = (FuncTTT)GetProcAddress ( m_pDll, fNameStr );
 		if ( ! fPtr )
 		{
 			ATLTRACE( "ERROR: cannot locate function name (%s) from dll\n", fNameStr );
-			return (FuncTTT)NULL;
+			return (FuncTTT)nullptr;
 		}
 		c = fPtr;
 		return fPtr;
 	}
 
-	void Free()
+	void Free() noexcept
 	{
 		if ( m_pDll )
 		{
 			ATLTRACE( _T("Unloading DLL %s ...\n"), (LPCTSTR)m_sDllName );
 			ATLVERIFY( ::FreeLibrary( m_pDll ) );
 			ATLTRACE( _T("DLL %s successfully unloaded.\n"), (LPCTSTR)m_sDllName );
-			m_pDll = 0;
+			m_pDll = nullptr;
 		}
 	}
 
-	bool LoadLibrary(HINSTANCE hInstance = NULL)
+	bool LoadLibrary(HINSTANCE hInstance = nullptr)
 	{
 		// existing lib loaded?
 		if ( m_pDll )

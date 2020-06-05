@@ -29,43 +29,43 @@ namespace c4u {
 class thread
 {
 public:
-	thread () throw() :
-		m_thread (NULL),
+	thread () noexcept :
+		m_thread (nullptr),
 		m_id (0),
 		m_suspended (false)
 	{
 	}
-	~thread () throw()
+	~thread () noexcept
 	{
 		close ();
 	}
-	inline operator HANDLE () const throw()
+	inline operator HANDLE () const noexcept
 	{
 		return m_thread;
 	}
-	inline operator bool () const throw()
+	inline operator bool () const noexcept
 	{
-		return (m_thread != NULL);
+		return (m_thread != nullptr);
 	}
 	inline bool start (unsigned(__stdcall*fn)(void*),
-		LPVOID param = NULL, bool suspended = false) throw()
+		LPVOID param = nullptr, bool suspended = false) noexcept
 	{
 		if (!m_thread)
-			m_thread = reinterpret_cast <HANDLE> (_beginthreadex (NULL, 0, fn, param,
+			m_thread = reinterpret_cast <HANDLE> (_beginthreadex (nullptr, 0, fn, param,
 				(suspended ? CREATE_SUSPENDED : 0), &m_id));
-		return (m_thread != NULL);
+		return (m_thread != nullptr);
 	}
-	inline bool is_suspended () const throw()
+	inline bool is_suspended () const noexcept
 	{
 		return m_suspended;
 	}
-	inline bool wait_for_stop (DWORD timeout = INFINITE) throw()
+	inline bool wait_for_stop (DWORD timeout = INFINITE) noexcept
 	{
 		while ( m_thread )
 		{
 			resume ();
 			MSG msg;
-			while (PeekMessage (&msg, NULL, NULL, NULL, PM_REMOVE))
+			while (PeekMessage (&msg, nullptr, 0, 0, PM_REMOVE))
 			{
 				TranslateMessage (&msg);
 				DispatchMessage (&msg);
@@ -88,16 +88,16 @@ public:
 		}
 		return true;
 	}
-	inline bool is_running () const throw()
+	inline bool is_running () const noexcept
 	{
 		return m_thread && (CoWaitForSingleObject (m_thread, 0) == WAIT_TIMEOUT);
 	}
-	inline void suspend () throw ()
+	inline void suspend () noexcept
 	{
 		if (m_thread)
-			m_suspended = SuspendThread (m_thread) != (DWORD) -1;			
+			m_suspended = SuspendThread (m_thread) != (DWORD) -1;
 	}
-	inline void resume () throw ()
+	inline void resume () noexcept
 	{
 		if (m_thread) {
 			DWORD ret = (DWORD) -1;
@@ -107,24 +107,24 @@ public:
 			m_suspended = false;
 		}
 	}
-	inline void close () throw ()
+	inline void close () noexcept
 	{
 		if (m_thread) {
 			locker_holder h (&m_guard);
 			if (m_thread) {
 				CloseHandle (m_thread);
-				m_thread = NULL;
+				m_thread = nullptr;
 			}
 		}
 	}
-	inline int priority () const throw ()
+	inline int priority () const noexcept
 	{
 		if (m_thread)
 			return GetThreadPriority (m_thread);
 		else
 			return THREAD_PRIORITY_ERROR_RETURN;
 	}
-	inline void priority (int p) throw ()
+	inline void priority (int p) noexcept
 	{
 		if (m_thread)
 			SetThreadPriority (m_thread, p);
@@ -138,25 +138,25 @@ protected:
 };
 
 #define THREAD_INLINE(ClassName,Fn) \
-	inline bool start##Fn (bool suspended = false) throw() { \
+	inline bool start##Fn (bool suspended = false) noexcept { \
 		m_term##Fn.reset (); \
 		return m_thread##Fn.start (stub##Fn, \
 			reinterpret_cast<LPVOID> (this), suspended); \
 	} \
-	inline void stop##Fn () throw() { \
+	inline void stop##Fn () noexcept { \
 		m_term##Fn.set (); \
 		m_thread##Fn.wait_for_stop (); \
 	} \
-	inline void suspend##Fn () throw () { \
+	inline void suspend##Fn () noexcept { \
 		if (!m_term##Fn.check ()) \
 			m_thread##Fn.suspend (); \
 	} \
-	inline void resume##Fn () throw () { \
+	inline void resume##Fn () noexcept { \
 		m_thread##Fn.resume (); \
 	} \
 	c4u::event m_term##Fn; \
 	c4u::thread m_thread##Fn; \
-	static unsigned __stdcall stub##Fn (void* param) throw() { \
+	static unsigned __stdcall stub##Fn (void* param) noexcept { \
 		ClassName* self = reinterpret_cast <ClassName*> (param); \
 		self->##Fn (); \
 		return 0; \

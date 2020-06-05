@@ -30,7 +30,7 @@
 #endif
 
 
-CUSBOblivionDlg::CUSBOblivionDlg(CWnd* pParent /*=NULL*/)
+CUSBOblivionDlg::CUSBOblivionDlg(CWnd* pParent /*=NULL*/) noexcept
 	: CDialog			( CUSBOblivionDlg::IDD, pParent )
 	, m_hIcon			( AfxGetApp()->LoadIcon( IDR_MAINFRAME ) )
 	, m_bEnable			( FALSE )
@@ -80,7 +80,7 @@ void CUSBOblivionDlg::CopyToClipboard(const CString& sData)
 			if ( HGLOBAL hGlob = GlobalAlloc( GMEM_FIXED, nLen ) )
 			{
 				CopyMemory( (char*)hGlob, (char*)(LPCTSTR)sData, nLen );
-				if ( SetClipboardData( CF_UNICODETEXT, hGlob ) == NULL )
+				if ( SetClipboardData( CF_UNICODETEXT, hGlob ) == nullptr )
 				{
 					// Ошибка
 					GlobalFree( hGlob );
@@ -173,7 +173,7 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 	else
 		Log( IDS_START );
 
-	SetTimer( 1, 250, NULL );
+	SetTimer( 1, 250, nullptr );
 
 	return TRUE;
 }
@@ -274,7 +274,7 @@ void CUSBOblivionDlg::OnOK()
 		sParams.AppendFormat( _T(" -lang:%x"), (int)theApp.m_Loc.GetLang() );
 
 		CString sPath;
-		GetModuleFileName( NULL, sPath.GetBuffer( MAX_PATH + 1 ), MAX_PATH );
+		GetModuleFileName( nullptr, sPath.GetBuffer( MAX_PATH + 1 ), MAX_PATH );
 		sPath.ReleaseBuffer();
 
 		// Запустить себя как админа
@@ -516,7 +516,7 @@ LSTATUS CUSBOblivionDlg::RegOpenKeyFull(HKEY hKey, LPCTSTR lpSubKey, REGSAM samD
 
 LSTATUS CUSBOblivionDlg::RegDeleteValueFull(HKEY hKey, LPCTSTR lpSubKey, LPCTSTR lpValue)
 {
-	HKEY hValueKey = NULL;
+	HKEY hValueKey = nullptr;
 	LSTATUS ret = RegOpenKeyFull( hKey, lpSubKey, KEY_SET_VALUE, &hValueKey );
 	if ( ret == ERROR_SUCCESS )
 	{
@@ -538,7 +538,7 @@ LSTATUS CUSBOblivionDlg::RegDeleteKeyFull(HKEY hKey, const CString& sSubKey)
 	// Перечисление всех подключей
 	CStringList oSubKeys;
 	{
-		HKEY hSubKey = NULL;
+		HKEY hSubKey = nullptr;
 		ret = RegOpenKeyFull( hKey, sSubKey, KEY_READ, &hSubKey );
 		if ( ret != ERROR_SUCCESS )
 			return ret;
@@ -598,7 +598,7 @@ void CUSBOblivionDlg::ProcessKey(HKEY hRoot, const CString& sRoot, const CKeyDef
 	DWORD cchValue;
 
 	CString sFullKey = sRoot + def.szKeyName;
-	HKEY hKeys = NULL;
+	HKEY hKeys = nullptr;
 	LSTATUS ret = RegOpenKeyFull( hRoot, sFullKey, KEY_READ, &hKeys );
 	if ( ret != ERROR_SUCCESS )
 		return;
@@ -650,7 +650,7 @@ void CUSBOblivionDlg::ProcessValue(HKEY hRoot, const CString& sRoot, const CKeyD
 	DWORD cchValue;
 
 	CString sFullKey = sRoot + def.szKeyName;
-	HKEY hKey = NULL;
+	HKEY hKey = nullptr;
 	LRESULT ret = RegOpenKeyFull( hRoot, sFullKey, KEY_READ, &hKey );
 	if ( ret != ERROR_SUCCESS )
 		return;
@@ -690,8 +690,7 @@ bool CUSBOblivionDlg::EjectDrive(TCHAR DriveLetter)
 	szVolumeAccessPath[4] = DriveLetter;
 
 	// open the storage volume
-	HANDLE hVolume = CreateFile( szVolumeAccessPath, 0,
-		FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, NULL, NULL );
+	HANDLE hVolume = CreateFile( szVolumeAccessPath, 0, FILE_SHARE_READ | FILE_SHARE_WRITE, nullptr, OPEN_EXISTING, 0, nullptr );
 	if ( hVolume == INVALID_HANDLE_VALUE )
 		return false;
 
@@ -699,7 +698,7 @@ bool CUSBOblivionDlg::EjectDrive(TCHAR DriveLetter)
 	DWORD DeviceNumber = (DWORD)-1;
 	STORAGE_DEVICE_NUMBER sdn = {};
 	DWORD dwBytesReturned = 0;
-	if ( DeviceIoControl( hVolume, IOCTL_STORAGE_GET_DEVICE_NUMBER, NULL, 0, &sdn, sizeof( sdn ), &dwBytesReturned, NULL ) )
+	if ( DeviceIoControl( hVolume, IOCTL_STORAGE_GET_DEVICE_NUMBER, nullptr, 0, &sdn, sizeof( sdn ), &dwBytesReturned, nullptr ) )
 	{
 		DeviceNumber = sdn.DeviceNumber;
 	}
@@ -844,7 +843,7 @@ void CUSBOblivionDlg::DoDeleteFile(LPCTSTR szPath)
 				}
 				else
 				{
-					if ( ::MoveFileEx( sLongPath, NULL, MOVEFILE_DELAY_UNTIL_REBOOT ) )
+					if ( ::MoveFileEx( sLongPath, nullptr, MOVEFILE_DELAY_UNTIL_REBOOT ) )
 					{
 						Log( LoadString( IDS_DELETE_FILE_BOOT ) + sPath, Warning );
 					}
@@ -873,7 +872,7 @@ void CUSBOblivionDlg::DoDeleteLog(LPCTSTR szName)
 		STARTUPINFO si = { sizeof( STARTUPINFO ) };
 		si.dwFlags = STARTF_USESHOWWINDOW;
 		PROCESS_INFORMATION pi = {};
-		if ( CreateProcess( NULL, szCommand, NULL, NULL, FALSE, 0, NULL, NULL, &si, &pi ) )
+		if ( CreateProcess( nullptr, szCommand, nullptr, nullptr, FALSE, 0, nullptr, nullptr, &si, &pi ) )
 		{
 			// Wait until child process exits
 			WaitForSingleObject( pi.hProcess, INFINITE );
@@ -884,12 +883,12 @@ void CUSBOblivionDlg::DoDeleteLog(LPCTSTR szName)
 		}
 
 		// Using API
-		if ( HANDLE hLog = OpenEventLog( NULL, szName ) )
+		if ( HANDLE hLog = OpenEventLog( nullptr, szName ) )
 		{
 			DWORD dwCount = 0;
 			if ( GetNumberOfEventLogRecords( hLog, &dwCount ) && dwCount > 1 )
 			{
-				if ( ClearEventLog( hLog, NULL ) )
+				if ( ClearEventLog( hLog, nullptr ) )
 				{
 					Log( LoadString( IDS_RUN_LOG ) + szName, Clean );
 				}
@@ -978,7 +977,7 @@ BOOL CUSBOblivionDlg::OnHelpInfo(HELPINFO* /*pHelpInfo*/)
 {
 	CWaitCursor wc;
 
-	ShellExecute( GetSafeHwnd(), NULL, _T("http://www.cherubicsoft.com/projects/usboblivion"), NULL, NULL, SW_SHOWDEFAULT );
+	ShellExecute( GetSafeHwnd(), nullptr, _T("http://www.cherubicsoft.com/projects/usboblivion"), nullptr, nullptr, SW_SHOWDEFAULT );
 
 	return TRUE;
 }
@@ -1059,24 +1058,24 @@ void CUSBOblivionDlg::OnTimer(UINT_PTR nIDEvent)
 INT_PTR CUSBOblivionDlg::DoModal()
 {
 	// can be constructed with a resource template or InitModalIndirect
-	ASSERT(m_lpszTemplateName != NULL || m_hDialogTemplate != NULL ||
-		m_lpDialogTemplate != NULL);
+	ASSERT(m_lpszTemplateName != nullptr || m_hDialogTemplate != nullptr ||
+		m_lpDialogTemplate != nullptr);
 
 	// load resource as necessary
 	LPCDLGTEMPLATE lpDialogTemplate = m_lpDialogTemplate;
 	HGLOBAL hDialogTemplate = m_hDialogTemplate;
 	HINSTANCE hInst = AfxGetResourceHandle();
-	if (m_lpszTemplateName != NULL)
+	if (m_lpszTemplateName != nullptr)
 	{
 		hInst = AfxFindResourceHandle(m_lpszTemplateName, RT_DIALOG);
 		HRSRC hResource = ::FindResource(hInst, m_lpszTemplateName, RT_DIALOG);
 		hDialogTemplate = LoadResource(hInst, hResource);
 	}
-	if (hDialogTemplate != NULL)
+	if (hDialogTemplate != nullptr)
 		lpDialogTemplate = (LPCDLGTEMPLATE)LockResource(hDialogTemplate);
 
 	// return -1 in case of failure to load the dialog template resource
-	if (lpDialogTemplate == NULL)
+	if (lpDialogTemplate == nullptr)
 		return -1;
 
 	// disable parent (before creating dialog)
@@ -1084,7 +1083,7 @@ INT_PTR CUSBOblivionDlg::DoModal()
 	AfxUnhookWindowCreate();
 	BOOL bEnableParent = FALSE;
 #ifndef _AFX_NO_OLE_SUPPORT
-	CWnd* pMainWnd = NULL;
+	CWnd* pMainWnd = nullptr;
 	BOOL bEnableMainWnd = FALSE;
 #endif
 	if (hWndParent && hWndParent != ::GetDesktopWindow() && ::IsWindowEnabled(hWndParent))
@@ -1121,8 +1120,8 @@ INT_PTR CUSBOblivionDlg::DoModal()
 			}
 
 			// hide the window before enabling the parent, etc.
-			if (m_hWnd != NULL)
-				SetWindowPos(NULL, 0, 0, 0, 0, SWP_HIDEWINDOW|
+			if (m_hWnd != nullptr)
+				SetWindowPos(nullptr, 0, 0, 0, 0, SWP_HIDEWINDOW|
 					SWP_NOSIZE|SWP_NOMOVE|SWP_NOACTIVATE|SWP_NOZORDER);
 		}
 	}
@@ -1139,7 +1138,7 @@ INT_PTR CUSBOblivionDlg::DoModal()
 #endif
 	if (bEnableParent)
 		::EnableWindow(hWndParent, TRUE);
-	if (hWndParent != NULL && ::GetActiveWindow() == m_hWnd)
+	if (hWndParent != nullptr && ::GetActiveWindow() == m_hWnd)
 		::SetActiveWindow(hWndParent);
 
 	// destroy modal window
@@ -1147,9 +1146,9 @@ INT_PTR CUSBOblivionDlg::DoModal()
 	PostModal();
 
 	// unlock/free resources as necessary
-	if (m_lpszTemplateName != NULL || m_hDialogTemplate != NULL)
+	if (m_lpszTemplateName != nullptr || m_hDialogTemplate != nullptr)
 		UnlockResource(hDialogTemplate);
-	if (m_lpszTemplateName != NULL)
+	if (m_lpszTemplateName != nullptr)
 		FreeResource(hDialogTemplate);
 
 	return m_nModalResult;
