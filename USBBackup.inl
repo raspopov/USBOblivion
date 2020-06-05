@@ -80,12 +80,12 @@ void CUSBOblivionDlg::FinishBackup()
 	m_oFile.Close();
 }
 
-void CUSBOblivionDlg::Write( LPCTSTR szText )
+void CUSBOblivionDlg::Write(const CString& sText)
 {
 	if ( m_oFile == INVALID_HANDLE_VALUE )
 		return;
 
-	m_oFile.Write( szText, (UINT)( _tcslen( szText ) * sizeof( TCHAR ) ) );
+	m_oFile.Write( (LPCTSTR)sText, (UINT)( sText.GetLength() * sizeof( TCHAR ) ) );
 }
 
 void CUSBOblivionDlg::SaveKey( HKEY hRoot, LPCTSTR szKeyName, LPCTSTR szValueName )
@@ -170,7 +170,7 @@ void CUSBOblivionDlg::SaveValue( LPCTSTR szName, DWORD dwType, LPBYTE pData, DWO
 		str = (LPCTSTR)pData;
 		str.Replace( _T( "\\" ), _T( "\\\\" ) );
 		str.Replace( _T( "\"" ), _T( "\\\"" ) );
-		Write( (LPCTSTR)str );
+		Write( str );
 		Write( _T( "\"" ) );
 		break;
 

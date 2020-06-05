@@ -119,7 +119,7 @@ protected:
 	// Закрытие .reg-файла
 	void FinishBackup();
 	// Запись в .reg-файл
-	void Write( LPCTSTR szText );
+	void Write(const CString& sText);
 	// Сохранение ключа в .reg-файле
 	void SaveKey( HKEY hRoot, LPCTSTR szKeyName, LPCTSTR szValueName = nullptr );
 	// Сохранение значения в .reg-файле
