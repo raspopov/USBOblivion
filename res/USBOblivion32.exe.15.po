@@ -1,21 +1,22 @@
-﻿msgid ""
+msgid ""
 msgstr ""
 "Project-Id-Version: USBOblivion32.exe\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: dmocha <dmocha@gmail.com>\n"
 "Language-Team: \n"
-"Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
+"X-Generator: Poedit 2.3.1\n"
+"Last-Translator: dmocha <dmocha@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Language: pl_PL\n"
 
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
 msgstr "USBOblivion"
 
-#: DIALOGCONTROL.102.Button.1
+#: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Czyść"
 
@@ -26,6 +27,14 @@ msgstr "Czyść naprawdę (w przeciwnym razie będzie to tylko symulacja)"
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr "Zapisz kopię do pliku .reg"
+
+#: DIALOGCONTROL.102.Button.1004
+msgid "Reboot Windows (RECOMMENDED)"
+msgstr "Uruchom ponownie system Windows (ZALECANE)"
+
+#: DIALOGCONTROL.102.Button.1005
+msgid "Close Windows Explorer (RECOMMENDED)"
+msgstr "Zamknij Eksploratora Windows (ZALECANE)"
 
 #: DIALOGCONTROL.102.Button.2
 msgid "Exit"
@@ -57,6 +66,8 @@ msgid ""
 "-save:filename - Save a registry backup to this file\n"
 "-log:filename - Save working log to this file\n"
 "-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - Use language XX (hex-code)\n"
 "-silent - Hidden mode (if possible)\n"
 "-? - Show this help\n"
@@ -73,9 +84,11 @@ msgstr ""
 "-save:filename - Zapisz kopię zapasową rejestru do tego pliku\n"
 "-log:filename - Zapisz dziennik roboczy do tego pliku\n"
 "-norestorepoint - Nie twórz punktu przywracania systemu\n"
+"-norestart - Nie uruchamiaj ponownie systemu Windows\n"
+"-noexplorer - Nie zamykaj Eksploratora Windows\n"
 "-lang:XX - Użyj pliku językowego XX (kod szestnastkowy)\n"
 "-silent - Tryb ukryty (jeśli dostępny)\n"
-"-? - Pokaż tę pomoc\n"
+"-? - Pokaż tę pomoc.\n"
 
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
@@ -111,11 +124,11 @@ msgstr "Wykonane."
 
 #: STRING.138
 msgid "Gathering data from system registry..."
-msgstr "Zbieranie danych z rejestru systemowego..."
+msgstr "Gromadzenie danych z rejestru systemowego..."
 
 #: STRING.139
 msgid "Found drives (will be ignored): "
-msgstr "Znaleziono napędy (będą ignorowane): "
+msgstr "Znalezione napędy (będą ignorowane): "
 
 #: STRING.140
 msgid "Cleaning..."
@@ -131,11 +144,11 @@ msgstr "Usuwanie wartości: "
 
 #: STRING.143
 msgid "Gathering user data..."
-msgstr "Zbieranie danych użytkownika..."
+msgstr "Gromadzenie danych użytkownika..."
 
 #: STRING.144
 msgid "Gathering data about user: "
-msgstr "Zbieranie informacji o użytkowniku: "
+msgstr "Gromadzenie informacji o użytkowniku: "
 
 #: STRING.145
 msgid "Found users: "
@@ -147,7 +160,7 @@ msgstr "Znaleziono punkty montowania: "
 
 #: STRING.147
 msgid "Found Explorer drives: "
-msgstr "Znaleziono napędy explorera: "
+msgstr "Znaleziono napędy Eksploratora: "
 
 #: STRING.148
 msgid "Remove error: "
@@ -159,7 +172,7 @@ msgstr "Zbieranie danych punktu montowania..."
 
 #: STRING.150
 msgid "Found ControlSets: "
-msgstr "Znaleziono zestawy sterowania: "
+msgstr "Znaleziono zestawy kontrolne: "
 
 #: STRING.151
 msgid "Found keys: "
@@ -207,7 +220,7 @@ msgstr "Usuwanie pliku: "
 
 #: STRING.162
 msgid "Gathering file data..."
-msgstr "Zbieranie danych..."
+msgstr "Zbieranie danych plików..."
 
 #: STRING.163
 msgid "Cleaning journal: "
@@ -232,3 +245,43 @@ msgstr "Błąd podczas czyszczenia dziennika: "
 #: STRING.168
 msgid "Creating System Restore Point..."
 msgstr "Tworzenie punktu przywracania systemu..."
+
+#: STRING.169
+msgid "Closing Windows Explorer..."
+msgstr "Zamykanie przeglądarki Windows Explorer..."
+
+#: STRING.170
+msgid "Gathering Windows Search cache data..."
+msgstr "Gromadzenie danych z pamięci podręcznej Wyszukiwanie w systemie Windows..."
+
+#: STRING.171
+msgid "System Restore Point creation error: "
+msgstr "Błąd tworzenia punktu przywracania systemu: "
+
+#: STRING.172
+msgid "System Restore Point created successfully."
+msgstr "Punkt przywracania systemu został pomyślnie utworzony."
+
+#: STRING.173
+msgid "System Restore Point disabled."
+msgstr "Punkt przywracania systemu wyłączony."
+
+#: STRING.174
+msgid "Restarting Windows..."
+msgstr "Ponowne uruchomienie systemu Windows..."
+
+#: STRING.175
+msgid "Restarting Windows Explorer..."
+msgstr "Ponowne uruchomienie Eksploratora Windows..."
+
+#: STRING.176
+msgid "Failed to restart Windows: "
+msgstr "Nie udało się zrestartować systemu Windows: "
+
+#: STRING.177
+msgid "Simulate"
+msgstr "Symulacja"
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr "Zatrzymywanie usług systemu Windows..."
