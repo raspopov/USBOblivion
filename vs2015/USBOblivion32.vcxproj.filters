@@ -91,6 +91,9 @@
     <None Include="..\res\warning.ico">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="..\res\USBOblivion32.exe.04.po_">
+      <Filter>Resource Files</Filter>
+    </None>
     <None Include="..\res\USBOblivion32.exe.07.po_">
       <Filter>Resource Files</Filter>
     </None>

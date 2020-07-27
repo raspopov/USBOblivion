@@ -68,6 +68,7 @@ Q: How to restore a saved .reg-file?
  Languages
 ---------
 
+	-lang:04 - Simplified Chinese (by 天路)
 	-lang:07 - German (by Kristine Baumgart)
 	-lang:08 - Greek (by Geogeo)
 	-lang:09 - English (by Nikolay Raspopov)
@@ -92,6 +93,10 @@ Q: How to restore a saved .reg-file?
 
  Changes
 ----------------------
+
+1.12.3.0
+
+	* Added Simplified Chinese translation (by 天路)
 
 1.12.2.0
 

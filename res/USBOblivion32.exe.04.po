@@ -1,0 +1,287 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: USBOblivion32.exe\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4\n"
+"Last-Translator: 天路 <defyyoung@163.com>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: DIALOGCAPTION.102
+msgid "USBOblivion"
+msgstr "USB痕迹清除"
+
+#: DIALOGCONTROL.102.Button.1 STRING.178
+msgid "Clean"
+msgstr "清除"
+
+#: DIALOGCONTROL.102.Button.1002
+msgid "Do real clean (simulation otherwise)"
+msgstr "做真正的清除（否则模拟）"
+
+#: DIALOGCONTROL.102.Button.1003
+msgid "Save backup .reg-file"
+msgstr "保存备份 .reg 文件"
+
+#: DIALOGCONTROL.102.Button.1004
+msgid "Reboot Windows (RECOMMENDED)"
+msgstr "重启 Windows（建议）"
+
+#: DIALOGCONTROL.102.Button.1005
+msgid "Close Windows Explorer (RECOMMENDED)"
+msgstr "关闭 Windows 资源管理器（建议）"
+
+#: DIALOGCONTROL.102.Button.2
+msgid "Exit"
+msgstr "退出"
+
+#: MENUITEM.130.32771
+msgid "Copy"
+msgstr "复制"
+
+#: MENUITEM.130.32772
+msgid "Copy all"
+msgstr "全部复制"
+
+#: MENUPOPUP.130.0
+msgid "Context"
+msgstr "Context"
+
+#: STRING.129
+msgid ""
+"Usage:\n"
+"\n"
+"USBOblivion[32|64].exe [params]\n"
+"\n"
+"Params:\n"
+"\n"
+"-enable - Do real clean (simulation otherwise)\n"
+"-auto - Automatic run\n"
+"-nosave - Don't save a registry backup file\n"
+"-save:filename - Save a registry backup to this file\n"
+"-log:filename - Save working log to this file\n"
+"-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
+"-lang:XX - Use language XX (hex-code)\n"
+"-silent - Hidden mode (if possible)\n"
+"-? - Show this help\n"
+msgstr ""
+"使用方法:\n"
+"\n"
+"USBOblivion[32|64].exe [参数]\n"
+"\n"
+"参数:\n"
+"\n"
+"-enable - 做真正的清除 (否则模拟)\n"
+"-auto - 自动运行\n"
+"-nosave - 不保存注册表备份文件\n"
+"-save:filename - 将注册表备份保存到此文件\n"
+"-log:filename - 将工作日志保存到此文件\n"
+"-norestorepoint - 不要创建系统还原点\n"
+"-norestart - 不要重启 Windows\n"
+"-noexplorer - 不要关闭 Windows 资源管理器\n"
+"-lang:XX - 使用语言 XX (十六进制代码)\n"
+"-silent - 隐藏模式 (如果可能)\n"
+"-? - 显示此帮助\n"
+
+#: STRING.130
+msgid "WARNING! Eject all flash drives before cleaning please."
+msgstr "警告！请在清除前弹出所有闪存驱动器。"
+
+#: STRING.131
+msgid "Press \"Clean\" button to begin cleaning."
+msgstr "按【清除】按钮开始清除。"
+
+#: STRING.132
+msgid "Process mode: real (data will be cleaned)."
+msgstr "处理模式: 清除 (数据将被清除)。"
+
+#: STRING.133
+msgid "Process mode: simulation (no data will be cleaned)."
+msgstr "处理模式: 模拟 (不会清除任何数据)。"
+
+#: STRING.134
+msgid "File creation error: "
+msgstr "文件创建错误: "
+
+#: STRING.135
+msgid "File write error: "
+msgstr "文件写入错误: "
+
+#: STRING.136
+msgid "Backup file: "
+msgstr "备份文件: "
+
+#: STRING.137
+msgid "Done."
+msgstr "完成。"
+
+#: STRING.138
+msgid "Gathering data from system registry..."
+msgstr "正在从系统注册表中收集数据..."
+
+#: STRING.139
+msgid "Found drives (will be ignored): "
+msgstr "找到的驱动器 (将被忽略): "
+
+#: STRING.140
+msgid "Cleaning..."
+msgstr "正在清除..."
+
+#: STRING.141
+msgid "Removing key: "
+msgstr "移除键: "
+
+#: STRING.142
+msgid "Removing value: "
+msgstr "移除值: "
+
+#: STRING.143
+msgid "Gathering user data..."
+msgstr "正在收集用户数据..."
+
+#: STRING.144
+msgid "Gathering data about user: "
+msgstr "收集有关用户的数据: "
+
+#: STRING.145
+msgid "Found users: "
+msgstr "找到的用户: "
+
+#: STRING.146
+msgid "Found mount points: "
+msgstr "找到的挂载点: "
+
+#: STRING.147
+msgid "Found Explorer drives: "
+msgstr "找到资源管理器驱动器: "
+
+#: STRING.148
+msgid "Remove error: "
+msgstr "移除错误: "
+
+#: STRING.149
+msgid "Gathering mount point's data..."
+msgstr "正在收集挂载点的数据..."
+
+#: STRING.150
+msgid "Found ControlSets: "
+msgstr "找到的控件集: "
+
+#: STRING.151
+msgid "Found keys: "
+msgstr "找到的键: "
+
+#: STRING.152
+msgid "Found values: "
+msgstr "找到的值: "
+
+#: STRING.153
+msgid "Key access denied: "
+msgstr "访问键被拒绝: "
+
+#: STRING.154
+msgid "Disk %c: has been inserted."
+msgstr "磁盘 %c: 已插入。"
+
+#: STRING.155
+msgid "Logged-in under system account successfully."
+msgstr "成功使用系统帐户登录。"
+
+#: STRING.156
+msgid "Failed to login under system account."
+msgstr "无法使用系统帐户登录。"
+
+#: STRING.157
+msgid "Re-starting under administrator..."
+msgstr "使用管理员账号重启..."
+
+#: STRING.158
+msgid "Disk %c: has been ejected."
+msgstr "磁盘 %c: 已弹出。"
+
+#: STRING.159
+msgid "Failed to eject disk %c:."
+msgstr "无法弹出磁盘 %c:."
+
+#: STRING.160
+msgid "Ejecting disk %c:..."
+msgstr "正在弹出磁盘 %c:..."
+
+#: STRING.161
+msgid "Removing file: "
+msgstr "正在移除文件: "
+
+#: STRING.162
+msgid "Gathering file data..."
+msgstr "正在收集文件数据..."
+
+#: STRING.163
+msgid "Cleaning journal: "
+msgstr "正在清除日志: "
+
+#: STRING.164
+msgid "Gathering journal data..."
+msgstr "正在收集日志数据..."
+
+#: STRING.165
+msgid "File removal error:"
+msgstr "文件移除错误:"
+
+#: STRING.166
+msgid "Removing file at boot-time:"
+msgstr "启动时移除文件:"
+
+#: STRING.167
+msgid "Journal cleanup error:"
+msgstr "日志清除错误:"
+
+#: STRING.168
+msgid "Creating System Restore Point..."
+msgstr "正在创建系统还原点..."
+
+#: STRING.169
+msgid "Closing Windows Explorer..."
+msgstr "正在关闭 Windows 资源管理器..."
+
+#: STRING.170
+msgid "Gathering Windows Search cache data..."
+msgstr "正在收集 Windows 搜索缓存数据..."
+
+#: STRING.171
+msgid "System Restore Point creation error: "
+msgstr "系统还原点创建错误: "
+
+#: STRING.172
+msgid "System Restore Point created successfully."
+msgstr "已成功创建系统还原点。"
+
+#: STRING.173
+msgid "System Restore Point disabled."
+msgstr "系统还原点已禁用。"
+
+#: STRING.174
+msgid "Restarting Windows..."
+msgstr "重启 Windows..."
+
+#: STRING.175
+msgid "Restarting Windows Explorer..."
+msgstr "正在重启 Windows 资源管理器..."
+
+#: STRING.176
+msgid "Failed to restart Windows: "
+msgstr "无法重启 Windows: "
+
+#: STRING.177
+msgid "Simulate"
+msgstr "模拟"
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr "正在停止 Windows 服务..."
