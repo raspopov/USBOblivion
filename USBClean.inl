@@ -128,6 +128,7 @@ static const LPCTSTR szLogs[] =
 	_T( "Microsoft-Windows-Kernel-PnP/Configuration" ),
 	_T( "Microsoft-Windows-Kernel-ShimEngine/Operational" ),
 	_T( "Microsoft-Windows-DriverFrameworks-UserMode/Operational" ),
+	_T( "Microsoft-Windows-Partition/Diagnostic" ),
 	_T( "HardwareEvents" ),
 	_T( "Application" ),
 	_T( "Security" ),

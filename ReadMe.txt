@@ -94,6 +94,10 @@ Q: How to restore a saved .reg-file?
  Changes
 ----------------------
 
+1.13.0.0
+
+	* Added "Microsoft-Windows-Partition/Diagnostic" journal cleanup
+
 1.12.3.0
 
 	* Added Simplified Chinese translation (by 天路)
