@@ -94,6 +94,10 @@ Q: How to restore a saved .reg-file?
  Changes
 ----------------------
 
+1.14.0.0
+
+	* Added cleaning of "Control\DeviceClasses\{6ead3d82-25ec-46bc-b7fd-c1f0df8f5037}" key
+
 1.13.0.0
 
 	* Added "Microsoft-Windows-Partition/Diagnostic" journal cleanup

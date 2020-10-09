@@ -69,17 +69,21 @@ static const CKeyDef defs[] =
 	// Vista (GUID_DEVINTERFACE_WPD)
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}" ), _T( "USBSTOR#Disk" ), nullptr, nullptr, FALSE },
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{6ac27878-a6fa-4155-ba85-f98f491d4f33}" ), _T( "USBSTOR#CdRom" ), nullptr, nullptr, FALSE },
-	// Vista
+	// Vista 7 (WPD devices)
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}" ), _T( "USBSTOR#Disk" ), nullptr, nullptr, FALSE },
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae}" ), _T( "USBSTOR#CdRom" ), nullptr, nullptr, FALSE },
-	// Windows 7
+	// Windows 7 (WPD devices)
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}" ), _T( "USBSTOR#Disk" ), nullptr, nullptr, FALSE },
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{10497b1b-ba51-44e5-8318-a65c837b6661}" ), _T( "USBSTOR#CdRom" ), nullptr, nullptr, FALSE },
-	// windows 8
+	// windows 8 (Disks)
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}" ), _T( "USBSTOR#Disk" ), nullptr, nullptr, FALSE },
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{7fccc86c-228a-40ad-8a58-f590af7bfdce}" ), _T( "USBSTOR#CdRom" ), nullptr, nullptr, FALSE },
+	// windows 8 (Volumes)
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}" ), _T( "USBSTOR#Disk" ), nullptr, nullptr, FALSE },
 	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{7f108a28-9833-4b3b-b780-2c6b5fa5c062}" ), _T( "USBSTOR#CdRom" ), nullptr, nullptr, FALSE },
+	// Windows 10 (Volumes)
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{6ead3d82-25ec-46bc-b7fd-c1f0df8f5037}" ), _T( "USBSTOR#Disk" ), nullptr, nullptr, FALSE },
+	{ mControlSet_Key,	_T( "Control\\DeviceClasses\\{6ead3d82-25ec-46bc-b7fd-c1f0df8f5037}" ), _T( "USBSTOR#CdRom" ), nullptr, nullptr, FALSE },
 	// XP
 	{ mControlSet_Key,	_T( "Enum\\STORAGE\\RemovableMedia" ), nullptr, nullptr, nullptr, FALSE },
 	// Vista
