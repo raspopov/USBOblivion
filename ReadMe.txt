@@ -96,6 +96,7 @@ Q: How to restore a saved .reg-file?
 
 1.15.0.0
 
+	* Added cleaning of "Bags" and "BagMRU" keys
 	* Updated Swedish translation (by Sopor)
 
 1.14.0.0
