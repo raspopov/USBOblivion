@@ -1,7 +1,9 @@
+// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 //
-// USBBackup.inl
+// USBBackup.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2017.
+// Copyright (c) Nikolay Raspopov, 2009-2021.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -19,7 +21,13 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 
-#pragma once
+#include "stdafx.h"
+#include "USBOblivion.h"
+#include "USBOblivionDlg.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#endif
 
 bool CUSBOblivionDlg::PrepareBackup()
 {

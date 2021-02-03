@@ -290,8 +290,11 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\USBBackup.cpp" />
+    <ClCompile Include="..\USBClean.cpp" />
     <ClCompile Include="..\USBOblivion.cpp" />
     <ClCompile Include="..\USBOblivionDlg.cpp" />
+    <ClCompile Include="..\USBRegistry.cpp" />
     <ClCompile Include="..\vc_crt_fix_impl.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -303,8 +306,6 @@
     <ClInclude Include="..\Resource.h" />
     <ClInclude Include="..\stdafx.h" />
     <ClInclude Include="..\targetver.h" />
-    <ClInclude Include="..\USBBackup.inl" />
-    <ClInclude Include="..\USBClean.inl" />
     <ClInclude Include="..\USBOblivion.h" />
     <ClInclude Include="..\USBOblivionDlg.h" />
   </ItemGroup>

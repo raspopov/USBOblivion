@@ -30,6 +30,15 @@
     <ClCompile Include="..\vc_crt_fix_impl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\USBBackup.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\USBClean.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\USBRegistry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\CtrlsResize.h">
@@ -51,12 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\DllLoader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\USBBackup.inl">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\USBClean.inl">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

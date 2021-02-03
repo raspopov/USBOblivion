@@ -94,6 +94,11 @@ Q: How to restore a saved .reg-file?
  Changes
 ----------------------
 
+1.15.1.0
+
+	* Preserving desktop settings
+	* Updated German translation (by Mr. Update)
+
 1.15.0.0
 
 	* Added cleaning of "Bags" and "BagMRU" keys

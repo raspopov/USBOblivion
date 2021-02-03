@@ -1,5 +1,7 @@
+// This is an open source non-commercial project. Dear PVS-Studio, please check it.
+// PVS-Studio Static Code Analyzer for C, C++ and C#: http://www.viva64.com
 //
-// USBClean.inl
+// USBClean.cpp
 //
 // Copyright (c) Nikolay Raspopov, 2009-2021.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
@@ -19,7 +21,13 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 
-#pragma once
+#include "stdafx.h"
+#include "USBOblivion.h"
+#include "USBOblivionDlg.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#endif
 
 // Used in CleanLocalMachine() and CleanUsers() functions
 
@@ -137,8 +145,6 @@ static const CKeyDef defs[] =
 	{ mHKCU_Key,		_T( "SOFTWARE\\Classes\\Wow6432Node\\Local Settings\\Software\\Microsoft\\Windows\\ShellNoRoam\\BagMRU" ), nullptr, nullptr, nullptr, TRUE },
 	// HandlerInstances
 	{ mHKCU_Key,		_T( "SOFTWARE\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\SyncMgr\\HandlerInstances" ), nullptr, nullptr, nullptr, TRUE },
-	// end
-	{ mControlSet_Key,	nullptr, nullptr, nullptr, nullptr, FALSE }
 };
 
 // Event logs to clear
@@ -365,10 +371,10 @@ void CUSBOblivionDlg::CleanFiles()
 {
 	Log( IDS_RUN_FILES, Search );
 
-	for ( int i = 0; i < _countof( szFiles ); ++i )
+	for ( const auto& szFile : szFiles )
 	{
 		CString sFile;
-		ExpandEnvironmentStrings( szFiles[ i ], sFile.GetBuffer( MAX_PATH ), MAX_PATH );
+		ExpandEnvironmentStrings( szFile, sFile.GetBuffer( MAX_PATH ), MAX_PATH );
 		sFile.ReleaseBuffer();
 
 		DoDeleteFile( sFile );
@@ -379,9 +385,9 @@ void CUSBOblivionDlg::CleanLogs()
 {
 	Log( IDS_RUN_LOGS, Search );
 
-	for ( int i = 0; i < _countof( szLogs ); ++i )
+	for ( const auto& szLog : szLogs )
 	{
-		DoDeleteLog( szLogs[ i ] );
+		DoDeleteLog( szLog );
 	}
 }
 
@@ -725,31 +731,31 @@ void CUSBOblivionDlg::CleanLocalMachine()
 		}
 
 		// Подчистка всего остального
-		for ( int i = 0; defs[ i ].szKeyName; ++i )
+		for ( const auto& def : defs )
 		{
-			if ( defs[ i ].nMode == mControlSet_Key )
-				ProcessKey( HKEY_LOCAL_MACHINE, sControlSetKey, defs[ i ], oKeys );
-			else if ( defs[ i ].nMode == mControlSet_Val )
-				ProcessValue( HKEY_LOCAL_MACHINE, sControlSetKey, defs[ i ], oValues );
+			if ( def.nMode == mControlSet_Key )
+				ProcessKey( HKEY_LOCAL_MACHINE, sControlSetKey, def, oKeys );
+			else if ( def.nMode == mControlSet_Val )
+				ProcessValue( HKEY_LOCAL_MACHINE, sControlSetKey, def, oValues );
 		}
 	}
 
 	// Обработка ключей
-	for ( int i = 0; defs[ i ].szKeyName; ++i )
+	for ( const auto& def : defs )
 	{
-		if ( defs[ i ].nMode == mHKLM_Key )
-			ProcessKey( HKEY_LOCAL_MACHINE, CString(), defs[ i ], oKeys );
-		else if ( defs[ i ].nMode == mHKCR_Key )
-			ProcessKey( HKEY_CLASSES_ROOT, CString(), defs[ i ], oKeys );
+		if ( def.nMode == mHKLM_Key )
+			ProcessKey( HKEY_LOCAL_MACHINE, CString(), def, oKeys );
+		else if ( def.nMode == mHKCR_Key )
+			ProcessKey( HKEY_CLASSES_ROOT, CString(), def, oKeys );
 	}
 
 	// Обработка переменных
-	for ( int i = 0; defs[ i ].szKeyName; ++i )
+	for ( const auto& def : defs )
 	{
-		if ( defs[ i ].nMode == mHKLM_Val )
-			ProcessValue( HKEY_LOCAL_MACHINE, CString(), defs[ i ], oValues );
-		else if ( defs[ i ].nMode == mHKCR_Val )
-			ProcessValue( HKEY_CLASSES_ROOT, CString(), defs[ i ], oValues );
+		if ( def.nMode == mHKLM_Val )
+			ProcessValue( HKEY_LOCAL_MACHINE, CString(), def, oValues );
+		else if ( def.nMode == mHKCR_Val )
+			ProcessValue( HKEY_CLASSES_ROOT, CString(), def, oValues );
 	}
 
 	msg.Format( _T( "%d" ), (int)oKeys.GetCount() );
@@ -942,17 +948,17 @@ void CUSBOblivionDlg::CleanUsers()
 		CStringC2List oUValues;
 
 		// Обработка ключей
-		for ( int i = 0; defs[ i ].szKeyName; ++i )
+		for ( const auto& def : defs )
 		{
-			if ( defs[ i ].nMode == mHKCU_Key )
-				ProcessKey( HKEY_USERS, sKey, defs[ i ], oUKeys );
+			if ( def.nMode == mHKCU_Key )
+				ProcessKey( HKEY_USERS, sKey, def, oUKeys );
 		}
 
 		// Обработка переменных
-		for ( int i = 0; defs[ i ].szKeyName; ++i )
+		for ( const auto& def : defs )
 		{
-			if ( defs[ i ].nMode == mHKCU_Val )
-				ProcessValue( HKEY_USERS, sKey, defs[ i ], oUValues );
+			if ( def.nMode == mHKCU_Val )
+				ProcessValue( HKEY_USERS, sKey, def, oUValues );
 		}
 
 		{
