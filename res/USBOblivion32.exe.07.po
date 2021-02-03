@@ -3,13 +3,13 @@ msgstr ""
 "Project-Id-Version: USBOblivion32.exe\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: Steven <usedamasik@web.de>\n"
+"Last-Translator: Mr. Update <Mr.Update@gmx.de>\n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: DIALOGCAPTION.102
@@ -26,15 +26,15 @@ msgstr "Wirkliche Reinigung durchführen (ansonsten Simulation)"
 
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
-msgstr "Speichere Sicherung als .reg-Datei"
+msgstr "Sicherung als REG-Datei speichern"
 
 #: DIALOGCONTROL.102.Button.1004
 msgid "Reboot Windows (RECOMMENDED)"
-msgstr "Starte Windows neu (EMPFOHLEN)"
+msgstr "Windows neu starten (empfohlen)"
 
 #: DIALOGCONTROL.102.Button.1005
 msgid "Close Windows Explorer (RECOMMENDED)"
-msgstr "Beende den Windows-Explorer (EMPFOHLEN)"
+msgstr "Windows Explorer schließen (empfohlen)"
 
 #: DIALOGCONTROL.102.Button.2
 msgid "Exit"
@@ -78,17 +78,17 @@ msgstr ""
 "\n"
 "Parameter:\n"
 "\n"
-"-enable - wirkliche Reinigung (ansonsten Simulation)\n"
+"-enable - Wirkliche Reinigung (ansonsten Simulation)\n"
 "-auto - Automatischer Ablauf\n"
-"-nosave - Speichere keine Sicherungsdatei\n"
-"-save:filename - Speichere eine Sicherungsdatei\n"
-"-log:filename - Speichere den Log zu dieser Datei\n"
-"-norestorepoint - Erstelle keinen Wiederherstellungspunkt\n"
-"-norestart - Don't restart Windows\n"
-"-noexplorer - Don't close Windows Explorer\n"
-"-lang:XX - Verwenden Sie die Sprache XX (Hex-Code)\n"
+"-nosave - Kein Registry-Backup speichern\n"
+"-save:filename - Registry-Backup in diese Datei speichern\n"
+"-log:filename - Logprotokoll in diese Datei speichern\n"
+"-norestorepoint - Keinen System-Wiederherstellungspunkt erstellen\n"
+"-norestart - Windows nicht neu starten\n"
+"-noexplorer - Windows Explorer nicht schließen\n"
+"-lang:XX - Sprache XX (Hex-Code) verwenden\n"
 "-silent - Versteckter Modus (wenn möglich)\n"
-"-? - Anzeige dieser Hilfe\n"
+"-? - Diese Hilfe anzeigen\n"
 
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
@@ -96,15 +96,15 @@ msgstr "WARNUNG! Entfernen Sie bitte alle Flash-Laufwerke vor der Reinigung."
 
 #: STRING.131
 msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Drücken Sie auf die Taste \"Reinigung\", um mit der Reinigung zu beginnen."
+msgstr "Drücken Sie auf den Button \"Reinigung\", um mit der Reinigung zu beginnen."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
-msgstr "Prozess-Modus: wirklich (Daten werden bereinigt)."
+msgstr "Prozessmodus: Wirkliches Löschen (Daten werden bereinigt)."
 
 #: STRING.133
 msgid "Process mode: simulation (no data will be cleaned)."
-msgstr "Prozess-Modus: Simulation (keine Daten werden bereinigt)."
+msgstr "Prozessmodus: Simulation (Daten werden nicht bereinigt)."
 
 #: STRING.134
 msgid "File creation error: "
@@ -172,7 +172,7 @@ msgstr "Einhängepunkt-Daten werden gesammelt..."
 
 #: STRING.150
 msgid "Found ControlSets: "
-msgstr "ControlSets gefunden: "
+msgstr "Gefundene ControlSets: "
 
 #: STRING.151
 msgid "Found keys: "
@@ -192,15 +192,15 @@ msgstr "Disk %c: wurde eingelegt."
 
 #: STRING.155
 msgid "Logged-in under system account successfully."
-msgstr "Anmeldung unter dem Systemkonto ist erfolgreich."
+msgstr "Erfolgreich mit dem Systemkonto angemeldet."
 
 #: STRING.156
 msgid "Failed to login under system account."
-msgstr "Anmeldung unter dem Systemkonto ist fehlgeschlagen."
+msgstr "Anmeldung mit dem Systemkonto ist fehlgeschlagen."
 
 #: STRING.157
 msgid "Re-starting under administrator..."
-msgstr "Neustart unter Administrator..."
+msgstr "Neustart als Administrator..."
 
 #: STRING.158
 msgid "Disk %c: has been ejected."
@@ -232,51 +232,51 @@ msgstr "Protokolldaten werden gesammelt..."
 
 #: STRING.165
 msgid "File removal error:"
-msgstr "Fehler beim Löschen der Datei:"
+msgstr "Fehler beim Löschen der Datei: "
 
 #: STRING.166
 msgid "Removing file at boot-time:"
-msgstr "Datei wird zum Windows-Startzeitpunkt entfernt:"
+msgstr "Datei wird beim Windows-Start gelöscht: "
 
 #: STRING.167
 msgid "Journal cleanup error:"
-msgstr "Fehler beim Löschen des Protokolls:"
+msgstr "Fehler beim Löschen des Protokolls: "
 
 #: STRING.168
 msgid "Creating System Restore Point..."
-msgstr "Systemwiederherstellungspunkt wird erstellt..."
+msgstr "System-Wiederherstellungspunkt wird erstellt..."
 
 #: STRING.169
 msgid "Closing Windows Explorer..."
-msgstr "Windows-Explorer wird geschlossen..."
+msgstr "Windows Explorer wird geschlossen..."
 
 #: STRING.170
 msgid "Gathering Windows Search cache data..."
-msgstr "Zwischenspeicherdaten der Windows-Suche werden gesammelt..."
+msgstr "Cachedaten der Windows-Suche werden gesammelt..."
 
 #: STRING.171
 msgid "System Restore Point creation error: "
-msgstr "Fehler beim Erstellen des Systemwiederherstellungspunkts: "
+msgstr "Fehler beim Erstellen des System-Wiederherstellungspunkts: "
 
 #: STRING.172
 msgid "System Restore Point created successfully."
-msgstr "Systemwiederherstellungspunkt wurde erfolgreich erstellt."
+msgstr "System-Wiederherstellungspunkt wurde erfolgreich erstellt."
 
 #: STRING.173
 msgid "System Restore Point disabled."
-msgstr "Systemwiederherstellungspunkt wurde deaktiviert."
+msgstr "System-Wiederherstellungspunkt wurde deaktiviert."
 
 #: STRING.174
 msgid "Restarting Windows..."
-msgstr "Windows wird neugestartet..."
+msgstr "Windows wird neu gestartet..."
 
 #: STRING.175
 msgid "Restarting Windows Explorer..."
-msgstr "Windows-Explorer wird neugestartet..."
+msgstr "Windows Explorer wird neu gestartet..."
 
 #: STRING.176
 msgid "Failed to restart Windows: "
-msgstr "Windows-Neustart ist fehlgeschlagen:"
+msgstr "Windows-Neustart ist fehlgeschlagen: "
 
 #: STRING.177
 msgid "Simulate"
