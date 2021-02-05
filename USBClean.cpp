@@ -143,6 +143,8 @@ static const CKeyDef defs[] =
 	{ mHKCU_Key,		_T( "SOFTWARE\\Classes\\Wow6432Node\\Local Settings\\Software\\Microsoft\\Windows\\Shell\\BagMRU" ), nullptr, nullptr, nullptr, TRUE },
 	{ mHKCU_Key,		_T( "SOFTWARE\\Classes\\Wow6432Node\\Local Settings\\Software\\Microsoft\\Windows\\ShellNoRoam\\Bags" ), nullptr, nullptr, nullptr, TRUE },
 	{ mHKCU_Key,		_T( "SOFTWARE\\Classes\\Wow6432Node\\Local Settings\\Software\\Microsoft\\Windows\\ShellNoRoam\\BagMRU" ), nullptr, nullptr, nullptr, TRUE },
+	// UserAssist
+	{ mHKCU_Key,		_T( "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Explorer\\UserAssist" ), nullptr, nullptr, nullptr, TRUE },
 	// HandlerInstances
 	{ mHKCU_Key,		_T( "SOFTWARE\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\SyncMgr\\HandlerInstances" ), nullptr, nullptr, nullptr, TRUE },
 };
@@ -763,7 +765,7 @@ void CUSBOblivionDlg::CleanLocalMachine()
 	msg.Format( _T( "%d" ), (int)oValues.GetCount() );
 	Log( LoadString( IDS_RUN_VALUES_FOUND ) + msg );
 
-	// Удаление
+	// Actual deleting
 
 	if ( oKeys.GetCount() || oValues.GetCount() )
 		Log( IDS_RUN_CLEAN, Clean );

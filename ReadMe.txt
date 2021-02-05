@@ -94,6 +94,10 @@ Q: How to restore a saved .reg-file?
  Changes
 ----------------------
 
+1.16.0.0
+
+	* Added cleaning of "UserAssist" keys
+
 1.15.1.0
 
 	* Preserving desktop settings
