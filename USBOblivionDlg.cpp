@@ -612,6 +612,33 @@ void CUSBOblivionDlg::Run()
 
 	CleanUsers();
 
+	// Restoring initial keys
+
+	static const struct
+	{
+		const HKEY hRoot;
+		const TCHAR * const szSubKey;
+		const TCHAR * const szValue;
+		const DWORD dwType;
+		const std::vector< BYTE > Data;
+	}
+	RestoreKeys[] =
+	{
+		{ HKEY_CURRENT_USER, _T("SOFTWARE\\Microsoft\\Windows\\Shell\\BagMRU"), _T("MRUListEx"), REG_BINARY, { 0xff, 0xff, 0xff, 0xff } },
+		{ HKEY_CURRENT_USER, _T("SOFTWARE\\Microsoft\\Windows\\Shell\\BagMRU"), _T("NodeSlot"), REG_DWORD, { 0x01, 0x00, 0x00, 0x00 } },
+		{ HKEY_CURRENT_USER, _T("SOFTWARE\\Microsoft\\Windows\\Shell\\BagMRU"), _T("NodeSlots"), REG_BINARY, { 0x02 } }
+	};
+
+	for ( const auto& RestoreKey : RestoreKeys )
+	{
+		HKEY hKey;
+		if ( RegCreateKeyEx( RestoreKey.hRoot, RestoreKey.szSubKey, 0, nullptr, 0, KEY_WRITE, nullptr, &hKey, nullptr ) == ERROR_SUCCESS )
+		{
+			RegSetValueEx( hKey, RestoreKey.szValue, 0, RestoreKey.dwType, RestoreKey.Data.data(), (DWORD)RestoreKey.Data.size() );
+			RegCloseKey( hKey );
+		}
+	}
+
 	// Creation of System Restore Point - end
 	RestorePtInfo.dwEventType = END_SYSTEM_CHANGE;
 	if ( theApp.dyn_SRSetRestorePointW && m_bRestorePoint && SMgrStatus.nStatus == ERROR_SUCCESS )

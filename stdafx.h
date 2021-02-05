@@ -57,6 +57,8 @@
 #include <psapi.h>
 #include <RestartManager.h>
 
+#include <vector>
+
 #ifndef BCM_FIRST
 	#define BCM_FIRST 0x1600
 #endif
