@@ -94,6 +94,11 @@ Q: How to restore a saved .reg-file?
  Changes
 ----------------------
 
+1.17.0.0
+
+	* Fixed the wrong format of key names contains quotes and slashes in the backup reg-file
+	* Improved backup reg-file creation speed
+
 1.16.0.0
 
 	* Added cleaning of "UserAssist" keys

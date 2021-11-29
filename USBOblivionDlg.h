@@ -87,7 +87,7 @@ protected:
 	HICON		m_hIcon;		// Иконка окна
 	CListCtrl	m_pReport;		// Отчёт
 	int			m_nSelected;	// Текущая выбранная строка в отчёте
-	CFile		m_oFile;		// Путь до .reg-файла
+	CStdioFile	m_oFile;		// Путь до .reg-файла
 	CCtrlResize	m_CtrlsResize;	// Изменение размеров интерфейса
 	CRect		m_InitialRect;	// Начальные размеры окна - минимальные размеры
 	DWORD		m_nDrives;		// Текущие диски

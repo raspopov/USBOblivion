@@ -29,6 +29,13 @@
 #define new DEBUG_NEW
 #endif
 
+inline CString Escape(CString str)
+{
+	str.Replace( _T( "\\" ), _T( "\\\\" ) );
+	str.Replace( _T( "\"" ), _T( "\\\"" ) );
+	return str;
+}
+
 bool CUSBOblivionDlg::PrepareBackup()
 {
 	if ( !m_bSave )
@@ -58,11 +65,13 @@ bool CUSBOblivionDlg::PrepareBackup()
 			(LPCTSTR)sLogFolder, (LPCTSTR)sComputer, (LPCTSTR)CTime::GetCurrentTime().Format( _T( "%y%m%d-%H%M%S" ) ) );
 	}
 
-	if ( !m_oFile.Open( sPath, CFile::modeCreate | CFile::modeWrite ) )
+	if ( ! m_oFile.Open( sPath, CFile::modeCreate | CFile::modeWrite | CFile::typeBinary | CFile::shareExclusive ) )
 	{
 		Log( LoadString( IDS_ERROR_FILE_CREATE ) + sPath, Error );
 		return false;
 	}
+
+	setvbuf( m_oFile.m_pStream, nullptr, _IOFBF, 4 * 1024 * 1024 ); // 4 MB
 
 	try
 	{
@@ -162,9 +171,7 @@ void CUSBOblivionDlg::SaveValue( LPCTSTR szName, DWORD dwType, LPBYTE pData, DWO
 
 	if ( *szName )
 	{
-		Write( _T( "\"" ) );
-		Write( szName );
-		Write( _T( "\"=" ) );
+		Write( _T( "\"" ) + Escape( szName ) + _T( "\"=" ) );
 	}
 	else if ( dwType != REG_SZ || dwSize != 0 )
 	{
@@ -174,12 +181,7 @@ void CUSBOblivionDlg::SaveValue( LPCTSTR szName, DWORD dwType, LPBYTE pData, DWO
 	switch ( dwType )
 	{
 	case REG_SZ:
-		Write( _T( "\"" ) );
-		str = (LPCTSTR)pData;
-		str.Replace( _T( "\\" ), _T( "\\\\" ) );
-		str.Replace( _T( "\"" ), _T( "\\\"" ) );
-		Write( str );
-		Write( _T( "\"" ) );
+		Write( _T( "\"" ) + Escape( (LPCTSTR)pData ) + _T( "\"" ) );
 		break;
 
 	case REG_DWORD:
