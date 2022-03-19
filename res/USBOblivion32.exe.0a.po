@@ -5,11 +5,12 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: Boris Gilmar Terrazas Miranda <bdymit@msn.com>\n"
 "Language-Team: \n"
-"Language: es\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.4\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: DIALOGCAPTION.102
 msgid "USBOblivion"
@@ -85,7 +86,7 @@ msgstr ""
 "-norestorepoint - No crear Punto de Restauración del Sistema\n"
 "-norestart - No reinicie Windows\n"
 "-noexplorer - No cerrar el Explorador de Windows\n"
-"-lang:XX - Usar idioma XX (código exadecimal)\n"
+"-lang:XX - Usar idioma XX (código hexadecimal)\n"
 "-silent - Modo oculto (Si es posible)\n"
 "-? - Mostrar la ayuda\n"
 
@@ -219,7 +220,7 @@ msgstr "Eliminando archivo: "
 
 #: STRING.162
 msgid "Gathering file data..."
-msgstr "Reuniendo datos de archivo..."
+msgstr "Reuniendo datos de archivo.."
 
 #: STRING.163
 msgid "Cleaning journal: "
@@ -239,7 +240,7 @@ msgstr "Eliminación del archivo en el arranque:"
 
 #: STRING.167
 msgid "Journal cleanup error:"
-msgstr "Error de limpeza del registro:"
+msgstr "Error de limpieza del registro:"
 
 #: STRING.168
 msgid "Creating System Restore Point..."
@@ -251,7 +252,7 @@ msgstr "Cerrando el Explorador de Windows..."
 
 #: STRING.170
 msgid "Gathering Windows Search cache data..."
-msgstr "Reuniendo datos de la cahé de Búsqueda de Windows..."
+msgstr "Reuniendo datos de la caché de Búsqueda de Windows..."
 
 #: STRING.171
 msgid "System Restore Point creation error: "
@@ -263,7 +264,7 @@ msgstr "Punto de Restauración del Sistema creado correctamente."
 
 #: STRING.173
 msgid "System Restore Point disabled."
-msgstr "Punto de Sestauración del Sistema deshabilitado."
+msgstr "Punto de Restauración del Sistema deshabilitado."
 
 #: STRING.174
 msgid "Restarting Windows..."
@@ -280,3 +281,7 @@ msgstr "No se pudo reiniciar Windows: "
 #: STRING.177
 msgid "Simulate"
 msgstr "Simular"
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr "Deteniendo Servicios de Windows..."
