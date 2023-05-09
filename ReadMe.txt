@@ -74,7 +74,7 @@ Q: How to restore a saved .reg-file?
 	-lang:09 - English (by Nikolay Raspopov)
 	-lang:0a - Spanish (by CesarRG, Boris Gilmar Terrazas Miranda)
 	-lang:0c - French (by Mathieu Bergounioux, Rico-sos)
-	-lang:10 - Italian (by Marcello Gianola)
+	-lang:10 - Italian
 	-lang:12 - Korean (by 4Li)
 	-lang:13 - Dutch (by Jeroen Westera)
 	-lang:15 - Polish (by dmocha)
@@ -133,7 +133,7 @@ Q: How to restore a saved .reg-file?
 1.12.1.1
 
 	* Fixed compatibility for very old CPU
-	* Updated Italian translation (by Marcello Gianola)
+	* Updated Italian translation
 
 1.12.1.0
 
@@ -178,7 +178,7 @@ Q: How to restore a saved .reg-file?
 	* Added "Control\usbstor" registry key selective cleanup
 	* Fixed USB-HDD cleanup
 	* Minor fixes
-	* Updated Italian translation (by Marcello Gianola)
+	* Updated Italian translation
 	* Updated Polish translation (by dmocha)
 	* Updated Korean translation (by 4Li)
 
@@ -187,7 +187,7 @@ Q: How to restore a saved .reg-file?
 	* Added "HKLM\SOFTWARE\Microsoft\Windows Search\VolumeInfoCache" registry key cleanup
 	* Extended "%SystemRoot%\setup*.log" and "%SystemRoot%\inf\setupapi*.log" files deletion
 	* Minor fixes
-	* Updated Italian translation (by Marcello Gianola)
+	* Updated Italian translation
 
 1.11.0.0 (11 Oct 2016)
 
