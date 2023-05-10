@@ -130,7 +130,28 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 	SetIcon( m_hIcon, TRUE );
 	SetIcon( m_hIcon, FALSE );
 
+	CString sBinaryPath;
+	GetModuleFileName( nullptr, sBinaryPath.GetBuffer( 1024 ), 1024 );
+	sBinaryPath.ReleaseBuffer();
+
 	CString sTitle = LoadString( AFX_IDS_APP_TITLE );
+	if ( DWORD dwSize = GetFileVersionInfoSize( sBinaryPath, &dwSize ) )
+	{
+		CAutoVectorPtr< BYTE > pBuffer( new BYTE[ dwSize ] );
+		if ( pBuffer )
+		{
+			if ( GetFileVersionInfo( sBinaryPath, 0, dwSize, pBuffer ) )
+			{
+				VS_FIXEDFILEINFO* pTable = nullptr;
+				if ( VerQueryValue( pBuffer, _T("\\"), (VOID**)&pTable, (UINT*)&dwSize ) )
+				{
+					sTitle.AppendFormat( _T(" %u.%u.%u.%u"),
+						(WORD)( pTable->dwFileVersionMS >> 16 ), (WORD)( pTable->dwFileVersionMS & 0xFFFF ),
+						(WORD)( pTable->dwFileVersionLS >> 16 ), (WORD)( pTable->dwFileVersionLS & 0xFFFF ) );
+				}
+			}
+		}
+	}
 #ifdef WIN64
 	sTitle += _T(" (64-bit)");
 #else
