@@ -11,11 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.3\n"
 
-#: DIALOGCAPTION.102
-msgid "USBOblivion"
-msgstr "USBOblivion"
-
-#: DIALOGCONTROL.102.Button.1
+#: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Limpar"
 
@@ -26,6 +22,14 @@ msgstr "Fazer limpeza real (simulação se marcado)"
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr "Salvar backup em arquivo .reg"
+
+#: DIALOGCONTROL.102.Button.1004
+msgid "Reboot Windows (RECOMMENDED)"
+msgstr ""
+
+#: DIALOGCONTROL.102.Button.1005
+msgid "Close Windows Explorer (RECOMMENDED)"
+msgstr ""
 
 #: DIALOGCONTROL.102.Button.2
 msgid "Exit"
@@ -38,10 +42,6 @@ msgstr "Copiar"
 #: MENUITEM.130.32772
 msgid "Copy all"
 msgstr "Copiar tudo"
-
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Contexto"
 
 #: STRING.129
 msgid ""
@@ -57,6 +57,8 @@ msgid ""
 "-save:filename - Save a registry backup to this file\n"
 "-log:filename - Save working log to this file\n"
 "-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - Use language XX (hex-code)\n"
 "-silent - Hidden mode (if possible)\n"
 "-? - Show this help\n"
@@ -73,6 +75,8 @@ msgstr ""
 "-save:filename - Save a registry backup to this file\n"
 "-log:filename - Save working log to this file\n"
 "-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - Usar idioma XX (código hexadecimal)\n"
 "-silent - Modo oculto (se possível)\n"
 "-? - Exibir esta ajuda\n"
@@ -80,10 +84,6 @@ msgstr ""
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "ATENÇÃO! Por favor, remova todos os drives flash antes de limpar."
-
-#: STRING.131
-msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Pressione o botão \"Limpar\" para iniciar a limpeza."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
@@ -232,3 +232,43 @@ msgstr "Erro na limpeza do histórico:"
 #: STRING.168
 msgid "Creating System Restore Point..."
 msgstr "Criando Ponto de Restauração do Sistema..."
+
+#: STRING.169
+msgid "Closing Windows Explorer..."
+msgstr ""
+
+#: STRING.170
+msgid "Gathering Windows Search cache data..."
+msgstr ""
+
+#: STRING.171
+msgid "System Restore Point creation error: "
+msgstr ""
+
+#: STRING.172
+msgid "System Restore Point created successfully."
+msgstr ""
+
+#: STRING.173
+msgid "System Restore Point disabled."
+msgstr ""
+
+#: STRING.174
+msgid "Restarting Windows..."
+msgstr ""
+
+#: STRING.175
+msgid "Restarting Windows Explorer..."
+msgstr ""
+
+#: STRING.176
+msgid "Failed to restart Windows: "
+msgstr ""
+
+#: STRING.177
+msgid "Simulate"
+msgstr ""
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr ""

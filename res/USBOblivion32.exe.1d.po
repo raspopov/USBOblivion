@@ -11,11 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: DIALOGCAPTION.102
-msgid "USBOblivion"
-msgstr "USBOblivion"
-
-#: DIALOGCONTROL.102.Button.1
+#: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Rensa"
 
@@ -26,6 +22,14 @@ msgstr "Rensa på riktigt (annars simulering)"
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr "Spara säkerhetskopia (.reg-fil)"
+
+#: DIALOGCONTROL.102.Button.1004
+msgid "Reboot Windows (RECOMMENDED)"
+msgstr ""
+
+#: DIALOGCONTROL.102.Button.1005
+msgid "Close Windows Explorer (RECOMMENDED)"
+msgstr ""
 
 #: DIALOGCONTROL.102.Button.2
 msgid "Exit"
@@ -38,10 +42,6 @@ msgstr "Kopiera"
 #: MENUITEM.130.32772
 msgid "Copy all"
 msgstr "Kopiera alla"
-
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Innehåll"
 
 #: STRING.129
 msgid ""
@@ -57,6 +57,8 @@ msgid ""
 "-save:filename - Save a registry backup to this file\n"
 "-log:filename - Save working log to this file\n"
 "-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - Use language XX (hex-code)\n"
 "-silent - Hidden mode (if possible)\n"
 "-? - Show this help\n"
@@ -73,6 +75,8 @@ msgstr ""
 "-save:filename - Sparar en registerfilkopia till den här filen\n"
 "-log:filename - Sparar arbetsloggen till den här filen\n"
 "-norestorepoint - Skapa inte en systemåterställningspunkt\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - Användarspråk XX (hex-kod)\n"
 "-silent - Dolt läge (om möjligt)\n"
 "-? - Visa denna hjälp\n"
@@ -80,10 +84,6 @@ msgstr ""
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "Varning! Mata ut alla flash-enheter före rensning."
-
-#: STRING.131
-msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Tryck \"Rensa\" för att påbörja rensningen."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
@@ -232,3 +232,43 @@ msgstr "Fel i journalrensning:"
 #: STRING.168
 msgid "Creating System Restore Point..."
 msgstr "Skapar systemåterställningspunkt..."
+
+#: STRING.169
+msgid "Closing Windows Explorer..."
+msgstr ""
+
+#: STRING.170
+msgid "Gathering Windows Search cache data..."
+msgstr ""
+
+#: STRING.171
+msgid "System Restore Point creation error: "
+msgstr ""
+
+#: STRING.172
+msgid "System Restore Point created successfully."
+msgstr ""
+
+#: STRING.173
+msgid "System Restore Point disabled."
+msgstr ""
+
+#: STRING.174
+msgid "Restarting Windows..."
+msgstr ""
+
+#: STRING.175
+msgid "Restarting Windows Explorer..."
+msgstr ""
+
+#: STRING.176
+msgid "Failed to restart Windows: "
+msgstr ""
+
+#: STRING.177
+msgid "Simulate"
+msgstr ""
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr ""

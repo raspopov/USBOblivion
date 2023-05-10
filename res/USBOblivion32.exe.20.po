@@ -12,10 +12,6 @@ msgstr ""
 "X-Generator: Poedit 2.1.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: DIALOGCAPTION.102
-msgid "USBOblivion"
-msgstr "USBOblivion"
-
 #: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Čistit"
@@ -47,10 +43,6 @@ msgstr "Kopírovat"
 #: MENUITEM.130.32772
 msgid "Copy all"
 msgstr "Kopírovat vše"
-
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Kontext"
 
 #: STRING.129
 msgid ""
@@ -93,10 +85,6 @@ msgstr ""
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "VAROVÁNÍ: Odpojte před čistěním všechny flash disky."
-
-#: STRING.131
-msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Pro spuštění čistění stiskněte tlačítko \"Čistit\"."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
@@ -281,3 +269,7 @@ msgstr "Nezdařený restart Windows:"
 #: STRING.177
 msgid "Simulate"
 msgstr "Simulovat"
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr ""

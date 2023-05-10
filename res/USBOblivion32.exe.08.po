@@ -13,11 +13,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
-#: DIALOGCAPTION.102
-msgid "USBOblivion"
-msgstr "USBOblivion"
-
-#: DIALOGCONTROL.102.Button.1
+#: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Εκκαθάριση"
 
@@ -28,6 +24,14 @@ msgstr "Να γίνει πραγματική εκκαθάριση (ειδάλλ�
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr "Αποθήκευση αντιγράφου ασφαλείας αρχείου .reg"
+
+#: DIALOGCONTROL.102.Button.1004
+msgid "Reboot Windows (RECOMMENDED)"
+msgstr ""
+
+#: DIALOGCONTROL.102.Button.1005
+msgid "Close Windows Explorer (RECOMMENDED)"
+msgstr ""
 
 #: DIALOGCONTROL.102.Button.2
 msgid "Exit"
@@ -40,10 +44,6 @@ msgstr "Αντιγραφή"
 #: MENUITEM.130.32772
 msgid "Copy all"
 msgstr "Αντιγραφή όλων"
-
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Πλαίσιο"
 
 #: STRING.129
 msgid ""
@@ -59,6 +59,8 @@ msgid ""
 "-save:filename - Save a registry backup to this file\n"
 "-log:filename - Save working log to this file\n"
 "-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - Use language XX (hex-code)\n"
 "-silent - Hidden mode (if possible)\n"
 "-? - Show this help\n"
@@ -75,6 +77,8 @@ msgstr ""
 "-save:όνομα αρχείου - Αποθήκευση αρχείου ασφαλείας μητρώου σε αυτό το αρχείο\n"
 "-log:όνομα αρχείου - Αποθήκευση του log εργασίας σε αυτό το αρχείο\n"
 "-norestorepoint - Να μη δημιουργηθεί Σημείο Επαναφοράς Συστήματος\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - Χρήση γλώσσας XX (δεκαεξαδικός κωδικός)\n"
 "-silent -Κρυφή λειτουργία (εάν είναι δυνατή)\n"
 "-? - Εμφάνιση αυτής της βοήθειας\n"
@@ -82,10 +86,6 @@ msgstr ""
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "ΠΡΟΕΙΔΟΠΟΙΗΣΗ! Παρακαλούμε αποσυνδέστε όλες τις μονάδες αποθήκευσης flash, πριν τον καθαρισμό."
-
-#: STRING.131
-msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Πατήστε το κουμπί \"Εκκαθάριση\" για έναρξη της εκκαθάρισης."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
@@ -234,3 +234,43 @@ msgstr "Σφάλμα εκκαθάρισης αρχείου καταγραφής:
 #: STRING.168
 msgid "Creating System Restore Point..."
 msgstr "Δημιουργία Σημείου Επαναφοράς Συστήματος..."
+
+#: STRING.169
+msgid "Closing Windows Explorer..."
+msgstr ""
+
+#: STRING.170
+msgid "Gathering Windows Search cache data..."
+msgstr ""
+
+#: STRING.171
+msgid "System Restore Point creation error: "
+msgstr ""
+
+#: STRING.172
+msgid "System Restore Point created successfully."
+msgstr ""
+
+#: STRING.173
+msgid "System Restore Point disabled."
+msgstr ""
+
+#: STRING.174
+msgid "Restarting Windows..."
+msgstr ""
+
+#: STRING.175
+msgid "Restarting Windows Explorer..."
+msgstr ""
+
+#: STRING.176
+msgid "Failed to restart Windows: "
+msgstr ""
+
+#: STRING.177
+msgid "Simulate"
+msgstr ""
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr ""

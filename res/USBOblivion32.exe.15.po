@@ -12,10 +12,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "Language: pl_PL\n"
 
-#: DIALOGCAPTION.102
-msgid "USBOblivion"
-msgstr "USBOblivion"
-
 #: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Czyść"
@@ -47,10 +43,6 @@ msgstr "Kopiuj"
 #: MENUITEM.130.32772
 msgid "Copy all"
 msgstr "Kopiuj wszystko"
-
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Kontekst"
 
 #: STRING.129
 msgid ""
@@ -93,10 +85,6 @@ msgstr ""
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "OSTRZEŻENIE! Przed rozpoczęciem czyszczenia należy wysunąć wszystkie napędy flash."
-
-#: STRING.131
-msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Naciśnij przycisk \"Czyść\" aby rozpocząć czyszczenie."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."

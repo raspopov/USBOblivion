@@ -11,10 +11,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.4\n"
 
-#: DIALOGCAPTION.102
-msgid "USBOblivion"
-msgstr "USBOblivion"
-
 #: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Temizle"
@@ -46,10 +42,6 @@ msgstr "Kopyala"
 #: MENUITEM.130.32772
 msgid "Copy all"
 msgstr "Hepsini Kopyala"
-
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Durum"
 
 #: STRING.129
 msgid ""
@@ -92,10 +84,6 @@ msgstr ""
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "UYARI! Temizlemeden Önce Tüm Flash Sürücüleri(Bellekleri) Çıkarın Lütfen."
-
-#: STRING.131
-msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Temizlemeye Başlamak için \"Temizle\" Düğmesine Basın."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
@@ -280,3 +268,7 @@ msgstr "Windows Yeniden Başlatma Başarısız: "
 #: STRING.177
 msgid "Simulate"
 msgstr "Simüle Et"
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr ""

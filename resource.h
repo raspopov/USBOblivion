@@ -7,7 +7,6 @@
 #define IDS_ABOUT                       129
 #define IDS_WARNING                     130
 #define IDR_CONTEXT                     130
-#define IDS_START                       131
 #define IDS_MODE_WORK                   132
 #define IDS_MODE_SIM                    133
 #define IDI_SEARCH                      133

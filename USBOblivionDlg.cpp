@@ -3,7 +3,7 @@
 //
 // USBOblivionDlg.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2021.
+// Copyright (c) Nikolay Raspopov, 2009-2023.
 // This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -132,9 +132,9 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 
 	CString sTitle = LoadString( AFX_IDS_APP_TITLE );
 #ifdef WIN64
-	sTitle += _T(" 64-bit");
+	sTitle += _T(" (64-bit)");
 #else
-	sTitle += _T(" 32-bit");
+	sTitle += _T(" (32-bit)");
 #endif
 	SetWindowText( sTitle );
 
@@ -169,8 +169,6 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 
 	if ( m_bAuto || m_bElevation )
 		PostMessage( WM_COMMAND, IDOK );
-	else
-		Log( IDS_START );
 
 	SetTimer( 1, 250, nullptr );
 

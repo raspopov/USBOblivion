@@ -12,10 +12,6 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: DIALOGCAPTION.102
-msgid "USBOblivion"
-msgstr "USBOblivion"
-
 #: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Reinigung"
@@ -47,10 +43,6 @@ msgstr "Kopieren"
 #: MENUITEM.130.32772
 msgid "Copy all"
 msgstr "Alle kopieren"
-
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Kontext"
 
 #: STRING.129
 msgid ""
@@ -93,10 +85,6 @@ msgstr ""
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "WARNUNG! Entfernen Sie bitte alle Flash-Laufwerke vor der Reinigung."
-
-#: STRING.131
-msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Drücken Sie auf den Button \"Reinigung\", um mit der Reinigung zu beginnen."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."

@@ -12,10 +12,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: nl_NL\n"
 
-#: DIALOGCAPTION.102
-msgid "USBOblivion"
-msgstr "USBOblivion"
-
 #: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Opruimen"
@@ -47,10 +43,6 @@ msgstr "Kopiëren"
 #: MENUITEM.130.32772
 msgid "Copy all"
 msgstr "Alles kopiëren"
-
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Context"
 
 #: STRING.129
 msgid ""
@@ -93,10 +85,6 @@ msgstr ""
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "WAARSCHUWING! Verwijder a.u.b. alle usb schijven voor de opruimactie."
-
-#: STRING.131
-msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Druk op \"Opruimen\" om de opruimactie te starten."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
@@ -281,3 +269,7 @@ msgstr "Herstarten van Windows mislukt: "
 #: STRING.177
 msgid "Simulate"
 msgstr "Simuleren"
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr ""

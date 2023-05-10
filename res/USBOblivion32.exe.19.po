@@ -11,10 +11,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.1\n"
 
-#: DIALOGCAPTION.102
-msgid "USBOblivion"
-msgstr "USBOblivion"
-
 #: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "Очистка"
@@ -46,10 +42,6 @@ msgstr "Копировать"
 #: MENUITEM.130.32772
 msgid "Copy all"
 msgstr "Копировать Всё"
-
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Context"
 
 #: STRING.129
 msgid ""
@@ -92,10 +84,6 @@ msgstr ""
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "ВНИМАНИЕ! Удалите все флешки из системы перед очисткой."
-
-#: STRING.131
-msgid "Press \"Clean\" button to begin cleaning."
-msgstr "Нажмите кнопку \"Очистка\" для начала очистки системы."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."

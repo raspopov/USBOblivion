@@ -11,11 +11,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: DIALOGCAPTION.102
-msgid "USBOblivion"
-msgstr "USBOblivion (한글 번역 제공: 4Li)"
-
-#: DIALOGCONTROL.102.Button.1
+#: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
 msgstr "지우기"
 
@@ -26,6 +22,14 @@ msgstr "실제로 지우기 (그렇지 않으면, 모의 시험)"
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
 msgstr ".reg 파일로 백업 저장"
+
+#: DIALOGCONTROL.102.Button.1004
+msgid "Reboot Windows (RECOMMENDED)"
+msgstr ""
+
+#: DIALOGCONTROL.102.Button.1005
+msgid "Close Windows Explorer (RECOMMENDED)"
+msgstr ""
 
 #: DIALOGCONTROL.102.Button.2
 msgid "Exit"
@@ -38,10 +42,6 @@ msgstr "복사"
 #: MENUITEM.130.32772
 msgid "Copy all"
 msgstr "모두 복사"
-
-#: MENUPOPUP.130.0
-msgid "Context"
-msgstr "Context"
 
 #: STRING.129
 msgid ""
@@ -57,6 +57,8 @@ msgid ""
 "-save:filename - Save a registry backup to this file\n"
 "-log:filename - Save working log to this file\n"
 "-norestorepoint - Don't create a System Restore Point\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - Use language XX (hex-code)\n"
 "-silent - Hidden mode (if possible)\n"
 "-? - Show this help\n"
@@ -73,6 +75,8 @@ msgstr ""
 "-save:파일 이름 - 레지스트리 백업을 이 파일로 저장\n"
 "-log:파일 이름 - 작업 기록을 이 파일로 저장\n"
 "-norestorepoint - 시스템 복원 지점을 만들지 않기\n"
+"-norestart - Don't restart Windows\n"
+"-noexplorer - Don't close Windows Explorer\n"
 "-lang:XX - XX (16진수) 언어 사용\n"
 "-silent - 숨김 방식 (가능한 경우)\n"
 "-? - 이 도움말을 보입니다\n"
@@ -80,10 +84,6 @@ msgstr ""
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
 msgstr "경고!  지우기 전에 모든 플래시 드라이브를 꺼내세요."
-
-#: STRING.131
-msgid "Press \"Clean\" button to begin cleaning."
-msgstr "지우기를 시작하려면, '지우기' 버튼을 누르세요."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
@@ -232,3 +232,43 @@ msgstr "저널 지우기 오류:"
 #: STRING.168
 msgid "Creating System Restore Point..."
 msgstr "시스템 복원 지점을 만드는 중..."
+
+#: STRING.169
+msgid "Closing Windows Explorer..."
+msgstr ""
+
+#: STRING.170
+msgid "Gathering Windows Search cache data..."
+msgstr ""
+
+#: STRING.171
+msgid "System Restore Point creation error: "
+msgstr ""
+
+#: STRING.172
+msgid "System Restore Point created successfully."
+msgstr ""
+
+#: STRING.173
+msgid "System Restore Point disabled."
+msgstr ""
+
+#: STRING.174
+msgid "Restarting Windows..."
+msgstr ""
+
+#: STRING.175
+msgid "Restarting Windows Explorer..."
+msgstr ""
+
+#: STRING.176
+msgid "Failed to restart Windows: "
+msgstr ""
+
+#: STRING.177
+msgid "Simulate"
+msgstr ""
+
+#: STRING.179
+msgid "Stopping Windows Services..."
+msgstr ""
