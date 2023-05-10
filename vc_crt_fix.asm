@@ -41,6 +41,7 @@ InterlockedPushEntrySListWrapper proto stdcall :dword, :dword
 InterlockedPushListSListExWrapper proto stdcall :dword, :dword, :dword, :dword
 RtlFirstEntrySListWrapper proto stdcall :dword
 QueryDepthSListWrapper proto stdcall :dword
+GetTickCount64Wrapper proto stdcall
 
 .const
 align 4
@@ -54,6 +55,7 @@ __imp__InterlockedPushEntrySList@8 dd InterlockedPushEntrySListWrapper
 __imp__InterlockedPushListSListEx@16 dd InterlockedPushListSListExWrapper
 __imp__RtlFirstEntrySList@4 dd RtlFirstEntrySListWrapper
 __imp__QueryDepthSList@4 dd QueryDepthSListWrapper
+__imp__GetTickCount64@0 dd GetTickCount64Wrapper
 
 public \
 __imp__EncodePointer@4,
@@ -65,5 +67,6 @@ __imp__InterlockedPopEntrySList@4,
 __imp__InterlockedPushEntrySList@8,
 __imp__InterlockedPushListSListEx@16,
 __imp__RtlFirstEntrySList@4,
-__imp__QueryDepthSList@4
+__imp__QueryDepthSList@4,
+__imp__GetTickCount64@0
 end

@@ -226,3 +226,18 @@ extern "C"
 	void __telemetry_main_return_trigger() {}
 	void __vcrt_uninitialize_telemetry_provider() {}
 };
+
+// GetTickCount64 (VC2022)
+extern "C" ULONGLONG WINAPI GetTickCount64Wrapper()
+{
+	struct implementation
+	{
+		static ULONGLONG WINAPI GetTickCount64()
+		{
+			return GetTickCount();
+		}
+	};
+
+	CREATE_FUNCTION_POINTER(kernel32, GetTickCount64);
+	return Function();
+}
