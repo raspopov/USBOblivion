@@ -1,8 +1,8 @@
 //
 // USBOblivionDlg.h
 //
-// Copyright (c) Nikolay Raspopov, 2009-2019.
-// This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
+// Copyright (c) Nikolay Raspopov, 2009-2023.
+// This file is part of USB Oblivion (https://www.cherubicsoft.com/en/projects/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@
 #include "CtrlsResize.h"
 
 
-typedef enum CKeyType
+using CKeyType = enum
 {
 	mControlSet_Key,// Поиск ключей   в HKEY_LOCAL_MACHINE\SYSTEM\ControlSet\*
 	mControlSet_Val,// Поиск значений в HKEY_LOCAL_MACHINE\SYSTEM\ControlSet\*
@@ -34,9 +34,9 @@ typedef enum CKeyType
 	mHKCU_Val,		// Поиск значений в HKEY_USERS\*
 	mHKCR_Key,		// Поиск ключей   в HKEY_CLASSES_ROOT
 	mHKCR_Val		// Поиск значений в HKEY_CLASSES_ROOT
-} CKeyType;
+};
 
-typedef struct CKeyDef
+using CKeyDef = struct
 {
 	CKeyType	nMode;				// Тип ключа
 	LPCTSTR		szKeyName;			// Открыть данную папку (NULL - конец)
@@ -44,21 +44,21 @@ typedef struct CKeyDef
 	LPCTSTR		szValueName;		// Проверка присутствия данного ключа (NULL - не проверять)
 	LPCTSTR		szValueSubstring;	// Эта строка должна содержаться в значении ключа (NULL - любое)
 	BOOL		bDeleteEmpty;		// Удалить сам ключ если он пустой
-} CKeyDef;
+};
 
 template < class T1, class T2 >
 class C2
 {
 public:
-	inline C2() noexcept {}
+	inline C2() noexcept = default;
 	inline C2(const T1& f, const T2& s) noexcept : first( f ), second( s ) {}
 	T1 first;
 	T2 second;
 };
 
-typedef C2 < CString, CString > CStringC2;
+using CStringC2 = C2 < CString, CString >;
 
-typedef CList < CStringC2 > CStringC2List;
+using CStringC2List = CList < CStringC2 >;
 
 
 class CUSBOblivionDlg : public CDialog
@@ -69,18 +69,19 @@ public:
 
 	enum { IDD = IDD_USBOBLIVION_DIALOG };
 
-	BOOL		m_bEnable;		// -enable			- Рабочий режим очистки, иначе симуляция
-	BOOL		m_bAuto;		// -auto			- Автоматический запуск
-	BOOL		m_bSave;		// -nosave			- Отмена сохранения .reg-файла (инверсия)
-	CString		m_sSave;		// -save:			- Save-file
-	BOOL		m_bRestorePoint;// -norestorepoint	- Disable creation of System Restore Point
-	BOOL		m_bElevation;	// -elevation		- Режим с повышенными правами
-	BOOL		m_bSilent;		// -silent			- Тихий режим (работает только в автоматическом режиме)
-	CString		m_sLog;			// -log:			- Log-file
-	BOOL		m_bReboot;
-	BOOL		m_bCloseExplorer;
+	BOOL		m_bEnable;			// -enable         - Do real clean (simulation otherwise)
+	BOOL		m_bAuto;			// -auto           - Automatic run
+	BOOL		m_bSave;			// -nosave         - Don't save a registry backup file
+	CString		m_sSave;			// -save:filename  - Save a registry backup to this file
+	CString		m_sLog;				// -log:filename   - Save working log to this file
+	BOOL		m_bRestorePoint;	// -norestorepoint - Don't create a System Restore Point
+	BOOL		m_bReboot;			// -norestart      - Don't restart Windows
+	BOOL		m_bCloseExplorer;	// -noexplorer     - Don't close Windows Explorer
+	BOOL		m_bSilent;			// -silent         - Hidden mode (if possible)
 
-	virtual INT_PTR DoModal();
+	BOOL		m_bElevation;		// -elevation
+
+	INT_PTR DoModal() override;
 
 protected:
 	CImageList	m_oImages;		// Иконки списка
@@ -95,8 +96,8 @@ protected:
 	CString		m_sDeleteKeyString;		// Кэш строки
 	CString		m_sDeleteValueString;	// Кэш строки
 
-	typedef C2< CString, UINT > CLogItem;
-	typedef CList< CLogItem* > CLogList;
+	using CLogItem = C2< CString, UINT >;
+	using CLogList = CList< CLogItem* >;
 	cs						m_pSection;		// Синхронизация доступа к отчёту
 	CAutoPtr< CLogList >	m_pReportList;	// Список строк для отчёта
 	bool					m_bRunning;		// Флаг обработки
@@ -174,10 +175,10 @@ protected:
 	void DeleteValue(HKEY hRoot, LPCTSTR szSubKey, LPCTSTR szValue);
 	void CopyToClipboard(const CString& sData);
 
-	virtual void DoDataExchange(CDataExchange* pDX);	// поддержка DDX/DDV
-	virtual BOOL OnInitDialog();
-	virtual void OnOK();
-	virtual void OnCancel();
+	void DoDataExchange(CDataExchange* pDX) override;	// поддержка DDX/DDV
+	BOOL OnInitDialog() override;
+	void OnOK() override;
+	void OnCancel() override;
 
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnGetMinMaxInfo(MINMAXINFO* lpMMI);
