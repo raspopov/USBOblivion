@@ -27,46 +27,37 @@
 ;(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
 ;THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+__ML_64 = OPATTR rax
 
-.486
+if __ML_64
+else
 .model flat
-
-EncodePointerWrapper proto stdcall :dword
-DecodePointerWrapper proto stdcall :dword
-GetModuleHandleExWWrapper proto stdcall :dword, :dword, :dword
-InitializeSListHeadWrapper proto stdcall :dword
-InterlockedFlushSListWrapper proto stdcall :dword
-InterlockedPopEntrySListWrapper proto stdcall :dword
-InterlockedPushEntrySListWrapper proto stdcall :dword, :dword
-InterlockedPushListSListExWrapper proto stdcall :dword, :dword, :dword, :dword
-RtlFirstEntrySListWrapper proto stdcall :dword
-QueryDepthSListWrapper proto stdcall :dword
-GetTickCount64Wrapper proto stdcall
+endif
 
 .const
-align 4
-__imp__EncodePointer@4 dd EncodePointerWrapper
-__imp__DecodePointer@4 dd DecodePointerWrapper
-__imp__GetModuleHandleExW@12 dd GetModuleHandleExWWrapper
-__imp__InitializeSListHead@4 dd InitializeSListHeadWrapper
-__imp__InterlockedFlushSList@4 dd InterlockedFlushSListWrapper
-__imp__InterlockedPopEntrySList@4 dd InterlockedPopEntrySListWrapper
-__imp__InterlockedPushEntrySList@8 dd InterlockedPushEntrySListWrapper
-__imp__InterlockedPushListSListEx@16 dd InterlockedPushListSListExWrapper
-__imp__RtlFirstEntrySList@4 dd RtlFirstEntrySListWrapper
-__imp__QueryDepthSList@4 dd QueryDepthSListWrapper
-__imp__GetTickCount64@0 dd GetTickCount64Wrapper
 
-public \
-__imp__EncodePointer@4,
-__imp__DecodePointer@4,
-__imp__GetModuleHandleExW@12,
-__imp__InitializeSListHead@4,
-__imp__InterlockedFlushSList@4,
-__imp__InterlockedPopEntrySList@4,
-__imp__InterlockedPushEntrySList@8,
-__imp__InterlockedPushListSListEx@16,
-__imp__RtlFirstEntrySList@4,
-__imp__QueryDepthSList@4,
-__imp__GetTickCount64@0
+HOOK MACRO name, size, args:VARARG
+	if __ML_64
+		@CatStr(name, Wrapper) proto stdcall
+		@CatStr(__imp_, name) dq @CatStr(name, Wrapper)
+		public @CatStr(__imp_, name)
+	else
+		@CatStr(name, Wrapper) proto stdcall args
+		@CatStr(__imp__, name, @, size) dd @CatStr(name, Wrapper)
+		public @CatStr(__imp__, name, @, size)
+	endif
+ENDM
+
+HOOK EncodePointer                          ,  4, :dword
+HOOK DecodePointer                          ,  4, :dword
+HOOK GetModuleHandleExW                     , 12, :dword, :dword, :dword
+HOOK InitializeSListHead                    ,  4, :dword
+HOOK InterlockedFlushSList                  ,  4, :dword
+HOOK InterlockedPopEntrySList               ,  4, :dword
+HOOK InterlockedPushEntrySList              ,  8, :dword, :dword
+HOOK InterlockedPushListSListEx             , 16, :dword, :dword, :dword, :dword
+HOOK RtlFirstEntrySList                     ,  4, :dword
+HOOK QueryDepthSList                        ,  4, :dword
+HOOK GetTickCount64                         ,  0
+
 end
