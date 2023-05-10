@@ -4,7 +4,7 @@
 // USBOblivionDlg.cpp
 //
 // Copyright (c) Nikolay Raspopov, 2009-2023.
-// This file is part of USB Oblivion (http://www.cherubicsoft.com/en/projects/usboblivion)
+// This file is part of USB Oblivion (https://www.cherubicsoft.com/en/projects/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -182,6 +182,12 @@ BOOL CUSBOblivionDlg::OnInitDialog()
 	theApp.m_Loc.Translate( GetSafeHwnd(), CUSBOblivionDlg::IDD );
 
 	Log( IDS_WARNING, Warning );
+
+	// Disable reboot on simulation
+	if ( ! m_bEnable )
+	{
+		m_bReboot = FALSE;
+	}
 
 	UpdateData( FALSE );
 
@@ -808,7 +814,7 @@ BOOL CUSBOblivionDlg::OnHelpInfo(HELPINFO* /*pHelpInfo*/)
 {
 	CWaitCursor wc;
 
-	ShellExecute( GetSafeHwnd(), nullptr, _T("http://www.cherubicsoft.com/projects/usboblivion"), nullptr, nullptr, SW_SHOWDEFAULT );
+	ShellExecute( GetSafeHwnd(), nullptr, _T("https://www.cherubicsoft.com/en/projects/usboblivion/"), nullptr, nullptr, SW_SHOWDEFAULT );
 
 	return TRUE;
 }
@@ -990,4 +996,8 @@ void CUSBOblivionDlg::OnBnClickedEnable()
 	UpdateData();
 
 	SetDlgItemText( IDOK, LoadString( m_bEnable ? IDS_CLEAN : IDS_SIMULATE ) );
+
+	m_bReboot = m_bEnable;
+
+	UpdateData( FALSE );
 }
