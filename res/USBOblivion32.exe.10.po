@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
@@ -17,11 +17,11 @@ msgstr "Pulisci"
 
 #: DIALOGCONTROL.102.Button.1002
 msgid "Do real clean (simulation otherwise)"
-msgstr "Esegui pulizia reale (altrimenti simulazione)"
+msgstr "Esegui pulizia reale (se non abilitato esegue solo simulazione)"
 
 #: DIALOGCONTROL.102.Button.1003
 msgid "Save backup .reg-file"
-msgstr "Salva una copia di sicurezza in un file .reg"
+msgstr "Salva file .reg come backup"
 
 #: DIALOGCONTROL.102.Button.1004
 msgid "Reboot Windows (RECOMMENDED)"
@@ -63,7 +63,7 @@ msgid ""
 "-silent - Hidden mode (if possible)\n"
 "-? - Show this help\n"
 msgstr ""
-"Utilizzo:\n"
+"Uso:\n"
 "\n"
 "USBOblivion[32|64].exe [parametri]\n"
 "\n"
@@ -72,8 +72,7 @@ msgstr ""
 "-enable - Esegue pulizia reale (altrimenti simula)\n"
 "-auto - Esecuzione automatica\n"
 "-nosave - Nessun salvataggio della copia di sicurezza del registro\n"
-"-save:filename - Salva una copia di sicurezza del registro nel file "
-"specificato\n"
+"-save:filename - Salva una copia di sicurezza del registro nel file specificato\n"
 "-log:filename - Salva il log nel file specificato\n"
 "-norestorepoint - Nessuna creazione del punto di ripristino\n"
 "-norestart - Nessun riavvio di Windows\n"
@@ -84,7 +83,7 @@ msgstr ""
 
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
-msgstr "ATTENZIONE! Disconnettere tutte le periferiche USB prima di pulire."
+msgstr "ATTENZIONE! PRIMA di avviare le operazioni disconnetti tutte le periferiche USB."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
@@ -92,51 +91,51 @@ msgstr "Tipo di pulizia: reale (i dati verranno puliti)."
 
 #: STRING.133
 msgid "Process mode: simulation (no data will be cleaned)."
-msgstr "Tipo di pulizia: simulazione (nessun dato verrà pulito)."
+msgstr "Tipo di pulizia: simulazione (nessun dato verrà modificato)."
 
 #: STRING.134
 msgid "File creation error: "
-msgstr "Non posso creare questo file: "
+msgstr "Impossibile creare il file: "
 
 #: STRING.135
 msgid "File write error: "
-msgstr "Non posso scrivere in questo file: "
+msgstr "Errore scrittura file: "
 
 #: STRING.136
 msgid "Backup file: "
-msgstr "Copia di sicurezza: "
+msgstr "File backup: "
 
 #: STRING.137
 msgid "Done."
-msgstr "Ho finito."
+msgstr "Operazioni completate."
 
 #: STRING.138
 msgid "Gathering data from system registry..."
-msgstr "Raccolgo i dati dal registro di sistema..."
+msgstr "Raccolta dati registro di sistema..."
 
 #: STRING.139
 msgid "Found drives (will be ignored): "
-msgstr "Ho trovato questi dispositivi di memorizzazione (li ignoro): "
+msgstr "Unità rilevate (verranno ignorate): "
 
 #: STRING.140
 msgid "Cleaning..."
-msgstr "Inizio la pulizia..."
+msgstr "Pulizia..."
 
 #: STRING.141
 msgid "Removing key: "
-msgstr "Rimuovo chiave: "
+msgstr "Rimozione chiave: "
 
 #: STRING.142
 msgid "Removing value: "
-msgstr "Rimuovo valore: "
+msgstr "Rimozione valore: "
 
 #: STRING.143
 msgid "Gathering user data..."
-msgstr "Raccolgo i dati dell'utente..."
+msgstr "Raccolta dati utente..."
 
 #: STRING.144
 msgid "Gathering data about user: "
-msgstr "Raccolgo i dati relativi all'utente: "
+msgstr "Raccolta dati relativi all'utente: "
 
 #: STRING.145
 msgid "Found users: "
@@ -148,15 +147,15 @@ msgstr "Punti di montaggio trovati: "
 
 #: STRING.147
 msgid "Found Explorer drives: "
-msgstr "Unità trovate in Explorer: "
+msgstr "Unità Explorer rilevate: "
 
 #: STRING.148
 msgid "Remove error: "
-msgstr "Rimuovo errore: "
+msgstr "Errore rimozione: "
 
 #: STRING.149
 msgid "Gathering mount point's data..."
-msgstr "Raccolgo i dati dei punti di montaggio..."
+msgstr "Raccolta dati punti di montaggio..."
 
 #: STRING.150
 msgid "Found ControlSets: "
@@ -176,15 +175,15 @@ msgstr "Accesso negato alla chiave: "
 
 #: STRING.154
 msgid "Disk %c: has been inserted."
-msgstr "Il disco %c: è stato connesso."
+msgstr "Il disco '%c': è stato connesso."
 
 #: STRING.155
 msgid "Logged-in under system account successfully."
-msgstr "Accesso nell'account di sistema avvenuto con successo."
+msgstr "Accesso nell'account di sistema completato."
 
 #: STRING.156
 msgid "Failed to login under system account."
-msgstr "Non posso accedere nell'account di sistema."
+msgstr "Impossibile accedere nell'account di sistema."
 
 #: STRING.157
 msgid "Re-starting under administrator..."
@@ -192,23 +191,23 @@ msgstr "Riavvio come amministratore..."
 
 #: STRING.158
 msgid "Disk %c: has been ejected."
-msgstr "Il disco %c: è stato disconnesso."
+msgstr "Il disco '%c': è stato disconnesso."
 
 #: STRING.159
 msgid "Failed to eject disk %c:."
-msgstr "Non posso disconnettere il disco %c:."
+msgstr "Impossibile disconnettere il disco '%c:'."
 
 #: STRING.160
 msgid "Ejecting disk %c:..."
-msgstr "Disconnetto il disco %c:..."
+msgstr "Disconnessione disco '%c:'..."
 
 #: STRING.161
 msgid "Removing file: "
-msgstr "Elimino il file: "
+msgstr "Rimozione file: "
 
 #: STRING.162
 msgid "Gathering file data..."
-msgstr "Raccolgo i dati del file..."
+msgstr "Raccoltai dati file..."
 
 #: STRING.163
 msgid "Cleaning journal: "
@@ -216,51 +215,51 @@ msgstr "Pulisco diario: "
 
 #: STRING.164
 msgid "Gathering journal data..."
-msgstr "Raccolgo i dati del diario..."
+msgstr "Raccolta dati diario..."
 
 #: STRING.165
 msgid "File removal error:"
-msgstr "Errore alla rimozione di:"
+msgstr "Impossibile rimuovere il file:"
 
 #: STRING.166
 msgid "Removing file at boot-time:"
-msgstr "Rimuovo al prossimo riavvio:"
+msgstr "Rimozione file al prossimo riavvio:"
 
 #: STRING.167
 msgid "Journal cleanup error:"
-msgstr "Errore alla pulizia diario:"
+msgstr "Errore pulizia diario:"
 
 #: STRING.168
 msgid "Creating System Restore Point..."
-msgstr "Creo un punto di ripristino..."
+msgstr "Creazione punto di ripristino..."
 
 #: STRING.169
 msgid "Closing Windows Explorer..."
-msgstr "Chiudo Windows Explorer..."
+msgstr "Chiusura Windows Explorer..."
 
 #: STRING.170
 msgid "Gathering Windows Search cache data..."
-msgstr "Raccolgo i dati di cache di Windows Search..."
+msgstr "Raccolta dati cache ricerca Windows..."
 
 #: STRING.171
 msgid "System Restore Point creation error: "
-msgstr "Errore di creazione del punto di ripristino: "
+msgstr "Errore creazione punto di ripristino sistema: "
 
 #: STRING.172
 msgid "System Restore Point created successfully."
-msgstr "Ho creato il punto di ripristino."
+msgstr "Creazione punto di ripristino sistema completata."
 
 #: STRING.173
 msgid "System Restore Point disabled."
-msgstr "Punto di ripristino disabilitato..."
+msgstr "Punto di ripristino sistema disabilitato..."
 
 #: STRING.174
 msgid "Restarting Windows..."
-msgstr "Sto riavviando Windows..."
+msgstr "Riavvio di Windows..."
 
 #: STRING.175
 msgid "Restarting Windows Explorer..."
-msgstr "Sto riavviando Windows Explorer..."
+msgstr "Riavvio Windows Explorer..."
 
 #: STRING.176
 msgid "Failed to restart Windows: "
@@ -268,8 +267,8 @@ msgstr "Riavvio di Windows fallito: "
 
 #: STRING.177
 msgid "Simulate"
-msgstr "Simulare"
+msgstr "Simula"
 
 #: STRING.179
 msgid "Stopping Windows Services..."
-msgstr "Arresto dei servizi Windows..."
+msgstr "Arresto servizi Windows..."
