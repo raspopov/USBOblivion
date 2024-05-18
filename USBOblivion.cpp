@@ -3,7 +3,7 @@
 //
 // USBOblivion.cpp
 //
-// Copyright (c) Nikolay Raspopov, 2009-2023.
+// Copyright (c) Nikolay Raspopov, 2009-2024.
 // This file is part of USB Oblivion (https://www.cherubicsoft.com/en/projects/usboblivion/)
 //
 // This program is free software; you can redistribute it and/or modify
@@ -25,7 +25,7 @@
 #include "USBOblivion.h"
 #include "USBOblivionDlg.h"
 
-#include "Localization\Localization.cpp"
+#include "Localization.cpp"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW

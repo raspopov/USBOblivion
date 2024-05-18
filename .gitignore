@@ -1,0 +1,7 @@
+.vs
+/build
+/Win32
+/x64
+*.aps
+*.po_
+*.user
