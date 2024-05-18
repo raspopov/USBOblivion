@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.3\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: DIALOGCONTROL.102.Button.1 STRING.178
 msgid "Clean"
@@ -25,11 +25,11 @@ msgstr "Salvar backup em arquivo .reg"
 
 #: DIALOGCONTROL.102.Button.1004
 msgid "Reboot Windows (RECOMMENDED)"
-msgstr ""
+msgstr "Reiniciar o Windows (RECOMENDADO)"
 
 #: DIALOGCONTROL.102.Button.1005
 msgid "Close Windows Explorer (RECOMMENDED)"
-msgstr ""
+msgstr "Fechar o Windows Explorer (RECOMENDADO)"
 
 #: DIALOGCONTROL.102.Button.2
 msgid "Exit"
@@ -69,21 +69,21 @@ msgstr ""
 "\n"
 "Parâmetros:\n"
 "\n"
-"-enable - Limpeza Real(simulação se marcado)\n"
+"-enable - Fazer limpeza real (simulação se marcado)\n"
 "-auto - Executar automaticamente\n"
-"-nosave - Não salvar backup em arquivo .reg\n"
-"-save:filename - Save a registry backup to this file\n"
-"-log:filename - Save working log to this file\n"
-"-norestorepoint - Don't create a System Restore Point\n"
-"-norestart - Don't restart Windows\n"
-"-noexplorer - Don't close Windows Explorer\n"
+"-nosave - Não salva um arquivo de backup do registro\n"
+"-save:filename - Salva um backup do registro neste arquivo\n"
+"-log:filename - Salva o log de trabalho neste arquivo\n"
+"-norestorepoint - Não cria um Ponto de Restauração do sistema\n"
+"-norestart - Não reinicia o Windows\n"
+"-noexplorer - Não fecha o Windows Explorer\n"
 "-lang:XX - Usar idioma XX (código hexadecimal)\n"
 "-silent - Modo oculto (se possível)\n"
-"-? - Exibir esta ajuda\n"
+"-? - Mostra esta ajuda\n"
 
 #: STRING.130
 msgid "WARNING! Eject all flash drives before cleaning please."
-msgstr "ATENÇÃO! Por favor, remova todos os drives flash antes de limpar."
+msgstr "ATENÇÃO! Por favor, ejete todas as unidades flash antes de limpar."
 
 #: STRING.132
 msgid "Process mode: real (data will be cleaned)."
@@ -107,11 +107,11 @@ msgstr "Arquivo de backup: "
 
 #: STRING.137
 msgid "Done."
-msgstr "Concluído!"
+msgstr "Concluído."
 
 #: STRING.138
 msgid "Gathering data from system registry..."
-msgstr "Coletando os dados do registro do sistema..."
+msgstr "Coletando dados do registro do sistema..."
 
 #: STRING.139
 msgid "Found drives (will be ignored): "
@@ -123,11 +123,11 @@ msgstr "Limpando..."
 
 #: STRING.141
 msgid "Removing key: "
-msgstr "Chave removida: "
+msgstr "Removendo chave: "
 
 #: STRING.142
 msgid "Removing value: "
-msgstr "Valor removido: "
+msgstr "Removendo valor: "
 
 #: STRING.143
 msgid "Gathering user data..."
@@ -151,7 +151,7 @@ msgstr "Unidades encontradas no Explorer: "
 
 #: STRING.148
 msgid "Remove error: "
-msgstr "Erro na remoção: "
+msgstr "Erro ao remover: "
 
 #: STRING.149
 msgid "Gathering mount point's data..."
@@ -159,7 +159,7 @@ msgstr "Coletando dados do ponto de montagem..."
 
 #: STRING.150
 msgid "Found ControlSets: "
-msgstr "Conjuntos de Controle encontrados: "
+msgstr "ControlSets encontrados: "
 
 #: STRING.151
 msgid "Found keys: "
@@ -187,7 +187,7 @@ msgstr "Falha ao fazer login na conta do sistema."
 
 #: STRING.157
 msgid "Re-starting under administrator..."
-msgstr "Reiniciar como Administrador..."
+msgstr "Reiniciando como administrador..."
 
 #: STRING.158
 msgid "Disk %c: has been ejected."
@@ -195,15 +195,15 @@ msgstr "O dispositivo %c: foi removido."
 
 #: STRING.159
 msgid "Failed to eject disk %c:."
-msgstr "Falha ao remover o dispositivo %c:."
+msgstr "Falha ao ejetar o dispositivo %c:."
 
 #: STRING.160
 msgid "Ejecting disk %c:..."
-msgstr "Removendo o dispositivo %c:..."
+msgstr "Ejetando o dispositivo %c:..."
 
 #: STRING.161
 msgid "Removing file: "
-msgstr "Arquivo removido:"
+msgstr "Removendo arquivo: "
 
 #: STRING.162
 msgid "Gathering file data..."
@@ -211,23 +211,23 @@ msgstr "Coletando dados do arquivo..."
 
 #: STRING.163
 msgid "Cleaning journal: "
-msgstr "Limpeza de histórico: "
+msgstr "Limpando o journal: "
 
 #: STRING.164
 msgid "Gathering journal data..."
-msgstr "Coletando os dados de hitórico..."
+msgstr "Coletando dados do journal..."
 
 #: STRING.165
 msgid "File removal error:"
-msgstr "Falha na remoção do arquivo:"
+msgstr "Erro de remoção de arquivo:"
 
 #: STRING.166
 msgid "Removing file at boot-time:"
-msgstr "Arquivo será removido na hora da reinicialização:"
+msgstr "Removendo arquivo na inicialização:"
 
 #: STRING.167
 msgid "Journal cleanup error:"
-msgstr "Erro na limpeza do histórico:"
+msgstr "Erro ao limpar o journal:"
 
 #: STRING.168
 msgid "Creating System Restore Point..."
@@ -235,40 +235,40 @@ msgstr "Criando Ponto de Restauração do Sistema..."
 
 #: STRING.169
 msgid "Closing Windows Explorer..."
-msgstr ""
+msgstr "Fechando o Windows Explorer..."
 
 #: STRING.170
 msgid "Gathering Windows Search cache data..."
-msgstr ""
+msgstr "Coletando dados do cache do Windows Search..."
 
 #: STRING.171
 msgid "System Restore Point creation error: "
-msgstr ""
+msgstr "Erro na criação do Ponto de Restauração do Sistema: "
 
 #: STRING.172
 msgid "System Restore Point created successfully."
-msgstr ""
+msgstr "Ponto de Restauração do Sistema criado com sucesso."
 
 #: STRING.173
 msgid "System Restore Point disabled."
-msgstr ""
+msgstr "Ponto de Restauração do Sistema desabilitado."
 
 #: STRING.174
 msgid "Restarting Windows..."
-msgstr ""
+msgstr "Reiniciando o Windows..."
 
 #: STRING.175
 msgid "Restarting Windows Explorer..."
-msgstr ""
+msgstr "Reiniciando o Windows Explorer..."
 
 #: STRING.176
 msgid "Failed to restart Windows: "
-msgstr ""
+msgstr "Falha ao reiniciar o Windows: "
 
 #: STRING.177
 msgid "Simulate"
-msgstr ""
+msgstr "Simular"
 
 #: STRING.179
 msgid "Stopping Windows Services..."
-msgstr ""
+msgstr "Parando Serviços do Windows..."
